@@ -9,7 +9,7 @@ function defZero(a: any): any {
 //(function (params, context) {
 
 // after
-export const REG0010413: Rule = (iv) => {
+export const REG0009397: Rule = (iv) => {
   //la require non funziona
   //let defZero = require('./utils/util.mjs').defZero;
   //console.log(params.get("variables").asString().getValue());
