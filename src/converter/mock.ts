@@ -22,7 +22,7 @@ class RuleDaoMock implements RuleDao {
     converted: string[] = [];
 
     getUnconvertedRules(): Rule[] {
-        return this.rules.filter(rule => this.converted.indexOf(rule.id) != -1);
+        return this.rules.filter(rule => this.converted.indexOf(rule.id) == -1);
     }
 
     markRuleAsConverted(rule: Rule): void {
