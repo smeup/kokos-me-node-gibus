@@ -18,11 +18,13 @@ class RuleDaoIBM implements RuleDao {
             const result = conn.querySync(query);
 
             for (const row of result) {
-                const rule: Rule = {
-                    id: row.ID,
-                    script: row.RULE
-                };
-                rules.push(rule);
+                // TODO implement
+                // const rule: Rule = {
+                //     id: row.ID,
+                //     script: row.RULE
+                // };
+                // rules.push(rule);
+                throw "TODO"
             }
             return rules;
         } finally {
