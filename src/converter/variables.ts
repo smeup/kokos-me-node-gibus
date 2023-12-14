@@ -15,122 +15,254 @@ class Variables {
         this.input = ruleVariableMap
     }
 
+    
+    /**
+     * Retrieves the CF value.
+     * 
+     * @returns 1 fixed
+     */
     getCF(): string {
         return "1";
     }
 
+    /**
+     * Retrieves the value of the "D§COMP" input.
+     * @returns The value of the "D§COMP" input.
+     */
     getCM(): string {
         return this.input["D§COMP"]
     }
 
+    /**
+     * Retrieves the value of the "XCONFI" property from the input object,
+     * extracts the first four characters, trims any leading or trailing whitespace,
+     * and pads the result with spaces to a length of four characters.
+     * 
+     * @returns The first four characters of the "XCONFI" property, padded with spaces.
+     */
     getCOL(): string {
         const xconfi = this.input["XCONFI"] || "";
         const firstFourChars = xconfi.substring(0, 4).trim().padEnd(4, " ");
         return firstFourChars;
     }
 
+    /**
+     * Retrieves the value of CON_A. CON_A is the same of COL
+     * 
+     * @returns The value of CON_A.
+     * @see getCOL
+     */
     getCON_A(): string {
         return this.getCOL()
     }
-
+    
+    /**
+     * Retrieves the value of the "XCONFI" property from the input object,
+     * extracts the last five characters, trims any leading or trailing whitespace,
+     * and pads the result with spaces to a length of five characters.
+     * 
+     * @returns The last five characters of the "XCONFI" property, padded with spaces.
+     */
     getCON_B(): string {
         const xconfi = this.input["XCONFI"] || "";
         const firstFourChars = xconfi.substring(4, 9).trim().padEnd(5, " ");
         return firstFourChars;
     }
 
+    
+    /**
+     * @returns ""
+     */
     getLG(): string {
         return "";
     }
 
+    /**
+     * Retrieves the value of the "D§NOTA" input.
+     * 
+     * @returns The value of the "D§NOTA" input.
+     */
     getNT(): string {
         return this.input["D§NOTA"] || ""
     }
 
+    /**
+     * Retrieves the value of the "D§QUA1" input.
+     * 
+     * @returns The value of the "D§QUA1" input.
+     */
     getQ1(): string {
         return this.input["D§QUA1"] || ""
     }
 
+    /**
+     * Retrieves the value of the "D§QUA2" input.
+     * 
+     * @returns The value of the "D§QUA2" input.
+     */
     getQ2(): string {
         return this.input["D§QUA2"] || ""
     }
 
+    /**
+     * Retrieves the value of the "D§QUA3" input.
+     * 
+     * @returns The value of the "D§QUA3" input.
+     */
     getQ3(): string {
         return this.input["D§QUA3"] || ""
     }
 
+    /**
+     * Retrieves the value of the "D§QUA4" input.
+     * 
+     * @returns The value of the "D§QUA4" input.
+     */
     getQ4(): string {
         return this.input["D§QUA4"] || ""
     }
 
+    /**
+     * Retrieves the value of the "D§QUA5" input.
+     * 
+     * @returns The value of the "D§QUA5" input.
+     */
     getQ5(): string {
         return this.input["D§QUA5"] || ""
     }
 
+    /**
+     * Retrieves the value of the "D§USR1" input.
+     * 
+     * @returns The value of the "D§USR1" input.
+     */
     getS1(): string {
         return this.input["D§USR1"] || ""
     }
 
+    /**
+     * Retrieves the value of the "D§USR2" input.
+     * 
+     * @returns The value of the "D§USR2" input.
+     */
     getS2(): string {
         return this.input["D§USR2"] || ""
     }
 
+    /**
+     * @returns The value of the getCON_B
+     * @see getCON_B
+     */
     getLUNG(): string {
         return this.getCON_B();
     }
 
+    /**
+     * Set the value of "D§COEF"
+     * @param cf The value that will be set
+     */
     setCF(cf: string) {
         this.output["D§COEF"] = cf
     }
 
+    /**
+     * Set the value of "D§COMP"
+     * @param cm The value that will be set
+     */
     setCM(cm: string) {
         this.output["D§COMP"] = cm
     }
 
+    /**
+     * Set the first four chars of "D§DISE"
+     * @param con_a The value that will be set
+     */
     setCON_A(con_a: string) {
         // D§DISE is a 10 chars len
-        this.output["D§DISE"] = (con_a.trim().padEnd(4, " ") + (this.output["D§DISE"] || "").substring(4)).padEnd(D_DISE_LEN, " ");
+        this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] || "").substring(4)).padEnd(D_DISE_LEN, " ");
     }
 
+    /**
+     * Set the last five chars of "D§DISE"
+     * @param con_a The value that will be set
+     */
     setCON_B(con_a: string) {
         // D§DISE is a 10 chars len
         this.output["D§DISE"] = ((this.output["D§DISE"] || "").padEnd(4, " ") + con_a.trim()).padEnd(D_DISE_LEN, " ");
     }
 
+    /**
+     * Set the value of XFVALI, param is "" or "1" XVALI wull be set to ""
+     * @param lg The value that will be set
+     */
     setLG(lg: string) {
         if (lg.trim() === "" || lg === "1") {
-            this.output["XFVALI"] = " ";
+            this.output["XFVALI"] = "";
+        } else {
+            this.output["XFVALI"] = lg
         }
     }
 
+    /**
+     * Set the value of "D§NOTA"
+     * @param nt The value that will be set
+     */
     setNT(nt: string) {
         this.output["D§NOTA"] = nt
     }
 
+    /**
+     * Set the value of "D§QUA1"
+     * @param q The value that will be set
+     */
     setQ1(q: string) {
         this.output["D§QUA1"] = q
     }
 
+    /**
+     * Set the value of "D§QUA2"
+     * @param q The value that will be set
+     */
     setQ2(q: string) {
         this.output["D§QUA2"] = q
     }
 
+    /**
+     * Set the value of "D§QUA3"
+     * @param q The value that will be set
+     */
     setQ3(q: string) {
         this.output["D§QUA3"] = q
     }
 
+    /**
+     * Set the value of "D§QUA4"
+     * @param q The value that will be set
+     */
     setQ4(q: string) {
         this.output["D§QUA4"] = q
     }
 
+    /**
+     * Set the value of "D§QUA5"
+     * @param q The value that will be set
+     */
     setQ5(q: string) {
         this.output["D§QUA5"] = q
     }
 
+    /**
+     * Set the value of "D§USR1"
+     * @param usr The value that will be set
+     */
     setUSR1(usr: string) {
         this.output["D§USR1"] = usr
     }
 
+    /**
+     * Set the value of "D§USR2"
+     * @param usr The value that will be set
+     */
     setUSR2(usr: string) {
         this.output["D§USR2"] = usr
     }
