@@ -1,6 +1,6 @@
 import { RuleVariableMap } from "types/general";
 
-const D_DISE_LEN = 10
+const D_DISE_LEN = 9
 
 /***
  * This class is a wrapper of RuleVariableMap to expose
@@ -178,21 +178,21 @@ class Variables {
      * @param con_a The value that will be set
      */
     setCON_A(con_a: string) {
-        // D§DISE is a 10 chars len
+        // D§DISE is a 9 chars len
         this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] || "").substring(4)).padEnd(D_DISE_LEN, " ");
     }
 
     /**
      * Set the last five chars of "D§DISE"
-     * @param con_a The value that will be set
+     * @param con_b The value that will be set
      */
-    setCON_B(con_a: string) {
-        // D§DISE is a 10 chars len
-        this.output["D§DISE"] = ((this.output["D§DISE"] || "").padEnd(4, " ") + con_a.trim()).padEnd(D_DISE_LEN, " ");
+    setCON_B(con_b: string) {
+        // D§DISE is a 9 chars len
+        this.output["D§DISE"] = ((this.output["D§DISE"] || "").padEnd(4, " ") + con_b.trim()).padEnd(D_DISE_LEN, " ");
     }
 
     /**
-     * Set the value of XFVALI, param is "" or "1" XVALI wull be set to ""
+     * Set the value of XFVALI, if param is "" or "1" XVALI wull be set to ""
      * @param lg The value that will be set
      */
     setLG(lg: string) {
