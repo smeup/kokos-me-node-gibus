@@ -1,6 +1,5 @@
-import { RuleConverterApp } from "./app";
-import { RuleConverter, RuleDao } from "./interface";
-import { ConversionResult, Rule } from "./model";
+import { RuleConverter, RuleDao } from "../../src/converter/interface";
+import { ConversionResult, Rule } from "../../src/converter/model";
 
 class RuleConverterMock implements RuleConverter {
 
@@ -31,6 +30,5 @@ class RuleDaoMock implements RuleDao {
 
 }
 
-new RuleConverterApp(new RuleDaoMock(), new RuleConverterMock()).convertRules();
 
 
