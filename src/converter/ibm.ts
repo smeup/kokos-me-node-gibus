@@ -1,5 +1,5 @@
-import { RuleDao } from './interface';
-import { Rule } from './model';
+import { RuleDao } from './types';
+import { Rule } from './types';
 import * as ibm_db from 'ibm_db';
 
 class RuleDaoIBM implements RuleDao {

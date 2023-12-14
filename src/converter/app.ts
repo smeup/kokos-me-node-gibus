@@ -1,4 +1,4 @@
-import { RuleConverter, RuleDao } from "./interface";
+import { RuleConverter, RuleDao } from "./types";
 
 class RuleConverterApp {
     ruleDao: RuleDao;
