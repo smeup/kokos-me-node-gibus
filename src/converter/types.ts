@@ -51,7 +51,7 @@ class ConversionResult {
  * Represents a service for converting rules from one language to another.
  */
 
-export interface RuleConverter {
+export interface IRuleConverter {
 
     /**
      * Converts a rule from one language to another.
@@ -65,7 +65,7 @@ export interface RuleConverter {
  * Represents a data access object for managing rules.
  */
 
-export interface RuleDao {
+export interface IRuleDao {
 
     /**
      * Retrieves all rules that have not been converted.
@@ -83,8 +83,8 @@ export interface RuleDao {
 /**
  * Represents a data access object for managing conversion results.
  */
-export interface ConversionResultDao {
-    
+export interface IConversionResultDao {
+
     /**
      * Saves a conversion result.
      * @param conversionResult - The conversion result to be saved.

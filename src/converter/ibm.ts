@@ -1,8 +1,8 @@
-import { RuleDao } from './types';
+import { IRuleDao } from './types';
 import { Rule } from './types';
 import * as ibm_db from 'ibm_db';
 
-class RuleDaoIBM implements RuleDao {
+class RuleDaoIBM implements IRuleDao {
 
     private connectionString: string;
 
