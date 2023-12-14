@@ -51,7 +51,7 @@ class ConversionResult {
  * Represents a service for converting rules from one language to another.
  */
 
-export interface IRuleConverter {
+export interface IRuleConverterService {
 
     /**
      * Converts a rule from one language to another.

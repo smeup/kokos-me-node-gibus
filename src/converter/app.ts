@@ -1,10 +1,10 @@
-import { IRuleConverter, IRuleDao } from "./types";
+import { IRuleConverterService, IRuleDao } from "./types";
 
 class RuleConverterApp {
     ruleDao: IRuleDao;
-    ruleConverterService: IRuleConverter;
+    ruleConverterService: IRuleConverterService;
 
-    constructor(ruleDao: IRuleDao, ruleConverterService: IRuleConverter) {
+    constructor(ruleDao: IRuleDao, ruleConverterService: IRuleConverterService) {
         this.ruleDao = ruleDao;
         this.ruleConverterService = ruleConverterService;
     }
