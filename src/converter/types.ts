@@ -80,4 +80,16 @@ export interface RuleDao {
     markRuleAsConverted(rule: Rule): void;
 }
 
+/**
+ * Represents a data access object for managing conversion results.
+ */
+export interface ConversionResultDao {
+    
+    /**
+     * Saves a conversion result.
+     * @param conversionResult - The conversion result to be saved.
+     */
+    saveConversionResult(conversionResult: ConversionResult): void;
+}
+
 export { Rule, ConversionResult };
