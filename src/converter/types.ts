@@ -1,3 +1,9 @@
+/**
+ * Represents a condition statement in a rule.
+ * @property ifCondition - The if condition.
+ * @property thenCondition - The then condition.
+ * @property elseCondition - The else condition.
+ */
 class Condition {
     ifCondition: string;
     thenCondition: string;
@@ -10,6 +16,11 @@ class Condition {
     }
 }
 
+/**
+ * Represents a rule.
+ * @property id - The ID of the rule.
+ * @property conditions - The conditions of the rule.
+ */
 class Rule {
 
     id: string;
@@ -21,7 +32,11 @@ class Rule {
     }
 }
 
-
+/**
+ * Represents the result of converting a rule.
+ * @property rule - The converted rule.
+ * @property javaScript - The JavaScript representation of the rule.
+ */
 class ConversionResult {
     rule: Rule;
     javaScript: string;
