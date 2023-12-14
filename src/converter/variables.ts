@@ -1,6 +1,7 @@
 import { RuleVariableMap } from "types/general";
 
-class RuleVariableMapWrapper {
+
+class InputVariable {
     ruleVariableMap: RuleVariableMap;
 
 
