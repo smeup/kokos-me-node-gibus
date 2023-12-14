@@ -59,7 +59,9 @@ export interface RuleConverter {
      * @returns A ConversionResult object containing the converted rule.
      */
     convertRule(rule: Rule): ConversionResult;
-}/**
+}
+
+/**
  * Represents a data access object for managing rules.
  */
 
