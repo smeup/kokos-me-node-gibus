@@ -1,20 +1,33 @@
-class Rule {
-    id: string;
-    script: string;
+class Condition {
+    ifCondition: string;
+    thenCondition: string;
+    elseCondition: string;
 
-    constructor(id: string, script: string) {
+    constructor(ifCondition: string, thenCondition: string, elseCondition: string) {
+        this.ifCondition = ifCondition;
+        this.thenCondition = thenCondition;
+        this.elseCondition = elseCondition;
+    }
+}
+
+class Rule {
+
+    id: string;
+    conditions: Condition[];
+
+    constructor(id: string, conditions: Condition[]) {
         this.id = id;
-        this.script = script;
+        this.conditions = conditions;
     }
 }
 
 
 class ConversionResult {
-    ruleId: string;
+    rule: Rule;
     javaScript: string;
 
-    constructor(ruleId: string, javaScript: string) {
-        this.ruleId = ruleId;
+    constructor(rule: Rule, javaScript: string) {
+        this.rule = rule;
         this.javaScript = javaScript;
     }
 }

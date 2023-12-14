@@ -13,7 +13,7 @@ class RuleConverterApp {
         const rules = this.ruleDao.getUnconvertedRules();
         for (const rule of rules) {
             const result = this.ruleConverterService.convertRule(rule);
-            console.log(`Converted rule ${result.ruleId}`);
+            console.log(`Converted rule ${result.rule.id}`);
             this.ruleDao.markRuleAsConverted(rule);
         }
     }
