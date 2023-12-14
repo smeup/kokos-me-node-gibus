@@ -1,5 +1,6 @@
 import { RuleVariableMap } from "types/general";
 
+const D_DISE_LEN = 10
 
 class InputVariable {
     ruleVariableMap: RuleVariableMap;
@@ -38,35 +39,35 @@ class InputVariable {
     }
 
     getNT(): string {
-        return this.ruleVariableMap["D§NOTA "] || ""
+        return this.ruleVariableMap["D§NOTA"] || ""
     }
 
     getQ1(): string {
-        return this.ruleVariableMap["D§QUA1 "] || ""
+        return this.ruleVariableMap["D§QUA1"] || ""
     }
 
     getQ2(): string {
-        return this.ruleVariableMap["D§QUA2 "] || ""
+        return this.ruleVariableMap["D§QUA2"] || ""
     }
 
     getQ3(): string {
-        return this.ruleVariableMap["D§QUA3 "] || ""
+        return this.ruleVariableMap["D§QUA3"] || ""
     }
 
     getQ4(): string {
-        return this.ruleVariableMap["D§QUA4 "] || ""
+        return this.ruleVariableMap["D§QUA4"] || ""
     }
 
     getQ5(): string {
-        return this.ruleVariableMap["D§QUA5 "] || ""
+        return this.ruleVariableMap["D§QUA5"] || ""
     }
 
     getS1(): string {
-        return this.ruleVariableMap["D§USR1 "] || ""
+        return this.ruleVariableMap["D§USR1"] || ""
     }
 
     getS2(): string {
-        return this.ruleVariableMap["D§USR2 "] || ""
+        return this.ruleVariableMap["D§USR2"] || ""
     }
 
     getLUNG(): string {
@@ -74,4 +75,66 @@ class InputVariable {
     }
 }
 
-export { RuleVariableMap }
+class OutputVariable {
+
+    variables: RuleVariableMap = {};
+
+    setCF(cf: string) {
+        this.variables["D§COEF"] = cf
+    }
+
+    setCM(cm: string) {
+        this.variables["D§COMP"] = cm
+    }
+
+    setCON_A(con_a: string) {
+        // D§DISE is a 10 chars len
+        this.variables["D§DISE"] = (con_a.trim().padEnd(4, " ") + (this.variables["D§DISE"] || "").substring(4)).padEnd(D_DISE_LEN, " ");
+    }
+
+    setCON_B(con_a: string) {
+        // D§DISE is a 10 chars len
+        this.variables["D§DISE"] = ((this.variables["D§DISE"] || "").padEnd(4, " ") + con_a.trim()).padEnd(D_DISE_LEN, " ");
+    }
+
+    setLG(lg: string) {
+        if (lg.trim() === "" || lg === "1") {
+            this.variables["XFVALI"] = " ";
+        }
+    }
+
+    setNT(nt: string) {
+        this.variables["D§NOTA"] = nt
+    }
+
+    setQ1(q: string) {
+        this.variables["D§QUA1"] = q
+    }
+
+    setQ2(q: string) {
+        this.variables["D§QUA2"] = q
+    }
+
+    setQ3(q: string) {
+        this.variables["D§QUA3"] = q
+    }
+
+    setQ4(q: string) {
+        this.variables["D§QUA4"] = q
+    }
+
+    setQ5(q: string) {
+        this.variables["D§QUA5"] = q
+    }
+
+    setUSR1(usr: string) {
+        this.variables["D§USR1"] = usr
+    }
+
+    setUSR2(usr: string) {
+        this.variables["D§USR2"] = usr
+    }
+
+}
+
+export { InputVariable, OutputVariable }
