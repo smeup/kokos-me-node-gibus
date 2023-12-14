@@ -1,21 +1,20 @@
-import { RuleConverter, RuleDao } from "../../src/converter/interface";
-import { ConversionResult, Rule } from "../../src/converter/model";
+import { IRuleConverterService, IRuleDao } from "../../src/converter/types";
+import { ConversionResult, Rule } from "../../src/converter/types";
 
-class RuleConverterMock implements RuleConverter {
+class RuleConverterMock implements IRuleConverterService {
 
     convertRule(rule: Rule): ConversionResult {
-        return new ConversionResult(rule.id, rule.script);
+        return new ConversionResult(rule, rule.id);
     }
 }
 
-class RuleDaoMock implements RuleDao {
+class RuleDaoMock implements IRuleDao {
 
     rules: Rule[] = [
-        new Rule("1", "function foo() { return 1; }"),
-        new Rule("2", "function bar() { return 2; }"),
-        new Rule("3", "function baz() { return 3; }"),
-        new Rule("4", "function baz() { return 4; }"),
-        new Rule("5", "function baz() { return 5; }")
+       new Rule("1", []),
+       new Rule("2", []),
+       new Rule("3", []),
+       new Rule("4", []),
     ];
 
     converted: string[] = [];
