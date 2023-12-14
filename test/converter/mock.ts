@@ -1,4 +1,4 @@
-import { IRuleConverterService, IRuleDao } from "../../src/converter/types";
+import { IConversionResultDao, IRuleConverterService, IRuleDao } from "../../src/converter/types";
 import { ConversionResult, Rule } from "../../src/converter/types";
 
 class RuleConverterMock implements IRuleConverterService {
@@ -11,10 +11,10 @@ class RuleConverterMock implements IRuleConverterService {
 class RuleDaoMock implements IRuleDao {
 
     rules: Rule[] = [
-       new Rule("1", []),
-       new Rule("2", []),
-       new Rule("3", []),
-       new Rule("4", []),
+        new Rule("1", []),
+        new Rule("2", []),
+        new Rule("3", []),
+        new Rule("4", []),
     ];
 
     converted: string[] = [];
@@ -29,5 +29,12 @@ class RuleDaoMock implements IRuleDao {
 
 }
 
+class ConversionResultDaoMock implements IConversionResultDao {
 
+    onSave: (conversionResult: ConversionResult) => void;
 
+    saveConversionResult(conversionResult: ConversionResult): void {
+        console.log("saveConversionResult: " + conversionResult)
+        this.onSave.apply(conversionResult);
+    }
+}
