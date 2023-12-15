@@ -11,8 +11,8 @@ class Variables {
     input: RuleVariableMap;
     output: RuleVariableMap = {};
 
-    constructor(ruleVariableMap: RuleVariableMap) {
-        this.input = ruleVariableMap
+    constructor(input: RuleVariableMap) {
+        this.input = input
     }
 
     
