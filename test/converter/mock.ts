@@ -4,7 +4,7 @@ import { ConversionResult, Rule } from "../../src/converter/types";
 class RuleConverterMock implements IRuleConverterService {
 
     convertRule(rule: Rule): ConversionResult {
-        return new ConversionResult(rule, rule.id);
+        return new ConversionResult(rule.id, rule.id);
     }
 }
 

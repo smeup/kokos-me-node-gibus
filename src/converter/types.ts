@@ -34,15 +34,15 @@ class Rule {
 
 /**
  * Represents the result of converting a rule.
- * @property rule - The converted rule.
+ * @property ruleId - The converted rule id.
  * @property javaScript - The JavaScript representation of the rule.
  */
 class ConversionResult {
-    rule: Rule;
+    ruleId: string;
     javaScript: string;
 
-    constructor(rule: Rule, javaScript: string) {
-        this.rule = rule;
+    constructor(ruleId: string, javaScript: string) {
+        this.ruleId = ruleId;
         this.javaScript = javaScript;
     }
 }
