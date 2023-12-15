@@ -1,0 +1,75 @@
+### Regola (J§TRUE e J§FALS):
+J§REGO
+§L_CAS_SUP_TG > #0
+
+J§TRUE
+*SET *CON-A = §VERN_CASSONETTO
+*SET *CON-B = §L_CAS_SUP_TG
+
+J§FALS
+*SET *LG=''
+
+Traduzione:
+  if (iv['§L_CAS_SUP_TG'] > 0) {
+    vars.setCON_A(iv['§VERN_CASSONETTO']);
+    vars.setCON_B(iv['§L_CAS_SUP_TG']);
+  } else {
+    vars.setLG('');
+  }
+###
+
+### Regola (J§TRUE):
+J§REGO
+§L_CAS_SUP_TG > #0
+
+J§TRUE
+*SET *CON-A = §VERN_CASSONETTO
+*SET *CON-B = §L_CAS_SUP_TG
+
+J§FALS
+
+Traduzione:
+  if (iv['§L_CAS_SUP_TG'] > 0) {
+    vars.setCON_A(iv['§VERN_CASSONETTO']);
+    vars.setCON_B(iv['§L_CAS_SUP_TG']);
+  } else {
+  }
+###
+
+### Regola (J§FALS):
+J§REGO
+§L_CAS_SUP_TG > #0
+
+J§TRUE
+
+J§FALS
+*SET *LG=''
+
+Traduzione:
+  if (iv['§L_CAS_SUP_TG'] > 0) {
+  } else {
+    vars.setLG("");
+  }
+###
+---
+
+Test:  REG0000235
+J§REGO
+§NR_SUPP_MURO <= #0
+
+J§TRUE
+*SET *LG = ''
+
+J§FALS
+*SET *CF = §NR_SUPP_MURO
+
+J§REGO
+§NR_SUPP_MINO > 'abcd'
+
+J§TRUE
+*SET *LG = ''
+
+J§FALS
+*SET *CL = §NR_SUPP_MURO
+
+Traduzione:
