@@ -92,4 +92,4 @@ export interface IConversionResultDao {
     saveConversionResult(conversionResult: ConversionResult): void;
 }
 
-export { Rule, ConversionResult };
+export { Rule, ConversionResult, Condition };
