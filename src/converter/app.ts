@@ -1,4 +1,5 @@
 import { IRuleConverterService, IRuleDao, IConversionResultDao } from "./types";
+import * as fs from 'fs';
 
 class RuleConverterApp {
     ruleDao: IRuleDao;
@@ -25,6 +26,7 @@ class RuleConverterApp {
         for (const rule of rules) {
             console.log(`${rule.id} - converting rule`);
             const result = this.ruleConverterService.convertRule(rule);
+            result.javaScript = completeRules(result.javaScript);
             console.log(`${rule.id} - saving conversion result ${result.javaScript}`);
             this.conversionResultDao.saveConversionResult(result);
             console.log(`${rule.id} - marking rule as converted`);
@@ -33,4 +35,29 @@ class RuleConverterApp {
     }
 }
 
-export { RuleConverterApp };
+
+/**
+ * Completes the body of a rule template implementation by replacing the placeholder "// AI_GENERATED" with the provided function body.
+ * 
+ * @param bodyFunctionImpl - The function body to be inserted into the rule template.
+ * @returns The completed rule function implementation.
+ */
+function completeRules(bodyFunctionImpl: string): string {
+    const ruleTemplate = readRuleTemplateFile();
+    return ruleTemplate.replaceAll("// AI_GENERATED", bodyFunctionImpl);
+}
+
+
+/**
+ * Reads the rule template file from ./src/rules/TEMPLATE.ts and returns its content as a string.
+ * 
+ * @returns The rule template file content.
+ */
+function readRuleTemplateFile(): string {
+    const filePath = './src/rules/TEMPLATE.ts';
+    const ruleTemplate = fs.readFileSync(filePath, 'utf8');
+    return ruleTemplate;
+}
+
+
+export { RuleConverterApp, completeRules, readRuleTemplateFile};
