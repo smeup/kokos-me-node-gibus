@@ -10,6 +10,9 @@ class RuleDaoIBM implements IRuleDao {
         this.connectionString = connectionString;
     }
 
+    // create a connecton string for ibmd db2 as400
+    
+
     getUnconvertedRules(): Rule[] {
         const rules: Rule[] = [];
         const conn = ibm_db.openSync(this.connectionString);
