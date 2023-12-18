@@ -1,3 +1,5 @@
+
+const SAMPLE_RULES = `
 ### Regola (J§TRUE e J§FALS):
 J§REGO
 §L_CAS_SUP_TG > #0
@@ -51,25 +53,23 @@ Traduzione:
     vars.setLG("");
   }
 ###
----
+`;
 
-Test:  REG0000235
-J§REGO
-§NR_SUPP_MURO <= #0
+const SYSTEM_MESSAGE = `
+Sei un traduttore di regole.
+L'utente ti passerà la regola da tradurre tra in questo formato:
+ID della regola da tradurre
+"""
+#REGOLA_DA_TRADURRE
+"""
+Per ottenere la risposta consulta gli esempi racchiusi tra ###
 
-J§TRUE
-*SET *LG = ''
+La risposta deve essere in questo formato:
 
-J§FALS
-*SET *CF = §NR_SUPP_MURO
+//ID della regola da tradurre
+<traduzione della regola>
 
-J§REGO
-§NR_SUPP_MINO > 'abcd'
+{sampleRules}
+`;
 
-J§TRUE
-*SET *LG = ''
-
-J§FALS
-*SET *CL = §NR_SUPP_MURO
-
-Traduzione:
+export { SAMPLE_RULES, SYSTEM_MESSAGE }
