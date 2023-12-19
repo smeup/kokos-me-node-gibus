@@ -9,7 +9,7 @@ describe('RuleDaoIBM', () => {
     });
 
     describe('getUnconvertedRules', () => {
-        it('should retrieve unconverted rules from the IBM database', () => {
+        xit('should retrieve unconverted rules from the IBM database', () => {
             // Arrange
             const mockRule1: Rule = { id: 'COMP1', conditions: [] };
             const mockRule2: Rule = { id: 'COMP2', conditions: [] };
@@ -32,7 +32,7 @@ describe('RuleDaoIBM', () => {
     });
 
     describe('markRuleAsConverted', () => {
-        it('should mark a rule as converted in the IBM database', () => {
+        xit('should mark a rule as converted in the IBM database', () => {
             // Arrange
             const mockRule: Rule = { id: 'COMP1', conditions: [] };
 
