@@ -83,5 +83,9 @@ if ((process.env.OPENAI_API_KEY || "").length > 0) {
         });
     });
 } else {
-    console.warn("rule-converter.openai.tests skipped!!!")
+    describe("OpenAIRuleConverter", () => {
+        it("should skip tests", () => {
+            expect(true).toBe(true);
+        });
+    });
 }
