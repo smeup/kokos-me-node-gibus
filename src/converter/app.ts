@@ -25,12 +25,16 @@ class RuleConverterApp {
         const rules = this.ruleDao.getUnconvertedRules();
         for (const rule of rules) {
             console.log(`${rule.id} - converting rule`);
-            const result = this.ruleConverterService.convertRule(rule);
-            result.javaScript = completeRules(result.javaScript);
-            console.log(`${rule.id} - saving conversion result ${result.javaScript}`);
-            this.conversionResultDao.saveConversionResult(result);
-            console.log(`${rule.id} - marking rule as converted`);
-            this.ruleDao.markRuleAsConverted(rule);
+            const result = this.ruleConverterService.convertRule(rule).then((result) => {
+                console.log(`${rule.id} - conversion result ${result.javaScript}`);
+                result.javaScript = completeRules(result.javaScript);
+                console.log(`${rule.id} - saving conversion result ${result.javaScript}`);
+                this.conversionResultDao.saveConversionResult(result);
+                console.log(`${rule.id} - marking rule as converted`);
+                this.ruleDao.markRuleAsConverted(rule);
+            }).catch((error) => {
+                console.log(`${rule.id} - error converting rule ${error}`);
+            });
         }
     }
 }
@@ -60,4 +64,4 @@ function readRuleTemplateFile(): string {
 }
 
 
-export { RuleConverterApp, completeRules, readRuleTemplateFile};
+export { RuleConverterApp, completeRules, readRuleTemplateFile };

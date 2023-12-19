@@ -56,9 +56,9 @@ export interface IRuleConverterService {
     /**
      * Converts a rule from one language to another.
      * @param rule - The rule to be converted.
-     * @returns A ConversionResult object containing the converted rule.
+     * @returns A promise that resolves to a ConversionResult.
      */
-    convertRule(rule: Rule): ConversionResult;
+    convertRule(rule: Rule): Promise<ConversionResult>;
 }
 
 /**
