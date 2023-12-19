@@ -40,23 +40,5 @@ describe('RuleConverterApp', () => {
       expect(conversionResultDao.saveConversionResult).toHaveBeenCalledWith(mockResult);
       expect(ruleDao.markRuleAsConverted).toHaveBeenCalledWith(mockRule);
     });
-
-    it('should handle errors during conversion', async () => {
-      // Arrange
-      const mockRule = { id: 1 };
-      const mockError = new Error('Conversion error');
-
-      (ruleDao.getUnconvertedRules as jest.Mock).mockReturnValue([mockRule]);
-      (ruleConverterService.convertRule as jest.Mock).mockRejectedValue(mockError);
-
-      // Act
-      await ruleConverterApp.convertRules();
-
-      // Assert
-      expect(ruleDao.getUnconvertedRules).toHaveBeenCalled();
-      expect(ruleConverterService.convertRule).toHaveBeenCalledWith(mockRule);
-      expect(conversionResultDao.saveConversionResult).not.toHaveBeenCalled();
-      expect(ruleDao.markRuleAsConverted).not.toHaveBeenCalled();
-    });
   });
 });

@@ -15,26 +15,23 @@ class RuleConverterApp {
     /**
      * Converts all unconverted rules. 
      * Process:
-     * - gets all rule to convert from @see IRuleDao.getUnconvertedRules and for each rule it invkes:
+     * - gets all rule to convert from @see IRuleDao.getUnconvertedRules and for each rule it invokes:
      *   - @see IRuleConverterService.convertRule
      *   - @see IConversionResultDao.saveConversionResult
      *   - @see IRuleDao.saveConversionResult
      *   - 
     */
-    convertRules(): void {
+    async convertRules(): Promise<void> {
         const rules = this.ruleDao.getUnconvertedRules();
         for (const rule of rules) {
             console.log(`${rule.id} - converting rule`);
-            const result = this.ruleConverterService.convertRule(rule).then((result) => {
-                console.log(`${rule.id} - conversion result ${result.javaScript}`);
-                result.javaScript = completeRules(result.javaScript);
-                console.log(`${rule.id} - saving conversion result ${result.javaScript}`);
-                this.conversionResultDao.saveConversionResult(result);
-                console.log(`${rule.id} - marking rule as converted`);
-                this.ruleDao.markRuleAsConverted(rule);
-            }).catch((error) => {
-                console.log(`${rule.id} - error converting rule ${error}`);
-            });
+            const result = await this.ruleConverterService.convertRule(rule);
+            console.log(`${rule.id} - conversion result ${result.javaScript}`);
+            result.javaScript = completeRules(result.javaScript);
+            console.log(`${rule.id} - saving conversion result ${result.javaScript}`);
+            this.conversionResultDao.saveConversionResult(result);
+            console.log(`${rule.id} - marking rule as converted`);
+            this.ruleDao.markRuleAsConverted(rule);
         }
     }
 }
