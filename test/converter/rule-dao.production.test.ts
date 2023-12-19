@@ -1,11 +1,11 @@
-import { RuleDaoIBM } from '../../src/converter/rule-dao.ibm';
+import { RuleDaoProduction } from '../../src/converter/rule-dao.production';
 import { Rule } from '../../src/converter/types';
 
 describe('RuleDaoIBM', () => {
-    let ruleDao: RuleDaoIBM;
+    let ruleDao: RuleDaoProduction;
 
     beforeEach(() => {
-        ruleDao = new RuleDaoIBM('connectionString');
+        ruleDao = new RuleDaoProduction('connectionString');
     });
 
     describe('getUnconvertedRules', () => {

@@ -5,7 +5,7 @@ import * as ibm_db from 'ibm_db';
 /**
  * Represents a RuleDao implementation for IBM database.
  */
-class RuleDaoIBM implements IRuleDao {
+class RuleDaoProduction implements IRuleDao {
 
     private connectionString: string;
 
@@ -91,4 +91,4 @@ class RuleDaoIBM implements IRuleDao {
 
 }
 
-export { RuleDaoIBM };
+export { RuleDaoProduction };
