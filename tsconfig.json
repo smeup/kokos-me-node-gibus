@@ -16,7 +16,7 @@
 	},
 	"include": [
 		"src/**/*.ts"
-	],
+, "test/converter/rule-converter.openai.test.ts"],
 	"exclude": [
 		"node_modules",
 		"lib",

@@ -19,19 +19,10 @@ class OpenAIRuleConverter implements IRuleConverterService {
     }
 
     async convertRule(rule: Rule): Promise<ConversionResult> {
-        const prompt = PromptTemplate.fromTemplate(SYSTEM_MESSAGE);
         const messages = [new SystemMessage({ content: SYSTEM_MESSAGE }), new HumanMessage({ content: this.transformRuleToText(rule) })];
         const result = await this.openai.predictMessages(messages)
-        const messageContent = result.content[0];
-        let text: string;
-        if (typeof messageContent === 'string') {
-            text = messageContent;
-        } else if (messageContent.type === 'text') {
-            text = messageContent.text;
-        } else {
-            throw new Error(`Unexpected message content type: ${messageContent.type}`);
-        }
-        return new ConversionResult(rule.id, text);
+        const messageContent = result.content.toString();
+        return new ConversionResult(rule.id, messageContent);
     };
 
 
