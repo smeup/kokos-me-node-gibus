@@ -2,7 +2,7 @@ import { ChatOpenAI } from "langchain/chat_models/openai";
 import { SystemMessage, HumanMessage } from "langchain/schema";
 import { Condition, ConversionResult, IRuleConverterService, Rule } from "./types";
 import { PromptTemplate } from "langchain/prompts";
-import { SAMPLE_RULES, SYSTEM_MESSAGE } from "./prompts";
+import { SYSTEM_MESSAGE } from "./prompts";
 
 class OpenAIRuleConverter implements IRuleConverterService {
 
@@ -20,8 +20,7 @@ class OpenAIRuleConverter implements IRuleConverterService {
 
     async convertRule(rule: Rule): Promise<ConversionResult> {
         const prompt = PromptTemplate.fromTemplate(SYSTEM_MESSAGE);
-        const formattedPrompt = await prompt.format({ sampleRules: SAMPLE_RULES });
-        const messages = [new SystemMessage({ content: formattedPrompt }), new HumanMessage({ content: this.transformRuleToText(rule) })];
+        const messages = [new SystemMessage({ content: SYSTEM_MESSAGE }), new HumanMessage({ content: this.transformRuleToText(rule) })];
         const result = await this.openai.predictMessages(messages)
         const messageContent = result.content[0];
         let text: string;

@@ -69,7 +69,7 @@ La risposta deve essere in questo formato:
 //ID della regola da tradurre
 <traduzione della regola>
 
-{sampleRules}
+${SAMPLE_RULES}
 `;
 
-export { SAMPLE_RULES, SYSTEM_MESSAGE }
+export { SYSTEM_MESSAGE}
