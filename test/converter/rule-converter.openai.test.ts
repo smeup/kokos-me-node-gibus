@@ -13,7 +13,7 @@ if ((process.env.OPENAI_API_KEY || "").length > 0) {
             it("should convert rule to text", async () => {
                 // define input
                 const rule: Rule = {
-                    id: "REG0000235",
+                    id: "REGTEST",
                     conditions: [
                         {
                             ifCondition: "§NR_SUPP_MURO <= #0",
@@ -29,13 +29,13 @@ if ((process.env.OPENAI_API_KEY || "").length > 0) {
                 // check values
                 expect(result.ruleId).toBe(rule.id);
                 const expectedJavaScript = `
-    //REG0000235
-    if (iv['§NR_SUPP_MURO'] <= 0) {
-      vars.setLG('');
-    } else {
-      vars.setCF(iv['§NR_SUPP_MURO']);
-    }`
-                expect(result.javaScript.trim()).toContain(expectedJavaScript.trim());
+                    //${rule.id}
+                    if (iv['§NR_SUPP_MURO'] <= 0) {
+                    vars.setLG('');
+                    } else {
+                    vars.setCF(iv['§NR_SUPP_MURO']);
+                    }`
+                expect(result.javaScript.replace(/\s+/g, '')).toContain(expectedJavaScript.replace(/\s+/g, ''));
             });
         });
 
