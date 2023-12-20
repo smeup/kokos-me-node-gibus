@@ -29,12 +29,24 @@ if ((process.env.OPENAI_API_KEY || "").length > 0) {
                 // check values
                 expect(result.ruleId).toBe(rule.id);
                 const expectedJavaScript = `
-                    //${rule.id}
-                    if (iv['§NR_SUPP_MURO'] <= 0) {
+                //RULE: ${rule.id}
+                //REQUEST:
+                //"""
+                //COND:
+                //§NR_SUPP_MURO <= #0
+                //THEN:
+                //*SET *LG = ''
+                //ELSE:
+                //*SET *CF = §NR_SUPP_MURO
+                //"""
+                //Traduzione:
+                //RESPONSE:
+                if (iv['§NR_SUPP_MURO'] <= 0) {
                     vars.setLG('');
-                    } else {
+                } else {
                     vars.setCF(iv['§NR_SUPP_MURO']);
-                    }`
+                }
+                `
                 expect(result.javaScript.replace(/\s+/g, '')).toContain(expectedJavaScript.replace(/\s+/g, ''));
             });
         });
@@ -57,9 +69,10 @@ if ((process.env.OPENAI_API_KEY || "").length > 0) {
                 const result: string = converter.transformRuleToText(rule);
 
                 // check values
-                expect(result).toContain("J§REGO");
-                expect(result).toContain("J§TRUE");
-                expect(result).toContain("J§FALS");
+                expect(result).toContain("COND:");
+                expect(result).toContain("THEN:");
+                expect(result).toContain("ELSE:");
+                expect(result).toContain("Traduzione:");
             });
         });
 
@@ -76,9 +89,9 @@ if ((process.env.OPENAI_API_KEY || "").length > 0) {
                 const result: string = converter.transformConditionToText(condition);
 
                 // check values
-                expect(result).toContain("J§REGO");
-                expect(result).toContain("J§TRUE");
-                expect(result).toContain("J§FALS");
+                expect(result).toContain("COND:");
+                expect(result).toContain("THEN:");
+                expect(result).toContain("ELSE:");
             });
         });
     });

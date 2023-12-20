@@ -19,34 +19,39 @@ class OpenAIRuleConverter implements IRuleConverterService {
     }
 
     async convertRule(rule: Rule): Promise<ConversionResult> {
-        const messages = [new SystemMessage({ content: SYSTEM_MESSAGE }), new HumanMessage({ content: this.transformRuleToText(rule) })];
+        const payloadSentToLLM = this.transformRuleToText(rule);
+        const commentedPayloadSentToLLM = `//REQUEST:\n//${this.insertStringAfterNewLine(payloadSentToLLM, "//")}\n//RESPONSE:`;
+        const messages = [new SystemMessage({ content: SYSTEM_MESSAGE }), new HumanMessage({ content: payloadSentToLLM })];
         const result = await this.openai.predictMessages(messages)
-        const messageContent = result.content.toString();
+        const messageContent = `//RULE: ${rule.id}\n${commentedPayloadSentToLLM}\n${result.content.toString().trim()}`;
         return new ConversionResult(rule.id, messageContent);
     };
 
 
     transformRuleToText(rule: Rule): string {
-        return `
-        //${rule.id}
+        return this.removeSpacesAfterNewline(`
         """
         ${rule.conditions.map((condition) => this.transformConditionToText(condition)).join("\n")}
         """
-        `;
+        Traduzione:
+        `);
     }
 
 
     transformConditionToText(condition: Condition): string {
-        return `
-        J§REGO
-        ${condition.ifCondition} 
+        return this.removeSpacesAfterNewline(`
+        ${condition.ifCondition.trim().length > 0 ? `COND:\n${condition.ifCondition}` : ""}
+        ${condition.thenCondition.trim().length > 0 ? `THEN:\n${condition.thenCondition}` : ""}
+        ${condition.elseCondition.trim().length > 0 ? `ELSE:\n${condition.elseCondition}` : ""}
+        `);
+    }
 
-        J§TRUE
-        ${condition.thenCondition}
+    private removeSpacesAfterNewline(input: string): string {
+        return input.replace(/\n\s+/g, "\n").trim();
+    }
 
-        J§FALS
-        ${condition.elseCondition}
-        `;
+    private insertStringAfterNewLine(input: string, stringToInsert: string): string {
+        return input.replace(/\n/g, "\n" + stringToInsert);
     }
 
 }

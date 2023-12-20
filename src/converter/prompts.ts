@@ -1,75 +1,110 @@
 
 const SAMPLE_RULES = `
-### Regola (J§TRUE e J§FALS):
-J§REGO
+###
+Regola (COND, THEN, ELSE):
+"""
+COND:
 §L_CAS_SUP_TG > #0
 
-J§TRUE
+THEN:
 *SET *CON-A = §VERN_CASSONETTO
 *SET *CON-B = §L_CAS_SUP_TG
 
-J§FALS
+ELSE:
 *SET *LG=''
-
+"""
 Traduzione:
-  if (iv['§L_CAS_SUP_TG'] > 0) {
+if (iv['§L_CAS_SUP_TG'] > 0) {
     vars.setCON_A(iv['§VERN_CASSONETTO']);
     vars.setCON_B(iv['§L_CAS_SUP_TG']);
-  } else {
+} else {
     vars.setLG('');
-  }
+}
 ###
 
-### Regola (J§TRUE):
-J§REGO
+###
+Regola (COND, THEN):
+"""
+COND:
 §L_CAS_SUP_TG > #0
 
-J§TRUE
+THEN:
 *SET *CON-A = §VERN_CASSONETTO
 *SET *CON-B = §L_CAS_SUP_TG
-
-J§FALS
-
+"""
 Traduzione:
-  if (iv['§L_CAS_SUP_TG'] > 0) {
+if (iv['§L_CAS_SUP_TG'] > 0) {
     vars.setCON_A(iv['§VERN_CASSONETTO']);
     vars.setCON_B(iv['§L_CAS_SUP_TG']);
-  } else {
-  }
+} 
 ###
 
-### Regola (J§FALS):
-J§REGO
+###
+Regola (COND, ELSE):
+"""
+COND:
 §L_CAS_SUP_TG > #0
 
-J§TRUE
-
-J§FALS
+ELSE:
 *SET *LG=''
-
+"""
 Traduzione:
-  if (iv['§L_CAS_SUP_TG'] > 0) {
-  } else {
+if (iv['§L_CAS_SUP_TG'] > 0) {
+} else {
     vars.setLG("");
-  }
+}
+###
+
+###
+Regola (THEN, ELSE):
+"""
+THEN:
+*SET *CON-A = §VERN_CASSONETTO
+
+ELSE:
+*SET *CON-B = §L_CAS_SUP_TG
+"""
+Traduzione:
+vars.setCON_A(iv['§VERN_CASSONETTO']);
+vars.setCON_B(iv['§L_CAS_SUP_TG']);
+###
+
+###
+Regola (THEN):
+"""
+THEN:
+*SET *CON-A = §VERN_CASSONETTO
+"""
+Traduzione:
+vars.setCON_A(iv['§VERN_CASSONETTO']);
+###
+
+###
+Regola (ELSE):
+"""
+ELSE:
+*SET *CON-A = §VERN_CASSONETTO
+"""
+Traduzione:
+vars.setCON_A(iv['§VERN_CASSONETTO']);
 ###
 `;
 
 const SYSTEM_MESSAGE = `
 Sei un traduttore di regole.
 L'utente ti passerà la regola da tradurre tra in questo formato:
-ID della regola da tradurre
 """
 #REGOLA_DA_TRADURRE
 """
 Per ottenere la risposta consulta gli esempi racchiusi tra ###
 
 La risposta deve essere in questo formato:
+Traduzione:
 
-//ID della regola da tradurre
-<traduzione della regola>
+Se non riesci a tradurre la regola devi rispondere KO
+
 
 ${SAMPLE_RULES}
 `;
 
-export { SYSTEM_MESSAGE}
+export { SYSTEM_MESSAGE }
