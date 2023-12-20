@@ -9,7 +9,7 @@
 import { Rule } from "../types/general";
 import { Variables } from "../converter/variables";
 
-export const SCAFFOLD: Rule = (iv) => {
+export const TEMPLATE: Rule = (iv) => {
 
     const vars = new Variables(iv);
     
