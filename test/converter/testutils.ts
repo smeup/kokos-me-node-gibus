@@ -7,3 +7,5 @@
 function removeUnnecessaryChars(code: string) {
     return code.replace(/\s+/g, ' ');
 }
+
+export { removeUnnecessaryChars }
