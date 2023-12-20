@@ -8,17 +8,23 @@ import * as fs from 'fs'
  */
 class RuleDaoExamples implements IRuleDao {
 
-    private logPath;
+    readonly logPath: string;
+    readonly errPath: string;
 
     /**
      * Creates a new instance of the RuleDaoExamples class.
      * @param logPath The path where will be logged the rules when converted. Default is .work/conversion-result.txt.
+     * @param errPath The path where will be logged the rules when not converted. Default is .work/conversion-result.err.
      */
-    constructor(logPath: string = path.resolve(".work", "conversion-result.txt")) {
+    constructor(logPath: string = path.resolve(".work", "conversion-result.txt"), errPath: string = path.resolve(".work", "conversion-result.err")) {
         this.logPath = logPath;
+        this.errPath = errPath;
         fs.mkdirSync(path.dirname(this.logPath), { recursive: true });
         if (!fs.existsSync(this.logPath)) {
             fs.writeFileSync(this.logPath, '', 'utf-8');
+        }
+        if (!fs.existsSync(this.errPath)) {
+            fs.writeFileSync(this.errPath, '', 'utf-8');
         }
     }
 
@@ -66,7 +72,7 @@ class RuleDaoExamples implements IRuleDao {
     }
 
     /***
-     * Marks a rule as converted. The rule is written to the .work/conversion-result.txt file.
+     * Marks a rule as converted. The rule is written to the this.logPath file.
      */
     markRuleAsConverted(rule: Rule): void {
         const timestamp = new Date().toISOString();
@@ -74,8 +80,13 @@ class RuleDaoExamples implements IRuleDao {
         fs.appendFileSync(this.logPath, row, 'utf-8');
     }
 
+    /***
+    * Marks a rule as not converted. The rule is written to the this.errPath file.
+    */
     markRuleAsNotConverted(rule: Rule, error: string): void {
-        throw new Error('Method not implemented.');
+        const timestamp = new Date().toISOString();
+        const row = `${rule.id}\t${error}\t${timestamp}\n`;
+        fs.appendFileSync(this.errPath, row, 'utf-8');
     }
 
     private getConvertedRulesIds(): string[] {

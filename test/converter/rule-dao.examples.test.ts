@@ -5,13 +5,15 @@ import * as fs from 'fs';
 
 
 const LOG_PATH = path.resolve(".work", "conversion-result-test.txt");
+const ERR_PATH = path.resolve(".work", "conversion-result-test.err");
 
 describe('RuleDaoExamples', () => {
     let ruleDao: RuleDaoExamples;
 
     beforeEach(() => {
+        fs.rmSync(ERR_PATH, { force: true });
         fs.rmSync(LOG_PATH, { force: true });
-        ruleDao = new RuleDaoExamples(LOG_PATH);
+        ruleDao = new RuleDaoExamples(LOG_PATH, ERR_PATH);
     });
 
     describe('getUnconvertedRules', () => {
@@ -48,7 +50,7 @@ describe('RuleDaoExamples', () => {
 
             // Assert
 
-            const fileContent = fs.readFileSync(LOG_PATH, 'utf-8');
+            const fileContent = fs.readFileSync(ruleDao.logPath, 'utf-8');
             expect(fileContent).toContain(`${mockRule.id}\t`);
             ruleDao.getUnconvertedRules()[0]
         });
