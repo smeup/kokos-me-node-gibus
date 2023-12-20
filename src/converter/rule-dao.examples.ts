@@ -60,7 +60,7 @@ class RuleDaoExamples implements IRuleDao {
                 continue;
             };
             if (this.allow.apply(this, [COMP]) === false) {
-                console.log(`Rule ${COMP} cannot be converted. Skipping...`);
+                console.debug(`Rule ${COMP} cannot be converted. Skipping...`);
                 continue;
             }
             // const PRGR = parseInt(record[1]);
