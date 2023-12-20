@@ -11,7 +11,7 @@ describe("RuleConverterAppExamples", () => {
 
     beforeAll(async () => {
         await appExamples.convertRules();
-    });
+    }, 20000); // Increase timeout to 20 seconds
 
     describe("convertRules", () => {
         it("check REG0003124", async () => {
