@@ -50,12 +50,13 @@ class RuleConverterApp {
      */
     private completeRules(rule: Rule, bodyFunctionImpl: string): string {
         const ruleTemplate = this.readRuleTemplateFile().replace("TEMPLATE", rule.id);
-        return ruleTemplate.replaceAll("// AI_GENERATED", bodyFunctionImpl);
+        return ruleTemplate.replaceAll("// AI_GENERATED", this.indentScript(bodyFunctionImpl));
     }
 
-    private indentText(text: string, indent: number): string {
-        const indentText = " ".repeat(indent);
-        return text.split(/\n|\r\n/).map(line => `${indentText}${line}`).join('\n');
+    private indentScript(script: string): string {
+        const lines = script.split("\n");
+        const indentedLines = lines.map((line, index) => index > 0 ? `    ${line.trimStart()}` : line);
+        return indentedLines.join("\n");
     }
 
     /**
