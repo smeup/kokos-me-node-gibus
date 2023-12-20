@@ -31,19 +31,19 @@ describe("OpenAIRuleConverter", () => {
                 // check values
                 expect(result.ruleId).toBe(rule.id);
                 const expectedJavaScript = `
-                    //RULE: REGTEST
-                    //REQUEST:
-                    //"""
-                    //#1
-                    //COND:
-                    //§NR_SUPP_MURO <= #0
-                    //THEN:
-                    //*SET *LG = ''
-                    //ELSE:
-                    //*SET *CF = §NR_SUPP_MURO
-                    //"""
-                    //Traduzione:
-                    //RESPONSE:
+                    // RULE: REGTEST
+                    // REQUEST:
+                    // """
+                    // #1
+                    // COND:
+                    // §NR_SUPP_MURO <= #0
+                    // THEN:
+                    // *SET *LG = ''
+                    // ELSE:
+                    // *SET *CF = §NR_SUPP_MURO
+                    // """
+                    // Traduzione:
+                    // RESPONSE:
                     Traduzione:
                     //#1
                     if (iv['§NR_SUPP_MURO'] <= 0) {
