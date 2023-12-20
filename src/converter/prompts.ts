@@ -63,6 +63,23 @@ if (iv['§L_CAS_SUP_TG'] > 0) {
 ###
 
 ###
+Regola (COND_AND, THEN):
+"""
+#1
+COND:
+(§L_PORTANTE2> #0 ) AND (§L_PORTANTE3 = #0 )  AND (§FS_FAM2_WALL=§SI)
+
+THEN:
+*SET *CF=#1
+"""
+Traduzione:
+//#1
+if ((iv['§L_PORTANTE2'] > 0) && (iv['§L_PORTANTE3'] == 0) && (iv['§FS_FAM2_WALL'] == iv['§SI'])) {
+    vars.setCF(1);
+}
+###
+
+###
 Regola (COND, ELSE):
 """
 #1
