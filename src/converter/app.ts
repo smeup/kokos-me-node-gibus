@@ -1,4 +1,4 @@
-import { IRuleConverterService, IRuleDao, IConversionResultDao } from "./types";
+import { IRuleConverterService, IRuleDao, IConversionResultDao, Rule } from "./types";
 import * as fs from 'fs';
 
 class RuleConverterApp {
@@ -22,14 +22,14 @@ class RuleConverterApp {
      *   - 
     */
     async convertRules(): Promise<void> {
-        const rules = this.ruleDao.getUnconvertedRules();
+        const rules: Rule[] = this.ruleDao.getUnconvertedRules();
         for (const rule of rules) {
             try {
                 console.log(`${rule.id} - converting rule`);
                 const result = await this.ruleConverterService.convertRule(rule);
-                console.log(`${rule.id} - conversion result ${result.javaScript}`);
-                result.javaScript = completeRules(result.javaScript);
-                console.log(`${rule.id} - saving conversion result ${result.javaScript}`);
+                console.debug(`${rule.id} - conversion result ${result.javaScript}`);
+                result.javaScript = this.completeRules(rule, result.javaScript);
+                console.log(`${rule.id} - saving conversion result`);
                 this.conversionResultDao.saveConversionResult(result);
                 console.log(`${rule.id} - marking rule as converted`);
                 this.ruleDao.markRuleAsConverted(rule);
@@ -40,30 +40,34 @@ class RuleConverterApp {
             }
         }
     }
-}
 
+    /**
+     * Completes the body of a rule template implementation by replacing the placeholder "// AI_GENERATED" with the provided function body.
+     * 
+     * @param rule - The rule to be converted.
+     * @param bodyFunctionImpl - The function body to be inserted into the rule template.
+     * @returns The completed rule function implementation.
+     */
+    private completeRules(rule: Rule, bodyFunctionImpl: string): string {
+        const ruleTemplate = this.readRuleTemplateFile().replace("TEMPLATE", rule.id);
+        return ruleTemplate.replaceAll("// AI_GENERATED", bodyFunctionImpl);
+    }
 
-/**
- * Completes the body of a rule template implementation by replacing the placeholder "// AI_GENERATED" with the provided function body.
- * 
- * @param bodyFunctionImpl - The function body to be inserted into the rule template.
- * @returns The completed rule function implementation.
- */
-function completeRules(bodyFunctionImpl: string): string {
-    const ruleTemplate = readRuleTemplateFile();
-    return ruleTemplate.replaceAll("// AI_GENERATED", bodyFunctionImpl);
-}
+    private indentText(text: string, indent: number): string {
+        const indentText = " ".repeat(indent);
+        return text.split(/\n|\r\n/).map(line => `${indentText}${line}`).join('\n');
+    }
 
-
-/**
- * Reads the rule template file from ./src/rules/TEMPLATE.ts and returns its content as a string.
- * 
- * @returns The rule template file content.
- */
-function readRuleTemplateFile(): string {
-    const filePath = './src/rules/TEMPLATE.ts';
-    const ruleTemplate = fs.readFileSync(filePath, 'utf8');
-    return ruleTemplate;
+    /**
+     * Reads the rule template file from ./src/rules/TEMPLATE.ts and returns its content as a string.
+     * 
+     * @returns The rule template file content.
+     */
+    private readRuleTemplateFile(): string {
+        const filePath = './src/rules/TEMPLATE.ts';
+        const ruleTemplate = fs.readFileSync(filePath, 'utf8');
+        return ruleTemplate;
+    }
 }
 
 

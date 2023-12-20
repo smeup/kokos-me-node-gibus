@@ -1,12 +1,13 @@
 
 import { RuleConverterApp } from '../../src/converter/app';
-import { IRuleDao, IRuleConverterService, IConversionResultDao } from '../../src/converter/types';
+import { IRuleDao, IRuleConverterService, IConversionResultDao, ConversionResult } from '../../src/converter/types';
 
 describe('RuleConverterApp', () => {
   let ruleDao: IRuleDao;
   let ruleConverterService: IRuleConverterService;
   let conversionResultDao: IConversionResultDao;
   let ruleConverterApp: RuleConverterApp;
+  let conversionResult: ConversionResult
 
   beforeEach(() => {
     ruleDao = {
@@ -18,7 +19,9 @@ describe('RuleConverterApp', () => {
       convertRule: jest.fn(),
     };
     conversionResultDao = {
-      saveConversionResult: jest.fn(),
+      saveConversionResult(myConversionResult: ConversionResult) {
+        conversionResult = myConversionResult;
+      },
     };
     ruleConverterApp = new RuleConverterApp(ruleDao, ruleConverterService, conversionResultDao);
   });
@@ -26,7 +29,7 @@ describe('RuleConverterApp', () => {
   describe('convertRules', () => {
     it('should convert all unconverted rules', async () => {
       // Arrange
-      const mockRule = { id: 1 };
+      const mockRule = { id: "MYRULE" };
       const mockResult = { javaScript: 'converted code' };
 
       (ruleDao.getUnconvertedRules as jest.Mock).mockReturnValue([mockRule]);
@@ -38,8 +41,31 @@ describe('RuleConverterApp', () => {
       // Assert
       expect(ruleDao.getUnconvertedRules).toHaveBeenCalled();
       expect(ruleConverterService.convertRule).toHaveBeenCalledWith(mockRule);
-      expect(conversionResultDao.saveConversionResult).toHaveBeenCalledWith(mockResult);
       expect(ruleDao.markRuleAsConverted).toHaveBeenCalledWith(mockRule);
+      const expectedJavaScript = `
+      /**
+       * This rule represents a template implementation of a rule.
+       * It takes an input value and performs some operations on it using the Variables class.
+       * The result is returned as the output value.
+       * 
+       * @param iv The input value for the rule.
+       * @returns The output value after applying the rule.
+       */
+      import { Rule } from "../types/general";
+      import { Variables } from "../converter/variables";
+
+      export const ${mockRule.id}: Rule = (iv) => {
+
+          const vars = new Variables(iv);
+          
+          // GENERATED
+          converted code
+          // GENERATED
+
+          return vars.output;
+      };
+      `.trim().replace(/\s+/g, ' ');
+      expect(conversionResult.javaScript.trim().replace(/\s+/g, ' ')).toBe(expectedJavaScript);
     });
   });
 });
