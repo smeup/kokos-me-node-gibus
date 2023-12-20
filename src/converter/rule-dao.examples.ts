@@ -99,8 +99,10 @@ class RuleDaoExamples implements IRuleDao {
     }
 
     private getConvertedRulesIds(): string[] {
+        if (!fs.existsSync(this.logPath)) {
+            fs.writeFileSync(this.logPath, '', 'utf-8');
+        }
         const rulesIds: string[] = [];
-
         const fileContent = fs.readFileSync(this.logPath, 'utf-8');
         const rows = fileContent.split(/\n|\r\n/);
         let rowCount = 0;
