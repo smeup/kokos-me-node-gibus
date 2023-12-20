@@ -24,13 +24,8 @@ class RuleDaoExamples implements IRuleDao {
         this.errPath = errPath;
         this.allow = allow;
         fs.mkdirSync(path.dirname(this.logPath), { recursive: true });
-        if (!fs.existsSync(this.logPath)) {
-            fs.writeFileSync(this.logPath, '', 'utf-8');
-        }
-        if (!fs.existsSync(this.errPath)) {
-            fs.writeFileSync(this.errPath, '', 'utf-8');
-        }
     }
+
 
     /**
      * Retrieves unconverted rules. This method verifies the .work/conversion-result.txt file to avoid retrieving already converted rules.
@@ -83,6 +78,9 @@ class RuleDaoExamples implements IRuleDao {
      * Marks a rule as converted. The rule is written to the this.logPath file.
      */
     markRuleAsConverted(rule: Rule): void {
+        if (!fs.existsSync(this.logPath)) {
+            fs.writeFileSync(this.logPath, '', 'utf-8');
+        }
         const timestamp = new Date().toISOString();
         const row = `${rule.id}\t${timestamp}\n`;
         fs.appendFileSync(this.logPath, row, 'utf-8');
@@ -92,6 +90,9 @@ class RuleDaoExamples implements IRuleDao {
     * Marks a rule as not converted. The rule is written to the this.errPath file.
     */
     markRuleAsNotConverted(rule: Rule, error: string): void {
+        if (!fs.existsSync(this.errPath)) {
+            fs.writeFileSync(this.errPath, '', 'utf-8');
+        }
         const timestamp = new Date().toISOString();
         const row = `${rule.id}\t${error}\t${timestamp}\n`;
         fs.appendFileSync(this.errPath, row, 'utf-8');
