@@ -51,7 +51,7 @@ class RuleDaoExamples implements IRuleDao {
             if (rowCount++ == 0 || row.length === 0) continue;
             const record = row.split('\t');
             if (record.length != 5) {
-                console.log(`Invalid record: ${record}`);
+                console.warn(`Invalid record: ${record}`);
                 continue;
             }
             const COMP = record[0];
@@ -59,6 +59,10 @@ class RuleDaoExamples implements IRuleDao {
                 console.log(`Rule ${COMP} already converted. Skipping...`);
                 continue;
             };
+            if (this.allow.apply(this, [COMP]) === false) {
+                console.log(`Rule ${COMP} cannot be converted. Skipping...`);
+                continue;
+            }
             // const PRGR = parseInt(record[1]);
             const REGO = record[2].replace(/^""$/g, '');
             const IF_TRUE = record[3].replace(/^""$/g, '');
