@@ -6,23 +6,21 @@ import { SYSTEM_MESSAGE } from "./prompts";
 
 class OpenAIRuleConverter implements IRuleConverterService {
 
-
-    private openai = new ChatOpenAI(
-        {
-            openAIApiKey: process.env.OPENAI_API_KEY,
-            modelName: "gpt-3.5-turbo",
-            temperature: 0
-        }
-    );
-
     constructor() {
     }
 
     async convertRule(rule: Rule): Promise<ConversionResult> {
+        const openai = new ChatOpenAI(
+            {
+                openAIApiKey: process.env.OPENAI_API_KEY,
+                modelName: "gpt-3.5-turbo",
+                temperature: 0
+            }
+        );
         const payloadSentToLLM = this.transformRuleToText(rule);
         const commentedPayloadSentToLLM = `//REQUEST:\n//${this.insertStringAfterNewLine(payloadSentToLLM, "//")}\n//RESPONSE:`;
         const messages = [new SystemMessage({ content: SYSTEM_MESSAGE }), new HumanMessage({ content: payloadSentToLLM })];
-        const result = await this.openai.predictMessages(messages)
+        const result = await openai.predictMessages(messages)
         const messageContent = `//RULE: ${rule.id}\n${commentedPayloadSentToLLM}\n${result.content.toString().trim()}`;
         return new ConversionResult(rule.id, messageContent);
     };
@@ -31,7 +29,7 @@ class OpenAIRuleConverter implements IRuleConverterService {
     transformRuleToText(rule: Rule): string {
         return this.removeSpacesAfterNewline(`
         """
-        ${rule.conditions.map((condition) => this.transformConditionToText(condition)).join("\n")}
+        ${rule.conditions.map((condition, index) => `#${index + 1}\n${this.transformConditionToText(condition)}`).join("\n")}
         """
         Traduzione:
         `);
