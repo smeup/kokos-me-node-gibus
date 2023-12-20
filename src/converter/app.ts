@@ -55,7 +55,7 @@ class RuleConverterApp {
 
     private indentScript(script: string): string {
         const lines = script.split("\n");
-        const indentedLines = lines.map((line, index) => index > 0 ? `    ${line.trimStart()}` : line);
+        const indentedLines = lines.map((line, index) => index > 0 ? `    ${line}` : line);
         return indentedLines.join("\n");
     }
 
