@@ -67,4 +67,4 @@ function readRuleTemplateFile(): string {
 }
 
 
-export { RuleConverterApp, completeRules, readRuleTemplateFile };
+export { RuleConverterApp };

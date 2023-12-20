@@ -1,5 +1,5 @@
 
-import { RuleConverterApp, completeRules, readRuleTemplateFile } from '../../src/converter/app';
+import { RuleConverterApp } from '../../src/converter/app';
 import { IRuleDao, IRuleConverterService, IConversionResultDao } from '../../src/converter/types';
 
 describe('RuleConverterApp', () => {
