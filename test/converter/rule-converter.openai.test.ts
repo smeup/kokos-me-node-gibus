@@ -42,9 +42,7 @@ describe("OpenAIRuleConverter", () => {
                     // ELSE:
                     // *SET *CF = §NR_SUPP_MURO
                     // """
-                    // Traduzione:
                     // RESPONSE:
-                    Traduzione:
                     //#1
                     if (iv['§NR_SUPP_MURO'] <= 0) {
                         vars.setLG('');
@@ -80,7 +78,6 @@ describe("OpenAIRuleConverter", () => {
             expect(result).toContain("\n#1\nCOND:");
             expect(result).toContain("THEN:");
             expect(result).toContain("ELSE:");
-            expect(result).toContain("Traduzione:");
         });
     });
 

@@ -129,11 +129,10 @@ L'utente ti passerà la regola da tradurre tra in questo formato:
 """
 Per ottenere la risposta consulta gli esempi racchiusi tra ###
 
-La risposta deve essere in questo formato:
-Traduzione:
+La risposta deve essere:
+<regola tradotta>
 
 Se non riesci a tradurre la regola devi rispondere KO
-
 
 ${SAMPLE_RULES}
 `;

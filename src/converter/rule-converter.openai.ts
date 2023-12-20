@@ -31,7 +31,6 @@ class OpenAIRuleConverter implements IRuleConverterService {
         """
         ${rule.conditions.map((condition, index) => `#${index + 1}\n${this.transformConditionToText(condition)}`).join("\n")}
         """
-        Traduzione:
         `);
     }
 
