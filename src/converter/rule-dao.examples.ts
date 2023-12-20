@@ -74,6 +74,10 @@ class RuleDaoExamples implements IRuleDao {
         fs.appendFileSync(this.logPath, row, 'utf-8');
     }
 
+    markRuleAsNotConverted(rule: Rule, error: string): void {
+        throw new Error('Method not implemented.');
+    }
+
     private getConvertedRulesIds(): string[] {
         const rulesIds: string[] = [];
 

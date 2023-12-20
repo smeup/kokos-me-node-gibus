@@ -11,7 +11,8 @@ describe('RuleConverterApp', () => {
   beforeEach(() => {
     ruleDao = {
       getUnconvertedRules: jest.fn(),
-      markRuleAsConverted: jest.fn()
+      markRuleAsConverted: jest.fn(),
+      markRuleAsNotConverted: jest.fn(),
     };
     ruleConverterService = {
       convertRule: jest.fn(),

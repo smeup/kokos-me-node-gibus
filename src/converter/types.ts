@@ -78,6 +78,13 @@ export interface IRuleDao {
      * @param rule - The rule to be marked as converted.
      */
     markRuleAsConverted(rule: Rule): void;
+
+    /**
+     * Marks a as not converted.
+     * @param rule The rule to be marked as not converted.
+     * @param error The error message.
+     */
+    markRuleAsNotConverted(rule: Rule, error: string): void;
 }
 
 /**
