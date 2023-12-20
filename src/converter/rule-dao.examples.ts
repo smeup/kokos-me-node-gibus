@@ -10,15 +10,19 @@ class RuleDaoExamples implements IRuleDao {
 
     readonly logPath: string;
     readonly errPath: string;
+    readonly allow: (ruleId: string) => boolean;
 
     /**
      * Creates a new instance of the RuleDaoExamples class.
      * @param logPath The path where will be logged the rules when converted. Default is .work/conversion-result.txt.
      * @param errPath The path where will be logged the rules when not converted. Default is .work/conversion-result.err.
+     * @param allow A function that returns true if the rule can be converted, otherwise false. Default is a function that always returns true.
      */
-    constructor(logPath: string = path.resolve(".work", "conversion-result.txt"), errPath: string = path.resolve(".work", "conversion-result.err")) {
+    constructor({ logPath = path.resolve(".work", "conversion-result.txt"), errPath = path.resolve(".work", "conversion-result.err"),
+        allow = () => true }: { logPath?: string, errPath?: string, allow?: (ruleId: string) => boolean } = {}) {
         this.logPath = logPath;
         this.errPath = errPath;
+        this.allow = allow;
         fs.mkdirSync(path.dirname(this.logPath), { recursive: true });
         if (!fs.existsSync(this.logPath)) {
             fs.writeFileSync(this.logPath, '', 'utf-8');

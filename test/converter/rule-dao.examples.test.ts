@@ -13,7 +13,7 @@ describe('RuleDaoExamples', () => {
     beforeEach(() => {
         fs.rmSync(ERR_PATH, { force: true });
         fs.rmSync(LOG_PATH, { force: true });
-        ruleDao = new RuleDaoExamples(LOG_PATH, ERR_PATH);
+        ruleDao = new RuleDaoExamples({logPath: LOG_PATH, errPath: ERR_PATH});
     });
 
     describe('getUnconvertedRules', () => {
