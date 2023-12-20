@@ -35,11 +35,11 @@ export const REG0003127: Rule = (iv) => {
     //#1
     vars.setCF(0);
     //#2
-    if (iv['§L_PORTANTE2'] > 0 && iv['§L_PORTANTE3'] == 0 && iv['§FS_FAM2_WALL'] == iv['§SI']) {
+    if ((iv['§L_PORTANTE2'] > 0) && (iv['§L_PORTANTE3'] == 0) && (iv['§FS_FAM2_WALL'] == iv['§SI'])) {
         vars.setCF(1);
     }
     //#3
-    if (iv['§L_PORTANTE2'] > 0 && iv['§L_PORTANTE3'] > 0 && iv['§FS_FAM2_WALL'] == iv['§SI']) {
+    if ((iv['§L_PORTANTE2'] > 0) && (iv['§L_PORTANTE3'] > 0) && (iv['§FS_FAM2_WALL'] == iv['§SI'])) {
         vars.setCF(2);
     }
     // GENERATED
