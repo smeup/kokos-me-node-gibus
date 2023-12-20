@@ -11,7 +11,7 @@ class RuleDaoExamples implements IRuleDao {
     /**
      * Retrieves unconverted rules.
      * The rules are retrieved from the /assets/test/rules.tsv file.
-     *  Skip the first row.
+     * Skip the first row.
      */
     getUnconvertedRules(): Rule[] {
         const filePath = path.resolve("assets", "test", "rules.tsv");
