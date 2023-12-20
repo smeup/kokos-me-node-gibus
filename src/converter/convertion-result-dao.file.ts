@@ -7,7 +7,12 @@ class ConversionResultDaoFileSystem implements IConversionResultDao {
     private rootPath: string;
     private overwrite: boolean;
 
-    constructor(rootPath: string, overwrite: boolean = false) {
+    /**
+     * Creates a new instance of the ConversionResultDaoFileSystem class.
+     * @param rootPath The root path where the conversion results will be saved.
+     * @param overwrite Indicates whether the conversion results should be overwritten if they already exist. Default is true.
+     */
+    constructor(rootPath: string, overwrite: boolean = true) {
         this.rootPath = rootPath;
         this.overwrite = overwrite;
     }
