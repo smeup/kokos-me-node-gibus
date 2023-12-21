@@ -1,6 +1,7 @@
 
 import { RuleConverterApp } from '../../src/converter/app';
 import { IRuleDao, IRuleConverterService, IConversionResultDao, ConversionResult } from '../../src/converter/types';
+import { removeUnnecessaryChars } from "./testutils";
 
 describe('RuleConverterApp', () => {
   let ruleDao: IRuleDao;
@@ -64,8 +65,10 @@ describe('RuleConverterApp', () => {
 
           return vars.output;
       };
-      `.trim().replace(/\s+/g, ' ');
-      expect(conversionResult.javaScript.trim().replace(/\s+/g, ' ')).toBe(expectedJavaScript);
+      `;
+      expect(removeUnnecessaryChars(conversionResult.javaScript)).toBe(removeUnnecessaryChars(expectedJavaScript));
     });
   });
 });
+
+
