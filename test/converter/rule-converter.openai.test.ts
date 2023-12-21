@@ -44,10 +44,10 @@ describe("OpenAIRuleConverter", () => {
                     // """
                     // RESPONSE:
                     //#1
-                    if (iv['§NR_SUPP_MURO'] <= 0) {
+                    if (vars.get('§NR_SUPP_MURO') <= 0) {
                         vars.setLG('');
                     } else {
-                        vars.setCF(iv['§NR_SUPP_MURO']);
+                        vars.setCF(vars.get('§NR_SUPP_MURO'));
                     }
                     `
                 expect(result.javaScript.replace(/\s+/g, '')).toContain(expectedJavaScript.replace(/\s+/g, ''));
