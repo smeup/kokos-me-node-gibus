@@ -1,5 +1,5 @@
 import { RuleConverterAppExamples } from "../../src/converter/app.examples";
-import { removeUnnecessaryChars } from "./testutils";
+import { removeUnnecessaryChars } from "../../src/converter/utils";
 import * as path from 'path';
 import * as fs from 'fs';
 
