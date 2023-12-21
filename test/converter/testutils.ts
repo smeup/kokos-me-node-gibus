@@ -5,7 +5,7 @@
  * @returns The code string with whitespace characters replaced by a single space.
  */
 function removeUnnecessaryChars(code: string) {
-    return code.replace(/\s+/g, ' ');
+    return code.replace(/\s+/g, ' ').trim();
 }
 
 export { removeUnnecessaryChars }
