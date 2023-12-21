@@ -3,7 +3,7 @@ import { removeUnnecessaryChars } from "../../src/converter/utils";
 import * as path from 'path';
 import * as fs from 'fs';
 
-const allow = (ruleId: string) => ["REG0003124", "REG0003127"].includes(ruleId);
+const allow = (ruleId: string) => ["REG0003124", "REG0003127", "REG0008660"].includes(ruleId);
 const rootPath = path.resolve(".work", "converted-rules");
 const appExamples: RuleConverterAppExamples = new RuleConverterAppExamples(allow, rootPath);
 
@@ -11,7 +11,7 @@ describe("RuleConverterAppExamples", () => {
 
     beforeAll(async () => {
         await appExamples.convertRules();
-    }, 20000); // Increase timeout to 20 seconds
+    }, 60000); // Increase timeout to 60000 seconds
 
     describe("convertRules", () => {
         it("check REG0003124", async () => {
@@ -20,6 +20,9 @@ describe("RuleConverterAppExamples", () => {
         });
         it("check REG0003127", async () => {
             expect(loadRulesFromWorkConvertedRules("REG0003127")).toBe(loadRuleFromAssetAsset("REG0003127"))
+        });
+        it("check REG0008660", async () => {
+            expect(loadRulesFromWorkConvertedRules("REG0008660")).toBe(loadRuleFromAssetAsset("REG0008660"))
         });
     });
 
