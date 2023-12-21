@@ -1,163 +1,217 @@
 
 import { Variables } from "../../src/converter/variables"
 
+
 describe("Variables", () => {
-    let variables: Variables;
+  let variables: Variables;
 
-    beforeEach(() => {
-        const ruleVariableMap = {
-            "D§COMP": "COMP_VALUE",
-            "XCONFI": "XCONFI_VALUE",
-            "D§NOTA": "NOTA_VALUE",
-            "D§QUA1": "QUA1_VALUE",
-            "D§QUA2": "QUA2_VALUE",
-            "D§QUA3": "QUA3_VALUE",
-            "D§QUA4": "QUA4_VALUE",
-            "D§QUA5": "QUA5_VALUE",
-            "D§USR1": "USR1_VALUE",
-            "D§USR2": "USR2_VALUE"
-        };
+  beforeEach(() => {
+    // Initialize the Variables instance with some input data
+    const input = {
+      "D§QUA1": "10",
+      "D§QUA2": "20",
+      "D§QUA3": "30",
+      "D§QUA4": "40",
+      "D§QUA5": "50",
+      "D§COMP": "COMP_VALUE",
+      "XCONFI": "XCONFI_VALUE",
+      "D§NOTA": "NOTA_VALUE",
+      "D§USR1": "USR1_VALUE",
+      "D§USR2": "USR2_VALUE"
+    };
+    variables = new Variables(input);
+  });
 
-        variables = new Variables(ruleVariableMap);
-    });
+  it("should retrieve the value of input variables", () => {
+    expect(variables.get("D§QUA1")).toBe(10);
+    expect(variables.get("D§QUA2")).toBe(20);
+    expect(variables.get("D§QUA3")).toBe(30);
+    expect(variables.get("D§QUA4")).toBe(40);
+    expect(variables.get("D§QUA5")).toBe(50);
+    expect(variables.get("D§COMP")).toBe("COMP_VALUE");
+    expect(variables.get("XCONFI")).toBe("XCONFI_VALUE");
+    expect(variables.get("D§NOTA")).toBe("NOTA_VALUE");
+    expect(variables.get("D§USR1")).toBe("USR1_VALUE");
+    expect(variables.get("D§USR2")).toBe("USR2_VALUE");
+  });
 
-    it("should return the correct CF value", () => {
-        const result = variables.getCF();
-        expect(result).toBe("1");
-    });
+  it("should retrieve the CF value", () => {
+    expect(variables.getCF()).toBe("1");
+  });
 
-    it("should return the correct CM value", () => {
-        const result = variables.getCM();
-        expect(result).toBe("COMP_VALUE");
-    });
+  it("should retrieve the value of D§COMP input", () => {
+    expect(variables.getCM()).toBe("COMP_VALUE");
+  });
 
-    it("should return the correct COL value", () => {
-        const result = variables.getCOL();
-        expect(result).toBe("XCON");
-    });
+  it("should retrieve the first four characters of XCONFI property", () => {
+    expect(variables.getCOL()).toBe("XCON");
+  });
 
-    it("should return the correct CON_A value", () => {
-        const result = variables.getCON_A();
-        expect(result).toBe("XCON");
-    });
+  it("should retrieve the value of CON_A (same as COL)", () => {
+    expect(variables.getCON_A()).toBe("XCON");
+  });
 
-    it("should return the correct CON_B value", () => {
-        const result = variables.getCON_B();
-        expect(result).toBe("FI_VA");
-    });
+  it("should retrieve the last five characters of XCONFI property", () => {
+    expect(variables.getCON_B()).toBe("FI_VA");
+  });
 
-    it("should return the correct LG value", () => {
-        const result = variables.getLG();
-        expect(result).toBe("");
-    });
+  it("should retrieve an empty string for LG", () => {
+    expect(variables.getLG()).toBe("");
+  });
 
-    it("should return the correct NT value", () => {
-        const result = variables.getNT();
-        expect(result).toBe("NOTA_VALUE");
-    });
+  it("should retrieve the value of D§NOTA input", () => {
+    expect(variables.getNT()).toBe("NOTA_VALUE");
+  });
 
-    it("should return the correct Q1 value", () => {
-        const result = variables.getQ1();
-        expect(result).toBe("QUA1_VALUE");
-    });
+  it("should retrieve the value of D§QUA1 input", () => {
+    expect(variables.getQ1()).toBe(10);
+  });
 
-    it("should return the correct Q2 value", () => {
-        const result = variables.getQ2();
-        expect(result).toBe("QUA2_VALUE");
-    });
+  it("should retrieve the value of D§QUA2 input", () => {
+    expect(variables.getQ2()).toBe(20);
+  });
 
-    it("should return the correct Q3 value", () => {
-        const result = variables.getQ3();
-        expect(result).toBe("QUA3_VALUE");
-    });
+  it("should retrieve the value of D§QUA3 input", () => {
+    expect(variables.getQ3()).toBe(30);
+  });
 
-    it("should return the correct Q4 value", () => {
-        const result = variables.getQ4();
-        expect(result).toBe("QUA4_VALUE");
-    });
+  it("should retrieve the value of D§QUA4 input", () => {
+    expect(variables.getQ4()).toBe(40);
+  });
 
-    it("should return the correct Q5 value", () => {
-        const result = variables.getQ5();
-        expect(result).toBe("QUA5_VALUE");
-    });
+  it("should retrieve the value of D§QUA5 input", () => {
+    expect(variables.getQ5()).toBe(50);
+  });
 
-    it("should return the correct S1 value", () => {
-        const result = variables.getS1();
-        expect(result).toBe("USR1_VALUE");
-    });
+  it("should retrieve the value of D§USR1 input", () => {
+    expect(variables.getS1()).toBe("USR1_VALUE");
+  });
 
-    it("should return the correct S2 value", () => {
-        const result = variables.getS2();
-        expect(result).toBe("USR2_VALUE");
-    });
+  it("should retrieve the value of D§USR2 input", () => {
+    expect(variables.getS2()).toBe("USR2_VALUE");
+  });
 
-    it("should return the correct LUNG value", () => {
-        const result = variables.getLUNG();
-        expect(result).toBe("FI_VA");
-    });
+  it("should retrieve the value of CON_B (same as getCON_B)", () => {
+    expect(variables.getLUNG()).toBe("FI_VA");
+  });
 
-    it("should set the CF value correctly", () => {
-        variables.setCF("NEW_CF_VALUE");
-        expect(variables.output["D§COEF"]).toBe("NEW_CF_VALUE");
-    });
+  it("should set the value of D§COEF", () => {
+    variables.setCF("COEF_VALUE");
+    expect(variables.output["D§COEF"]).toBe("COEF_VALUE");
+  });
 
-    it("should set the CM value correctly", () => {
-        variables.setCM("NEW_CM_VALUE");
-        expect(variables.output["D§COMP"]).toBe("NEW_CM_VALUE");
-    });
+  it("should set the value of D§COMP", () => {
+    variables.setCM("NEW_COMP_VALUE");
+    expect(variables.output["D§COMP"]).toBe("NEW_COMP_VALUE");
+  });
 
-    it("should set the CON_A value correctly", () => {
-        variables.setCON_A("NEW_CON_A_VALUE");
-        expect(variables.output["D§DISE"]).toBe("NEW_     ");
-    });
+  it("should set the value of D§DISE (first four chars)", () => {
+    variables.setCON_A("NEW_CON_A_VALUE");
+    expect(variables.output["D§DISE"]).toBe("NEW_     ");
+  });
 
-    it("should set the CON_B value correctly", () => {
-        variables.setCON_B("NEW_CON_B_VALUE");
-        expect(variables.output["D§DISE"]).toBe("    NEW_CON_B_VALUE");
-    });
+  it("should set the value of D§DISE (last five chars)", () => {
+    variables.setCON_B("NEW_CON_B_VALUE");
+    expect(variables.output["D§DISE"]).toBe("    NEW_CON_B_VALUE");
+  });
 
-    it("should set the LG value correctly", () => {
-        variables.setLG("NEW_LG_VALUE");
-        expect(variables.output["XFVALI"]).toBe("NEW_LG_VALUE");
-    });
+  it("should set the value of §DUMMYN1", () => {
+    variables.setDUMMYN1("DUMMYN1_VALUE");
+    expect(variables.output["§DUMMYN1"]).toBe("DUMMYN1_VALUE");
+  });
 
-    it("should set the NT value correctly", () => {
-        variables.setNT("NEW_NT_VALUE");
-        expect(variables.output["D§NOTA"]).toBe("NEW_NT_VALUE");
-    });
+  it("should set the value of §DUMMYN2", () => {
+    variables.setDUMMYN2("DUMMYN2_VALUE");
+    expect(variables.output["§DUMMYN2"]).toBe("DUMMYN2_VALUE");
+  });
 
-    it("should set the Q1 value correctly", () => {
-        variables.setQ1("NEW_Q1_VALUE");
-        expect(variables.output["D§QUA1"]).toBe("NEW_Q1_VALUE");
-    });
+  it("should set the value of §DUMMYN3", () => {
+    variables.setDUMMYN3("DUMMYN3_VALUE");
+    expect(variables.output["§DUMMYN3"]).toBe("DUMMYN3_VALUE");
+  });
 
-    it("should set the Q2 value correctly", () => {
-        variables.setQ2("NEW_Q2_VALUE");
-        expect(variables.output["D§QUA2"]).toBe("NEW_Q2_VALUE");
-    });
+  it("should set the value of §DUMMYN4", () => {
+    variables.setDUMMYN4("DUMMYN4_VALUE");
+    expect(variables.output["§DUMMYN4"]).toBe("DUMMYN4_VALUE");
+  });
 
-    it("should set the Q3 value correctly", () => {
-        variables.setQ3("NEW_Q3_VALUE");
-        expect(variables.output["D§QUA3"]).toBe("NEW_Q3_VALUE");
-    });
+  it("should set the value of §DUMMYN5", () => {
+    variables.setDUMMYN5("DUMMYN5_VALUE");
+    expect(variables.output["§DUMMYN5"]).toBe("DUMMYN5_VALUE");
+  });
 
-    it("should set the Q4 value correctly", () => {
-        variables.setQ4("NEW_Q4_VALUE");
-        expect(variables.output["D§QUA4"]).toBe("NEW_Q4_VALUE");
-    });
+  it("should set the value of §DUMMYB1", () => {
+    variables.setDUMMYB1("DUMMYB1_VALUE");
+    expect(variables.output["§DUMMYB1"]).toBe("DUMMYB1_VALUE");
+  });
 
-    it("should set the Q5 value correctly", () => {
-        variables.setQ5("NEW_Q5_VALUE");
-        expect(variables.output["D§QUA5"]).toBe("NEW_Q5_VALUE");
-    });
+  it("should set the value of §DUMMYB2", () => {
+    variables.setDUMMYB2("DUMMYB2_VALUE");
+    expect(variables.output["§DUMMYB2"]).toBe("DUMMYB2_VALUE");
+  });
 
-    it("should set the USR1 value correctly", () => {
-        variables.setUSR1("NEW_USR1_VALUE");
-        expect(variables.output["D§USR1"]).toBe("NEW_USR1_VALUE");
-    });
+  it("should set the value of §DUMMYB3", () => {
+    variables.setDUMMYB3("DUMMYB3_VALUE");
+    expect(variables.output["§DUMMYB3"]).toBe("DUMMYB3_VALUE");
+  });
 
-    it("should set the USR2 value correctly", () => {
-        variables.setUSR2("NEW_USR2_VALUE");
-        expect(variables.output["D§USR2"]).toBe("NEW_USR2_VALUE");
-    });
+  it("should set the value of §DUMMYB4", () => {
+    variables.setDUMMYB4("DUMMYB4_VALUE");
+    expect(variables.output["§DUMMYB4"]).toBe("DUMMYB4_VALUE");
+  });
+
+  it("should set the value of §DUMMYB5", () => {
+    variables.setDUMMYB5("DUMMYB5_VALUE");
+    expect(variables.output["§DUMMYB5"]).toBe("DUMMYB5_VALUE");
+  });
+
+  it("should set the value of XFVALI (empty string)", () => {
+    variables.setLG("");
+    expect(variables.output["XFVALI"]).toBe("");
+  });
+
+  it("should set the value of XFVALI (non-empty string)", () => {
+    variables.setLG("LG_VALUE");
+    expect(variables.output["XFVALI"]).toBe("LG_VALUE");
+  });
+
+  it("should set the value of D§NOTA", () => {
+    variables.setNT("NEW_NOTA_VALUE");
+    expect(variables.output["D§NOTA"]).toBe("NEW_NOTA_VALUE");
+  });
+
+  it("should set the value of D§QUA1", () => {
+    variables.setQ1(100);
+    expect(variables.output["D§QUA1"]).toBe(100);
+  });
+
+  it("should set the value of D§QUA2", () => {
+    variables.setQ2(200);
+    expect(variables.output["D§QUA2"]).toBe(200);
+  });
+
+  it("should set the value of D§QUA3", () => {
+    variables.setQ3(300);
+    expect(variables.output["D§QUA3"]).toBe(300);
+  });
+
+  it("should set the value of D§QUA4", () => {
+    variables.setQ4(400);
+    expect(variables.output["D§QUA4"]).toBe(400);
+  });
+
+  it("should set the value of D§QUA5", () => {
+    variables.setQ5(500);
+    expect(variables.output["D§QUA5"]).toBe(500);
+  });
+
+  it("should set the value of D§USR1", () => {
+    variables.setUSR1("NEW_USR1_VALUE");
+    expect(variables.output["D§USR1"]).toBe("NEW_USR1_VALUE");
+  });
+
+  it("should set the value of D§USR2", () => {
+    variables.setUSR2("NEW_USR2_VALUE");
+    expect(variables.output["D§USR2"]).toBe("NEW_USR2_VALUE");
+  });
 });

@@ -5,23 +5,40 @@ const D_DISE_LEN = 9
 /***
  * This class is a wrapper of RuleVariableMap to expose
  * the variables as methods
+ * Setters and getter model *VAR
+ * get(key) model §AAAA
  */
 class Variables {
 
     input: RuleVariableMap;
-    output: RuleVariableMap = {};
+    output: Record<string, any> = {};
 
     constructor(input: RuleVariableMap) {
         this.input = input
     }
 
-    
+    /**
+     * Retrieves the value of the input variables.
+     * @param key The name of the variable to retrieve.
+     * @returns The value of the variable.
+     */
+    get(key: string): any {
+        if (key.match(/§DUMMYN\d+/)) {
+            return this.output[key]
+        }
+        if (key.match(/D§QUA\d+/)) {
+            return Number(this.input[key]) || 0;
+        } else {
+            return this.input[key]
+        }
+    }
+
     /**
      * Retrieves the CF value.
      * 
      * @returns 1 fixed
      */
-    getCF(): string {
+    getCF(): any {
         return "1";
     }
 
@@ -29,7 +46,7 @@ class Variables {
      * Retrieves the value of the "D§COMP" input.
      * @returns The value of the "D§COMP" input.
      */
-    getCM(): string {
+    getCM(): any {
         return this.input["D§COMP"]
     }
 
@@ -40,7 +57,7 @@ class Variables {
      * 
      * @returns The first four characters of the "XCONFI" property, padded with spaces.
      */
-    getCOL(): string {
+    getCOL(): any {
         const xconfi = this.input["XCONFI"] || "";
         const firstFourChars = xconfi.substring(0, 4).trim().padEnd(4, " ");
         return firstFourChars;
@@ -52,10 +69,10 @@ class Variables {
      * @returns The value of CON_A.
      * @see getCOL
      */
-    getCON_A(): string {
+    getCON_A(): any {
         return this.getCOL()
     }
-    
+
     /**
      * Retrieves the value of the "XCONFI" property from the input object,
      * extracts the last five characters, trims any leading or trailing whitespace,
@@ -63,17 +80,17 @@ class Variables {
      * 
      * @returns The last five characters of the "XCONFI" property, padded with spaces.
      */
-    getCON_B(): string {
+    getCON_B(): any {
         const xconfi = this.input["XCONFI"] || "";
         const firstFourChars = xconfi.substring(4, 9).trim().padEnd(5, " ");
         return firstFourChars;
     }
 
-    
+
     /**
      * @returns ""
      */
-    getLG(): string {
+    getLG(): any {
         return "";
     }
 
@@ -82,7 +99,7 @@ class Variables {
      * 
      * @returns The value of the "D§NOTA" input.
      */
-    getNT(): string {
+    getNT(): any {
         return this.input["D§NOTA"] || ""
     }
 
@@ -91,8 +108,8 @@ class Variables {
      * 
      * @returns The value of the "D§QUA1" input.
      */
-    getQ1(): string {
-        return this.input["D§QUA1"] || ""
+    getQ1(): any {
+        return Number(this.input["D§QUA1"]) || 0;
     }
 
     /**
@@ -100,8 +117,8 @@ class Variables {
      * 
      * @returns The value of the "D§QUA2" input.
      */
-    getQ2(): string {
-        return this.input["D§QUA2"] || ""
+    getQ2(): any {
+        return Number(this.input["D§QUA2"]) || 0;
     }
 
     /**
@@ -109,8 +126,8 @@ class Variables {
      * 
      * @returns The value of the "D§QUA3" input.
      */
-    getQ3(): string {
-        return this.input["D§QUA3"] || ""
+    getQ3(): any {
+        return Number(this.input["D§QUA3"]) || 0;
     }
 
     /**
@@ -118,8 +135,8 @@ class Variables {
      * 
      * @returns The value of the "D§QUA4" input.
      */
-    getQ4(): string {
-        return this.input["D§QUA4"] || ""
+    getQ4(): any {
+        return Number(this.input["D§QUA4"]) || 0;
     }
 
     /**
@@ -127,8 +144,8 @@ class Variables {
      * 
      * @returns The value of the "D§QUA5" input.
      */
-    getQ5(): string {
-        return this.input["D§QUA5"] || ""
+    getQ5(): any {
+        return Number(this.input["D§QUA5"]) || 0;
     }
 
     /**
@@ -136,7 +153,7 @@ class Variables {
      * 
      * @returns The value of the "D§USR1" input.
      */
-    getS1(): string {
+    getS1(): any {
         return this.input["D§USR1"] || ""
     }
 
@@ -145,7 +162,7 @@ class Variables {
      * 
      * @returns The value of the "D§USR2" input.
      */
-    getS2(): string {
+    getS2(): any {
         return this.input["D§USR2"] || ""
     }
 
@@ -153,7 +170,7 @@ class Variables {
      * @returns The value of the getCON_B
      * @see getCON_B
      */
-    getLUNG(): string {
+    getLUNG(): any {
         return this.getCON_B();
     }
 
@@ -161,7 +178,7 @@ class Variables {
      * Set the value of "D§COEF"
      * @param cf The value that will be set
      */
-    setCF(cf: string) {
+    setCF(cf: any) {
         this.output["D§COEF"] = cf
     }
 
@@ -169,7 +186,7 @@ class Variables {
      * Set the value of "D§COMP"
      * @param cm The value that will be set
      */
-    setCM(cm: string) {
+    setCM(cm: any) {
         this.output["D§COMP"] = cm
     }
 
@@ -177,26 +194,66 @@ class Variables {
      * Set the first four chars of "D§DISE"
      * @param con_a The value that will be set
      */
-    setCON_A(con_a: string) {
+    setCON_A(con_a: any) {
         // D§DISE is a 9 chars len
-        this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] || "").substring(4)).padEnd(D_DISE_LEN, " ");
+        this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] as string || "").substring(4)).padEnd(D_DISE_LEN, " ");
     }
 
     /**
      * Set the last five chars of "D§DISE"
      * @param con_b The value that will be set
      */
-    setCON_B(con_b: string) {
+    setCON_B(con_b: any) {
         // D§DISE is a 9 chars len
-        this.output["D§DISE"] = ((this.output["D§DISE"] || "").padEnd(4, " ") + con_b.trim()).padEnd(D_DISE_LEN, " ");
+        this.output["D§DISE"] = (String(this.output["D§DISE"] || "").padEnd(4, " ") + con_b.trim()).padEnd(D_DISE_LEN, " ");
+    }
+
+    setDUMMYN1(value: any) {
+        this.output["§DUMMYN1"] = value
+    }
+
+    setDUMMYN2(value: any) {
+        this.output["§DUMMYN2"] = value
+    }
+
+    setDUMMYN3(value: any) {
+        this.output["§DUMMYN3"] = value
+    }
+
+    setDUMMYN4(value: any) {
+        this.output["§DUMMYN4"] = value
+    }
+
+    setDUMMYN5(value: any) {
+        this.output["§DUMMYN5"] = value
+    }
+
+    setDUMMYB1(value: any) {
+        this.output["§DUMMYB1"] = value
+    }
+
+    setDUMMYB2(value: any) {
+        this.output["§DUMMYB2"] = value
+    }
+
+    setDUMMYB3(value: any) {
+        this.output["§DUMMYB3"] = value
+    }
+
+    setDUMMYB4(value: any) {
+        this.output["§DUMMYB4"] = value
+    }
+
+    setDUMMYB5(value: any) {
+        this.output["§DUMMYB5"] = value
     }
 
     /**
      * Set the value of XFVALI, if param is "" or "1" XVALI wull be set to ""
      * @param lg The value that will be set
      */
-    setLG(lg: string) {
-        if (lg.trim() === "" || lg === "1") {
+    setLG(lg: any) {
+        if (lg == "" || lg == 1) {
             this.output["XFVALI"] = "";
         } else {
             this.output["XFVALI"] = lg
@@ -207,7 +264,7 @@ class Variables {
      * Set the value of "D§NOTA"
      * @param nt The value that will be set
      */
-    setNT(nt: string) {
+    setNT(nt: any) {
         this.output["D§NOTA"] = nt
     }
 
@@ -215,7 +272,7 @@ class Variables {
      * Set the value of "D§QUA1"
      * @param q The value that will be set
      */
-    setQ1(q: string) {
+    setQ1(q: any) {
         this.output["D§QUA1"] = q
     }
 
@@ -223,7 +280,7 @@ class Variables {
      * Set the value of "D§QUA2"
      * @param q The value that will be set
      */
-    setQ2(q: string) {
+    setQ2(q: any) {
         this.output["D§QUA2"] = q
     }
 
@@ -231,7 +288,7 @@ class Variables {
      * Set the value of "D§QUA3"
      * @param q The value that will be set
      */
-    setQ3(q: string) {
+    setQ3(q: any) {
         this.output["D§QUA3"] = q
     }
 
@@ -239,7 +296,7 @@ class Variables {
      * Set the value of "D§QUA4"
      * @param q The value that will be set
      */
-    setQ4(q: string) {
+    setQ4(q: any) {
         this.output["D§QUA4"] = q
     }
 
@@ -247,7 +304,7 @@ class Variables {
      * Set the value of "D§QUA5"
      * @param q The value that will be set
      */
-    setQ5(q: string) {
+    setQ5(q: any) {
         this.output["D§QUA5"] = q
     }
 
@@ -255,7 +312,7 @@ class Variables {
      * Set the value of "D§USR1"
      * @param usr The value that will be set
      */
-    setUSR1(usr: string) {
+    setUSR1(usr: any) {
         this.output["D§USR1"] = usr
     }
 
@@ -263,7 +320,7 @@ class Variables {
      * Set the value of "D§USR2"
      * @param usr The value that will be set
      */
-    setUSR2(usr: string) {
+    setUSR2(usr: any) {
         this.output["D§USR2"] = usr
     }
 }
