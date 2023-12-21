@@ -15,11 +15,11 @@
 		"declaration": true
 	},
 	"include": [
-		"src/**/*.ts",
-		"test/converter/**/*.ts"
+		"src/**/*.ts"
 	],
 	"exclude": [
 		"node_modules",
-		"lib"
+		"lib",
+		"test/**/*.ts"
 	]
 }
