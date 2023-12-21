@@ -19,22 +19,32 @@ export const REG0008660: Rule = (iv) => {
     // """
     // #1
     // THEN:
-    // *SET *CON-A = §VERN_1_COM                                                                                                    *SET *CF = #0
+    // *SET *CON-A = §VERN_1_COM
+    // *SET *CF = #0
     // #2
     // COND:
     // §FS_FAM2_JOY = §SI
     // THEN:
-    // *SET *CF = #1                                                                                                                *SET §DUMMYN1 = #26                                                                                                          *SET §DUMMYN2 = #19,5                                                                                                        *SET §DUMMYN3 = #13
+    // *SET *CF = #1
+    // *SET §DUMMYN1 = #26
+    // *SET §DUMMYN2 = #19,5
+    // *SET §DUMMYN3 = #13
     // #3
     // COND:
     // §FS_FAM2_ZENIT = §SI
     // THEN:
-    // *SET *CF = #1                                                                                                                *SET §DUMMYN1 = #30,9                                                                                                        *SET §DUMMYN2 = #30,9                                                                                                        *SET §DUMMYN3 = #30,9
+    // *SET *CF = #1
+    // *SET §DUMMYN1 = #30,9
+    // *SET §DUMMYN2 = #30,9
+    // *SET §DUMMYN3 = #30,9
     // #4
     // COND:
     // §FS_FAM2_AZIMUT = §SI
     // THEN:
-    // *SET *CF = #1                                                                                                                *SET §DUMMYN1 = #35                                                                                                          *SET §DUMMYN2 = #33,1                                                                                                        *SET §DUMMYN3 = #31,3
+    // *SET *CF = #1
+    // *SET §DUMMYN1 = #35
+    // *SET §DUMMYN2 = #33,1
+    // *SET §DUMMYN3 = #31,3
     // #5
     // THEN:
     // *SET *CON-B = [§SPOR - §DUMMYN1]
@@ -50,7 +60,8 @@ export const REG0008660: Rule = (iv) => {
     // *SET *CON-B = [§SPOR - §DUMMYN3]
     // #8
     // THEN:
-    // *SET §DUMMYB1 = ''                                                                                                           *SET §DUMMYB2 = ''
+    // *SET §DUMMYB1 = ''
+    // *SET §DUMMYB2 = ''
     // #9
     // COND:
     // §FS_FAM2_AZIMUT = §SI OR §FS_FAM2_ZENIT = §SI
