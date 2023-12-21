@@ -49,26 +49,26 @@ class RuleDaoExamples implements IRuleDao {
                 console.warn(`Invalid record: ${record}`);
                 continue;
             }
-            const COMP = record[0];
+            const COMP: string = record[0];
             if (convertedRulesId.indexOf(COMP) >= 0) {
                 console.log(`Rule ${COMP} already converted. Skipping...`);
                 continue;
             };
-            if (this.allow.apply(this, [COMP]) === false) {
-                console.debug(`Rule ${COMP} cannot be converted. Skipping...`);
-                continue;
+            if (this.allow(COMP)) {
+                // const PRGR = parseInt(record[1]);
+                const REGO = record[2].replace(/^""$/g, '');
+                const IF_TRUE = record[3].replace(/^""$/g, '');
+                const IF_FALSE = record[4].replace(/^""$/g, '');
+                const condition = new Condition(REGO, IF_TRUE, IF_FALSE);
+                if (currentRuleId !== COMP) {
+                    currentRule = new Rule(COMP, []);
+                    rules.push(currentRule);
+                    currentRuleId = COMP
+                }
+                currentRule?.conditions.push(condition);
+            } else {
+                console.debug(`Rule ${COMP} not allowed. Skipping...`);
             }
-            // const PRGR = parseInt(record[1]);
-            const REGO = record[2].replace(/^""$/g, '');
-            const IF_TRUE = record[3].replace(/^""$/g, '');
-            const IF_FALSE = record[4].replace(/^""$/g, '');
-            const condition = new Condition(REGO, IF_TRUE, IF_FALSE);
-            if (currentRuleId !== COMP) {
-                currentRule = new Rule(COMP, []);
-                rules.push(currentRule);
-                currentRuleId = COMP
-            }
-            currentRule?.conditions.push(condition);
         }
 
         return rules;
@@ -121,6 +121,3 @@ class RuleDaoExamples implements IRuleDao {
 }
 
 export { RuleDaoExamples }
-
-// comment to enable console.debug
-console.debug = function() {}
