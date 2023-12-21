@@ -2,12 +2,17 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 /**
- * Removes unnecessary whitespace characters from a given code string.
+ * Removes unnecessary whitespace characters and js comments from a given code string.
  * @param code The code string to remove whitespace from.
  * @returns The code string with whitespace characters replaced by a single space.
  */
 function removeUnnecessaryChars(code: string) {
+    code = removeJavascriptLineComment(code);
     return code.replace(/\s+/g, ' ').trim();
+}
+
+function removeJavascriptLineComment(jsCode: string) {
+    return jsCode.replace(/\s*\/\/.*/g, '');
 }
 
 function printTargetVariable() {
@@ -31,4 +36,4 @@ function printTargetVariable() {
 
 }
 
-export { removeUnnecessaryChars, printTargetVariable }
+export { removeUnnecessaryChars }
