@@ -1,7 +1,7 @@
 
 import { RuleConverterApp } from '../../src/converter/app';
 import { IRuleDao, IRuleConverterService, IConversionResultDao, ConversionResult } from '../../src/converter/types';
-import { removeUnnecessaryChars } from "./testutils";
+import { removeUnnecessaryChars } from "../../src/converter/utils";
 
 describe('RuleConverterApp', () => {
   let ruleDao: IRuleDao;
