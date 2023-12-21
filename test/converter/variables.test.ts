@@ -8,11 +8,11 @@ describe("Variables", () => {
   beforeEach(() => {
     // Initialize the Variables instance with some input data
     const input = {
-      "D§QUA1": "10",
-      "D§QUA2": "20",
-      "D§QUA3": "30",
-      "D§QUA4": "40",
-      "D§QUA5": "50",
+      "D§QUA1": 10,
+      "D§QUA2": 20,
+      "D§QUA3": 30,
+      "D§QUA4": 40,
+      "D§QUA5": 50,
       "D§COMP": "COMP_VALUE",
       "XCONFI": "XCONFI_VALUE",
       "D§NOTA": "NOTA_VALUE",

@@ -11,7 +11,7 @@ const D_DISE_LEN = 9
 class Variables {
 
     input: RuleVariableMap;
-    output: Record<string, any> = {};
+    output: RuleVariableMap = {};
 
     constructor(input: RuleVariableMap) {
         this.input = input
@@ -23,14 +23,7 @@ class Variables {
      * @returns The value of the variable.
      */
     get(key: string): any {
-        if (key.match(/§DUMMYN\d+/)) {
-            return this.output[key]
-        }
-        if (key.match(/D§QUA\d+/)) {
-            return Number(this.input[key]) || 0;
-        } else {
-            return this.input[key]
-        }
+        return this.input[key];
     }
 
     /**
@@ -109,7 +102,7 @@ class Variables {
      * @returns The value of the "D§QUA1" input.
      */
     getQ1(): any {
-        return Number(this.input["D§QUA1"]) || 0;
+        return this.input["D§QUA1"] || 0;
     }
 
     /**
@@ -118,7 +111,7 @@ class Variables {
      * @returns The value of the "D§QUA2" input.
      */
     getQ2(): any {
-        return Number(this.input["D§QUA2"]) || 0;
+        return this.input["D§QUA2"] || 0;
     }
 
     /**
@@ -127,7 +120,7 @@ class Variables {
      * @returns The value of the "D§QUA3" input.
      */
     getQ3(): any {
-        return Number(this.input["D§QUA3"]) || 0;
+        return this.input["D§QUA3"] || 0;
     }
 
     /**
@@ -136,7 +129,7 @@ class Variables {
      * @returns The value of the "D§QUA4" input.
      */
     getQ4(): any {
-        return Number(this.input["D§QUA4"]) || 0;
+        return this.input["D§QUA4"] || 0;
     }
 
     /**
@@ -145,7 +138,7 @@ class Variables {
      * @returns The value of the "D§QUA5" input.
      */
     getQ5(): any {
-        return Number(this.input["D§QUA5"]) || 0;
+        return this.input["D§QUA5"] || 0;
     }
 
     /**
