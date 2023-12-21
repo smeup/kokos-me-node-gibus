@@ -25,7 +25,7 @@ export const REG0003124: Rule = (iv) => {
     // """
     // RESPONSE:
     //#1
-    if (iv['§L_PORTANTE2'] > 0) {
+    if (vars.get('§L_PORTANTE2') > 0) {
     } else {
         vars.setLG("");
     }

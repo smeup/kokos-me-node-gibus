@@ -12,7 +12,7 @@ import { Variables } from "../converter/variables";
 export const REG0003127: Rule = (iv) => {
 
     const vars = new Variables(iv);
-    
+
     // GENERATED
     // RULE: REG0003127
     // REQUEST:
@@ -35,11 +35,11 @@ export const REG0003127: Rule = (iv) => {
     //#1
     vars.setCF(0);
     //#2
-    if ((iv['§L_PORTANTE2'] > 0) && (iv['§L_PORTANTE3'] == 0) && (iv['§FS_FAM2_WALL'] == iv['§SI'])) {
+    if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§L_PORTANTE3') == 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI'))) {
         vars.setCF(1);
     }
     //#3
-    if ((iv['§L_PORTANTE2'] > 0) && (iv['§L_PORTANTE3'] > 0) && (iv['§FS_FAM2_WALL'] == iv['§SI'])) {
+    if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§L_PORTANTE3') > 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI'))) {
         vars.setCF(2);
     }
     // GENERATED
