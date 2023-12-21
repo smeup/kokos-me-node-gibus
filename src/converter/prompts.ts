@@ -21,9 +21,11 @@ COND:
 THEN:
 *SET *CON-A = §VERN_CASSONETTO
 *SET *CON-B = §L_CAS_SUP_TG
+*SET §DUMMYB1 = 'A'
 
 ELSE:
 *SET *LG=''
+*SET §DUMMYN2 = 10
 
 """
 Traduzione:
@@ -38,8 +40,10 @@ if (vars.get('§L_CAS_SUP_TG') > 0) {
 if (vars.get('§L_CAS_SUP_TG') == vars.get('§SI')) {
     vars.setCON_A(vars.get('§VERN_CASSONETTO'));
     vars.setCON_B(vars.get('§L_CAS_SUP_TG'));
+    vars.DUMMYB1('A');
 } else {
     vars.setLG('');
+    vars.setDUMMYN2(10);
 }
 ###
 
