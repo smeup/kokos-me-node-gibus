@@ -122,3 +122,5 @@ class RuleDaoExamples implements IRuleDao {
 
 export { RuleDaoExamples }
 
+// comment to enable console.debug
+console.debug = function() {}

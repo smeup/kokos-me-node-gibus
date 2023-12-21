@@ -73,3 +73,6 @@ class RuleConverterApp {
 
 
 export { RuleConverterApp };
+
+// comment to enable console.debug
+console.debug = function() {}
