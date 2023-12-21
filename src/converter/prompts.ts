@@ -28,16 +28,16 @@ ELSE:
 """
 Traduzione:
 //#1
-if (iv['§L_CAS_SUP_TG'] > 0) {
-    vars.setCON_A(iv['§VERN_CASSONETTO']);
-    vars.setCON_B(iv['§L_CAS_SUP_TG']);
+if (vars.get('§L_CAS_SUP_TG') > 0) {
+    vars.setCON_A(vars.get('§VERN_CASSONETTO'));
+    vars.setCON_B(vars.get('§L_CAS_SUP_TG'));
 } else {
     vars.setLG('');
 }
 //#2
-if (iv['§L_CAS_SUP_TG'] == iv['§SI']) {
-    vars.setCON_A(iv['§VERN_CASSONETTO']);
-    vars.setCON_B(iv['§L_CAS_SUP_TG']);
+if (vars.get('§L_CAS_SUP_TG') == vars.get('§SI')) {
+    vars.setCON_A(vars.get('§VERN_CASSONETTO'));
+    vars.setCON_B(vars.get('§L_CAS_SUP_TG'));
 } else {
     vars.setLG('');
 }
@@ -56,9 +56,9 @@ THEN:
 """
 Traduzione:
 //#1
-if (iv['§L_CAS_SUP_TG'] > 0) {
-    vars.setCON_A(iv['§VERN_CASSONETTO']);
-    vars.setCON_B(iv['§L_CAS_SUP_TG']);
+if (vars.get('§L_CAS_SUP_TG') > 0) {
+    vars.setCON_A(vars.get('§VERN_CASSONETTO'));
+    vars.setCON_B(vars.get('§L_CAS_SUP_TG'));
 } 
 ###
 
@@ -74,7 +74,7 @@ THEN:
 """
 Traduzione:
 //#1
-if ((iv['§L_PORTANTE2'] > 0) && (iv['§L_PORTANTE3'] == 0) && (iv['§FS_FAM2_WALL'] == iv['§SI'])) {
+if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§L_PORTANTE3') == 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI'))) {
     vars.setCF(1);
 }
 ###
@@ -91,7 +91,25 @@ ELSE:
 """
 Traduzione:
 //#1
-if (iv['§L_CAS_SUP_TG'] > 0) {
+if (vars.get('§L_CAS_SUP_TG') > 0) {
+} else {
+    vars.setLG("");
+}
+###
+
+###
+Regola (COND *VAR, ELSE):
+"""
+#1
+COND:
+*VAR > #0
+
+ELSE:
+*SET *LG=''
+"""
+Traduzione:
+//#1
+if (getVAR() > 0) {
 } else {
     vars.setLG("");
 }
@@ -109,8 +127,8 @@ ELSE:
 """
 Traduzione:
 //#1
-vars.setCON_A(iv['§VERN_CASSONETTO']);
-vars.setCON_B(iv['§L_CAS_SUP_TG']);
+vars.setCON_A(vars.get('§VERN_CASSONETTO'));
+vars.setCON_B(vars.get('§L_CAS_SUP_TG'));
 ###
 
 ###
@@ -122,7 +140,7 @@ THEN:
 """
 Traduzione:
 //#1
-vars.setCON_A(iv['§VERN_CASSONETTO']);
+vars.setCON_A(vars.get('§VERN_CASSONETTO'));
 ###
 
 ###
@@ -134,7 +152,7 @@ ELSE:
 """
 Traduzione:
 //#1
-vars.setCON_A(iv['§VERN_CASSONETTO']);
+vars.setCON_A(vars.get('§VERN_CASSONETTO'));
 ###
 `;
 
