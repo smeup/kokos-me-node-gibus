@@ -1,7 +1,7 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { SystemMessage, HumanMessage } from "langchain/schema";
 import { Condition, ConversionResult, IRuleConverterService, Rule } from "./types";
-import { PromptTemplate } from "langchain/prompts";
+import * as utils from "./utils";
 import { SYSTEM_MESSAGE } from "./prompts";
 
 class OpenAIRuleConverter implements IRuleConverterService {
@@ -38,9 +38,15 @@ class OpenAIRuleConverter implements IRuleConverterService {
     transformConditionToText(condition: Condition): string {
         return this.removeSpacesAfterNewline(`
         ${condition.ifCondition.trim().length > 0 ? `COND:\n${condition.ifCondition}` : ""}
-        ${condition.thenCondition.trim().length > 0 ? `THEN:\n${condition.thenCondition}` : ""}
-        ${condition.elseCondition.trim().length > 0 ? `ELSE:\n${condition.elseCondition}` : ""}
+        ${condition.thenCondition.trim().length > 0 ? `THEN:\n${this.splitBranch(condition.thenCondition)}` : ""}
+        ${condition.elseCondition.trim().length > 0 ? `ELSE:\n${this.splitBranch(condition.elseCondition)}` : ""}
         `);
+    }
+
+    private splitBranch(input: string): string {
+        const chuncks: string[] = (input.match(new RegExp(`.{1,125}`, "g")) || [])
+        const trimmmedChuncks = chuncks.map((chunck) => chunck.trim());
+        return trimmmedChuncks.join("\n");
     }
 
     private removeSpacesAfterNewline(input: string): string {
