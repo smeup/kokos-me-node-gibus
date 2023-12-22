@@ -5,7 +5,7 @@ import * as fs from 'fs';
 
 const allow = (ruleId: string) => ["REG0003124", "REG0003127", "REG0008660"].includes(ruleId);
 const rootPath = path.resolve(".work", "converted-rules");
-const appExamples: RuleConverterAppExamples = new RuleConverterAppExamples(allow, rootPath);
+const appExamples: RuleConverterAppExamples = new RuleConverterAppExamples({ allow: allow, rootPath: rootPath });
 
 describe("RuleConverterAppExamples", () => {
 
