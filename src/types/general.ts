@@ -3,7 +3,7 @@ export interface ExecuteRulePayload {
 }
 
 /**
- * Map<String, String> to identity variables rule
+ * Map<String, any> to identity variables rule
  */
 export interface RuleVariableMap {
   [key: string]: any;
