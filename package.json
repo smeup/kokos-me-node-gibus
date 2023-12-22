@@ -12,7 +12,7 @@
     "start": "NODE_ENV=production node ./lib/index.js",
     "test:win": "SET NODE_ENV=test&&jest",
     "dev:win": "SET NODE_ENV=development&&nodemon --watch . -e ts --exec \"node --experimental-specifier-resolution=node --loader ts-node/esm ./src/index.ts\"",
-    "start:win": "SET NODE_ENV=production&&node ./lib/entrypoint/restapi/index.js"
+    "start:win": "SET NODE_ENV=production&&node ./lib/index.js"
   },
   "author": "Sme.UP",
   "license": "ISC",
