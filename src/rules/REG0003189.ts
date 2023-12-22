@@ -9,23 +9,33 @@
 import { Rule } from "../types/general";
 import { Variables } from "../converter/variables";
 
-export const REG0003124: Rule = (iv) => {
+export const REG0003189: Rule = (iv) => {
 
     const vars = new Variables(iv);
     
     // GENERATED
-    // RULE: REG0003124
+    // RULE: REG0003189
     // REQUEST:
     // """
     // #1
     // COND:
-    // §L_PORTANTE2 > #0
+    // ( §FS_TRA_LAT_SX=§SI ) OR ( §FS_TRA_LAT_DX=§SI )
     // ELSE:
+    // *SET *LG=''
+    // #2
+    // COND:
+    // (§FS_FAM2_PAV=§SI)
+    // THEN:
     // *SET *LG=''
     // """
     // RESPONSE:
-    if (vars.get('§L_PORTANTE2') > 0) {
+    //#1
+    if ((vars.get('§FS_TRA_LAT_SX') == vars.get('§SI')) || (vars.get('§FS_TRA_LAT_DX') == vars.get('§SI'))) {
     } else {
+        vars.setLG("");
+    }
+    //#2
+    if (vars.get('§FS_FAM2_PAV') == vars.get('§SI')) {
         vars.setLG("");
     }
     // GENERATED

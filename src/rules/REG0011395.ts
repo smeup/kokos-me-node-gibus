@@ -9,25 +9,21 @@
 import { Rule } from "../types/general";
 import { Variables } from "../converter/variables";
 
-export const REG0003124: Rule = (iv) => {
+export const REG0011395: Rule = (iv) => {
 
     const vars = new Variables(iv);
     
     // GENERATED
-    // RULE: REG0003124
+    // RULE: REG0011395
     // REQUEST:
     // """
     // #1
-    // COND:
-    // §L_PORTANTE2 > #0
-    // ELSE:
-    // *SET *LG=''
+    // THEN:
+    // *SET *CF = #0
     // """
     // RESPONSE:
-    if (vars.get('§L_PORTANTE2') > 0) {
-    } else {
-        vars.setLG("");
-    }
+    //#1
+    vars.setCF(0);
     // GENERATED
 
     return vars.output;

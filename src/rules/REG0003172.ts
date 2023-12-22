@@ -9,23 +9,33 @@
 import { Rule } from "../types/general";
 import { Variables } from "../converter/variables";
 
-export const REG0003124: Rule = (iv) => {
+export const REG0003172: Rule = (iv) => {
 
     const vars = new Variables(iv);
     
     // GENERATED
-    // RULE: REG0003124
+    // RULE: REG0003172
     // REQUEST:
     // """
     // #1
     // COND:
-    // §L_PORTANTE2 > #0
+    // (§N_GIUNZIONE_C > #0 ) OR (§N_GIUNZIONE_D > #0 )  OR (§N_GIUNZIONE_F > #0 )
     // ELSE:
+    // *SET *LG=''
+    // #2
+    // COND:
+    // §FS_NO_TRASM=§SI
+    // THEN:
     // *SET *LG=''
     // """
     // RESPONSE:
-    if (vars.get('§L_PORTANTE2') > 0) {
+    //#1
+    if ((vars.get('§N_GIUNZIONE_C') > 0) || (vars.get('§N_GIUNZIONE_D') > 0) || (vars.get('§N_GIUNZIONE_F') > 0)) {
     } else {
+        vars.setLG("");
+    }
+    //#2
+    if (vars.get('§FS_NO_TRASM') == vars.get('§SI')) {
         vars.setLG("");
     }
     // GENERATED

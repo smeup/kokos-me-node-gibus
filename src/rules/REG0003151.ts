@@ -9,24 +9,37 @@
 import { Rule } from "../types/general";
 import { Variables } from "../converter/variables";
 
-export const REG0003124: Rule = (iv) => {
+export const REG0003151: Rule = (iv) => {
 
     const vars = new Variables(iv);
     
     // GENERATED
-    // RULE: REG0003124
+    // RULE: REG0003151
     // REQUEST:
     // """
     // #1
     // COND:
-    // §L_PORTANTE2 > #0
+    // §FS_COM_ARGANO=§SI
+    // THEN:
+    // *SET *CON-A=§VERN_1_COM
     // ELSE:
+    // *SET *LG=''
+    // #2
+    // COND:
+    // §FS_NO_TRASM=§SI
+    // THEN:
     // *SET *LG=''
     // """
     // RESPONSE:
-    if (vars.get('§L_PORTANTE2') > 0) {
+    //#1
+    if (vars.get('§FS_COM_ARGANO') == vars.get('§SI')) {
+        vars.setCON_A(vars.get('§VERN_1_COM'));
     } else {
-        vars.setLG("");
+        vars.setLG('');
+    }
+    //#2
+    if (vars.get('§FS_NO_TRASM') == vars.get('§SI')) {
+        vars.setLG('');
     }
     // GENERATED
 

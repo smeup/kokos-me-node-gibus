@@ -9,24 +9,24 @@
 import { Rule } from "../types/general";
 import { Variables } from "../converter/variables";
 
-export const REG0003124: Rule = (iv) => {
+export const REG0003147: Rule = (iv) => {
 
     const vars = new Variables(iv);
     
     // GENERATED
-    // RULE: REG0003124
+    // RULE: REG0003147
     // REQUEST:
     // """
     // #1
     // COND:
-    // §L_PORTANTE2 > #0
-    // ELSE:
-    // *SET *LG=''
+    // ( §FS_FAM2_100=§SI ) OR ( §FS_FAM2_ROOM=§SI )
+    // THEN:
+    // *SET *CF=#0
     // """
     // RESPONSE:
-    if (vars.get('§L_PORTANTE2') > 0) {
-    } else {
-        vars.setLG("");
+    //#1
+    if ((vars.get('§FS_FAM2_100') == vars.get('§SI')) || (vars.get('§FS_FAM2_ROOM') == vars.get('§SI'))) {
+        vars.setCF(0);
     }
     // GENERATED
 
