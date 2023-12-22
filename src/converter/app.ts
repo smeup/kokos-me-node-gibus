@@ -22,6 +22,8 @@ class RuleConverterApp {
      *   - 
     */
     async convertRules(): Promise<void> {
+        console.log("Starting conversion...");
+        const startTime = new Date().getTime();
         const rules: Rule[] = this.ruleDao.getUnconvertedRules();
         const totalRules = rules.length;
         let currentRule = 0;
@@ -43,6 +45,8 @@ class RuleConverterApp {
             }
             console.log(`${currentRule}/${totalRules} rules converted`);
         }
+        console.log("Conversion completed");
+        console.log(`Total time: ${new Date().getTime() - startTime} ms`);
     }
 
     /**
