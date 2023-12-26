@@ -1,5 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { RuleConverterAppExamples } from './app.examples';
+import { Rule } from '../types/general';
+import { getRule } from '../services/RULE'; 
 
 /**
  * Removes unnecessary whitespace characters and js comments from a given code string.
@@ -36,4 +39,16 @@ function printTargetVariable() {
 
 }
 
-export { removeUnnecessaryChars }
+/**
+ * Convert a rule defined in the assets/test/rules.tsv and return the converted rule.
+ * @param ruleId The ID of the rule to convert.
+ */
+async function convertExampleRule(ruleId: string): Promise<Rule> {
+    const allow = (myRuleId: string) => myRuleId === ruleId;
+    const app = new RuleConverterAppExamples({ allow: allow });
+    await app.convertRules();
+    const rule = getRule(ruleId);
+    return rule;
+}
+
+export { removeUnnecessaryChars, convertExampleRule }
