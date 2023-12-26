@@ -58,6 +58,3 @@ class RuleConverterAppExamples {
 }
 
 export { RuleConverterAppExamples }
-
-const app = new RuleConverterAppExamples({ deleteLogFiles: false });
-await app.convertRules();
