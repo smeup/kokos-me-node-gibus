@@ -51,4 +51,18 @@ async function convertExampleRule(ruleId: string): Promise<Rule> {
     return rule;
 }
 
-export { removeUnnecessaryChars, convertExampleRule }
+/**
+ * Run a function if the OPENAI_API_KEY environment variable is set.
+ * @param func The function to run.
+ * @returns The result of the function else throws an error.
+ */
+function runFunctionIfOpenAIKeySet(func: () => any): any {
+    const openAIKey = process.env.OPENAI_API_KEY;
+    if (!openAIKey) {
+        throw new Error('OPENAI_API_KEY environment variable is not set.');
+    } else {
+        return func();
+    }
+}
+
+export { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet }
