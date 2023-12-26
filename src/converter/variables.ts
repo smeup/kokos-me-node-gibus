@@ -1,4 +1,4 @@
-import { RuleVariableMap } from "types/general";
+import { RuleVariableMap } from "../types/general";
 
 const D_DISE_LEN = 9
 
