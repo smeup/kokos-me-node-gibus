@@ -6,13 +6,13 @@
  * @param iv The input value for the rule.
  * @returns The output value after applying the rule.
  */
-import { Rule } from "../types/general";
-import { Variables } from "../converter/variables";
+import { Rule } from "../types/general.js";
+import { Variables } from "../converter/variables.js";
 
 export const TEMPLATE: Rule = (iv) => {
 
     const vars = new Variables(iv);
-    
+
     // GENERATED
     // AI_GENERATED
     // GENERATED
