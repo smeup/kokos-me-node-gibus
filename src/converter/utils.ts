@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { RuleConverterAppExamples } from './app.examples';
 import { Rule } from '../types/general';
-import { getRule } from '../services/RULE'; 
+import { getRule } from '../services/RULE';
 
 /**
  * Removes unnecessary whitespace characters and js comments from a given code string.
@@ -54,12 +54,16 @@ async function convertExampleRule(ruleId: string): Promise<Rule> {
 /**
  * Run a function if the OPENAI_API_KEY environment variable is set.
  * @param func The function to run.
- * @returns The result of the function else throws an error.
+ * @param onOpenAIKeyNotSet The function to run if the OPENAI_API_KEY environment variable is not set.
+ * @returns The result of the function else nothing.
  */
-function runFunctionIfOpenAIKeySet(func: () => any): any {
+async function runFunctionIfOpenAIKeySet(
+    func: () => any, 
+    onOpenAIKeyNotSet: () => void = () => { console.warn("OPENAI_API_KEY environment variable is not set.") }
+    ): Promise<any> {
     const openAIKey = process.env.OPENAI_API_KEY;
     if (!openAIKey) {
-        throw new Error('OPENAI_API_KEY environment variable is not set.');
+        onOpenAIKeyNotSet();
     } else {
         return func();
     }
