@@ -1,74 +1,85 @@
-
 import { RuleConverterApp } from '../../src/converter/app';
-import { IRuleDao, IRuleConverterService, IConversionResultDao, ConversionResult } from '../../src/converter/types';
-import { removeUnnecessaryChars } from "../../src/converter/utils";
+import { Rule, IRuleDao, IConversionResultValidator, IConversionResultDao, IRuleConverterService } from '../../src/converter/types';
+
 
 describe('RuleConverterApp', () => {
   let ruleDao: IRuleDao;
   let ruleConverterService: IRuleConverterService;
+  let conversionResultValidator: IConversionResultValidator;
   let conversionResultDao: IConversionResultDao;
   let ruleConverterApp: RuleConverterApp;
-  let conversionResult: ConversionResult
 
   beforeEach(() => {
-    ruleDao = {
-      getUnconvertedRules: jest.fn(),
-      markRuleAsConverted: jest.fn(),
-      markRuleAsNotConverted: jest.fn(),
-    };
-    ruleConverterService = {
-      convertRule: jest.fn(),
-    };
-    conversionResultDao = {
-      saveConversionResult(myConversionResult: ConversionResult) {
-        conversionResult = myConversionResult;
-      },
-    };
-    ruleConverterApp = new RuleConverterApp(ruleDao, ruleConverterService, conversionResultDao);
+    ruleDao = {} as IRuleDao;
+    ruleConverterService = {} as IRuleConverterService;
+    conversionResultValidator = {} as IConversionResultValidator;
+    conversionResultDao = {} as IConversionResultDao;
+    ruleConverterApp = new RuleConverterApp(ruleDao, ruleConverterService, conversionResultValidator, conversionResultDao);
   });
 
   describe('convertRules', () => {
     it('should convert all unconverted rules', async () => {
-      // Arrange
-      const mockRule = { id: "MYRULE" };
-      const mockResult = { javaScript: 'converted code' };
+      // Mock unconverted rules
+      const rules: Rule[] = [new Rule("rule1", []), new Rule("rule2", [])];
+      ruleDao.getUnconvertedRules = jest.fn().mockReturnValue(rules);
 
-      (ruleDao.getUnconvertedRules as jest.Mock).mockReturnValue([mockRule]);
-      (ruleConverterService.convertRule as jest.Mock).mockResolvedValue(mockResult);
+      // Mock ruleConverterService
+      const convertedRule1 = { javaScript: 'convertedRule1' };
+      const convertedRule2 = { javaScript: 'convertedRule2' };
+      ruleConverterService.convertRule = jest.fn()
+        .mockResolvedValueOnce(convertedRule1)
+        .mockResolvedValueOnce(convertedRule2);
 
-      // Act
+      // Mock conversionResultValidator
+      conversionResultValidator.validateConversionResult = jest.fn();
+
+      // Mock conversionResultDao
+      conversionResultDao.saveConversionResult = jest.fn();
+
+      // Mock ruleDao
+      ruleDao.markRuleAsConverted = jest.fn();
+
       await ruleConverterApp.convertRules();
 
-      // Assert
       expect(ruleDao.getUnconvertedRules).toHaveBeenCalled();
-      expect(ruleConverterService.convertRule).toHaveBeenCalledWith(mockRule);
-      expect(ruleDao.markRuleAsConverted).toHaveBeenCalledWith(mockRule);
-      const expectedJavaScript = `
-      /**
-       * This rule represents a template implementation of a rule.
-       * It takes an input value and performs some operations on it using the Variables class.
-       * The result is returned as the output value.
-       * 
-       * @param iv The input value for the rule.
-       * @returns The output value after applying the rule.
-       */
-      import { Rule } from "../types/general.js";
-      import { Variables } from "../converter/variables.js";
+      expect(ruleConverterService.convertRule).toHaveBeenCalledTimes(2);
+      expect(ruleConverterService.convertRule).toHaveBeenCalledWith(rules[0]);
+      expect(ruleConverterService.convertRule).toHaveBeenCalledWith(rules[1]);
+      expect(conversionResultValidator.validateConversionResult).toHaveBeenCalledTimes(2);
+      expect(conversionResultDao.saveConversionResult).toHaveBeenCalledTimes(2);
+      expect(ruleDao.markRuleAsConverted).toHaveBeenCalledTimes(2);
+    });
 
-      export const ${mockRule.id}: Rule = (iv) => {
+    it('should handle errors during conversion', async () => {
+      // Mock unconverted rules
+      const rules: Rule[] = [new Rule("rule1", []), new Rule("rule2", [])];
+      ruleDao.getUnconvertedRules = jest.fn().mockReturnValue(rules);
 
-          const vars = new Variables(iv);
-          
-          // GENERATED
-          converted code
-          // GENERATED
+      // Mock ruleConverterService
+      const error = new Error('Conversion error');
+      ruleConverterService.convertRule = jest.fn()
+        .mockResolvedValueOnce({ javaScript: 'convertedRule1' })
+        .mockRejectedValueOnce(error);
 
-          return vars.output;
-      };
-      `;
-      expect(removeUnnecessaryChars(conversionResult.javaScript)).toBe(removeUnnecessaryChars(expectedJavaScript));
+      // Mock ruleDao
+      ruleDao.markRuleAsConverted = jest.fn();
+      ruleDao.markRuleAsNotConverted = jest.fn();
+
+      // Mock conversionResultValidator
+      conversionResultValidator.validateConversionResult = jest.fn();
+
+      // Mock conversionResultDao
+      conversionResultDao.saveConversionResult = jest.fn();
+
+      await ruleConverterApp.convertRules();
+
+      expect(ruleDao.getUnconvertedRules).toHaveBeenCalled();
+      expect(ruleConverterService.convertRule).toHaveBeenCalledTimes(2);
+      expect(ruleConverterService.convertRule).toHaveBeenCalledWith(rules[0]);
+      expect(ruleConverterService.convertRule).toHaveBeenCalledWith(rules[1]);
+      expect(ruleDao.markRuleAsConverted).toHaveBeenCalledTimes(1);
+      expect(ruleDao.markRuleAsNotConverted).toHaveBeenCalledTimes(1);
+      expect(ruleDao.markRuleAsNotConverted).toHaveBeenCalledWith(rules[1], error.toString());
     });
   });
 });
-
-

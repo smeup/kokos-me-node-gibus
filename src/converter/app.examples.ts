@@ -2,7 +2,8 @@ import { RuleConverterApp } from "./app";
 import { ConversionResultDaoFileSystem } from "./convertion-result-dao.file";
 import { OpenAIRuleConverter } from "./rule-converter.openai";
 import { RuleDaoExamples } from "./rule-dao.examples";
-import { IConversionResultDao, IRuleConverterService, IRuleDao } from "./types";
+import { SyntaxErrorValidator } from "./conversion-result-validator";
+import { IConversionResultDao, IRuleConverterService } from "./types";
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -44,8 +45,9 @@ class RuleConverterAppExamples {
         if (!fs.existsSync(rootPath)) {
             fs.mkdirSync(rootPath);
         }
+        const conversionResultValidator: SyntaxErrorValidator = new SyntaxErrorValidator();
         const conversionResultDao: IConversionResultDao = new ConversionResultDaoFileSystem(rootPath);
-        this.app = new RuleConverterApp(ruleDao, ruleConverterService, conversionResultDao);
+        this.app = new RuleConverterApp(ruleDao, ruleConverterService, conversionResultValidator, conversionResultDao);
     }
 
     /**

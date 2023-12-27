@@ -1,14 +1,18 @@
-import { IRuleConverterService, IRuleDao, IConversionResultDao, Rule } from "./types";
+import { IRuleConverterService, IRuleDao, IConversionResultDao, Rule, IConversionResultValidator } from "./types";
 import * as fs from 'fs';
 
 class RuleConverterApp {
     ruleDao: IRuleDao;
     ruleConverterService: IRuleConverterService;
+    conversionResultValidator: IConversionResultValidator;
     conversionResultDao: IConversionResultDao;
 
-    constructor(ruleDao: IRuleDao, ruleConverterService: IRuleConverterService, conversionResultDao: IConversionResultDao) {
+
+    constructor(ruleDao: IRuleDao, ruleConverterService: IRuleConverterService, 
+        conversionResultValidator: IConversionResultValidator, conversionResultDao: IConversionResultDao) {
         this.ruleDao = ruleDao;
         this.ruleConverterService = ruleConverterService;
+        this.conversionResultValidator = conversionResultValidator;
         this.conversionResultDao = conversionResultDao
     }
 
@@ -18,6 +22,7 @@ class RuleConverterApp {
      * - gets all rule to convert from @see IRuleDao.getUnconvertedRules and for each rule it invokes:
      *   - @see IRuleConverterService.convertRule
      *   - @see IConversionResultDao.saveConversionResult
+     *   - @see IConversionResultValidator.validateConversionResult
      *   - @see IRuleDao.saveConversionResult
      *   - 
     */
@@ -34,6 +39,8 @@ class RuleConverterApp {
                 const result = await this.ruleConverterService.convertRule(rule);
                 console.debug(`${rule.id} - conversion result ${result.javaScript}`);
                 result.javaScript = this.completeRules(rule, result.javaScript);
+                console.log(`${rule.id} - validating conversion result`);
+                this.conversionResultValidator.validateConversionResult(result);
                 console.log(`${rule.id} - saving conversion result`);
                 this.conversionResultDao.saveConversionResult(result);
                 console.log(`${rule.id} - marking rule as converted`);

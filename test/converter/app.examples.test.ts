@@ -1,5 +1,5 @@
 import { RuleConverterAppExamples } from "../../src/converter/app.examples";
-import { removeUnnecessaryChars } from "../../src/converter/utils";
+import { removeUnnecessaryChars, runFunctionIfOpenAIKeySet } from "../../src/converter/utils";
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -10,7 +10,9 @@ const appExamples: RuleConverterAppExamples = new RuleConverterAppExamples({ all
 describe("RuleConverterAppExamples", () => {
 
     beforeAll(async () => {
-        await appExamples.convertRules();
+        await runFunctionIfOpenAIKeySet(async () => {
+            await appExamples.convertRules();
+        });
     }, 60000); // Increase timeout to 60000 seconds
 
     describe("convertRules", () => {
