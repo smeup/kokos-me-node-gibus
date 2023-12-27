@@ -69,4 +69,12 @@ async function runFunctionIfOpenAIKeySet(
     }
 }
 
-export { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet }
+/**
+ * Checks if the OPENAI_API_KEY environment variable is set.
+ * @returns {boolean} True if the OPENAI_API_KEY is set, false otherwise.
+ */
+function isOpenAIKeySet(): boolean {
+    return process.env.OPENAI_API_KEY !== undefined;
+}
+
+export { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet, isOpenAIKeySet }
