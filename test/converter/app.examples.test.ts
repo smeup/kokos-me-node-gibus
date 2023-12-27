@@ -15,15 +15,15 @@ describe("RuleConverterAppExamples", () => {
         });
     }, 60000); // Increase timeout to 60000 seconds
 
-    describe("convertRules", () => {
-        it("check REG0003124", async () => {
+    describe("check if rule loaded from assets is equals to rule converted", () => {
+        it("REG0003124", async () => {
 
             expect(loadRulesFromWorkConvertedRules("REG0003124")).toBe(loadRuleFromAssetAsset("REG0003124"))
         });
-        it("check REG0003127", async () => {
+        it("REG0003127", async () => {
             expect(loadRulesFromWorkConvertedRules("REG0003127")).toBe(loadRuleFromAssetAsset("REG0003127"))
         });
-        it("check REG0008660", async () => {
+        it("REG0008660", async () => {
             expect(loadRulesFromWorkConvertedRules("REG0008660")).toBe(loadRuleFromAssetAsset("REG0008660"))
         });
     });
