@@ -88,6 +88,19 @@ export interface IRuleDao {
 }
 
 /**
+ * Represents a validator for conversion results.
+ */
+export interface IConversionResultValidator {
+
+    /**
+     * Validates a conversion result.
+     * @throws An error if the conversion result is not valid.
+     * @param conversionResult - The conversion result to be validated.
+     */
+    validateConversionResult(conversionResult: ConversionResult): void;
+}
+
+/**
  * Represents a data access object for managing conversion results.
  */
 export interface IConversionResultDao {
