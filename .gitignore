@@ -2,3 +2,4 @@ node_modules
 lib
 .work
 src/rules/*.tmp.ts
+.DS_Store
