@@ -62,7 +62,7 @@ export const MYRULE: Rule = (iv) => {
 }
 ```
 
-If you are lucky you will see:
+If you are lucky you will see:   
 ![Debug](./docs/readme-myrule-dbg.png)
 
 and this **Response body**:
