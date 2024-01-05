@@ -14,7 +14,9 @@ npm install
 
 *The new rule will be named: MYRULE*
 
-- Start debugger terminal: [Open JavaScript Debug Terminal](command:extension.js-debug.createDebuggerTerminal)
+- Start debugger terminal: 
+  - use this shortcut: ctrl+P and type: `>Debug: JavaScript Debug Terminal`
+  - or click [command:extension.js-debug.createDebuggerTerminal](command:extension.js-debug.createDebuggerTerminal) if you are reading this doc in vscode
 - Run micro executor
 ```sh
 #linux osx
