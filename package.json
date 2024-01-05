@@ -17,7 +17,7 @@
   "author": "Sme.UP",
   "license": "ISC",
   "dependencies": {
-    "@sme.up/kokos-sdk-node": "^0.0.6",
+    "@sme.up/kokos-sdk-node": "^0.0.8",
     "ibm_db": "^3.2.3",
     "langchain": "^0.0.209"
   },
