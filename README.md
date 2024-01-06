@@ -2,7 +2,7 @@
 
 See [official docs](https://docs.smeup.cloud/en/CLS-SU/MURUNT/OPE/MURUNT_03/sdk-node) for all details.
 
-# Development
+## Development
 
 ```sh
 git clone https://github.com/smeup/kokos-me-node-gibus.git
@@ -10,7 +10,7 @@ cd kokos-me-node-gibus
 npm install
 ```
 
-## Try a new rule
+### Try a new rule
 
 *The new rule will be named: MYRULE*
 
@@ -19,9 +19,10 @@ npm install
   - or click [command:extension.js-debug.createDebuggerTerminal](command:extension.js-debug.createDebuggerTerminal) if you are reading this doc in vscode
 - Run micro executor
 ```sh
-#linux osx
+# linux osx
 npm run dev
-#win 
+
+# win 
 npm run dev:win
 ```
 
@@ -89,5 +90,8 @@ and this **Response body**:
     "executionTime_ms": 240681
   }
 }
-
 ```
+
+## Converter
+
+See [converter docs](./docs/converter.md) for all details.
