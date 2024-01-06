@@ -23,7 +23,7 @@ class RuleConverterAppExamples {
     /**
      * Constructs a new instance of the AppExamples class.
      * During construction, the following actions are performed:
-     * - The log and error files are deleted.
+     * - The log and error files are deleted based on deleteLogFiles params.
      * - The rule converter service is initialized.
      * - The destination root path is created if it does not exist.
      * Log and error files are located in the .work folder.
