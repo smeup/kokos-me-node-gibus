@@ -1,8 +1,19 @@
 # Micro Executor Node Gibus
 
-See [official docs](https://docs.smeup.cloud/en/CLS-SU/MURUNT/OPE/MURUNT_03/sdk-node) for all details.
+This application is based on: [Kokos SDK Node official docs](https://docs.smeup.cloud/en/CLS-SU/MURUNT/OPE/MURUNT_03/sdk-node).
 
-See [converter docs](./docs/converter.md) for all details.
+## The rule service
+
+This micro executor is a nodejs application that exposes a REST API to execute a rule.
+
+The rule service is implemented in [RuleService](./src/services/RULE.ts) and every rule is implemented in a file placed in [rules](./src/rules) folder.
+
+## The converter
+
+Transpiles the rules written in a property DSL into javascript.
+
+See [Converter rule](./docs/converter.md) for all details.
+
 
 ## Development
 
@@ -12,9 +23,9 @@ cd kokos-me-node-gibus
 npm install
 ```
 
-### Try a new rule
+### Write and test new rule
 
-*The new rule will be named: MYRULE*
+*Given a new rule named: MYRULE*
 
 - Start debugger terminal: 
   - use this shortcut: ctrl+P and type: `>Debug: JavaScript Debug Terminal`
