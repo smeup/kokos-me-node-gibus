@@ -4,8 +4,6 @@
 
 ### Test rule conversion
 
-```sh
-
 Before to convert the rules in production, it is possible to convert some example rules.  
 
 Currently these rules are stored in [rules.tsv](../assets/test/rules.tsv) file.  
