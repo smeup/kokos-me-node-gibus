@@ -2,9 +2,13 @@
 
 ## Rule conversion
 
-### Examples
+### Test rule conversion
 
-The examples rules are stored in [rules.tsv](../assets/test/rules.tsv) file.
+```sh
+
+Before to convert the rules in production, it is possible to convert some example rules.  
+
+Currently these rules are stored in [rules.tsv](../assets/test/rules.tsv) file.  
 This file has been created by serializing the rules stored in `GIBUS_RULES` logical view placed in `srvlab01.smeup.com` schema `W_SMMB` retrieved with the following query:
 
 ```sql
@@ -24,7 +28,7 @@ npm run convert-examples:win
 ```
 
 
-### Production
+### Convert rule in production
 
 ```sh
 # linux osx

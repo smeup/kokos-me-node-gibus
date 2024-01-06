@@ -2,6 +2,8 @@
 
 See [official docs](https://docs.smeup.cloud/en/CLS-SU/MURUNT/OPE/MURUNT_03/sdk-node) for all details.
 
+See [converter docs](./docs/converter.md) for all details.
+
 ## Development
 
 ```sh
@@ -91,7 +93,3 @@ and this **Response body**:
   }
 }
 ```
-
-## Converter
-
-See [converter docs](./docs/converter.md) for all details.
