@@ -23,7 +23,7 @@
   "dependencies": {
     "@sme.up/kokos-sdk-node": "^0.0.8",
     "ibm_db": "^3.2.3",
-    "langchain": "^0.0.209"
+    "langchain": "0.0.203"
   },
   "devDependencies": {
     "@types/ibm_db": "^2.0.16",
