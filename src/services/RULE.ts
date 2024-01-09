@@ -4,7 +4,7 @@ import {
   KokosService,
   SmeupDataStructureWriter,
 } from "@sme.up/kokos-sdk-node";
-import { ExecuteRulePayload } from "../types/general.js";
+import { ExecuteRulePayload, Rule } from "../types/general.js";
 import { RULE_MAPPING } from "../types/rule.js";
 
 const RULE: KokosService = {
@@ -26,13 +26,14 @@ async function executeRule(
   const ruleName = fun.obj1?.k;
   if (ruleName && ruleName != "") {
     // check rule existence
-    if (RULE_MAPPING[ruleName]) {
+    const rule = await getRule(ruleName);
+    if (rule != null) {
       // get and parse variables from fun input
       const jsonInput = JSON.parse(
         fun.INPUT ? fun.INPUT : ""
       ) as ExecuteRulePayload;
       // call rule
-      const outputVariables = RULE_MAPPING[ruleName](
+      const outputVariables = rule(
         jsonInput.variables ? jsonInput.variables : {}
       );
       // return smeup table
@@ -70,4 +71,28 @@ async function executeRule(
   }
 }
 
+/**
+ * Get rule.
+ * If an environment variable is set to "development" or "test", the rule is always loaded from the local filesystem.
+ * Otherwise, the rule is loaded from the compiled code, and served from the RULE_MAPPING or from the ./rules folder.
+ * @param name The name of the rule.
+ * @returns The rule.
+ */
+async function getRule(name: string): Promise<Rule> {
+  if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
+    const module = await import(`../rules/${name}.ts`);
+    return module[name] as Rule;
+  } else {
+    if (RULE_MAPPING[name]) {
+      return RULE_MAPPING[name];
+    } else {
+      const module = await import(`../rules/${name}.js`);
+      return module[name] as Rule;
+    }
+  }
+}
+
+
+
 export default RULE;
+export { getRule, executeRule };
