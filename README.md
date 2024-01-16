@@ -10,7 +10,7 @@ The rule service is implemented in [RuleService](./src/services/RULE.ts) and eve
 
 ## The converter
 
-Transpiles the rules written in a property DSL into javascript.
+Transpiles the rules written in a proprietary DSL into javascript.
 
 See [Converter rule](./docs/converter.md) for all details.
 
