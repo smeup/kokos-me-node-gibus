@@ -57,7 +57,7 @@ async function executeRule(
             VALUE: {
               name: "VALUE",
               smeupObject: {
-                codice: outputVariables[variableName],
+                codice: `${outputVariables[variableName]}`
               },
             },
           },
