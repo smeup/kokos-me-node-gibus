@@ -1,6 +1,6 @@
 # Micro Executor Node Gibus
 
-This application is based on: [Kokos SDK Node official docs](https://docs.smeup.cloud/en/CLS-SU/MURUNT/OPE/MURUNT_03/sdk-node).
+This application is based on: [Kokos SDK Node](https://docs.smeup.cloud/en/CLS-SU/MURUNT/OPE/MURUNT_03/sdk-node).
 
 ## The rule service
 
