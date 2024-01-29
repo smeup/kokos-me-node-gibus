@@ -117,52 +117,52 @@ describe("Variables", () => {
 
   it("should set the value of §DUMMYN1", () => {
     variables.setDUMMYN1("DUMMYN1_VALUE");
-    expect(variables.output["§DUMMYN1"]).toBe("DUMMYN1_VALUE");
+    expect(variables.get("§DUMMYN1")).toBe("DUMMYN1_VALUE");
   });
 
   it("should set the value of §DUMMYN2", () => {
     variables.setDUMMYN2("DUMMYN2_VALUE");
-    expect(variables.output["§DUMMYN2"]).toBe("DUMMYN2_VALUE");
+    expect(variables.get("§DUMMYN2")).toBe("DUMMYN2_VALUE");
   });
 
   it("should set the value of §DUMMYN3", () => {
     variables.setDUMMYN3("DUMMYN3_VALUE");
-    expect(variables.output["§DUMMYN3"]).toBe("DUMMYN3_VALUE");
+    expect(variables.get("§DUMMYN3")).toBe("DUMMYN3_VALUE");
   });
 
   it("should set the value of §DUMMYN4", () => {
     variables.setDUMMYN4("DUMMYN4_VALUE");
-    expect(variables.output["§DUMMYN4"]).toBe("DUMMYN4_VALUE");
+    expect(variables.get("§DUMMYN4")).toBe("DUMMYN4_VALUE");
   });
 
   it("should set the value of §DUMMYN5", () => {
     variables.setDUMMYN5("DUMMYN5_VALUE");
-    expect(variables.output["§DUMMYN5"]).toBe("DUMMYN5_VALUE");
+    expect(variables.get("§DUMMYN5")).toBe("DUMMYN5_VALUE");
   });
 
   it("should set the value of §DUMMYB1", () => {
     variables.setDUMMYB1("DUMMYB1_VALUE");
-    expect(variables.output["§DUMMYB1"]).toBe("DUMMYB1_VALUE");
+    expect(variables.get("§DUMMYB1")).toBe("DUMMYB1_VALUE");
   });
 
   it("should set the value of §DUMMYB2", () => {
     variables.setDUMMYB2("DUMMYB2_VALUE");
-    expect(variables.output["§DUMMYB2"]).toBe("DUMMYB2_VALUE");
+    expect(variables.get("§DUMMYB2")).toBe("DUMMYB2_VALUE");
   });
 
   it("should set the value of §DUMMYB3", () => {
     variables.setDUMMYB3("DUMMYB3_VALUE");
-    expect(variables.output["§DUMMYB3"]).toBe("DUMMYB3_VALUE");
+    expect(variables.get("§DUMMYB3")).toBe("DUMMYB3_VALUE");
   });
 
   it("should set the value of §DUMMYB4", () => {
     variables.setDUMMYB4("DUMMYB4_VALUE");
-    expect(variables.output["§DUMMYB4"]).toBe("DUMMYB4_VALUE");
+    expect(variables.get("§DUMMYB4")).toBe("DUMMYB4_VALUE");
   });
 
   it("should set the value of §DUMMYB5", () => {
     variables.setDUMMYB5("DUMMYB5_VALUE");
-    expect(variables.output["§DUMMYB5"]).toBe("DUMMYB5_VALUE");
+    expect(variables.get("§DUMMYB5")).toBe("DUMMYB5_VALUE");
   });
 
   it("should set the value of XFVALI (empty string)", () => {

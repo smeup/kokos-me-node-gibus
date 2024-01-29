@@ -12,18 +12,24 @@ class Variables {
 
     input: RuleVariableMap;
     output: RuleVariableMap = {};
+    dummy: RuleVariableMap = {};
 
     constructor(input: RuleVariableMap) {
         this.input = input
     }
 
     /**
-     * Retrieves the value of the input variables.
+     * Retrieves the value of the variable with the specified name.
+     * If the variable name starts with "§DUMMYN" or "§DUMMYB" the value will be retrieved from the dummy object else from the input object.
      * @param key The name of the variable to retrieve.
      * @returns The value of the variable.
      */
     get(key: string): any {
-        return this.input[key];
+        if (key.startsWith("§DUMMYN") || key.startsWith("§DUMMYB")) {
+            return this.dummy[key];
+        } else {
+            return this.input[key];
+        }
     }
 
     /**
@@ -202,43 +208,43 @@ class Variables {
     }
 
     setDUMMYN1(value: any) {
-        this.output["§DUMMYN1"] = value
+        this.dummy["§DUMMYN1"] = value
     }
 
     setDUMMYN2(value: any) {
-        this.output["§DUMMYN2"] = value
+        this.dummy["§DUMMYN2"] = value
     }
 
     setDUMMYN3(value: any) {
-        this.output["§DUMMYN3"] = value
+        this.dummy["§DUMMYN3"] = value
     }
 
     setDUMMYN4(value: any) {
-        this.output["§DUMMYN4"] = value
+        this.dummy["§DUMMYN4"] = value
     }
 
     setDUMMYN5(value: any) {
-        this.output["§DUMMYN5"] = value
+        this.dummy["§DUMMYN5"] = value
     }
 
     setDUMMYB1(value: any) {
-        this.output["§DUMMYB1"] = value
+        this.dummy["§DUMMYB1"] = value
     }
 
     setDUMMYB2(value: any) {
-        this.output["§DUMMYB2"] = value
+        this.dummy["§DUMMYB2"] = value
     }
 
     setDUMMYB3(value: any) {
-        this.output["§DUMMYB3"] = value
+        this.dummy["§DUMMYB3"] = value
     }
 
     setDUMMYB4(value: any) {
-        this.output["§DUMMYB4"] = value
+        this.dummy["§DUMMYB4"] = value
     }
 
     setDUMMYB5(value: any) {
-        this.output["§DUMMYB5"] = value
+        this.dummy["§DUMMYB5"] = value
     }
 
     /**
