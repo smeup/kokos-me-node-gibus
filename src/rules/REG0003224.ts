@@ -72,6 +72,6 @@ export const REG0003224: Rule = (iv) => {
         vars.setCF(vars.get('§DUMMYN1') + 1);
     }
     // GENERATED
-    vars.setCF(0);
+    vars.setCF(99);
     return vars.output;
 };
