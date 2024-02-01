@@ -22,11 +22,10 @@
   "license": "ISC",
   "dependencies": {
     "@sme.up/kokos-sdk-node": "^0.0.8",
-    "ibm_db": "^3.2.3",
-    "langchain": "0.0.203"
+    "langchain": "0.0.203",
+    "node-jt400": "^4.5.0"
   },
   "devDependencies": {
-    "@types/ibm_db": "^2.0.16",
     "@types/jest": "^29.5.10",
     "jest": "^29.5.0",
     "ts-jest": "^29.0.5"
