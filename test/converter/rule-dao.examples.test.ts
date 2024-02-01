@@ -17,8 +17,8 @@ describe('RuleDaoExamples', () => {
     });
 
     describe('getUnconvertedRules', () => {
-        it('should retrieve unconverted rules from the /assets/test/rules.tsv file', () => {
-            const unconvertedRules = ruleDao.getUnconvertedRules();
+        it('should retrieve unconverted rules from the /assets/test/rules.tsv file', async() => {
+            const unconvertedRules = await ruleDao.getUnconvertedRules();
 
             // Assert
             expect(unconvertedRules.length).toBe(38);
@@ -41,28 +41,28 @@ describe('RuleDaoExamples', () => {
     });
 
     describe('markRuleAsConverted', () => {
-        it(`should write the rule to the ${LOG_PATH} file`, () => {
+        it(`should write the rule to the ${LOG_PATH} file`, async() => {
             // Arrange
             const mockRule: Rule = { id: 'REG0003124', conditions: [] };
 
             // Act
-            ruleDao.markRuleAsConverted(mockRule);
+            await ruleDao.markRuleAsConverted(mockRule);
 
             // Assert
 
             const fileContent = fs.readFileSync(ruleDao.logPath, 'utf-8');
             expect(fileContent).toContain(`${mockRule.id}\t`);
-            ruleDao.getUnconvertedRules()[0]
+            (await ruleDao.getUnconvertedRules())[0]
         });
-        it(`REG0003124 is converted and than does not be in unconvertedRules`, () => {
+        it(`REG0003124 is converted and than does not be in unconvertedRules`, async() => {
             // Arrange
             const mockRule: Rule = { id: 'REG0003124', conditions: [] };
 
             // Act
-            ruleDao.markRuleAsConverted(mockRule);
+            await ruleDao.markRuleAsConverted(mockRule);
 
             // Assert
-            const firsRuleId = ruleDao.getUnconvertedRules()[0].id;
+            const firsRuleId = (await ruleDao.getUnconvertedRules())[0].id;
             expect(firsRuleId).not.toBe('REG0003124');
         });
     });
