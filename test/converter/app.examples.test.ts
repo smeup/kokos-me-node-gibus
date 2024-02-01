@@ -11,6 +11,9 @@ let openaiKeySet: boolean = false;
 describe("RuleConverterAppExamples", () => {
 
     beforeAll(async () => {
+        removeRuleFromWorkConvertedRules("REG0003124");
+        removeRuleFromWorkConvertedRules("REG0003127");
+        removeRuleFromWorkConvertedRules("REG0008660");
         await runFunctionIfOpenAIKeySet(async () => {
             openaiKeySet = true;
             await appExamples.convertRules();
@@ -20,17 +23,17 @@ describe("RuleConverterAppExamples", () => {
     describe("check if rule loaded from assets is equals to rule converted", () => {
         it("REG0003124", async () => {
             if (openaiKeySet) {
-                expect(loadRulesFromWorkConvertedRules("REG0003124")).toBe(loadRuleFromAsset("REG0003124"))
+                expect(loadRuleFromWorkConvertedRules("REG0003124")).toBe(loadRuleFromAsset("REG0003124"))
             }
         });
         it("REG0003127", async () => {
             if (openaiKeySet) {
-                expect(loadRulesFromWorkConvertedRules("REG0003127")).toBe(loadRuleFromAsset("REG0003127"))
+                expect(loadRuleFromWorkConvertedRules("REG0003127")).toBe(loadRuleFromAsset("REG0003127"))
             }
         });
         it("REG0008660", async () => {
             if (openaiKeySet) {
-                expect(loadRulesFromWorkConvertedRules("REG0008660")).toBe(loadRuleFromAsset("REG0008660"))
+                expect(loadRuleFromWorkConvertedRules("REG0008660")).toBe(loadRuleFromAsset("REG0008660"))
             }
         });
     });
@@ -42,7 +45,14 @@ function loadRuleFromAsset(ruleId: string): string {
     return removeUnnecessaryChars(fs.readFileSync(filePath, { encoding: "utf-8" }));
 }
 
-function loadRulesFromWorkConvertedRules(ruleId: string): string {
+function loadRuleFromWorkConvertedRules(ruleId: string): string {
     const filePath = path.resolve(".work", "converted-rules", `${ruleId}.ts`);
     return removeUnnecessaryChars(fs.readFileSync(filePath, { encoding: "utf-8" }));
+}
+
+function removeRuleFromWorkConvertedRules(ruleId: string): void {
+    const filePath = path.resolve(".work", "converted-rules", `${ruleId}.ts`);
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+    }
 }
