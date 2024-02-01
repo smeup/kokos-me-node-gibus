@@ -1,13 +1,18 @@
 import { Condition, IRuleDao } from './types';
 import { Rule } from './types';
-import * as ibm_db from 'ibm_db';
+
+type Config = {
+    host: string;
+    name: string;
+    password: string;
+};
 
 /**
- * Represents a RuleDao implementation for IBM database.
+ * Represents a RuleDao implementation for AS400 database.
  */
 class RuleDaoProduction implements IRuleDao {
 
-    private connectionString: string;
+    private config: Config;
 
     private exludeConverted = "STATUS is null or STATUS = 'E'";
 
@@ -15,13 +20,18 @@ class RuleDaoProduction implements IRuleDao {
 
     /**
      * Creates an instance of RuleDaoIBM.
-     * @param connectionString The connection string for the IBM database, the format is: 
-     * DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password;
+     * @param host The host name of the IBM database.
+     * @param user The user name of the IBM database.
+     * @param password The password of the IBM database.
      * @param filter The filter clause. Default is empty string that it means no filter.
      * If you pass a not empty string, you don't must pass the keyword WHERE.
      */
-    constructor(connectionString: string, filter: string = "") {
-        this.connectionString = connectionString;
+    constructor(host: string, user: string, password: string, filter: string = "") {
+        this.config = {
+            host: host,
+            name: user,
+            password: password
+        };
         if (filter.toLowerCase().indexOf("where") >= 0) {
             throw new Error("filter cannot be contain WHERE keyword");
         }
@@ -30,7 +40,7 @@ class RuleDaoProduction implements IRuleDao {
             select COMP, PRGR, REGO, IF_TRUE, IF_FALSE from GIBUS_RULES
             WHERE (${this.exludeConverted})
             ${filter === '' ? "" : ` and (${filter})`}
-            order by J§PRGR
+            order by PRGR
         `;
     }
 
@@ -39,25 +49,27 @@ class RuleDaoProduction implements IRuleDao {
      * Retrieves unconverted rules from the IBM database.
      * @returns An array of unconverted rules.
      */
-    getUnconvertedRules(): Rule[] {
+    async getUnconvertedRules(): Promise<Rule[]> {
         const rules: Rule[] = [];
-        const conn = ibm_db.openSync(this.connectionString);
+        let pool = null;
         try {
-            const result = conn.querySync(this.query);
-            let currProgr = -1
+            pool = require('node-jt400').pool(this.config);
+            const results = await pool.query(this.query);
+            let currRuleId = null;
             let currRule = null;
-            for (const row of result) {
+            for (let row of results) {
                 const condition = new Condition(row.REGO, row.IF_TRUE, row.IF_FALSE);
-                if (row.JPRGR != currProgr) {
+                if (currRuleId != row.COMP) {
+                    currRuleId = row.COMP;
                     currRule = new Rule(row.COMP, [condition]);
+                    rules.push(currRule);
                 } else {
-                    currRule?.conditions.push(new Condition(row.REGO, row.IF_TRUE, row.IF_FALSE));
+                    currRule?.conditions.push(condition);
                 }
             }
-            return rules;
-
+            return rules
         } finally {
-            conn.closeSync();
+            if (pool != null) pool.close();
         }
     };
 
@@ -65,23 +77,37 @@ class RuleDaoProduction implements IRuleDao {
      * Marks a rule as converted in the IBM database.
      * @param rule The rule to mark as converted.
      */
-    markRuleAsConverted(rule: Rule) {
-        const conn = ibm_db.openSync(this.connectionString);
+    async markRuleAsConverted(rule: Rule): Promise<void> {
+        let pool = null;
         try {
+            pool = require('node-jt400').pool(this.config);
             const tstamp = this.formatDate(new Date());
             const query = `
-                UPDATE GIBUS_CONV_STATUS SET STATUS = 'P', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}'
+                UPDATE GIBUS_CONV_STATUS SET STATUS = 'P', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MESSAGE = 'OK'
                 WHERE COMP = '${rule.id}'
             `;
-            conn.querySync(query);
+            await pool.update(query);
         } finally {
-            conn.closeSync();
+            if (pool != null) pool.close();
         }
     };
 
-    markRuleAsNotConverted(rule: Rule, error: string): void {
-        throw new Error('Method not implemented.');
-    }
+    async markRuleAsNotConverted(rule: Rule, error: string): Promise<void> {
+        let pool = null;
+        try {
+            pool = require('node-jt400').pool(this.config);
+            const tstamp = this.formatDate(new Date());
+            const query = `
+                UPDATE GIBUS_CONV_STATUS SET STATUS = 'E', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MESSAGE = '${error.slice(0, 500)}'
+                WHERE COMP = '${rule.id}'
+            `;
+            await pool.update(query);
+        } finally {
+            if (pool != null) pool.close();
+        }
+    };
+
+
 
     private formatDate(date: Date) {
         const year = date.getFullYear();
