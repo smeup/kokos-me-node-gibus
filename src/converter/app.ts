@@ -29,7 +29,7 @@ class RuleConverterApp {
     async convertRules(): Promise<void> {
         console.log("Starting conversion...");
         const startTime = new Date().getTime();
-        const rules: Rule[] = this.ruleDao.getUnconvertedRules();
+        const rules: Rule[] = await this.ruleDao.getUnconvertedRules();
         const totalRules = rules.length;
         let currentRule = 0;
         for (const rule of rules) {
@@ -44,11 +44,11 @@ class RuleConverterApp {
                 console.log(`${rule.id} - saving conversion result`);
                 this.conversionResultDao.saveConversionResult(result);
                 console.log(`${rule.id} - marking rule as converted`);
-                this.ruleDao.markRuleAsConverted(rule);
+                await this.ruleDao.markRuleAsConverted(rule);
                 console.log(`${rule.id} - successfully converted`);
             } catch (error) {
                 console.error(`${rule.id} - error converting rule ${error}`);
-                this.ruleDao.markRuleAsNotConverted(rule, `${error}`);
+                await this.ruleDao.markRuleAsNotConverted(rule, `${error}`);
             }
             console.log(`${currentRule}/${totalRules} rules converted`);
         }
