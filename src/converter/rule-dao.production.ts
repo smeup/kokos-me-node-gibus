@@ -3,7 +3,7 @@ import { Rule } from './types';
 
 type Config = {
     host: string;
-    name: string;
+    user: string;
     password: string;
 };
 
@@ -29,7 +29,7 @@ class RuleDaoProduction implements IRuleDao {
     constructor(host: string, user: string, password: string, filter: string = "") {
         this.config = {
             host: host,
-            name: user,
+            user: user,
             password: password
         };
         if (filter.toLowerCase().indexOf("where") >= 0) {
@@ -121,4 +121,4 @@ class RuleDaoProduction implements IRuleDao {
 
 }
 
-export { RuleDaoProduction };
+export { RuleDaoProduction, Config };
