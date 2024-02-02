@@ -11,18 +11,21 @@ class RuleDaoExamples implements IRuleDao {
     readonly logPath: string;
     readonly errPath: string;
     readonly allow: (ruleId: string) => boolean;
+    readonly rulesFileName: string;
 
     /**
      * Creates a new instance of the RuleDaoExamples class.
-     * @param logPath The path where will be logged the rules when converted. Default is .work/conversion-result.txt.
-     * @param errPath The path where will be logged the rules when not converted. Default is .work/conversion-result.err.
+     * @param workDir The dir where will be logged the rules when converted. Default is .work.
      * @param allow A function that returns true if the rule can be converted, otherwise false. Default is a function that always returns true.
+     * @param rulesFileName - The name of the file containing the rules to be converted. Defaults to rules.tsv. The
+     * file is expected to be located in the assets/test folder.
      */
-    constructor({ logPath = path.resolve(".work", "conversion-result.txt"), errPath = path.resolve(".work", "conversion-result.err"),
-        allow = () => true }: { logPath?: string, errPath?: string, allow?: (ruleId: string) => boolean } = {}) {
-        this.logPath = logPath;
-        this.errPath = errPath;
+    constructor({ workDir = ".work", errDir = ".work", allow = () => true, rulesFileName = "rules.tsv" }:
+        { workDir?: string, errDir?: string, allow?: (ruleId: string) => boolean, rulesFileName?: string } = {}) {
+        this.logPath = path.resolve(workDir, rulesFileName + ".txt");
+        this.errPath = path.resolve(workDir, rulesFileName + ".err");;
         this.allow = allow;
+        this.rulesFileName = rulesFileName;
         fs.mkdirSync(path.dirname(this.logPath), { recursive: true });
     }
 
@@ -33,7 +36,7 @@ class RuleDaoExamples implements IRuleDao {
      * Skip the first row.
      */
     getUnconvertedRules(): Rule[] {
-        const filePath = path.resolve("assets", "test", "rules.tsv");
+        const filePath = path.resolve("assets", "test", this.rulesFileName);
         const rules: Rule[] = [];
         const convertedRulesId = this.getConvertedRulesIds();
 

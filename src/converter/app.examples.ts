@@ -30,13 +30,15 @@ class RuleConverterAppExamples {
      * @param allow - A function that determines whether a rule is allowed based on its ID. Defaults to always true.
      * @param rootPath - The destinaton root path where the converted rules will be saved. Defaults to src/rules.
      * @param deleteLogFiles - Indicates whether the log and error files should be deleted. Defaults to true. 
+     * @param rulesFileName - The name of the file containing the rules to be converted. Defaults to rules.tsv. The
+     * file is expected to be located in the assets/test folder.
      * If you want to avoid to reconvert already converted rules, set this parameter to false.
      * @see convertRules
      * @see RuleDaoExamples
      * @see OpenAIRuleConverter
      */
-    constructor({ allow = defaultAllow, rootPath = defaultRootPath, deleteLogFiles = true }: { allow?: (ruleId: string) => boolean, rootPath?: string, deleteLogFiles?: boolean } = {}) {
-        const ruleDao: RuleDaoExamples = new RuleDaoExamples({ allow });
+    constructor({ allow = defaultAllow, rootPath = defaultRootPath, deleteLogFiles = true, rulesFileName = "rules.tsv" }: { allow?: (ruleId: string) => boolean, rootPath?: string, deleteLogFiles?: boolean, rulesFileName?: string } = {}) {
+        const ruleDao: RuleDaoExamples = new RuleDaoExamples({ allow: allow, rulesFileName: rulesFileName });
         if (deleteLogFiles) {
             fs.rmSync(ruleDao.logPath, { force: true });
             fs.rmSync(ruleDao.errPath, { force: true });
@@ -51,7 +53,8 @@ class RuleConverterAppExamples {
     }
 
     /**
-     * Converts rules from the asset/test/rules.tsv file
+     * Converts rules from the rulesFileName file and saves them to the rootPath folder.
+     * @see RuleConverterApp
      */
     async convertRules(): Promise<void> {
         return this.app.convertRules();
