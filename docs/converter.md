@@ -17,12 +17,16 @@ order by COMP, PRGR;
 
 Further information about the pipeline can be found at [RuleConverterExampleApp](../src/converter/app.examples.ts) 
 
+For a complete list of all examples converte rules see [Example converted rules](../assets/test/readme.md)
+
 ```sh
 # linux osx
-npm run convert-examples
+export OPENAI_API_KEY=your_api_key
+npm run convert-examples -- --rulesFileName rules.tsv
 
 # win
-npm run convert-examples:win
+$env:OPENAI_API_KEY="your_api_key"
+npm run convert-examples:win -- --rulesFileName rules.tsv
 ```
 
 
