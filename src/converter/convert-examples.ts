@@ -6,6 +6,12 @@
  * @see RuleConverterAppExamples
  */
 import { RuleConverterAppExamples } from "./app.examples";
-
-const app = new RuleConverterAppExamples({ deleteLogFiles: false });
+const rulesFileNameIndex = process.argv.indexOf('--ruleFileName');
+let rulesFileName;
+if (rulesFileNameIndex === -1) {
+    throw new Error('The --ruleFileName argument is required');
+} else {
+    rulesFileName = process.argv[rulesFileNameIndex + 1];
+}
+const app = new RuleConverterAppExamples({ deleteLogFiles: false, rulesFileName: rulesFileName});
 await app.convertRules();
