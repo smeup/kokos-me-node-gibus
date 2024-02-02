@@ -18,6 +18,9 @@ class RuleDaoProduction implements IRuleDao {
 
     private query: string;
 
+    // todo when I have understand hot to use pool in the right way, I will remove this any
+    readonly pool: any;
+
     /**
      * Creates an instance of RuleDaoIBM.
      * @param host The host name of the IBM database.
@@ -35,7 +38,7 @@ class RuleDaoProduction implements IRuleDao {
         if (filter.toLowerCase().indexOf("where") >= 0) {
             throw new Error("filter cannot be contain WHERE keyword");
         }
-
+        this.pool = require('node-jt400').pool(this.config);
         this.query = `
             select COMP, PRGR, REGO, IF_TRUE, IF_FALSE from GIBUS_RULES
             WHERE (${this.exludeConverted})
@@ -51,26 +54,20 @@ class RuleDaoProduction implements IRuleDao {
      */
     async getUnconvertedRules(): Promise<Rule[]> {
         const rules: Rule[] = [];
-        let pool = null;
-        try {
-            pool = require('node-jt400').pool(this.config);
-            const results = await pool.query(this.query);
-            let currRuleId = null;
-            let currRule = null;
-            for (let row of results) {
-                const condition = new Condition(row.REGO, row.IF_TRUE, row.IF_FALSE);
-                if (currRuleId != row.COMP) {
-                    currRuleId = row.COMP;
-                    currRule = new Rule(row.COMP, [condition]);
-                    rules.push(currRule);
-                } else {
-                    currRule?.conditions.push(condition);
-                }
+        const results = await this.pool.query(this.query);
+        let currRuleId = null;
+        let currRule = null;
+        for (let row of results) {
+            const condition = new Condition(row.REGO, row.IF_TRUE, row.IF_FALSE);
+            if (currRuleId != row.COMP) {
+                currRuleId = row.COMP;
+                currRule = new Rule(row.COMP, [condition]);
+                rules.push(currRule);
+            } else {
+                currRule?.conditions.push(condition);
             }
-            return rules
-        } finally {
-            if (pool != null) pool.close();
         }
+        return rules
     };
 
     /**
@@ -78,36 +75,26 @@ class RuleDaoProduction implements IRuleDao {
      * @param rule The rule to mark as converted.
      */
     async markRuleAsConverted(rule: Rule): Promise<void> {
-        let pool = null;
-        try {
-            pool = require('node-jt400').pool(this.config);
-            const tstamp = this.formatDate(new Date());
-            const query = `
+        const tstamp = this.formatDate(new Date());
+        const query = `
                 UPDATE GIBUS_CONV_STATUS SET STATUS = 'P', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MESSAGE = 'OK'
                 WHERE COMP = '${rule.id}'
             `;
-            await pool.update(query);
-        } finally {
-            if (pool != null) pool.close();
-        }
+        await this.pool.update(query);
     };
 
     async markRuleAsNotConverted(rule: Rule, error: string): Promise<void> {
-        let pool = null;
-        try {
-            pool = require('node-jt400').pool(this.config);
-            const tstamp = this.formatDate(new Date());
-            const query = `
-                UPDATE GIBUS_CONV_STATUS SET STATUS = 'E', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MESSAGE = '${error.slice(0, 500)}'
-                WHERE COMP = '${rule.id}'
-            `;
-            await pool.update(query);
-        } finally {
-            if (pool != null) pool.close();
-        }
+        const tstamp = this.formatDate(new Date());
+        const query = `
+            UPDATE GIBUS_CONV_STATUS SET STATUS = 'E', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MESSAGE = '${error.slice(0, 500)}'
+            WHERE COMP = '${rule.id}'
+        `;
+        await this.pool.update(query);
     };
 
-
+    async close(): Promise<void> {
+        this.pool.close();
+    }
 
     private formatDate(date: Date) {
         const year = date.getFullYear();
