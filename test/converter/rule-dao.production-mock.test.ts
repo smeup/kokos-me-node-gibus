@@ -40,7 +40,7 @@ const RULES: Rule[] = [
 
 const POOL = createPool();
 
-describe('RuleDaoProduction', () => {
+describe('RuleDaoProduction - Mock', () => {
   let ruleDao: RuleDaoProduction;
 
 
