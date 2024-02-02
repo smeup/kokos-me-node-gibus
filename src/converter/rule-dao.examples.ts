@@ -100,6 +100,10 @@ class RuleDaoExamples implements IRuleDao {
         fs.appendFileSync(this.errPath, row, 'utf-8');
     }
 
+    async close(): Promise<void> {
+        // Nothing to do here.
+    }
+
     private getConvertedRulesIds(): string[] {
         if (!fs.existsSync(this.logPath)) {
             fs.writeFileSync(this.logPath, '', 'utf-8');

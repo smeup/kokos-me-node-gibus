@@ -3,7 +3,7 @@ import { ConversionResultDaoFileSystem } from "./convertion-result-dao.file";
 import { OpenAIRuleConverter } from "./rule-converter.openai";
 import { RuleDaoExamples } from "./rule-dao.examples";
 import { SyntaxErrorValidator } from "./conversion-result-validator";
-import { IConversionResultDao, IRuleConverterService } from "./types";
+import { IConversionResultDao, IRuleConverterService, IRuleDao } from "./types";
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -19,6 +19,7 @@ const defaultRootPath = path.resolve("src", "rules");
 class RuleConverterAppExamples {
 
     private readonly app: RuleConverterApp;
+    private readonly ruleDao: IRuleDao;
 
     /**
      * Constructs a new instance of the AppExamples class.
@@ -39,6 +40,7 @@ class RuleConverterAppExamples {
      */
     constructor({ allow = defaultAllow, rootPath = defaultRootPath, deleteLogFiles = true, rulesFileName = "rules.tsv" }: { allow?: (ruleId: string) => boolean, rootPath?: string, deleteLogFiles?: boolean, rulesFileName?: string } = {}) {
         const ruleDao: RuleDaoExamples = new RuleDaoExamples({ allow: allow, rulesFileName: rulesFileName });
+        this.ruleDao = ruleDao;
         if (deleteLogFiles) {
             fs.rmSync(ruleDao.logPath, { force: true });
             fs.rmSync(ruleDao.errPath, { force: true });
@@ -57,7 +59,9 @@ class RuleConverterAppExamples {
      * @see RuleConverterApp
      */
     async convertRules(): Promise<void> {
-        return this.app.convertRules();
+        this.app.convertRules().finally(() => {
+            this.ruleDao.close();
+        });
     }
 
 }
