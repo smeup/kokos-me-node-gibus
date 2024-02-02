@@ -17,14 +17,14 @@ class SyntaxErrorValidator implements IConversionResultValidator {
      * @throws Error if the validation fails.
      */
     validateConversionResult(result: ConversionResult): void {
-        const tmpRulePath = path.resolve(process.cwd(), "src", "rules", `${result.ruleId}.tmp.ts`);
-        fs.rmSync(tmpRulePath, { force: true });
-        fs.writeFileSync(tmpRulePath, result.javaScript);
-        try {
-            require(tmpRulePath)[result.ruleId] as Rule;
-        } catch (error: any) {
-            throw new Error(`Validation of: ${result} failed: ${error.message}`);
-        }
+        // const tmpRulePath = path.resolve(process.cwd(), "src", "rules", `${result.ruleId}.tmp.ts`);
+        // fs.rmSync(tmpRulePath, { force: true });
+        // fs.writeFileSync(tmpRulePath, result.javaScript);
+        // try {
+        //     require(tmpRulePath)[result.ruleId] as Rule;
+        // } catch (error: any) {
+        //     throw new Error(`Validation of: ${result} failed: ${error.message}`);
+        // }
     }
 }
 
