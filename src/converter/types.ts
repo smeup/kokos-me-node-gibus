@@ -85,6 +85,12 @@ export interface IRuleDao {
      * @param error The error message.
      */
     markRuleAsNotConverted(rule: Rule, error: string): Promise<void>;
+
+    /**
+     * Closes the data access object.
+     * @returns A promise that resolves when the data access object has been closed.
+     */
+    close(): Promise<void>;
 }
 
 /**
