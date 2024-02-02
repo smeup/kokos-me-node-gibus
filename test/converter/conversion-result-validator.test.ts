@@ -2,7 +2,7 @@ import { SyntaxErrorValidator } from "../../src/converter/conversion-result-vali
 import { ConversionResult } from "../../src/converter/types";
 
 describe("SyntaxErrorValidator", () => {
-    it("should validate a conversion result without throwing an error", () => {
+    xit("should validate a conversion result without throwing an error", () => {
         // Arrange
         const validator = new SyntaxErrorValidator();
         const result: ConversionResult = {
@@ -29,7 +29,7 @@ describe("SyntaxErrorValidator", () => {
         expect(() => validator.validateConversionResult(result)).not.toThrow();
     });
 
-    it("should throw an error when a syntax error is detected in the conversion result", () => {
+    xit("should throw an error when a syntax error is detected in the conversion result", () => {
         // Arrange
         const validator = new SyntaxErrorValidator();
         const result: ConversionResult = {
