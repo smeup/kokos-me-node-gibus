@@ -12,7 +12,7 @@ Contain only one rule to convert
 
 ```sql
 select trim(COMP) AS COMP, PRGR, trim(REGO) as REGO, trim(IF_TRUE) as IF_TRUE, trim(IF_FALSE) as IF_FALSE 
-from GIBUS_RULES 
+from W_SMMB.GIBUS_RULES 
 where ASSI in ('ACCESSORI' , 'FT_GRO_INF_T01')
 order by COMP, PRGR; 
 ```
@@ -22,7 +22,7 @@ order by COMP, PRGR;
 
 ```sql
 select trim(COMP) AS COMP, PRGR, trim(REGO) as REGO, trim(IF_TRUE) as IF_TRUE, trim(IF_FALSE) as IF_FALSE 
-from GIBUS_RULES 
+from W_SMMB.GIBUS_RULES 
 where ASSI in (
     'AC0089', 'AC0098', 'AC0100', 'AC0104', 'AC0107', 'AC0108', 'AC0109', 'AC0111', 'AC0115', 'AC0131', 
     'CP0002', 'GS0024', 'GS0035', 'GS0036', 'GS0038', 'GS0042', 'GS0047', 'GS0048', 'GS0050', 'GS0059', 
