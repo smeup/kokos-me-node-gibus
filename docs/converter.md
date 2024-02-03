@@ -11,7 +11,7 @@ This file has been created by serializing the rules stored in `GIBUS_RULES` logi
 
 ```sql
 select trim(COMP) AS COMP, PRGR, trim(REGO) as REGO, trim(IF_TRUE) as IF_TRUE, trim(IF_FALSE) as IF_FALSE 
-from GIBUS_RULES where ASSI in ('ACCESSORI' , 'FT_GRO_INF_T01')
+from W_SMMB.GIBUS_RULES where ASSI in ('ACCESSORI' , 'FT_GRO_INF_T01')
 order by COMP, PRGR;
 ```
 
