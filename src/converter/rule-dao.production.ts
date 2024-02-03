@@ -1,5 +1,6 @@
 import { Condition, IRuleDao } from './types';
 import { Rule } from './types';
+import { Connection, pool } from 'node-jt400';
 
 type Config = {
     host: string;
@@ -7,19 +8,24 @@ type Config = {
     password: string;
 };
 
+type Row = {
+    COMP: string;
+    PRGR: number;
+    REGO: string;
+    IF_TRUE: string;
+    IF_FALSE: string;
+};
+
 /**
  * Represents a RuleDao implementation for AS400 database.
  */
 class RuleDaoProduction implements IRuleDao {
 
-    private config: Config;
-
+    private readonly config: Config;
     private exludeConverted = "STATUS is null or STATUS = 'E'";
-
-    private query: string;
-
-    // todo when I have understand hot to use pool in the right way, I will remove this any
-    readonly pool: any;
+    readonly pool: Connection;
+    private readonly filter: string;
+    private readonly SCHEMA = "W_SMMB";
 
     /**
      * Creates an instance of RuleDaoIBM.
@@ -38,13 +44,8 @@ class RuleDaoProduction implements IRuleDao {
         if (filter.toLowerCase().indexOf("where") >= 0) {
             throw new Error("filter cannot be contain WHERE keyword");
         }
-        this.pool = require('node-jt400').pool(this.config);
-        this.query = `
-            select COMP, PRGR, REGO, IF_TRUE, IF_FALSE from GIBUS_RULES
-            WHERE (${this.exludeConverted})
-            ${filter === '' ? "" : ` and (${filter})`}
-            order by PRGR
-        `;
+        this.filter = filter;
+        this.pool = pool(this.config);
     }
 
 
@@ -54,7 +55,13 @@ class RuleDaoProduction implements IRuleDao {
      */
     async getUnconvertedRules(): Promise<Rule[]> {
         const rules: Rule[] = [];
-        const results = await this.pool.query(this.query);
+        const query = `
+        select COMP, PRGR, REGO, IF_TRUE, IF_FALSE from ${this.SCHEMA}.GIBUS_RULES
+        WHERE (${this.exludeConverted})
+        ${this.filter === '' ? "" : ` and (${this.filter})`}
+        order by PRGR
+        `;
+        let results: Row[] = await this.pool.query(query);
         let currRuleId = null;
         let currRule = null;
         for (let row of results) {
@@ -68,7 +75,7 @@ class RuleDaoProduction implements IRuleDao {
             }
         }
         return rules
-    };
+    }
 
     /**
      * Marks a rule as converted in the IBM database.
@@ -77,23 +84,25 @@ class RuleDaoProduction implements IRuleDao {
     async markRuleAsConverted(rule: Rule): Promise<void> {
         const tstamp = this.formatDate(new Date());
         const query = `
-                UPDATE GIBUS_CONV_STATUS SET STATUS = 'P', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MESSAGE = 'OK'
+                UPDATE ${this.SCHEMA}.GIBUS_CONV_STATUS SET STATUS = 'P', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MSG = 'OK'
                 WHERE COMP = '${rule.id}'
             `;
-        await this.pool.update(query);
-    };
+        const updated = await this.pool.update(query);
+    }
 
     async markRuleAsNotConverted(rule: Rule, error: string): Promise<void> {
         const tstamp = this.formatDate(new Date());
         const query = `
-            UPDATE GIBUS_CONV_STATUS SET STATUS = 'E', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MESSAGE = '${error.slice(0, 500)}'
+            UPDATE ${this.SCHEMA}.GIBUS_CONV_STATUS SET STATUS = 'E', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MSG = '${error.slice(0, 500)}'
             WHERE COMP = '${rule.id}'
         `;
         await this.pool.update(query);
     };
 
     async close(): Promise<void> {
-        this.pool.close();
+        if (this.pool != null) {
+            return this.pool.close();
+        }
     }
 
     private formatDate(date: Date) {
@@ -108,4 +117,4 @@ class RuleDaoProduction implements IRuleDao {
 
 }
 
-export { RuleDaoProduction, Config };
+export { RuleDaoProduction, Config, Row };
