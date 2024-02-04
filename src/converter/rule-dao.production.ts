@@ -82,26 +82,32 @@ class RuleDaoProduction implements IRuleDao {
      * @param rule The rule to mark as converted.
      */
     async markRuleAsConverted(rule: Rule): Promise<void> {
-        const tstamp = this.formatDate(new Date());
-        const query = `
-                UPDATE ${this.SCHEMA}.GIBUS_CONV_STATUS SET STATUS = 'P', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MSG = 'OK'
-                WHERE COMP = '${rule.id}'
-            `;
-        const updated = await this.pool.update(query);
+        await this.changeConversionStatus(rule, 'P', 'OK');
     }
 
     async markRuleAsNotConverted(rule: Rule, error: string): Promise<void> {
-        const tstamp = this.formatDate(new Date());
-        const query = `
-            UPDATE ${this.SCHEMA}.GIBUS_CONV_STATUS SET STATUS = 'E', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MSG = '${error.slice(0, 500)}'
-            WHERE COMP = '${rule.id}'
-        `;
-        await this.pool.update(query);
+        await this.changeConversionStatus(rule, 'E', error);
     };
 
     async close(): Promise<void> {
         if (this.pool != null) {
             return this.pool.close();
+        }
+    }
+
+    private async changeConversionStatus(rule: Rule, status: string, msg: string): Promise<void> {
+        const tstamp = this.formatDate(new Date());
+        const query = `
+            UPDATE ${this.SCHEMA}.GIBUS_CONV_STATUS SET STATUS = '${status}', TSTAMP_START = '${tstamp}',  TSTAMP_END = '${tstamp}', MSG = '${msg.slice(0, 500)}'
+            WHERE COMP = '${rule.id}'
+        `;
+        const updated = await this.pool.update(query);
+        if (updated == 0) {
+            const insert = `
+                INSERT INTO ${this.SCHEMA}.GIBUS_CONV_STATUS (COMP, STATUS, TSTAMP_START, TSTAMP_END, MSG) VALUES
+                ('${rule.id}', '${status}', '${tstamp}',  '${tstamp}', '${msg.slice(0, 500)}')
+            `;
+            await this.pool.update(insert);
         }
     }
 

@@ -21,7 +21,7 @@ For a complete list of all examples converte rules see [Example converted rules]
 
 ```sh
 # linux osx
-export OPENAI_API_KEY=your_api_key
+OPENAI_API_KEY=your_api_key
 npm run convert-examples -- --rulesFileName rules.tsv
 
 # win
@@ -34,11 +34,27 @@ npm run convert-examples:win -- --rulesFileName rules.tsv
 
 ```sh
 # linux osx
+OPENAI_API_KEY=your_api_key
+ME_GIBUS_HOST=your_host
+ME_GIBUS_USER=your_user
+ME_GIBUS_PASSWORD=your_password
 npm run convert-production
 
 # win
+$env:OPENAI_API_KEY="your_api_key"
+$env:ME_GIBUS_HOST="your_host"
+$env:ME_GIBUS_USER="your_user"
+$env:ME_GIBUS_PASSWORD="your_password"
 npm run convert-production:win
 ```
+
+**NB npm run convert-production:win**
+In windows when you run: `npm run convert-production` if you have this error: 
+```
+The specified module could not be found.
+    \\?\<path_to_kokos_me_node_gibus>\node_modules\java\build\Release\nodejavabridge_bindings.node
+```
+try to add to PATH the `JAVA_HOME\jre\bin\server` directory and re-run the command. 
 
 
 ## Development
