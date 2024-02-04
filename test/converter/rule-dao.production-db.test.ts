@@ -51,7 +51,7 @@ describe('RuleDaoProduction - db', () => {
   });
 
   describe('markRuleAsConverted', () => {
-    xit('should mark a rule as converted in the database',  async () => {
+    it('should mark a rule as converted in the database',  async () => {
 
       // Create a test rule
       const rule = RULES[0];
@@ -67,7 +67,7 @@ describe('RuleDaoProduction - db', () => {
 
   describe('markRuleAsNotConverted', () => {
 
-    xit('should mark a rule as not converted in the database', async () => {
+    it('should mark a rule as not converted in the database', async () => {
 
       // Create a test rule and error message
       const rule = RULES[0];
