@@ -27,6 +27,31 @@ npm install
 
 *Given a new rule named: MYRULE*
 
+- Copy [TEMPLATES.ts](./src/rules/TEMPLATE.ts) into `./src/rules/MYRULE.ts`
+- Replace:
+```js
+export const TEMPLATE: Rule = (iv) => { 
+```
+with rule id `MYRULE`:
+```js
+export const MYRULE: Rule = (iv) => { 
+```
+
+#### Create and run test unit
+- Copy [TEMPLATES.test.ts](./test/rules/TEMPLATE.test.ts) into `./test/rules/MYRULE.test.ts`
+- Replace `TEMPLATE with MYRULE`
+
+- Run test
+```sh
+# linux osx
+npm run test ./test/rules/MYRULE.test.ts
+
+# win
+npm run test:win ./test/rules/MYRULE.test.ts
+```
+
+
+#### Debug endpoint through swagger
 - Start debugger terminal: 
   - use this shortcut: ctrl+P and type: `>Debug: JavaScript Debug Terminal`
   - or click [command:extension.js-debug.createDebuggerTerminal](command:extension.js-debug.createDebuggerTerminal) if you are reading this doc in vscode
@@ -37,16 +62,6 @@ npm run dev
 
 # win 
 npm run dev:win
-```
-
-- Copy [TEMPLATES.ts](./src/rules/TEMPLATE.ts) into `./src/rules/MYRULE.ts`
-- Replace:
-```js
-export const TEMPLATE: Rule = (iv) => { 
-```
-with rule id `MYRULE`:
-```js
-export const MYRULE: Rule = (iv) => { 
 ```
 - Set a breakpoint
 ![Breakpoint](./docs/readme-myrule-bpnt.png)
@@ -78,7 +93,7 @@ export const MYRULE: Rule = (iv) => {
 }
 ```
 
-If you are lucky you will see:   
+If everything is ok:
 ![Debug](./docs/readme-myrule-dbg.png)
 
 and this **Response body**:
