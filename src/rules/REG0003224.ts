@@ -12,7 +12,7 @@ import { Variables } from "../converter/variables.js";
 export const REG0003224: Rule = (iv) => {
 
     const vars = new Variables(iv);
-    
+
     // GENERATED
     // RULE: REG0003224
     // REQUEST:
@@ -72,6 +72,7 @@ export const REG0003224: Rule = (iv) => {
         vars.setCF(vars.get('§DUMMYN1') + 1);
     }
     // GENERATED
-
+    // just for demo
+    vars.setCF(99);
     return vars.output;
 };
