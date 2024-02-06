@@ -4,7 +4,7 @@ The already converted rules.
 Every .tsv is a file containing the rules to convert and achieved by extracting them from `GIBUS_RULES` table.
 
 ## onerules.tsv
-- [onerules.tsv](./onerules.tsv) - The file containing the rules to convert
+- [onerule.tsv](./onerule.tsv) - The file containing the rules to convert
 Contain only one rule to convert
 
 ## rules.tsv 
