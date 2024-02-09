@@ -190,21 +190,23 @@ class Variables {
     }
 
     /**
-     * Set the first four chars of "D§DISE"
+     * Set the first four chars of "D§DISE" and "CON-A"
      * @param con_a The value that will be set
      */
     setCON_A(con_a: any) {
         // D§DISE is a 9 chars len
         this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] as string || "").substring(4)).padEnd(D_DISE_LEN, " ");
+        this.output["CON-A"] = con_a;
     }
 
     /**
-     * Set the last five chars of "D§DISE"
+     * Set the last five chars of "D§DISE" and "CON-B"
      * @param con_b The value that will be set
      */
     setCON_B(con_b: any) {
         // D§DISE is a 9 chars len
         this.output["D§DISE"] = (String(this.output["D§DISE"] || "").padEnd(4, " ") + con_b.trim()).padEnd(D_DISE_LEN, " ");
+        this.output["CON-B"] = con_b;
     }
 
     setDUMMYN1(value: any) {
