@@ -59,9 +59,12 @@ class RuleConverterAppExamples {
      * @see RuleConverterApp
      */
     async convertRules(): Promise<void> {
-        this.app.convertRules().finally(() => {
+        try {
+            await this.app.convertRules();
+        }
+        finally {
             this.ruleDao.close();
-        });
+        }
     }
 
 }
