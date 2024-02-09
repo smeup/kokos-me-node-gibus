@@ -108,11 +108,13 @@ describe("Variables", () => {
   it("should set the value of D§DISE (first four chars)", () => {
     variables.setCON_A("NEW_CON_A_VALUE");
     expect(variables.output["D§DISE"]).toBe("NEW_     ");
+    expect(variables.output["CON-A"]).toBe("NEW_CON_A_VALUE");
   });
 
   it("should set the value of D§DISE (last five chars)", () => {
     variables.setCON_B("NEW_CON_B_VALUE");
     expect(variables.output["D§DISE"]).toBe("    NEW_CON_B_VALUE");
+    expect(variables.output["CON-B"]).toBe("NEW_CON_B_VALUE");
   });
 
   it("should set the value of §DUMMYN1", () => {
