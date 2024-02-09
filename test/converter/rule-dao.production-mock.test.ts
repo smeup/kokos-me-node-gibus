@@ -55,6 +55,10 @@ describe('RuleDaoProduction - Mock', () => {
     // (e.g., close database connections)
   });
 
+  afterAll(() => {
+    jest.unmock('node-jt400');
+  });
+
   describe('getUnconvertedRules', () => {
     it('should retrieve unconverted rules from the database', async () => {
 
