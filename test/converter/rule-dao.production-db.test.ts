@@ -76,8 +76,8 @@ describe('RuleDaoProduction - db', () => {
       // Call the method under test
       await ruleDao.markRuleAsNotConverted(rule, error);
 
-      // Assert that the database update method was called with the correct query
-      // expect(POOL.update).toHaveBeenCalledWith(expect.stringContaining(`UPDATE GIBUS_CONV_STATUS SET STATUS = 'E'`));
+      let unconvertedRules = await ruleDao.getUnconvertedRules();
+      expect(unconvertedRules).toEqual([rule]);
     });
   });
 });
