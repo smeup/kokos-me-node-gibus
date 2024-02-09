@@ -45,7 +45,7 @@ class RuleDaoProduction implements IRuleDao {
             throw new Error("filter cannot be contain WHERE keyword");
         }
         this.filter = filter;
-        this.pool = pool(this.config);
+        this.pool = require("node-jt400").pool(this.config);
     }
 
 

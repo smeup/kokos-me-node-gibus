@@ -78,7 +78,7 @@ describe('RuleDaoProduction - Mock', () => {
       await ruleDao.markRuleAsConverted(rule);
 
       // Assert that the database update method was called with the correct query
-      expect(POOL.update).toHaveBeenCalledWith(expect.stringContaining(`UPDATE GIBUS_CONV_STATUS SET STATUS = 'P'`));
+      expect(POOL.update).toHaveBeenCalledWith(expect.stringContaining(`UPDATE W_SMMB.GIBUS_CONV_STATUS SET STATUS = 'P'`));
     });
   });
 
@@ -94,25 +94,20 @@ describe('RuleDaoProduction - Mock', () => {
       await ruleDao.markRuleAsNotConverted(rule, error);
 
       // Assert that the database update method was called with the correct query
-      expect(POOL.update).toHaveBeenCalledWith(expect.stringContaining(`UPDATE GIBUS_CONV_STATUS SET STATUS = 'E'`));
+      expect(POOL.update).toHaveBeenCalledWith(expect.stringContaining(`UPDATE W_SMMB.GIBUS_CONV_STATUS SET STATUS = 'E'`));
     });
   });
 });
 
 
 function createPool() {
-  const mockPool = {
-    query: jest.fn().mockResolvedValue(GIBUS_RULES_ROWS),
-    update: jest.fn(),
-    close: jest.fn(),
-  };
   jest.mock('node-jt400', () => ({
-    pool: jest.fn().mockReturnValue(mockPool),
+    pool: jest.fn().mockReturnValue({
+      query: jest.fn().mockResolvedValue(GIBUS_RULES_ROWS),
+      update: jest.fn(),
+      close: jest.fn(),
+    }),
   }));
-  return mockPool;
-}
 
-
-function isEnvSetProperly(): boolean {
-  return consts.host !== 'setme' && consts.user !== 'setme' && consts.password !== 'setme';
+  return require('node-jt400').pool();
 }
