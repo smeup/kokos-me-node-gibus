@@ -22,23 +22,34 @@ const RULES: Rule[] = [
 ];
 
 
+
 describe('RuleDaoProduction - db', () => {
   let ruleDao: RuleDaoProduction;
 
   beforeEach(async () => {
+    if (!isEnvSetProperly()) {
+      return;
+    }
     // Initialize RuleDaoProduction with test configuration
     ruleDao = new RuleDaoProduction(consts.host, consts.user, consts.password, "COMP in ('REG0003124')");
     await ruleDao.markRuleAsNotConverted(RULES[0], 'Test error message');
   });
 
   afterEach(async () => {
+    if (!isEnvSetProperly()) {
+      return;
+    }
     // Clean up any resources used by RuleDaoProduction
     await ruleDao.close();
   });
 
   describe('getUnconvertedRules', () => {
     it('should retrieve unconverted rules from the database', async() => {
-
+      
+      if (!isEnvSetProperly()) {
+        return;
+      }
+      
       let expected: Rule[] = RULES;
 
       // Call the method under test
@@ -52,7 +63,11 @@ describe('RuleDaoProduction - db', () => {
 
   describe('markRuleAsConverted', () => {
     it('should mark a rule as converted in the database',  async () => {
-
+      
+      if (!isEnvSetProperly()) {
+        return;
+      }
+      
       // Create a test rule
       const rule = RULES[0];
 
@@ -68,6 +83,10 @@ describe('RuleDaoProduction - db', () => {
   describe('markRuleAsNotConverted', () => {
 
     it('should mark a rule as not converted in the database', async () => {
+
+      if (!isEnvSetProperly()) {
+        return;
+      }
 
       // Create a test rule and error message
       const rule = RULES[0];
