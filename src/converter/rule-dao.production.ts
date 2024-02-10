@@ -45,7 +45,14 @@ class RuleDaoProduction implements IRuleDao {
             throw new Error("filter cannot be contain WHERE keyword");
         }
         this.filter = filter;
-        this.pool = require("node-jt400").pool(this.config);
+        // this is a trick because to mock jest require "require"
+        // but if I use this class not in test environment "require" does not work
+        // to me js is a totaly mess
+        if (process.env.NODE_ENV === 'test') {
+            this.pool = require("node-jt400").pool(this.config);
+        } else {
+            this.pool = pool(this.config);
+        }
     }
 
 
@@ -59,7 +66,7 @@ class RuleDaoProduction implements IRuleDao {
         select COMP, PRGR, REGO, IF_TRUE, IF_FALSE from ${this.SCHEMA}.GIBUS_RULES
         WHERE (${this.exludeConverted})
         ${this.filter === '' ? "" : ` and (${this.filter})`}
-        order by PRGR
+        order by COMP, PRGR
         `;
         let results: Row[] = await this.pool.query(query);
         let currRuleId = null;
@@ -86,7 +93,7 @@ class RuleDaoProduction implements IRuleDao {
     }
 
     async markRuleAsNotConverted(rule: Rule, error: string): Promise<void> {
-        await this.changeConversionStatus(rule, 'E', error);
+        await this.changeConversionStatus(rule, 'E', error.replace(/'/g, "''"));
     };
 
     async close(): Promise<void> {
