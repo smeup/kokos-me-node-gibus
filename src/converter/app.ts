@@ -40,11 +40,11 @@ class RuleConverterApp {
                 console.debug(`${rule.id} - conversion result ${result.javaScript}`);
                 result.javaScript = this.completeRules(rule, result.javaScript);
                 console.log(`${rule.id} - validating conversion result`);
-                this.conversionResultValidator.validateConversionResult(result);
+                await this.conversionResultValidator.validateConversionResult(result);
             }
             // Error during conversion or validating are not fatal, we just log the error and continue with the next rule
-            catch (error) {
-                console.error(`${rule.id} - error converting rule ${error}`);
+            catch (error: any) {                
+                console.error(`${rule.id} - error converting rule ${error.stack}`);
                 await this.ruleDao.markRuleAsNotConverted(rule, `${error}`);
                 continue;
             }
