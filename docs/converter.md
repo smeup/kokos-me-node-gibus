@@ -38,14 +38,32 @@ OPENAI_API_KEY=your_api_key
 ME_GIBUS_HOST=your_host
 ME_GIBUS_USER=your_user
 ME_GIBUS_PASSWORD=your_password
-npm run convert-production
+npm run convert-production -- <options>
 
 # win
 $env:OPENAI_API_KEY="your_api_key"
 $env:ME_GIBUS_HOST="your_host"
 $env:ME_GIBUS_USER="your_user"
 $env:ME_GIBUS_PASSWORD="your_password"
-npm run convert-production:win
+npm run convert-production:win -- <options>
+```
+
+***Options***
+--all: convert all the unconverted rules
+--rules RULE1, RULE2, RULEn: convert only the rules specified in the list
+--assiemi ASSI1, ASSI2, ASSIn: convert only the rules relarted the assiemi specified in the list
+*NB The options are mutually exclusive and none rule already converted will be converted again.*
+
+Example:
+```sh
+# Convert all unconverted rules
+npm run convert-production[:win] -- --all
+
+# Convert only the rules related assiemi: ACCESSORI and FT_GRO_INF_T01
+npm run convert-production[:win] -- --assiemi ACCESSORI,FT_GRO_INF_T01
+
+# convert only the rules RULE1 and RULE2
+npm run convert-production[:win] -- --rules RULE1,RULE2
 ```
 
 **NB npm run convert-production:win**
