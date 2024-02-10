@@ -103,7 +103,7 @@ export interface IConversionResultValidator {
      * @throws An error if the conversion result is not valid.
      * @param conversionResult - The conversion result to be validated.
      */
-    validateConversionResult(conversionResult: ConversionResult): void;
+    validateConversionResult(conversionResult: ConversionResult): Promise<void>;
 }
 
 /**
