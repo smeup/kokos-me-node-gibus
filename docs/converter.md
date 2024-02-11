@@ -67,7 +67,7 @@ npm run convert-production[:win] -- --rules RULE1,RULE2
 ```
 
 **NB npm run convert-production:win**
-In windows when you run: `npm run convert-production` if you have this error: 
+In windows when you run: `npm run convert-production:win` if you have this error: 
 ```
 The specified module could not be found.
     \\?\<path_to_kokos_me_node_gibus>\node_modules\java\build\Release\nodejavabridge_bindings.node
