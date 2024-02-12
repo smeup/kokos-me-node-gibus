@@ -93,6 +93,27 @@ class Variables {
         }
     }
 
+    getDUMMYA1(): any {
+        return this.dummy["§DUMMYA1"]
+    }
+
+    getDUMMYA2(): any {
+        return this.dummy["§DUMMYA2"]
+    }
+
+    getDUMMYA3(): any {
+        return this.dummy["§DUMMYA3"]
+    }
+
+    getDUMMYA4(): any {
+        return this.dummy["§DUMMYA4"]
+    }
+
+    getDUMMYA5(): any {
+        return this.dummy["§DUMMYA5"]
+    }
+    
+
     getDUMMYN1(): any {
         return this.dummy["§DUMMYN1"]
     }
@@ -257,6 +278,26 @@ class Variables {
         // D§DISE is a 9 chars len
         this.output["D§DISE"] = (String(this.output["D§DISE"] || "").padEnd(4, " ") + con_b.toString()).padEnd(D_DISE_LEN, " ");
         this.output["*CON-B"] = con_b;
+    }
+
+    setDUMMYA1(value: any) {
+        this.dummy["§DUMMYA1"] = value
+    }
+
+    setDUMMYA2(value: any) {
+        this.dummy["§DUMMYA2"] = value
+    }
+
+    setDUMMYA3(value: any) {
+        this.dummy["§DUMMYA3"] = value
+    }
+
+    setDUMMYA4(value: any) {
+        this.dummy["§DUMMYA4"] = value
+    }
+
+    setDUMMYA5(value: any) {
+        this.dummy["§DUMMYA5"] = value
     }
 
     setDUMMYN1(value: any) {
