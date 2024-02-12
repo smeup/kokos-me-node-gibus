@@ -4,16 +4,14 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 
-const LOG_PATH = path.resolve(".work", "conversion-result-test.txt");
-const ERR_PATH = path.resolve(".work", "conversion-result-test.err");
 
 describe('RuleDaoExamples', () => {
     let ruleDao: RuleDaoExamples;
 
     beforeEach(() => {
-        fs.rmSync(ERR_PATH, { force: true });
-        fs.rmSync(LOG_PATH, { force: true });
-        ruleDao = new RuleDaoExamples({logPath: LOG_PATH, errPath: ERR_PATH});
+        ruleDao = new RuleDaoExamples();
+        fs.rmSync(ruleDao.errPath, { force: true });
+        fs.rmSync(ruleDao.logPath, { force: true });
     });
 
     describe('getUnconvertedRules', () => {
@@ -41,7 +39,7 @@ describe('RuleDaoExamples', () => {
     });
 
     describe('markRuleAsConverted', () => {
-        it(`should write the rule to the ${LOG_PATH} file`, () => {
+        it(`should write the rule to the ruleDao.logPath file`, () => {
             // Arrange
             const mockRule: Rule = { id: 'REG0003124', conditions: [] };
 
