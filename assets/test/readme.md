@@ -1,5 +1,7 @@
 # Example converted rules
 
+**Since 12/02/2024 the converted rules by "using npm run convert-production[:win]" are stored into W_SMMB.GIBUS_CONV_STATUS**
+
 The already converted rules.
 Every .tsv is a file containing the rules to convert and achieved by extracting them from `GIBUS_RULES` table.
 
@@ -29,4 +31,9 @@ where ASSI in (
     'GS0070', 'GS0084', 'GS0091', 'TS0058', 'TS0070', 'TS0078', 'TS0092', 'TS0098', 'TS0113', 'TS0121'
 )
 order by COMP, PRGR;
+```
+## rules_3.txt 
+- [rules_3.txt](./rules_3.txt) - Fiorenza telegram chat rules: *Regole per assiemi AC e gruppo distinta DGS_PROD09*  
+```sh
+npm run convert-production:win -- --rulesPath .\assets\rules_3.txt
 ```
