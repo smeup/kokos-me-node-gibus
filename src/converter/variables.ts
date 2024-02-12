@@ -322,17 +322,18 @@ class Variables {
      * Set the value of "D§USR1"
      * @param usr The value that will be set
      */
-    setUSR1(usr: any) {
-        this.output["D§USR1"] = usr
+    setS1(s: any) {
+        this.output["D§USR1"] = s
     }
 
     /**
      * Set the value of "D§USR2"
      * @param usr The value that will be set
      */
-    setUSR2(usr: any) {
-        this.output["D§USR2"] = usr
+    setS2(s: any) {
+        this.output["D§USR2"] = s
     }
+
 }
 
 export { Variables }
