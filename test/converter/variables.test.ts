@@ -220,12 +220,12 @@ describe("Variables", () => {
   });
 
   it("should set the value of D§USR1", () => {
-    variables.setUSR1("NEW_USR1_VALUE");
+    variables.setS1("NEW_USR1_VALUE");
     expect(variables.output["D§USR1"]).toBe("NEW_USR1_VALUE");
   });
 
   it("should set the value of D§USR2", () => {
-    variables.setUSR2("NEW_USR2_VALUE");
+    variables.setS2("NEW_USR2_VALUE");
     expect(variables.output["D§USR2"]).toBe("NEW_USR2_VALUE");
   });
 });
