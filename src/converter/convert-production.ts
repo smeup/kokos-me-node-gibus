@@ -4,6 +4,7 @@ import { ConversionResultDaoFileSystem } from "./convertion-result-dao.file";
 import { OpenAIRuleConverter } from "./rule-converter.openai";
 import { RuleDaoProduction } from "./rule-dao.production";
 import * as consts from "./consts";
+import * as fs from 'fs';
 
 function getInClauseForAssiemi(assiemi: string[]): string {
     let where = '';
@@ -22,12 +23,13 @@ function getInClauseForRules(rules: string[]): string {
 }
 
 const options = process.argv.filter(arg => arg.startsWith('--')).map(arg => arg.substring(2));
-if (!options.includes('all') && !options.includes('assiemi') && !options.includes('rules')) {
+if (!options.includes('all') && !options.includes('assiemi') && !options.includes('rules') && !options.includes('rulesPath') ) {
     console.log(
-        'The --all --rules or --assiemi options are required:\n' +
+        'The --all --rules or rulesPath or --assiemi options are required:\n' +
         'Usage:\n' +
         '--all to convert all unconverted rules\n' +
         '--rules RULE1,RULE2 to convert only the specified rules RULE1 and RULE2\n' +
+        '--rulesPath a path of file containing the rules to convert, one rule per lineì\n' +
         '--assiemi ASSI1,ASSI2 to convert only the specified assiemi ASSI1 and ASSI2\n'
     );
     process.exit(1);
@@ -49,6 +51,21 @@ if (options.includes('assiemi')) {
         process.exit(1);
     } else {
         filter = getInClauseForRules(rules.split(','));
+    }
+} else if (options.includes('rulesPath')) {
+    const rulesPath: string = process.argv[process.argv.indexOf('--rulesPath') + 1];
+    if (!rulesPath) {
+        console.error('The --rulesPath option requires a file path containing the rules to convert, one rule per line');
+        process.exit(1);
+    } else {
+        const rulesPath: string = process.argv[process.argv.indexOf('--rulesPath') + 1];
+        if (!rulesPath) {
+            console.error('The --rulesPath option requires a file path containing the rules to convert, one rule per line');
+            process.exit(1);
+        } else {
+            const fileContent: string = fs.readFileSync(rulesPath, 'utf-8');
+            filter = getInClauseForRules(fileContent.split(/\r?\n/));
+        }
     }
 }
 
