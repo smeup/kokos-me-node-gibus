@@ -93,6 +93,47 @@ class Variables {
         }
     }
 
+    getDUMMYN1(): any {
+        return this.dummy["§DUMMYN1"]
+    }
+
+    getDUMMYN2(): any {
+        return this.dummy["§DUMMYN2"]
+    }
+
+    getDUMMYN3(): any {
+        return this.dummy["§DUMMYN3"]
+    }
+
+    getDUMMYN4(): any {
+        return this.dummy["§DUMMYN4"]
+    }   
+
+    getDUMMYN5(): any {
+        return this.dummy["§DUMMYN5"]
+    }   
+
+    getDUMMYB1(): any {
+        return this.dummy["§DUMMYB1"]
+    }   
+
+    getDUMMYB2(): any {
+        return this.dummy["§DUMMYB2"]
+    }
+
+    getDUMMYB3(): any {
+        return this.dummy["§DUMMYB3"]
+    }
+
+    getDUMMYB4(): any {
+        return this.dummy["§DUMMYB4"]
+    }   
+
+    getDUMMYB5(): any {
+        return this.dummy["§DUMMYB5"]
+    }   
+    
+
     /**
      * @returns ""
      */
