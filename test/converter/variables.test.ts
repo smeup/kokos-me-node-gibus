@@ -111,10 +111,22 @@ describe("Variables", () => {
     expect(variables.output["*CON-A"]).toBe("NEW_CON_A_VALUE");
   });
 
+  it("setCON_A with undefined value", () => {
+    variables.setCON_A(variables.output["UNDEFINED"]);
+    expect(variables.output["D§DISE"]).toBe("         ");
+    expect(variables.output["*CON-A"]).toBe("");
+  });
+
   it("should set the value of D§DISE (last five chars)", () => {
     variables.setCON_B(12);
     expect(variables.output["D§DISE"]).toBe("    12   ");
     expect(variables.output["*CON-B"]).toBe(12);
+  });
+
+  it("setCON_B with undefined value", () => {
+    variables.setCON_B(variables.output["UNDEFINED"]);
+    expect(variables.output["D§DISE"]).toBe("    0    ");
+    expect(variables.output["*CON-B"]).toBe(0);
   });
 
   it("should set the value of §DUMMYN1", () => {
