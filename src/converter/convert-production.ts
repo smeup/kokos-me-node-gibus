@@ -25,7 +25,7 @@ function getInClauseForRules(rules: string[]): string {
 const options = process.argv.filter(arg => arg.startsWith('--')).map(arg => arg.substring(2));
 if (!options.includes('all') && !options.includes('assiemi') && !options.includes('rules') && !options.includes('rulesPath') ) {
     console.log(
-        'The --all --rules or rulesPath or --assiemi options are required:\n' +
+        'The --all --rules or --rulesPath or --assiemi options are required:\n' +
         'Usage:\n' +
         '--all to convert all unconverted rules\n' +
         '--rules RULE1,RULE2 to convert only the specified rules RULE1 and RULE2\n' +
