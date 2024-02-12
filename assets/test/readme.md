@@ -35,5 +35,5 @@ order by COMP, PRGR;
 ## rules_3.txt 
 - [rules_3.txt](./rules_3.txt) - Fiorenza telegram chat rules: *Regole per assiemi AC e gruppo distinta DGS_PROD09*  
 ```sh
-npm run convert-production:win -- --rulesPath .\assets\rules_3.txt
+npm run convert-production:win -- --rulesPath .\assets\test\rules_3.txt
 ```
