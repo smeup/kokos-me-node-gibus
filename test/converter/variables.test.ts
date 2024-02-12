@@ -14,7 +14,7 @@ describe("Variables", () => {
       "D§QUA4": 40,
       "D§QUA5": 50,
       "D§COMP": "COMP_VALUE",
-      "XCONFI": "XCONFI_VALUE",
+      "XCONFI": "XCON00001LUE",
       "D§NOTA": "NOTA_VALUE",
       "D§USR1": "USR1_VALUE",
       "D§USR2": "USR2_VALUE"
@@ -29,7 +29,7 @@ describe("Variables", () => {
     expect(variables.get("D§QUA4")).toBe(40);
     expect(variables.get("D§QUA5")).toBe(50);
     expect(variables.get("D§COMP")).toBe("COMP_VALUE");
-    expect(variables.get("XCONFI")).toBe("XCONFI_VALUE");
+    expect(variables.get("XCONFI")).toBe("XCON00001LUE");
     expect(variables.get("D§NOTA")).toBe("NOTA_VALUE");
     expect(variables.get("D§USR1")).toBe("USR1_VALUE");
     expect(variables.get("D§USR2")).toBe("USR2_VALUE");
@@ -51,8 +51,8 @@ describe("Variables", () => {
     expect(variables.getCON_A()).toBe("XCON");
   });
 
-  it("should retrieve the last five characters of XCONFI property", () => {
-    expect(variables.getCON_B()).toBe("FI_VA");
+  it("should retrieve the number related to the characters from 4 to 9 included of XCONFI property", () => {
+    expect(variables.getCON_B()).toBe(1);
   });
 
   it("should retrieve an empty string for LG", () => {
@@ -92,7 +92,7 @@ describe("Variables", () => {
   });
 
   it("should retrieve the value of CON_B (same as getCON_B)", () => {
-    expect(variables.getLUNG()).toBe("FI_VA");
+    expect(variables.getLUNG()).toBe(1);
   });
 
   it("should set the value of D§COEF", () => {
@@ -108,13 +108,13 @@ describe("Variables", () => {
   it("should set the value of D§DISE (first four chars)", () => {
     variables.setCON_A("NEW_CON_A_VALUE");
     expect(variables.output["D§DISE"]).toBe("NEW_     ");
-    expect(variables.output["CON-A"]).toBe("NEW_CON_A_VALUE");
+    expect(variables.output["*CON-A"]).toBe("NEW_CON_A_VALUE");
   });
 
   it("should set the value of D§DISE (last five chars)", () => {
-    variables.setCON_B("NEW_CON_B_VALUE");
-    expect(variables.output["D§DISE"]).toBe("    NEW_CON_B_VALUE");
-    expect(variables.output["CON-B"]).toBe("NEW_CON_B_VALUE");
+    variables.setCON_B(12);
+    expect(variables.output["D§DISE"]).toBe("    12   ");
+    expect(variables.output["*CON-B"]).toBe(12);
   });
 
   it("should set the value of §DUMMYN1", () => {

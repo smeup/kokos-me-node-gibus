@@ -68,23 +68,22 @@ class Variables {
      * @returns The value of CON_A.
      * @see getCOL
      */
-    getCON_A(): any {
+    getCON_A(): String {
         return this.getCOL()
     }
 
     /**
-     * Retrieves the value of the "XCONFI" property from the input object,
-     * extracts the last five characters, trims any leading or trailing whitespace,
-     * and pads the result with spaces to a length of five characters.
-     * 
-     * @returns The last five characters of the "XCONFI" property, padded with spaces.
+     * Get the characters from 4 to 9 from XCONFI property and convert to number
      */
-    getCON_B(): any {
-        const xconfi = this.input["XCONFI"] || "";
-        const firstFourChars = xconfi.substring(4, 9).trim().padEnd(5, " ");
-        return firstFourChars;
+    getCON_B(): number {
+        const xconfi: String = this.input["XCONFI"] || "";
+        const con_b: number = Number(xconfi.substring(4, 9).trim());
+        if (isNaN(con_b)) {
+            return 0;
+        } else {
+            return con_b;
+        }
     }
-
 
     /**
      * @returns ""
@@ -193,20 +192,20 @@ class Variables {
      * Set the first four chars of "D§DISE" and "CON-A"
      * @param con_a The value that will be set
      */
-    setCON_A(con_a: any) {
+    setCON_A(con_a: String) {
         // D§DISE is a 9 chars len
         this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] as string || "").substring(4)).padEnd(D_DISE_LEN, " ");
-        this.output["CON-A"] = con_a;
+        this.output["*CON-A"] = con_a;
     }
 
     /**
      * Set the last five chars of "D§DISE" and "CON-B"
      * @param con_b The value that will be set
      */
-    setCON_B(con_b: any) {
+    setCON_B(con_b: Number) {
         // D§DISE is a 9 chars len
-        this.output["D§DISE"] = (String(this.output["D§DISE"] || "").padEnd(4, " ") + con_b.trim()).padEnd(D_DISE_LEN, " ");
-        this.output["CON-B"] = con_b;
+        this.output["D§DISE"] = (String(this.output["D§DISE"] || "").padEnd(4, " ") + con_b.toString()).padEnd(D_DISE_LEN, " ");
+        this.output["*CON-B"] = con_b;
     }
 
     setDUMMYN1(value: any) {
