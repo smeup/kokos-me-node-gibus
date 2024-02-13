@@ -39,7 +39,6 @@ export const REG0011176: Rule = (iv) => {
     // *SET *CF = [§LU_SCO_ACC2 / #100]
     // """
     // RESPONSE:
-    Traduzione:
     //#1
     vars.setCF(0);
     vars.setDUMMYB1('');
@@ -56,7 +55,6 @@ export const REG0011176: Rule = (iv) => {
     if (vars.get('§DUMMYB1') == vars.get('§SI') && vars.get('§DUMMYB2') == vars.get('§SI')) {
         vars.setCF(vars.get('§LU_SCO_ACC2') / 100);
     }
-    ###
     // GENERATED
 
     return vars.output;

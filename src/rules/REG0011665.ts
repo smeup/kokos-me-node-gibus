@@ -114,7 +114,6 @@ export const REG0011665: Rule = (iv) => {
     // *SET §DUMMYB1 = ''
     // """
     // RESPONSE:
-    Traduzione:
     //#1
     vars.setDUMMYN1(0);
     vars.setDUMMYN2(0);

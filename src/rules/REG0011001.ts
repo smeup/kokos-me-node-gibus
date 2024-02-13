@@ -47,7 +47,6 @@ export const REG0011001: Rule = (iv) => {
     // *SET *CF = #0
     // """
     // RESPONSE:
-    Traduzione:
     //#1
     vars.setCF(0);
     vars.setDUMMYB1('');
@@ -70,7 +69,6 @@ export const REG0011001: Rule = (iv) => {
     if (vars.get('§VER_STA_T01') == '2021') {
         vars.setCF(0);
     }
-    ###
     // GENERATED
 
     return vars.output;

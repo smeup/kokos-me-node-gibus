@@ -42,7 +42,6 @@ export const REG0011461: Rule = (iv) => {
     // *SET *CF = #2
     // """
     // RESPONSE:
-    Traduzione:
     //#1
     vars.setCF(0);
     //#2
@@ -61,7 +60,6 @@ export const REG0011461: Rule = (iv) => {
     if (vars.get('§FS_FAM2_JOY') == vars.get('§SI') && vars.get('§FS_DOP_MOT') == vars.get('§SI')) {
         vars.setCF(2);
     }
-    ###
     // GENERATED
 
     return vars.output;
