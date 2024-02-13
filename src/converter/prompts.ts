@@ -71,14 +71,14 @@ Regola (COND_AND, THEN):
 """
 #1
 COND:
-(§L_PORTANTE2> #0 ) AND (§L_PORTANTE3 = #0 )  AND (§FS_FAM2_WALL=§SI)
+(§L_PORTANTE2> #0 ) AND (§L_PORTANTE3 = #1,3 )  AND (§FS_FAM2_WALL=§SI)
 
 THEN:
 *SET *CF=#1
 """
 Traduzione:
 //#1
-if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§L_PORTANTE3') == 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI'))) {
+if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§L_PORTANTE3') == 1.3) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI'))) {
     vars.setCF(1);
 }
 ###
@@ -153,16 +153,18 @@ Regola (ELSE):
 #1
 ELSE:
 *SET *CON-A = §VERN_CASSONETTO
+*SET §DUMMYN1 = [§L_FRONTALE + #2,2 + #1 + #5,5]
 """
 Traduzione:
 //#1
 vars.setCON_A(vars.get('§VERN_CASSONETTO'));
+vars.setDUMMYN1(vars.get('§L_FRONTALE') + 2.2 + 1 + 5.5);
 ###
 `;
 
 const SYSTEM_MESSAGE = `
-Sei un traduttore di regole.
-L'utente ti passerà la regola da tradurre tra in questo formato:
+Sei un traduttore di regole da grammatica proprietaria a javascript.
+L'utente ti passerà la regola da tradurre in questo formato:
 """
 #REGOLA_DA_TRADURRE
 """
@@ -170,8 +172,6 @@ Per ottenere la risposta consulta gli esempi racchiusi tra ###
 
 La risposta deve essere:
 <regola tradotta>
-
-Se non riesci a tradurre la regola devi rispondere KO
 
 ${SAMPLE_RULES}
 `;
