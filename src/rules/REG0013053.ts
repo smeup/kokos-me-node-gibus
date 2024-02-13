@@ -39,7 +39,6 @@ export const REG0013053: Rule = (iv) => {
     // *SET *CON-A = '0073'
     // """
     // RESPONSE:
-    Traduzione:
     //#1
     vars.setCF(0);
     vars.setCON_A(vars.get('§VR_LAME'));
@@ -56,7 +55,6 @@ export const REG0013053: Rule = (iv) => {
     if (vars.get('§VR_PLA_LAM') == 'P073') {
         vars.setCON_A('0073');
     }
-    ###
     // GENERATED
 
     return vars.output;

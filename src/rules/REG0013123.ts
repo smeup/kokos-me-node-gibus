@@ -59,7 +59,6 @@ export const REG0013123: Rule = (iv) => {
     if (vars.get('§L_CAV_T01') > 0) {
         vars.setCF(vars.get('§L_CAV_T01'));
     }
-    ###
     // GENERATED
 
     return vars.output;

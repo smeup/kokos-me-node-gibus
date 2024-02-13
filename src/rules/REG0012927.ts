@@ -39,7 +39,6 @@ export const REG0012927: Rule = (iv) => {
     // *SET *CF = #0
     // """
     // RESPONSE:
-    Traduzione:
     //#1
     vars.setCF(0);
     vars.setCON_A(vars.get('*COL'));
@@ -56,7 +55,6 @@ export const REG0012927: Rule = (iv) => {
     if (vars.get('§FS_ACC_LAT_DX') == vars.get('§SI')) {
         vars.setCF(0);
     }
-    ###
     // GENERATED
 
     return vars.output;

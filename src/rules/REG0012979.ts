@@ -25,7 +25,7 @@ export const REG0012979: Rule = (iv) => {
     // """
     // RESPONSE:
     //#1
-    vars.setCF(vars.get(2) - vars.get('§NR_CHI_GAM'));
+    vars.setCF(2 - vars.get('§NR_CHI_GAM'));
     vars.setCON_A(vars.get('§VERN_1_COM'));
     vars.setCON_B(vars.get('§L_GAM'));
     // GENERATED
