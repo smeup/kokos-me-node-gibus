@@ -8,6 +8,11 @@ COPY package*.json /app
 # Install dependencies of ibm_db
 RUN apt update && apt install -y make gcc g++ libssl-dev libbz2-dev python3
 
+# Install dependencies of node_jt400
+RUN apt-get update && \
+    apt-get install -y default-jdk && \
+    apt-get clean;
+
 # Install node dependencies and build
 RUN npm install
 COPY . .
@@ -22,6 +27,11 @@ COPY package* ./
 
 # Install dependencies of ibm_db
 RUN apt update && apt install -y make gcc g++ libssl-dev libbz2-dev python3
+
+# Install dependencies of node_jt400
+RUN apt-get update && \
+    apt-get install -y default-jdk && \
+    apt-get clean;
 
 # Install node dependencies
 RUN npm install
