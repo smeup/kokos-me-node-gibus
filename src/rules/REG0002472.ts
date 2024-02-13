@@ -48,7 +48,7 @@ export const REG0002472: Rule = (iv) => {
     }
     //#2
     if (vars.get('§FS_PIEDINI') == '01') {
-        vars.setCON_B(vars.get('§L_PORTA_ZIP') + '3,1');
+        vars.setCON_B(vars.get('§L_PORTA_ZIP') + 3.1);
     } else {
         vars.setCON_B(vars.get('§L_PORTA_ZIP'));
     }

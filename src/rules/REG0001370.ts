@@ -81,46 +81,57 @@ export const REG0001370: Rule = (iv) => {
     //#1
     vars.setCF(0);
     vars.setCON_A(vars.get('§VERN_1_COM'));
+    
     //#2
     vars.setCF(2);
+    
     //#3
     if (vars.get('§SPOR') > 300) {
         vars.setCF(3);
     }
+    
     //#4
     if (vars.get('§FS_APPOGGIATA') == vars.get('§SI') && vars.get('§FS_ACC_FIN') == vars.get('§SI') && vars.get('§SPOR') > 300) {
         vars.setCF(4);
     }
+    
     //#5
     if (vars.get('§SPOR') > 450) {
         vars.setCF(4);
     }
+    
     //#6
     if (vars.get('§FS_ACC_INI') == vars.get('§SI') && vars.get('§FS_APPOGGIATA') == vars.get('§SI') && vars.get('§FS_NICCHIA') == vars.get('§SI')) {
         vars.setCF(0);
     }
+    
     //#7
     if (vars.get('§FS_FRANGITRATTA') == vars.get('§SI')) {
         vars.setCON_B(11);
     } else {
-        vars.setCON_B("6,2");
+        vars.setCON_B(6.2);
     }
+    
     //#8
     if (vars.get('§H_SUP') > 0) {
         vars.setCON_B(vars.get('§H_SUP'));
     }
+    
     //#9
     if (vars.get('§FS_ACC_FIN') == vars.get('§SI')) {
         vars.setDUMMYN1(vars.getCON_B());
     }
+    
     //#10
     if (vars.get('§FS_ACC_FIN') == vars.get('§SI')) {
         vars.setCON_B(vars.get('§DUMMYN1') - 0.4);
     }
+    
     //#11
     if (vars.get('§NR_SUP_GUI_AGG') > 0) {
         vars.setDUMMYN1(vars.getCF());
     }
+    
     //#12
     if (vars.get('§NR_SUP_GUI_AGG') > 0) {
         vars.setCF(vars.get('§DUMMYN1') + vars.get('§NR_SUP_GUI_AGG'));

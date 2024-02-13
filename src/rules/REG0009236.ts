@@ -69,32 +69,33 @@ export const REG0009236: Rule = (iv) => {
     // *SET *CF = #2
     // """
     // RESPONSE:
+    Traduzione:
     //#1
     vars.setCF(0);
     vars.setCON_A(vars.get('§VERN_1_COM'));
-    vars.DUMMYB1('');
+    vars.setDUMMYB1('');
     //#2
     if (vars.get('§FS_ACC_LAT_SX') == vars.get('§SI')) {
         vars.setLG('');
     }
     //#3
     if (vars.get('§FS_FAM2_VARIA') == vars.get('§SI')) {
-        vars.DUMMYB1(vars.get('§SI'));
-        vars.DUMMYN1(34);
-        vars.DUMMYN2(34);
-        vars.DUMMYN3(17);
+        vars.setDUMMYB1(vars.get('§SI'));
+        vars.setDUMMYN1(34);
+        vars.setDUMMYN2(34);
+        vars.setDUMMYN3(17);
     }
     //#4
     if (vars.get('§DUMMYB1') == vars.get('§SI')) {
-        vars.DUMMYN4(vars.get('§SPOR') - vars.get('§DUMMYN1'));
+        vars.setDUMMYN4(vars.get('§SPOR') - vars.get('§DUMMYN1'));
     }
     //#5
     if (vars.get('§DUMMYB1') == vars.get('§SI') && (vars.get('§FS_ACC_LAT_ANT') == vars.get('§SI') || vars.get('§FS_ACC_LAT_POS') == vars.get('§SI'))) {
-        vars.DUMMYN4(vars.get('§SPOR') - vars.get('§DUMMYN2'));
+        vars.setDUMMYN4(vars.get('§SPOR') - vars.get('§DUMMYN2'));
     }
     //#6
     if (vars.get('§DUMMYB1') == vars.get('§SI') && (vars.get('§FS_ACC_LAT_ANT') == vars.get('§SI') || vars.get('§FS_ACC_LAT_POS') == vars.get('§SI')) && vars.get('§FS_FAM2_MOD_ACC') == vars.get('§SI')) {
-        vars.DUMMYN4(vars.get('§SPOR') - vars.get('§DUMMYN3'));
+        vars.setDUMMYN4(vars.get('§SPOR') - vars.get('§DUMMYN3'));
     }
     //#7
     if (vars.get('§DUMMYB1') == vars.get('§SI')) {
@@ -103,7 +104,7 @@ export const REG0009236: Rule = (iv) => {
     }
     //#8
     if (vars.get('§DUMMYB1') == vars.get('§SI') && vars.get('§FS_SUP_LAT_SX') == vars.get('§SI')) {
-        vars.DUMMYN1(vars.get('§DUMMYN4') - 10.5);
+        vars.setDUMMYN1(vars.get('§DUMMYN4') - 10.5);
     }
     //#9
     if (vars.get('§DUMMYB1') == vars.get('§SI') && vars.get('§FS_SUP_LAT_SX') == vars.get('§SI')) {

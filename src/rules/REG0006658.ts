@@ -75,42 +75,52 @@ export const REG0006658: Rule = (iv) => {
     //#1
     if (vars.get('§FS_FAM2_AZIMUT') == vars.get('§SI')) {
     } else {
-        vars.setLG("");
+        vars.setLG('');
     }
+    
     //#2
     vars.setCF(0);
+    
     //#3
     if ((vars.get('§FS_LED_RGB_SX') == vars.get('§SI')) || (vars.get('§FS_LED_RGB_FRA') == vars.get('§SI')) || (vars.get('§FS_LED_RGB_DX') == vars.get('§SI'))) {
         vars.setCF(1);
     }
+    
     //#4
     if (vars.get('§FS_LED_RGB_FRB') == vars.get('§SI')) {
         vars.setCF(2);
     }
+    
     //#5
     if ((vars.get('§FS_LED_RGB_SX') == vars.get('§SI')) && ((vars.get('§FS_LED_RGB_DX') == vars.get('§SI')) || (vars.get('§FS_LED_RGB_FRA') == vars.get('§SI')))) {
         vars.setCF(2);
     }
+    
     //#6
     if ((vars.get('§FS_LED_RGB_DX') == vars.get('§SI')) && (vars.get('§FS_LED_RGB_FRA') == vars.get('§SI'))) {
         vars.setCF(2);
     }
+    
     //#7
-    if (((vars.get('§FS_LED_RGB_SX') == vars.get('§SI')) || (vars.get('§FS_LED_RGB_FRA') == vars.get('§SI')) || (vars.get('§FS_LED_RGB_DX') == vars.get('§SI')))) && (vars.get('§FS_LED_RGB_FRB') == vars.get('§SI')))) {
+    if (((vars.get('§FS_LED_RGB_SX') == vars.get('§SI')) || (vars.get('§FS_LED_RGB_FRA') == vars.get('§SI')) || (vars.get('§FS_LED_RGB_DX') == vars.get('§SI')))) && (vars.get('§FS_LED_RGB_FRB') == vars.get('§SI'))) {
         vars.setCF(3);
     }
+    
     //#8
     if ((vars.get('§FS_LED_RGB_SX') == vars.get('§SI')) && (vars.get('§FS_LED_RGB_FRA') == vars.get('§SI')) && (vars.get('§FS_LED_RGB_DX') == vars.get('§SI')) && (vars.get('§FS_LED_RGB_FRB') != vars.get('§SI'))) {
         vars.setCF(4);
     }
+    
     //#9
     if ((vars.get('§FS_LED_RGB_SX') == vars.get('§SI')) && (vars.get('§FS_LED_RGB_FRA') == vars.get('§SI')) && (vars.get('§FS_LED_RGB_DX') == vars.get('§SI')) && (vars.get('§FS_LED_RGB_FRB') == vars.get('§SI'))) {
         vars.setCF(5);
     }
+    
     //#10
     if (vars.get('§FS_FAM2_TWIST') == vars.get('§SI')) {
         vars.setCF(0);
     }
+    
     //#11
     if (vars.get('§TI_STRIP') == '01') {
     } else {
