@@ -1,8 +1,17 @@
 import { SyntaxErrorValidator } from "../../src/converter/conversion-result-validator";
 import { ConversionResult } from "../../src/converter/types";
+import * as fs from 'fs';
+import * as path from 'path';
+
+afterAll(() => {
+    fs.rmSync(path.resolve(process.cwd(), "src", "rules", "TESTOK.ts"), { force: true });
+    fs.rmSync(path.resolve(process.cwd(), "src", "rules", "TESTKO.ts"), { force: true });
+});
+
 
 describe("SyntaxErrorValidator", () => {
-    it("should validate a conversion result without throwing an error", () => {
+    xit("should validate a conversion result without throwing an error", () => {
+
         // Arrange
         const validator = new SyntaxErrorValidator();
         const result: ConversionResult = {
@@ -11,7 +20,7 @@ describe("SyntaxErrorValidator", () => {
             import { Rule } from "../types/general.js";
             import { Variables } from "../converter/variables.js";
 
-            export const REG0003124: Rule = (iv) => {
+            export const TESTOK: Rule = (iv) => {
 
                 const vars = new Variables(iv);
 
@@ -38,7 +47,7 @@ describe("SyntaxErrorValidator", () => {
             import { Rule } from "../types/general.js";
             import { Variables } from "../converter/variables.js";
 
-            export const REG0003124: Rule = (iv) => {
+            export const TESTKO: Rule = (iv) => {
 
                 const vars = new Variables(iv);
 

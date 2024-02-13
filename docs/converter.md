@@ -11,7 +11,7 @@ This file has been created by serializing the rules stored in `GIBUS_RULES` logi
 
 ```sql
 select trim(COMP) AS COMP, PRGR, trim(REGO) as REGO, trim(IF_TRUE) as IF_TRUE, trim(IF_FALSE) as IF_FALSE 
-from GIBUS_RULES where ASSI in ('ACCESSORI' , 'FT_GRO_INF_T01')
+from W_SMMB.GIBUS_RULES where ASSI in ('ACCESSORI' , 'FT_GRO_INF_T01')
 order by COMP, PRGR;
 ```
 
@@ -21,7 +21,7 @@ For a complete list of all examples converte rules see [Example converted rules]
 
 ```sh
 # linux osx
-export OPENAI_API_KEY=your_api_key
+OPENAI_API_KEY=your_api_key
 npm run convert-examples -- --rulesFileName rules.tsv
 
 # win
@@ -34,11 +34,45 @@ npm run convert-examples:win -- --rulesFileName rules.tsv
 
 ```sh
 # linux osx
-npm run convert-production
+OPENAI_API_KEY=your_api_key
+ME_GIBUS_HOST=your_host
+ME_GIBUS_USER=your_user
+ME_GIBUS_PASSWORD=your_password
+npm run convert-production -- <options>
 
 # win
-npm run convert-production:win
+$env:OPENAI_API_KEY="your_api_key"
+$env:ME_GIBUS_HOST="your_host"
+$env:ME_GIBUS_USER="your_user"
+$env:ME_GIBUS_PASSWORD="your_password"
+npm run convert-production:win -- <options>
 ```
+
+***Options***
+--all: convert all the unconverted rules
+--rules RULE1, RULE2, RULEn: convert only the rules specified in the list
+--assiemi ASSI1, ASSI2, ASSIn: convert only the rules relarted the assiemi specified in the list
+*NB The options are mutually exclusive and none rule already converted will be converted again.*
+
+Example:
+```sh
+# Convert all unconverted rules
+npm run convert-production[:win] -- --all
+
+# Convert only the rules related assiemi: ACCESSORI and FT_GRO_INF_T01
+npm run convert-production[:win] -- --assiemi ACCESSORI,FT_GRO_INF_T01
+
+# convert only the rules RULE1 and RULE2
+npm run convert-production[:win] -- --rules RULE1,RULE2
+```
+
+**NB npm run convert-production:win**
+In windows when you run: `npm run convert-production:win` if you have this error: 
+```
+The specified module could not be found.
+    \\?\<path_to_kokos_me_node_gibus>\node_modules\java\build\Release\nodejavabridge_bindings.node
+```
+try to add to PATH the `JAVA_HOME\jre\bin\server` directory and re-run the command. 
 
 
 ## Development

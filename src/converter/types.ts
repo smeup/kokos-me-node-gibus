@@ -71,20 +71,26 @@ export interface IRuleDao {
      * Retrieves all rules that have not been converted.
      * @returns An array of Rule objects.
      */
-    getUnconvertedRules(): Rule[];
+    getUnconvertedRules(): Promise<Rule[]>;
 
     /**
      * Marks a rule as converted.
      * @param rule - The rule to be marked as converted.
      */
-    markRuleAsConverted(rule: Rule): void;
+    markRuleAsConverted(rule: Rule): Promise<void>;
 
     /**
      * Marks a as not converted.
      * @param rule The rule to be marked as not converted.
      * @param error The error message.
      */
-    markRuleAsNotConverted(rule: Rule, error: string): void;
+    markRuleAsNotConverted(rule: Rule, error: string): Promise<void>;
+
+    /**
+     * Closes the data access object.
+     * @returns A promise that resolves when the data access object has been closed.
+     */
+    close(): Promise<void>;
 }
 
 /**
@@ -97,7 +103,7 @@ export interface IConversionResultValidator {
      * @throws An error if the conversion result is not valid.
      * @param conversionResult - The conversion result to be validated.
      */
-    validateConversionResult(conversionResult: ConversionResult): void;
+    validateConversionResult(conversionResult: ConversionResult): Promise<void>;
 }
 
 /**

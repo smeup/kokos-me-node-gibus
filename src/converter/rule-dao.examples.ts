@@ -35,7 +35,7 @@ class RuleDaoExamples implements IRuleDao {
      * The rules are retrieved from the /assets/test/rules.tsv file.
      * Skip the first row.
      */
-    getUnconvertedRules(): Rule[] {
+    async getUnconvertedRules(): Promise<Rule[]> {
         const filePath = path.resolve("assets", "test", this.rulesFileName);
         const rules: Rule[] = [];
         const convertedRulesId = this.getConvertedRulesIds();
@@ -73,14 +73,13 @@ class RuleDaoExamples implements IRuleDao {
                 console.debug(`Rule ${COMP} not allowed. Skipping...`);
             }
         }
-
         return rules;
     }
 
     /***
      * Marks a rule as converted. The rule is written to the this.logPath file.
      */
-    markRuleAsConverted(rule: Rule): void {
+    async markRuleAsConverted(rule: Rule): Promise<void> {
         if (!fs.existsSync(this.logPath)) {
             fs.writeFileSync(this.logPath, '', 'utf-8');
         }
@@ -92,13 +91,17 @@ class RuleDaoExamples implements IRuleDao {
     /***
     * Marks a rule as not converted. The rule is written to the this.errPath file.
     */
-    markRuleAsNotConverted(rule: Rule, error: string): void {
+    async markRuleAsNotConverted(rule: Rule, error: string): Promise<void> {
         if (!fs.existsSync(this.errPath)) {
             fs.writeFileSync(this.errPath, '', 'utf-8');
         }
         const timestamp = new Date().toISOString();
         const row = `${rule.id}\t${error}\t${timestamp}\n`;
         fs.appendFileSync(this.errPath, row, 'utf-8');
+    }
+
+    async close(): Promise<void> {
+        // Nothing to do here.
     }
 
     private getConvertedRulesIds(): string[] {

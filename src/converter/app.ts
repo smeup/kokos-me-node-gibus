@@ -1,4 +1,4 @@
-import { IRuleConverterService, IRuleDao, IConversionResultDao, Rule, IConversionResultValidator } from "./types";
+import { IRuleConverterService, IRuleDao, IConversionResultDao, Rule, IConversionResultValidator, ConversionResult } from "./types";
 import * as fs from 'fs';
 
 class RuleConverterApp {
@@ -8,7 +8,7 @@ class RuleConverterApp {
     conversionResultDao: IConversionResultDao;
 
 
-    constructor(ruleDao: IRuleDao, ruleConverterService: IRuleConverterService, 
+    constructor(ruleDao: IRuleDao, ruleConverterService: IRuleConverterService,
         conversionResultValidator: IConversionResultValidator, conversionResultDao: IConversionResultDao) {
         this.ruleDao = ruleDao;
         this.ruleConverterService = ruleConverterService;
@@ -24,32 +24,35 @@ class RuleConverterApp {
      *   - @see IConversionResultDao.saveConversionResult
      *   - @see IConversionResultValidator.validateConversionResult
      *   - @see IRuleDao.saveConversionResult
-     *   - 
     */
     async convertRules(): Promise<void> {
         console.log("Starting conversion...");
         const startTime = new Date().getTime();
-        const rules: Rule[] = this.ruleDao.getUnconvertedRules();
+        const rules: Rule[] = await this.ruleDao.getUnconvertedRules();
         const totalRules = rules.length;
         let currentRule = 0;
+        let result: ConversionResult;
         for (const rule of rules) {
             try {
                 currentRule++;
                 console.log(`${rule.id} - converting rule`);
-                const result = await this.ruleConverterService.convertRule(rule);
+                result = await this.ruleConverterService.convertRule(rule);
                 console.debug(`${rule.id} - conversion result ${result.javaScript}`);
                 result.javaScript = this.completeRules(rule, result.javaScript);
                 console.log(`${rule.id} - validating conversion result`);
-                this.conversionResultValidator.validateConversionResult(result);
-                console.log(`${rule.id} - saving conversion result`);
-                this.conversionResultDao.saveConversionResult(result);
-                console.log(`${rule.id} - marking rule as converted`);
-                this.ruleDao.markRuleAsConverted(rule);
-                console.log(`${rule.id} - successfully converted`);
-            } catch (error) {
-                console.error(`${rule.id} - error converting rule ${error}`);
-                this.ruleDao.markRuleAsNotConverted(rule, `${error}`);
+                await this.conversionResultValidator.validateConversionResult(result);
             }
+            // Error during conversion or validating are not fatal, we just log the error and continue with the next rule
+            catch (error: any) {                
+                console.error(`${rule.id} - error converting rule ${error.stack}`);
+                await this.ruleDao.markRuleAsNotConverted(rule, `${error}`);
+                continue;
+            }
+            console.log(`${rule.id} - saving conversion result`);
+            this.conversionResultDao.saveConversionResult(result);
+            console.log(`${rule.id} - marking rule as converted`);
+            await this.ruleDao.markRuleAsConverted(rule);
+            console.log(`${rule.id} - successfully converted`);
             console.log(`${currentRule}/${totalRules} rules converted`);
         }
         console.log("Conversion completed");
@@ -90,4 +93,4 @@ class RuleConverterApp {
 export { RuleConverterApp };
 
 // comment to enable console.debug
-console.debug = function() {}
+console.debug = function () { }

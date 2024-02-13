@@ -111,10 +111,22 @@ describe("Variables", () => {
     expect(variables.output["*CON-A"]).toBe("NEW_CON_A_VALUE");
   });
 
+  it("setCON_A with undefined value", () => {
+    variables.setCON_A(variables.output["UNDEFINED"]);
+    expect(variables.output["D§DISE"]).toBe("         ");
+    expect(variables.output["*CON-A"]).toBe("");
+  });
+
   it("should set the value of D§DISE (last five chars)", () => {
     variables.setCON_B(12);
     expect(variables.output["D§DISE"]).toBe("    12   ");
     expect(variables.output["*CON-B"]).toBe(12);
+  });
+
+  it("setCON_B with undefined value", () => {
+    variables.setCON_B(variables.output["UNDEFINED"]);
+    expect(variables.output["D§DISE"]).toBe("    0    ");
+    expect(variables.output["*CON-B"]).toBe(0);
   });
 
   it("should set the value of §DUMMYN1", () => {
@@ -208,12 +220,12 @@ describe("Variables", () => {
   });
 
   it("should set the value of D§USR1", () => {
-    variables.setUSR1("NEW_USR1_VALUE");
+    variables.setS1("NEW_USR1_VALUE");
     expect(variables.output["D§USR1"]).toBe("NEW_USR1_VALUE");
   });
 
   it("should set the value of D§USR2", () => {
-    variables.setUSR2("NEW_USR2_VALUE");
+    variables.setS2("NEW_USR2_VALUE");
     expect(variables.output["D§USR2"]).toBe("NEW_USR2_VALUE");
   });
 });

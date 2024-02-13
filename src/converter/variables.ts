@@ -25,7 +25,7 @@ class Variables {
      * @returns The value of the variable.
      */
     get(key: string): any {
-        if (key.startsWith("§DUMMYN") || key.startsWith("§DUMMYB")) {
+        if (key.startsWith("§DUMMYN") || key.startsWith("§DUMMYB") || key.startsWith("§DUMMYA")) {
             return this.dummy[key];
         } else {
             return this.input[key];
@@ -62,28 +62,116 @@ class Variables {
         return firstFourChars;
     }
 
-    /**
-     * Retrieves the value of CON_A. CON_A is the same of COL
-     * 
-     * @returns The value of CON_A.
-     * @see getCOL
-     */
-    getCON_A(): String {
-        return this.getCOL()
-    }
 
     /**
-     * Get the characters from 4 to 9 from XCONFI property and convert to number
+     * Retrieves the value of "*CON-A" from the output object.
+     * If the value is not available, it falls back to calling the getCOL() method.
+     * 
+     * @returns The value of "*CON-A" or the result of getCOL() if not available.
+     */
+    getCON_A(): String {
+        return this.output["*CON-A"] || this.getCOL()
+    }
+
+
+    /**
+     * Retrieves the value of CON-B from the output object or calculates it based on the XCONFI input.
+     * If the value is not found or is not a valid number, it returns 0.
+     * @returns The value of CON-B.
      */
     getCON_B(): number {
-        const xconfi: String = this.input["XCONFI"] || "";
-        const con_b: number = Number(xconfi.substring(4, 9).trim());
-        if (isNaN(con_b)) {
-            return 0;
+        if (this.output["*CON-B"]) {
+            return this.output["*CON-B"];
         } else {
-            return con_b;
+            const xconfi: String = this.input["XCONFI"] || "";
+            const con_b: number = Number(xconfi.substring(4, 9).trim());
+            if (isNaN(con_b)) {
+                return 0;
+            } else {
+                return con_b;
+            }
         }
     }
+
+    getDUMMYA1(): any {
+        return this.dummy["§DUMMYA1"]
+    }
+
+    getDUMMYA2(): any {
+        return this.dummy["§DUMMYA2"]
+    }
+
+    getDUMMYA3(): any {
+        return this.dummy["§DUMMYA3"]
+    }
+
+    getDUMMYA4(): any {
+        return this.dummy["§DUMMYA4"]
+    }
+
+    getDUMMYA5(): any {
+        return this.dummy["§DUMMYA5"]
+    }
+
+
+    getDUMMYN1(): any {
+        return this.dummy["§DUMMYN1"]
+    }
+
+    getDUMMYN2(): any {
+        return this.dummy["§DUMMYN2"]
+    }
+
+    getDUMMYN3(): any {
+        return this.dummy["§DUMMYN3"]
+    }
+
+    getDUMMYN4(): any {
+        return this.dummy["§DUMMYN4"]
+    }
+
+    getDUMMYN5(): any {
+        return this.dummy["§DUMMYN5"]
+    }
+
+    getDUMMYN6(): any {
+        return this.dummy["§DUMMYN6"]
+    }
+
+    getDUMMYN7(): any {
+        return this.dummy["§DUMMYN7"]
+    }
+
+    getDUMMYN8(): any {
+        return this.dummy["§DUMMYN8"]
+    }
+
+    getDummyN9(): any {
+        return this.dummy["§DUMMYN9"]
+    }
+
+
+
+    getDUMMYB1(): any {
+        return this.dummy["§DUMMYB1"]
+    }
+
+    getDUMMYB2(): any {
+        return this.dummy["§DUMMYB2"]
+    }
+
+    getDUMMYB3(): any {
+        return this.dummy["§DUMMYB3"]
+    }
+
+    getDUMMYB4(): any {
+        return this.dummy["§DUMMYB4"]
+    }
+
+    getDUMMYB5(): any {
+        return this.dummy["§DUMMYB5"]
+    }
+
 
     /**
      * @returns ""
@@ -190,9 +278,10 @@ class Variables {
 
     /**
      * Set the first four chars of "D§DISE" and "CON-A"
-     * @param con_a The value that will be set
+     * @param con_a The value that will be set, if undefined default is ""
      */
-    setCON_A(con_a: String) {
+    setCON_A(con_a: string) {
+        con_a = con_a || "";
         // D§DISE is a 9 chars len
         this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] as string || "").substring(4)).padEnd(D_DISE_LEN, " ");
         this.output["*CON-A"] = con_a;
@@ -200,12 +289,33 @@ class Variables {
 
     /**
      * Set the last five chars of "D§DISE" and "CON-B"
-     * @param con_b The value that will be set
+     * @param con_b The value that will be set, if undefined default is 0
      */
-    setCON_B(con_b: Number) {
+    setCON_B(con_b: number) {
+        con_b = con_b || 0;
         // D§DISE is a 9 chars len
         this.output["D§DISE"] = (String(this.output["D§DISE"] || "").padEnd(4, " ") + con_b.toString()).padEnd(D_DISE_LEN, " ");
         this.output["*CON-B"] = con_b;
+    }
+
+    setDUMMYA1(value: any) {
+        this.dummy["§DUMMYA1"] = value
+    }
+
+    setDUMMYA2(value: any) {
+        this.dummy["§DUMMYA2"] = value
+    }
+
+    setDUMMYA3(value: any) {
+        this.dummy["§DUMMYA3"] = value
+    }
+
+    setDUMMYA4(value: any) {
+        this.dummy["§DUMMYA4"] = value
+    }
+
+    setDUMMYA5(value: any) {
+        this.dummy["§DUMMYA5"] = value
     }
 
     setDUMMYN1(value: any) {
@@ -226,6 +336,22 @@ class Variables {
 
     setDUMMYN5(value: any) {
         this.dummy["§DUMMYN5"] = value
+    }
+
+    setDUMMYN6(value: any) {
+        this.dummy["§DUMMYN6"] = value
+    }
+
+    setDUMMYN7(value: any) {
+        this.dummy["§DUMMYN7"] = value
+    }
+
+    setDUMMYN8(value: any) {
+        this.dummy["§DUMMYN8"] = value
+    }
+
+    setDummyN9(value: any) {
+        this.dummy["§DUMMYN9"] = value
     }
 
     setDUMMYB1(value: any) {
@@ -312,17 +438,18 @@ class Variables {
      * Set the value of "D§USR1"
      * @param usr The value that will be set
      */
-    setUSR1(usr: any) {
-        this.output["D§USR1"] = usr
+    setS1(s: any) {
+        this.output["D§USR1"] = s
     }
 
     /**
      * Set the value of "D§USR2"
      * @param usr The value that will be set
      */
-    setUSR2(usr: any) {
-        this.output["D§USR2"] = usr
+    setS2(s: any) {
+        this.output["D§USR2"] = s
     }
+
 }
 
 export { Variables }
