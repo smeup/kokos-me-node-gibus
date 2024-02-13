@@ -25,7 +25,7 @@ class Variables {
      * @returns The value of the variable.
      */
     get(key: string): any {
-        if (key.startsWith("§DUMMYN") || key.startsWith("§DUMMYB")) {
+        if (key.startsWith("§DUMMYN") || key.startsWith("§DUMMYB") || key.startsWith("§DUMMYA")) {
             return this.dummy[key];
         } else {
             return this.input[key];
@@ -112,7 +112,7 @@ class Variables {
     getDUMMYA5(): any {
         return this.dummy["§DUMMYA5"]
     }
-    
+
 
     getDUMMYN1(): any {
         return this.dummy["§DUMMYN1"]
@@ -128,15 +128,33 @@ class Variables {
 
     getDUMMYN4(): any {
         return this.dummy["§DUMMYN4"]
-    }   
+    }
 
     getDUMMYN5(): any {
         return this.dummy["§DUMMYN5"]
-    }   
+    }
+
+    getDUMMYN6(): any {
+        return this.dummy["§DUMMYN6"]
+    }
+
+    getDUMMYN7(): any {
+        return this.dummy["§DUMMYN7"]
+    }
+
+    getDUMMYN8(): any {
+        return this.dummy["§DUMMYN8"]
+    }
+
+    getDummyN9(): any {
+        return this.dummy["§DUMMYN9"]
+    }
+
+
 
     getDUMMYB1(): any {
         return this.dummy["§DUMMYB1"]
-    }   
+    }
 
     getDUMMYB2(): any {
         return this.dummy["§DUMMYB2"]
@@ -148,12 +166,12 @@ class Variables {
 
     getDUMMYB4(): any {
         return this.dummy["§DUMMYB4"]
-    }   
+    }
 
     getDUMMYB5(): any {
         return this.dummy["§DUMMYB5"]
-    }   
-    
+    }
+
 
     /**
      * @returns ""
@@ -318,6 +336,22 @@ class Variables {
 
     setDUMMYN5(value: any) {
         this.dummy["§DUMMYN5"] = value
+    }
+
+    setDUMMYN6(value: any) {
+        this.dummy["§DUMMYN6"] = value
+    }
+
+    setDUMMYN7(value: any) {
+        this.dummy["§DUMMYN7"] = value
+    }
+
+    setDUMMYN8(value: any) {
+        this.dummy["§DUMMYN8"] = value
+    }
+
+    setDummyN9(value: any) {
+        this.dummy["§DUMMYN9"] = value
     }
 
     setDUMMYB1(value: any) {
