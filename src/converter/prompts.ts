@@ -171,7 +171,7 @@ L'utente ti passerà la regola da tradurre in questo formato:
 Per ottenere la risposta consulta gli esempi racchiusi tra ###
 
 La risposta deve essere:
-<regola tradotta>
+<regola_tradotta_solo_codice_javascript>
 
 ${SAMPLE_RULES}
 `;
