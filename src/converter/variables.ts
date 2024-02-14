@@ -32,7 +32,7 @@ class Variables {
             switch (key.slice(1)) {
                 case "CON-A": return this.getCON_A();
                 case "CON-B": return this.getCON_B();
-                default: return new Function(`return this.get${key}.slice(1)`).bind(this)();
+                default: return new Function(`return this.get${key.slice(1)}();`).bind(this)();
             }
 
         } else {
@@ -50,11 +50,11 @@ class Variables {
     }
 
     /**
-     * Retrieves the value of the "D§COMP" input.
-     * @returns The value of the "D§COMP" input.
+     * Retrieves the value of the "D§COMP".
+     * @returns The value of the "D§COMP".
      */
     getCM(): any {
-        return this.input["D§COMP"]
+        return this.output["D§COMP"] || this.input["D§COMP"];
     }
 
     /**
