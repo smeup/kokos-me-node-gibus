@@ -34,11 +34,10 @@ class Variables {
 
     /**
      * Retrieves the CF value.
-     * 
-     * @returns 1 fixed
+     * @returns The value of the "D§COEF" output or 1 if not available.
      */
-    getCF(): any {
-        return "1";
+    getCF(): number {
+        return this.output["D§COEF"] || 1
     }
 
     /**
@@ -264,8 +263,8 @@ class Variables {
      * Set the value of "D§COEF"
      * @param cf The value that will be set
      */
-    setCF(cf: any) {
-        this.output["D§COEF"] = cf
+    setCF(cf: number) {
+        this.output["D§COEF"] = cf;
     }
 
     /**
