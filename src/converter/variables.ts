@@ -13,6 +13,7 @@ class Variables {
     input: RuleVariableMap;
     output: RuleVariableMap = {};
     dummy: RuleVariableMap = {};
+    cf: number = 1;
 
     constructor(input: RuleVariableMap) {
         this.input = input
@@ -27,9 +28,17 @@ class Variables {
     get(key: string): any {
         if (key.startsWith("§DUMMYN") || key.startsWith("§DUMMYB") || key.startsWith("§DUMMYA")) {
             return this.dummy[key];
+        } else if (key.startsWith("*")) {
+            switch (key.slice(1)) {
+                case "CON-A": return this.getCON_A();
+                case "CON-B": return this.getCON_B();
+                default: return new Function(`return this.get${key}.slice(1)`).bind(this)();
+            }
+
         } else {
             return this.input[key];
         }
+
     }
 
     /**
@@ -37,7 +46,7 @@ class Variables {
      * @returns The value of the "D§COEF" output or 1 if not available.
      */
     getCF(): number {
-        return this.output["D§COEF"] || 1
+        return this.cf
     }
 
     /**
@@ -150,7 +159,6 @@ class Variables {
     }
 
 
-
     getDUMMYB1(): any {
         return this.dummy["§DUMMYB1"]
     }
@@ -260,13 +268,14 @@ class Variables {
     }
 
     /**
-     * Set the value of "D§COEF"
+     * Set the value of cf
      * @param cf The value that will be set
      */
     setCF(cf: number) {
-        this.output["D§COEF"] = cf;
+        this.cf = cf
+        this.output["D§COEF"] = cf * this.get("D§COEF");
     }
-
+    
     /**
      * Set the value of "D§COMP"
      * @param cm The value that will be set
