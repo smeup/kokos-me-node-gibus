@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0000461"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§_AR\": \"AC0115\", \"§_CF\": \"AAJEJX\", \"§_CFO\": \"AAI45L\", \"§_CLI\": \"101160\", \"§_DEBUG\": \"\", \"§_LIN\": \"IT\", \"§_NAZ\": \"IT\", \"§_SU\": \"\", \"§_UT\": \"DANILA\", \"§ALLEGATI\": \"\", \"§AOP_MOD_TS\": \"TS0070\", \"§AOP_NR_OA\": \"N.180516003\", \"§AOP_S\":470.00000, \"§CFG1\": \"AAJEJX\", \"§COD_MOD_TS\": \"TS0070\", \"§DUMMYB2\": \"SI\", \"§DUMMYN1\":-1.00000, \"§FS_CAV_ZER\": \"SI\", \"§FS_NOTELO\": \"SI\", \"§FS_RIP_VETRATA\": \"\", \"§FS_ZEROGRADI\": \"SI\", \"§L_MAX_MONOGIVA\": \"700\", \"§LI_VERN_FS\": \"RAL\", \"§LIST_AR\": \"AC0115\", \"§LS_MAG_MAN\": \"143\", \"§LSD2\":470.00000, \"§LSK3\": \"**\", \"§MASTER_P\":470.00000, \"§NO\": \"NO\", \"§NR_OA\": \"180516003\", \"§OLOGRAMMA\": \"9\", \"§PD_ALLEGATI\": \"\", \"§PD_MOD_TS\": \"TS0070\", \"§SEI_IN_FONDO\": \"SI\", \"§SI\": \"SI\", \"§SPOR\":470.00000, \"§SPOR_AOP\":470.00000, \"§VERN_DEF_PLASTI\": \"P072\", \"§VERN_PLAST\": \"P072\", \"§VR_DEF_SLIT_CAR\": \"0055\", \"§VR_SLI_CAR\": \"0055\", \"§VZ_CVPLATE_SI\": \"SI\", \"§X_AR\": \"AC0115\", \"*CON-A\": \"\", \"*CON-B\":0.00000,  \"D§TIPD\":\"ART\", \"D§ASSI\":\"TC_CAVO_DINEEMA\", \"D§USR1\":\"AS02\", \"D§COMP\":\"220044\", \"D§USR2\":\"\", \"D§STAT\":\"10\", \"D§SQCI\":\"\", \"D§LTAD\":0, \"D§DINV\":0, \"D§DFNV\":0, \"D§CRSE\":\"GIBK\", \"D§COEF\":1.000000, \"D§PAS1\":\"REG0000461\", \"D§PAS2\":\"\", \"D§QTLO\":0.000, \"D§PERT\":0.000, \"D§QUA1\":0.000000, \"D§QUA2\":0.000000, \"D§QUA3\":0.000000, \"D§QUA4\":0.000000, \"D§QUA5\":0.000000, \"D§FLG1\":\"\", \"D§FLG2\":\"\", \"D§FLG3\":\"\", \"D§FLG4\":\"\", \"D§FLG5\":\"\", \"D§NOTA\":\"\", \"D§DISE\":\"\", \"D§DISP\":\"\", \"D§DTIN\":20160212, \"D§DTAG\":20240213, \"D§USAG\":\"SMFB\",\"XFVALI\":\"1\",\"XCONFI\":\"AAJEJX\"}}"
+    }
+}
