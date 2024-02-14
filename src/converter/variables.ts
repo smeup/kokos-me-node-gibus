@@ -3,10 +3,26 @@ import { RuleVariableMap } from "../types/general.js";
 const D_DISE_LEN = 9
 
 /***
- * This class is a wrapper of RuleVariableMap to expose
- * the variables as methods
- * Setters and getter model *VAR
- * get(key) model §AAAA
+ * Lamberto Grassi documentation
+ * *CF (coefficiente) inizializzata sempre a 1, diventa un moltiplicatore del campo D§COEF
+ * *CM (componente), finisce nel campo D§COMP
+ * *NT (nota), finisce nel campo D§NOTA 
+ * *S1 (sequenza 1) finisce nel campo D§USR1
+ * *S2 (sequenza 2) finisce nel campo D§USR2
+ * *CON-A (cfg prima parte) va nel campo D§DISE da pos 1 x 4
+ * *CON-B (cfg sec parte) va nel campo D§DISE da pos 5 x 5
+ * *Q1.. *Q5 finiscono in D§QUA1..5
+ * *COL colore del gruppo, inizializzata con i primi 4 caratteri della configurazione
+ * *LUNG, come sopra, dal carattere 5 x 5
+ * *LG legame (boleana) finisce in XFVALI per attivare/disattivare il record diba
+ * 
+ * Default behavior is the following:
+ * - the variables starting with § are input variables
+ * - the variables starting with * are output variables
+ * Input variables are read only variables and can be accessed by the get(key: string) method.
+ * Output variables are written by setNAME(value: any) methods annd can be accessed by the getNAME() methods, all the getters have in common
+ * this behavior: are searched in the output object, if not found are searched in the input object.
+ * @see get(key: string)
  */
 class Variables {
 
@@ -22,6 +38,8 @@ class Variables {
     /**
      * Retrieves the value of the variable with the specified name.
      * If the variable name starts with "§DUMMYN" or "§DUMMYB" the value will be retrieved from the dummy object else from the input object.
+     * If the variable name starts with "*" the value will be retrieved from from the getter method with the same name.
+     * Else the value will be retrieved from the input object.
      * @param key The name of the variable to retrieve.
      * @returns The value of the variable.
      */
@@ -42,8 +60,8 @@ class Variables {
     }
 
     /**
-     * Retrieves the CF value.
-     * @returns The value of the "D§COEF" output or 1 if not available.
+     * Retrieves the *CF value.
+     * @returns 1 if not available.
      */
     getCF(): number {
         return this.cf
@@ -58,14 +76,14 @@ class Variables {
     }
 
     /**
-     * Retrieves the value of the "XCONFI" property from the input object,
-     * extracts the first four characters, trims any leading or trailing whitespace,
+     * Retrieves the value of the "XCONFI" property.
+     * Extracts the first four characters, trims any leading or trailing whitespace,
      * and pads the result with spaces to a length of four characters.
      * 
      * @returns The first four characters of the "XCONFI" property, padded with spaces.
      */
     getCOL(): any {
-        const xconfi = this.input["XCONFI"] || "";
+        const xconfi = this.output["XCONFI"] || this.input["XCONFI"] || "";
         const firstFourChars = xconfi.substring(0, 4).trim().padEnd(4, " ");
         return firstFourChars;
     }
@@ -83,7 +101,7 @@ class Variables {
 
 
     /**
-     * Retrieves the value of CON-B from the output object or calculates it based on the XCONFI input.
+     * Retrieves the value of *CON-B from the output object or calculates it based on the XCONFI input.
      * If the value is not found or is not a valid number, it returns 0.
      * @returns The value of CON-B.
      */
@@ -91,7 +109,7 @@ class Variables {
         if (this.output["*CON-B"]) {
             return this.output["*CON-B"];
         } else {
-            const xconfi: String = this.input["XCONFI"] || "";
+            const xconfi: String = this.output["XCONFI"] || this.input["XCONFI"] || "";
             const con_b: number = Number(xconfi.substring(4, 9).trim());
             if (isNaN(con_b)) {
                 return 0;
@@ -181,82 +199,76 @@ class Variables {
 
 
     /**
-     * @returns ""
+     * Retrieves the value of the "XFVALI" output.
+     * If the value is not available, it falls back to the "XFVALI" input.
+     * @returns The value of the "XFVALI" output or input.
      */
     getLG(): any {
-        return "";
+        return this.output["XFVALI"] || this.input["XFVALI"] || "";
     }
 
     /**
-     * Retrieves the value of the "D§NOTA" input.
-     * 
-     * @returns The value of the "D§NOTA" input.
+     * Retrieves the value of the "D§NOTA" output.
+     * If the value is not available, it falls back to the "D§NOTA"" input.
+     * @returns The value of the "D§NOTA" output or input.
      */
     getNT(): any {
-        return this.input["D§NOTA"] || ""
+        return this.output["D§NOTA"] || this.input["D§NOTA"] || ""
     }
 
     /**
-     * Retrieves the value of the "D§QUA1" input.
+     * retrieves the value of the "D§QUA1" output.
+     * If the value is not available, it falls back to the "D§QUA1" input.
      * 
-     * @returns The value of the "D§QUA1" input.
+     * @returns The value of the "D§QUA1" output or input.
      */
     getQ1(): any {
-        return this.input["D§QUA1"] || 0;
+        return this.output["D§QUA1"] || this.input["D§QUA1"] || 0;
     }
 
     /**
-     * Retrieves the value of the "D§QUA2" input.
-     * 
-     * @returns The value of the "D§QUA2" input.
+     * Same behavior as getQ1
      */
     getQ2(): any {
-        return this.input["D§QUA2"] || 0;
+        return this.output["D§QUA2"] || this.input["D§QUA2"] || 0;
     }
 
     /**
-     * Retrieves the value of the "D§QUA3" input.
-     * 
-     * @returns The value of the "D§QUA3" input.
+     * Same behavior as getQ1
      */
     getQ3(): any {
-        return this.input["D§QUA3"] || 0;
+        return this.output["D§QUA3"] || this.input["D§QUA3"] || 0;
     }
 
     /**
-     * Retrieves the value of the "D§QUA4" input.
-     * 
-     * @returns The value of the "D§QUA4" input.
+     * Same behavior as getQ1
      */
     getQ4(): any {
-        return this.input["D§QUA4"] || 0;
+        return this.output["D§QUA4"] || this.input["D§QUA4"] || 0;
     }
 
     /**
-     * Retrieves the value of the "D§QUA5" input.
-     * 
-     * @returns The value of the "D§QUA5" input.
+     * Same behavior as getQ1
      */
     getQ5(): any {
-        return this.input["D§QUA5"] || 0;
+        return this.output["D§QUA5"] || this.input["D§QUA5"] || 0;
     }
 
     /**
-     * Retrieves the value of the "D§USR1" input.
+     * Retrieves the value of the "D§USR1" output.
+     * If the value is not available, it falls back to the "D§USR1" input.
      * 
-     * @returns The value of the "D§USR1" input.
+     * @returns The value of the "D§USR1" output or input.
      */
     getS1(): any {
-        return this.input["D§USR1"] || ""
+        return this.output["D§USR1"] || this.input["D§USR1"] || ""
     }
 
     /**
-     * Retrieves the value of the "D§USR2" input.
-     * 
-     * @returns The value of the "D§USR2" input.
+     * Same behavior as getS1
      */
     getS2(): any {
-        return this.input["D§USR2"] || ""
+        return this.output["D§USR2"] || this.input["D§USR2"] || ""
     }
 
     /**
@@ -268,14 +280,14 @@ class Variables {
     }
 
     /**
-     * Set the value of cf
+     * Set the value of cf and the output["D§COEF"] property to the product of the current value of "D§COEF" and the new value of cf.
      * @param cf The value that will be set
      */
     setCF(cf: number) {
         this.cf = cf
         this.output["D§COEF"] = cf * this.get("D§COEF");
     }
-    
+
     /**
      * Set the value of "D§COMP"
      * @param cm The value that will be set
