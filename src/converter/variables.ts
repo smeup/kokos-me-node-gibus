@@ -222,35 +222,35 @@ class Variables {
      * 
      * @returns The value of the "D§QUA1" output or input.
      */
-    getQ1(): any {
+    getQ1(): number {
         return this.output["D§QUA1"] || this.input["D§QUA1"] || 0;
     }
 
     /**
      * Same behavior as getQ1
      */
-    getQ2(): any {
+    getQ2(): number {
         return this.output["D§QUA2"] || this.input["D§QUA2"] || 0;
     }
 
     /**
      * Same behavior as getQ1
      */
-    getQ3(): any {
+    getQ3(): number {
         return this.output["D§QUA3"] || this.input["D§QUA3"] || 0;
     }
 
     /**
      * Same behavior as getQ1
      */
-    getQ4(): any {
+    getQ4(): number {
         return this.output["D§QUA4"] || this.input["D§QUA4"] || 0;
     }
 
     /**
      * Same behavior as getQ1
      */
-    getQ5(): any {
+    getQ5(): number {
         return this.output["D§QUA5"] || this.input["D§QUA5"] || 0;
     }
 
@@ -418,7 +418,7 @@ class Variables {
      * Set the value of "D§QUA1"
      * @param q The value that will be set
      */
-    setQ1(q: any) {
+    setQ1(q: number) {
         this.output["D§QUA1"] = q
     }
 
@@ -426,7 +426,7 @@ class Variables {
      * Set the value of "D§QUA2"
      * @param q The value that will be set
      */
-    setQ2(q: any) {
+    setQ2(q: number) {
         this.output["D§QUA2"] = q
     }
 
@@ -434,7 +434,7 @@ class Variables {
      * Set the value of "D§QUA3"
      * @param q The value that will be set
      */
-    setQ3(q: any) {
+    setQ3(q: number) {
         this.output["D§QUA3"] = q
     }
 
@@ -442,7 +442,7 @@ class Variables {
      * Set the value of "D§QUA4"
      * @param q The value that will be set
      */
-    setQ4(q: any) {
+    setQ4(q: number) {
         this.output["D§QUA4"] = q
     }
 
@@ -450,7 +450,7 @@ class Variables {
      * Set the value of "D§QUA5"
      * @param q The value that will be set
      */
-    setQ5(q: any) {
+    setQ5(q: number) {
         this.output["D§QUA5"] = q
     }
 
