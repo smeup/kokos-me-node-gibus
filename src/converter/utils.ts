@@ -1,8 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { RuleConverterAppExamples } from './app.examples';
-import { Rule } from '../types/general';
+import { Rule, ExecuteRulePayload, RuleVariableMap } from '../types/general';
 import { getRule } from '../services/RULE';
+import { Fun } from "@sme.up/kokos-sdk-node";
 
 /**
  * Removes unnecessary whitespace characters and js comments from a given code string.
@@ -58,9 +59,9 @@ async function convertExampleRule(ruleId: string): Promise<Rule> {
  * @returns The result of the function else nothing.
  */
 async function runFunctionIfOpenAIKeySet(
-    func: () => any, 
+    func: () => any,
     onOpenAIKeyNotSet: () => void = () => { console.warn("OPENAI_API_KEY environment variable is not set.") }
-    ): Promise<any> {
+): Promise<any> {
     const openAIKey = process.env.OPENAI_API_KEY;
     if (!openAIKey) {
         onOpenAIKeyNotSet();
@@ -77,4 +78,24 @@ function isOpenAIKeySet(): boolean {
     return process.env.OPENAI_API_KEY !== undefined;
 }
 
-export { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet, isOpenAIKeySet }
+/**
+ * Load variables from a function payload.
+ * @param funPayload The function payload.
+ * @returns The variables.
+ */
+function loadVariables(funPayload: string): RuleVariableMap {
+    if (funPayload === '') {
+        return {};
+    }
+    const fun: Fun = JSON.parse(funPayload);
+    if (fun.INPUT && fun.INPUT !== '') {
+        const jsonInput = JSON.parse(
+            fun.INPUT ? fun.INPUT : ""
+        ) as ExecuteRulePayload;
+        return jsonInput.variables ? jsonInput.variables : {}
+    } else {
+        return {};
+    }
+}
+
+export { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet, isOpenAIKeySet, loadVariables }
