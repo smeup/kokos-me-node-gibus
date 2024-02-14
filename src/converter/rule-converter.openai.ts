@@ -21,7 +21,7 @@ class OpenAIRuleConverter implements IRuleConverterService {
         const commentedPayloadSentToLLM = `// REQUEST:\n// ${this.insertStringAfterNewLine(payloadSentToLLM, "// ")}\n// RESPONSE:`;
         const messages = [new SystemMessage({ content: SYSTEM_MESSAGE }), new HumanMessage({ content: payloadSentToLLM })];
         const result = await openai.predictMessages(messages)
-        const messageContent = `// RULE: ${rule.id}\n${commentedPayloadSentToLLM}\n${result.content.toString().trim()}`;
+        const messageContent = `// RULE: ${rule.id}\n${commentedPayloadSentToLLM}\n${result.content.toString().trim().replace(/^###|^Traduzione:/gm, "")}`;
         return new ConversionResult(rule.id, messageContent);
     };
 
