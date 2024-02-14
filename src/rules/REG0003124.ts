@@ -12,7 +12,7 @@ import { Variables } from "../converter/variables.js";
 export const REG0003124: Rule = (iv) => {
 
     const vars = new Variables(iv);
-    
+
     // GENERATED
     // RULE: REG0003124
     // REQUEST:
@@ -24,6 +24,7 @@ export const REG0003124: Rule = (iv) => {
     // *SET *LG=''
     // """
     // RESPONSE:
+    //#1
     if (vars.get('§L_PORTANTE2') > 0) {
     } else {
         vars.setLG("");
