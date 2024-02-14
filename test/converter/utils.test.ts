@@ -52,12 +52,13 @@ describe("convertExampleRule", () => {
 
 describe("loadVariables", () => {
     it("should load variables from funPayload", () => {
-        const fun = {
-            fun: "fun",
-            INPUT: `{"variables": {"var1": "value1", "var2": "value2"}}`
+        const payload = {
+            fun: {
+                INPUT: `{"variables": {"var1": "value1", "var2": "value2"}}`
+            }
         }
         // define input
-        const funPayload = JSON.stringify(fun);
+        const funPayload = JSON.stringify(payload);
 
         // call function
         const result = loadVariables(funPayload);
@@ -71,11 +72,11 @@ describe("loadVariables", () => {
 
     it("should return an empty object if no variables are present", () => {
         // define input
-        const fun = {
-            fun: "fun"
+        const payload = {
+            fun: {}
         }
 
-        const funPayload = JSON.stringify(fun);
+        const funPayload = JSON.stringify(payload);
 
         // call function
         const result = loadVariables(funPayload);

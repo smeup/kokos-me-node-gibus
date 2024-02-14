@@ -87,7 +87,7 @@ function loadVariables(funPayload: string): RuleVariableMap {
     if (funPayload === '') {
         return {};
     }
-    const fun: Fun = JSON.parse(funPayload);
+    const fun: Fun = JSON.parse(funPayload).fun;
     if (fun.INPUT && fun.INPUT !== '') {
         const jsonInput = JSON.parse(
             fun.INPUT ? fun.INPUT : ""
