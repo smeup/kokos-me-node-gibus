@@ -260,15 +260,15 @@ class Variables {
      * 
      * @returns The value of the "D§USR1" output or input.
      */
-    getS1(): any {
-        return this.output["D§USR1"] || this.input["D§USR1"] || ""
+    getS1(): number {
+        return this.output["D§USR1"] || this.input["D§USR1"] || 0
     }
 
     /**
      * Same behavior as getS1
      */
-    getS2(): any {
-        return this.output["D§USR2"] || this.input["D§USR2"] || ""
+    getS2(): number {
+        return this.output["D§USR2"] || this.input["D§USR2"] || 0
     }
 
     /**
@@ -458,7 +458,7 @@ class Variables {
      * Set the value of "D§USR1"
      * @param usr The value that will be set
      */
-    setS1(s: any) {
+    setS1(s: number) {
         this.output["D§USR1"] = s
     }
 
@@ -466,7 +466,7 @@ class Variables {
      * Set the value of "D§USR2"
      * @param usr The value that will be set
      */
-    setS2(s: any) {
+    setS2(s: number) {
         this.output["D§USR2"] = s
     }
 
