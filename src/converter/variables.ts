@@ -20,7 +20,7 @@ const D_DISE_LEN = 9
  * - the variables starting with § are input variables
  * - the variables starting with * are output variables
  * Input variables are read only variables and can be accessed by the get(key: string) method.
- * Output variables are written by setNAME(value: any) methods annd can be accessed by the getNAME() methods, all the getters have in common
+ * Output variables are written by setNAME(value: any) methods and can be accessed by the getNAME() methods, all the getters have in common
  * this behavior: are searched in the output object, if not found are searched in the input object.
  * @see get(key: string)
  */
@@ -38,7 +38,7 @@ class Variables {
     /**
      * Retrieves the value of the variable with the specified name.
      * If the variable name starts with "§DUMMYN" or "§DUMMYB" the value will be retrieved from the dummy object else from the input object.
-     * If the variable name starts with "*" the value will be retrieved from from the getter method with the same name.
+     * If the variable name starts with "*" the value will be retrieved from the getter method with the same name.
      * Else the value will be retrieved from the input object.
      * @param key The name of the variable to retrieve.
      * @returns The value of the variable.
