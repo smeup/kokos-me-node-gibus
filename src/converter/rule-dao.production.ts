@@ -22,10 +22,11 @@ type Row = {
 class RuleDaoProduction implements IRuleDao {
 
     private readonly config: Config;
-    private exludeConverted = "STATUS is null or STATUS = 'E'";
+    private readonly exludeConverted: string;
     readonly pool: Connection;
     private readonly filter: string;
     private readonly SCHEMA = "W_SMMB";
+    private readonly forceConversion: boolean;
 
     /**
      * Creates an instance of RuleDaoIBM.
@@ -34,8 +35,9 @@ class RuleDaoProduction implements IRuleDao {
      * @param password The password of the IBM database.
      * @param filter The filter clause. Default is empty string that it means no filter.
      * If you pass a not empty string, you don't must pass the keyword WHERE.
+     * @param forceConversion If true, the conversion status is ignored and all rules, eventually filtered, are converted.
      */
-    constructor(host: string, user: string, password: string, filter: string = "") {
+    constructor(host: string, user: string, password: string, filter: string = "", forceConversion = false) {
         this.config = {
             host: host,
             user: user,
@@ -45,6 +47,12 @@ class RuleDaoProduction implements IRuleDao {
             throw new Error("filter cannot be contain WHERE keyword");
         }
         this.filter = filter;
+        this.forceConversion = forceConversion;
+        if (this.forceConversion) {
+            this.exludeConverted = "1 = 1";
+        } else {
+            this.exludeConverted = "STATUS <> 'P' and STATUS <> 'OK'";
+        }
         // this is a trick because to mock jest require "require"
         // but if I use this class not in test environment "require" does not work
         // to me js is a totaly mess

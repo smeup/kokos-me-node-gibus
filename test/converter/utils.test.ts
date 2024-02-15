@@ -1,4 +1,4 @@
-import { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet } from "../../src/converter/utils.js";
+import { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet, loadVariables } from "../../src/converter/utils.js";
 import * as fs from 'fs';
 import * as path from 'path';
 jest.setTimeout(20000);
@@ -47,5 +47,52 @@ describe("convertExampleRule", () => {
             // check values
             expect(result).toBeDefined();
         });
+    });
+});
+
+describe("loadVariables", () => {
+    it("should load variables from funPayload", () => {
+        const payload = {
+            fun: {
+                INPUT: `{"variables": {"var1": "value1", "var2": "value2"}}`
+            }
+        }
+        // define input
+        const funPayload = JSON.stringify(payload);
+
+        // call function
+        const result = loadVariables(funPayload);
+
+        // check values
+        expect(result).toEqual({
+            var1: "value1",
+            var2: "value2"
+        });
+    });
+
+    it("should return an empty object if no variables are present", () => {
+        // define input
+        const payload = {
+            fun: {}
+        }
+
+        const funPayload = JSON.stringify(payload);
+
+        // call function
+        const result = loadVariables(funPayload);
+
+        // check values
+        expect(result).toEqual({});
+    });
+
+    it("should return an empty object if funPayload is empty", () => {
+        // define input
+        const funPayload = '';
+
+        // call function
+        const result = loadVariables(funPayload);
+
+        // check values
+        expect(result).toEqual({});
     });
 });

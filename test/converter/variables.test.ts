@@ -36,7 +36,7 @@ describe("Variables", () => {
   });
 
   it("should retrieve the CF value", () => {
-    expect(variables.getCF()).toBe("1");
+    expect(variables.getCF()).toBe(1);
   });
 
   it("should retrieve the value of D§COMP input", () => {
@@ -93,11 +93,6 @@ describe("Variables", () => {
 
   it("should retrieve the value of CON_B (same as getCON_B)", () => {
     expect(variables.getLUNG()).toBe(1);
-  });
-
-  it("should set the value of D§COEF", () => {
-    variables.setCF("COEF_VALUE");
-    expect(variables.output["D§COEF"]).toBe("COEF_VALUE");
   });
 
   it("should set the value of D§COMP", () => {
@@ -220,12 +215,39 @@ describe("Variables", () => {
   });
 
   it("should set the value of D§USR1", () => {
-    variables.setS1("NEW_USR1_VALUE");
-    expect(variables.output["D§USR1"]).toBe("NEW_USR1_VALUE");
+    variables.setS1(1);
+    expect(variables.output["D§USR1"]).toBe(1);
   });
 
   it("should set the value of D§USR2", () => {
-    variables.setS2("NEW_USR2_VALUE");
-    expect(variables.output["D§USR2"]).toBe("NEW_USR2_VALUE");
+    variables.setS2(2);
+    expect(variables.output["D§USR2"]).toBe(2);
+  });
+});
+
+describe("Get variables starts with *", () => {
+  let variables: Variables;
+  beforeEach(() => {
+    variables = new Variables({})
+  });
+
+  it("should retrieve the value of *CF", () => {
+    variables.setCF(1);
+    expect(variables.get("*CF")).toBe(1);
+  });
+
+  it("should retrieve the value of *CM", () => {
+    variables.setCM(1);
+    expect(variables.get("*CM")).toBe(1);
+  });
+
+  it("should retrieve the value of *CON-A", () => {
+    variables.setCON_A("1");
+    expect(variables.get("*CON-A")).toBe("1");
+  });
+  
+  it("should retrieve the value of *CON-B", () => {
+    variables.setCON_B(1);
+    expect(variables.get("*CON-B")).toBe(1);
   });
 });

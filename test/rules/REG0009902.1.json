@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0009902"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§_AR\": \"AC0109\", \"§_CF\": \"AAJDXQ\", \"§_CLI\": \"100515\", \"§_DEBUG\": \"\", \"§_LIN\": \"IT\", \"§_NAZ\": \"IT\", \"§_SU\": \"\", \"§_UT\": \"ZANNIC\", \"§ALLEGATI\": \"\", \"§AOP_COI_LAM\": \"NO\", \"§AOP_COL_STR\": \"0055\", \"§CFG1\": \"AAJDXQ\", \"§DUMMYA_XAC\": \"03.0055\", \"§DUMMYA1\": \"N.Cavi 6PL: 1#13\", \"§DUMMYB2\": \"SI\", \"§DUMMYN1\":0.00000, \"§FAM_ABB_COLORE\": \"12\", \"§FS_COIBLAME_NEW\": \"NO\", \"§FS_LAM_BIO\": \"SI\", \"§FS_LED\": \"SI\", \"§FS_LED_FS\": \"SI\", \"§FS_LED_LAT_DX\": \"SI\", \"§FS_LED_SPOT\": \"SI\", \"§FS_RIP_VETRATA\": \"\", \"§FS_TIPO_LED\": \"03\", \"§GSK\": \"G99\", \"§L_BAN_FRA\":416.20000, \"§L_LAM\":416.20000, \"§L_MAX_MONOGIVA\": \"700\", \"§LATO_LED\": \"DX\", \"§LED_PRESENTI\": \"110\", \"§LI_VERN_FS\": \"RAL\", \"§LIST_AR\": \"AC0109\", \"§LOTTO_TAG_P11\": \"N.Cavi 6PL: 1#13\", \"§LS_SPOT_LAME\":6.00000, \"§LSD1\":416.20000, \"§LSK3\": \"**\", \"§NO\": \"NO\", \"§NR_BAN_FRA\":1.00000, \"§NR_BARRE_3MT\":1.00000, \"§NR_FRANGI_LED\":1.00000, \"§NR_SPO\":6.00000, \"§OLOGRAMMA\": \"9\", \"§PD_ALLEGATI\": \"\", \"§SEI_IN_FONDO\": \"SI\", \"§SI\": \"SI\", \"§TI_TEM_LED\":4000.00000, \"§TXT_NOTA_STRU\": \"\", \"§USCITA_DORS_LED\": \"03\", \"§VERN_DEF_PLASTI\": \"P055\", \"§VERN_GUIDE\": \"0055\", \"§VERN_PLAST\": \"P055\", \"§VERN_X_LTTAGLIO\": \"0055\", \"§VERN_1_COM\": \"0055\", \"§VERN_1_FS\": \"0055\", \"§VR_ABB\": \"01\", \"§VR_DEF_SLIT_CAR\": \"0055\", \"§VR_PLA_LAM\": \"P055\", \"§VR_SLI_CAR\": \"0055\", \"§VZ_CVPLATE_SI\": \"SI\", \"§X_AR\": \"AC0109\", \"*CON-A\": \"\", \"*CON-B\":0.00000,  \"D§TIPD\":\"ART\", \"D§ASSI\":\"FT_DOR_T05\", \"D§USR1\":\"HI01\", \"D§COMP\":\"FT_LED_T01\", \"D§USR2\":\"\", \"D§STAT\":\"10\", \"D§SQCI\":\"\", \"D§LTAD\":0, \"D§DINV\":0, \"D§DFNV\":0, \"D§CRSE\":\"GIBK\", \"D§COEF\":6.000000, \"D§PAS1\":\"REG0009902\", \"D§PAS2\":\"\", \"D§QTLO\":0.000, \"D§PERT\":0.000, \"D§QUA1\":0.000000, \"D§QUA2\":0.000000, \"D§QUA3\":0.000000, \"D§QUA4\":0.000000, \"D§QUA5\":0.000000, \"D§FLG1\":\"\", \"D§FLG2\":\"\", \"D§FLG3\":\"\", \"D§FLG4\":\"\", \"D§FLG5\":\"\", \"D§NOTA\":\"\", \"D§DISE\":\"\", \"D§DISP\":\"\", \"D§DTIN\":20190524, \"D§DTAG\":20240213, \"D§USAG\":\"SMFB\",\"XFVALI\":\"1\",\"XCONFI\":\"AAJDXQ\"}}"
+    }
+}

@@ -26,11 +26,12 @@ describe("REG0003172", () => {
         "§L_PORTANTE2": 1,
         "§L_PORTANTE3": 0,
         "§FS_FAM2_WALL": 0,
+        "D§COEF": 10
       };
 
       const output = rule(input);
 
-      expect(output["D§COEF"]).toBe(1);
+      expect(output["D§COEF"]).toBe(10);
     }
   });
 
@@ -44,17 +45,19 @@ describe("REG0003172", () => {
         "§L_PORTANTE2": 1,
         "§L_PORTANTE3": 1,
         "§FS_FAM2_WALL": 0,
+        "D§COEF": 10
       };
 
       const output = rule(input);
 
-      expect(output["D§COEF"]).toBe(2);
+      expect(output["D§COEF"]).toBe(20);
     }
   });
 
   it(`nothing true`, () => {
     if (utils.isOpenAIKeySet()) {
       const input: RuleVariableMap = {
+        "D§COEF": 10
       };
 
       const output = rule(input);

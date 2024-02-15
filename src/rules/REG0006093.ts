@@ -48,15 +48,15 @@ export const REG0006093: Rule = (iv) => {
     vars.setCF(0);
     //#2
     if ((vars.get('§LUNG_LISTELLO') > 0) && (vars.get('§LUNG_LISTELLO') <= 25)) {
-        vars.setCF([0, 25 * vars.get('§DUMMYN1')]);
+        vars.setCF(0.25 * vars.get('§DUMMYN1'));
     }
     //#3
     if ((vars.get('§LUNG_LISTELLO') > 25) && (vars.get('§LUNG_LISTELLO') <= 50)) {
-        vars.setCF([0, 5 * vars.get('§DUMMYN1')]);
+        vars.setCF(0.5 * vars.get('§DUMMYN1'));
     }
     //#4
     if ((vars.get('§LUNG_LISTELLO') > 50) && (vars.get('§LUNG_LISTELLO') <= 75)) {
-        vars.setCF([0, 75 * vars.get('§DUMMYN1')]);
+        vars.setCF(0.75 * vars.get('§DUMMYN1'));
     }
     //#5
     if ((vars.get('§LUNG_LISTELLO') > 75) && (vars.get('§LUNG_LISTELLO') <= 100)) {

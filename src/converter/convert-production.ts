@@ -30,7 +30,8 @@ if (!options.includes('all') && !options.includes('assiemi') && !options.include
         '--all to convert all unconverted rules\n' +
         '--rules RULE1,RULE2 to convert only the specified rules RULE1 and RULE2\n' +
         '--rulesPath a path of file containing the rules to convert, one rule per lineì\n' +
-        '--assiemi ASSI1,ASSI2 to convert only the specified assiemi ASSI1 and ASSI2\n'
+        '--assiemi ASSI1,ASSI2 to convert only the specified assiemi ASSI1 and ASSI2\n' +
+        '--force to convert all rules, even if they are already converted\n'
     );
     process.exit(1);
 }
@@ -68,8 +69,12 @@ if (options.includes('assiemi')) {
         }
     }
 }
+let forceConversion = false;
+if (options.includes('force')) {
+    forceConversion = true;
+}
 
-const ruleDao = new RuleDaoProduction(consts.host, consts.user, consts.password, filter);
+const ruleDao = new RuleDaoProduction(consts.host, consts.user, consts.password, filter, forceConversion);
 const ruleConverterService = new OpenAIRuleConverter();
 const conversionResultValidator = new SyntaxErrorValidator();
 const conversionResultDao = new ConversionResultDaoFileSystem("src/rules");
