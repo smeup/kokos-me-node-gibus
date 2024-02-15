@@ -32,8 +32,15 @@ where ASSI in (
 )
 order by COMP, PRGR;
 ```
+
 ## rules_3.txt 
 - [rules_3.txt](./rules_3.txt) - Fiorenza telegram chat rules: *Regole per assiemi AC e gruppo distinta DGS_PROD09*  
 ```sh
 npm run convert-production:win -- --rulesPath .\assets\test\rules_3.txt
+```
+
+## assieme_accessori.txt
+- [assieme_accessori.txt](./assieme_accessori.txt) - Fiorenza telegram chat rules: *Queste sono le regole per l'assieme ACCESSORI*  
+```sh
+npm run convert-production:win -- --rulesPath .\assets\test\assieme_accessori.txt
 ```
