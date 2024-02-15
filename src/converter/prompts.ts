@@ -154,7 +154,7 @@ Regola (ELSE):
 ELSE:
 *SET *CON-A = §VERN_CASSONETTO
 *SET §DUMMYN1 = [§L_FRONTALE + #2,2 + #1 + #5,5]
-*SET *CF = [ #0,75 * §DUMMYN1 ]
+*SET *CF = [ #0,25 * §DUMMYN1 ]
 *SET *CF = [#2 - §NR_CHI_GAM]
 """
 Traduzione:
