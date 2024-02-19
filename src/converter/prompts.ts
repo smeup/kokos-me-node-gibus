@@ -156,6 +156,7 @@ ELSE:
 *SET §DUMMYN1 = [§L_FRONTALE + #2,2 + #1 + #5,5]
 *SET *CF = [ #0,25 * §DUMMYN1 ]
 *SET *CF = [#2 - §NR_CHI_GAM]
+*SET *CON-A = *COL
 """
 Traduzione:
 //#1
@@ -163,6 +164,7 @@ vars.setCON_A(vars.get('§VERN_CASSONETTO'));
 vars.setDUMMYN1(vars.get('§L_FRONTALE') + 2.2 + 1 + 5.5);
 vars.setCF(0.25 * vars.get('§DUMMYN1'));
 vars.setCF(2 - vars.get('§NR_CHI_GAM'));
+vars.setCON_A(vars.getCOL());
 ###
 `;
 
