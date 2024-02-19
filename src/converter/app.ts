@@ -31,33 +31,58 @@ class RuleConverterApp {
         const rules: Rule[] = await this.ruleDao.getUnconvertedRules();
         const totalRules = rules.length;
         let currentRule = 0;
-        let result: ConversionResult;
         for (const rule of rules) {
-            try {
-                currentRule++;
-                console.log(`${rule.id} - converting rule`);
-                result = await this.ruleConverterService.convertRule(rule);
-                console.debug(`${rule.id} - conversion result ${result.javaScript}`);
-                result.javaScript = this.completeRules(rule, result.javaScript);
-                console.log(`${rule.id} - validating conversion result`);
-                await this.conversionResultValidator.validateConversionResult(result);
+            currentRule++;
+            // if result is null, the rule has not been converted
+            const result: ConversionResult | null = await this.convertRule(rule);
+            if (result) {
+                console.log(`${rule.id} - saving conversion result`);
+                this.conversionResultDao.saveConversionResult(result);
+                console.log(`${rule.id} - marking rule as converted`);
+                await this.ruleDao.markRuleAsConverted(rule);
+                console.log(`${rule.id} - successfully converted`);
+                console.log(`${currentRule}/${totalRules} rules converted`);
             }
-            // Error during conversion or validating are not fatal, we just log the error and continue with the next rule
-            catch (error: any) {                
-                console.error(`${rule.id} - error converting rule ${error.stack}`);
-                await this.ruleDao.markRuleAsNotConverted(rule, `${error}`);
-                continue;
-            }
-            console.log(`${rule.id} - saving conversion result`);
-            this.conversionResultDao.saveConversionResult(result);
-            console.log(`${rule.id} - marking rule as converted`);
-            await this.ruleDao.markRuleAsConverted(rule);
-            console.log(`${rule.id} - successfully converted`);
-            console.log(`${currentRule}/${totalRules} rules converted`);
         }
         console.log("Conversion completed");
         console.log(`Total time: ${new Date().getTime() - startTime} ms`);
     }
+
+    /**
+     * Converts a rule using different models and returns the conversion result.
+     * If conversion or validation fails, logs the error and continues with the next model.
+     * @param rule The rule to be converted.
+     * @returns A Promise that resolves to the ConversionResult if successful, or null if no conversion is possible.
+     */
+    private async convertRule(rule: Rule): Promise<ConversionResult | null> {
+        const models = ["gpt-3.5-turbo", "gpt-4"];
+        let retry = false;
+        for (const model of models) {
+            try {
+                retry = false;
+                console.log(`${rule.id} - converting rule using model ${model}`);
+                const result: ConversionResult = await this.ruleConverterService.convertRule(rule, model);
+                console.debug(`${rule.id} - conversion result ${result.javaScript}`);
+                result.javaScript = this.completeRules(rule, result.javaScript);
+                console.log(`${rule.id} - validating conversion result`);
+                retry = true;
+                await this.conversionResultValidator.validateConversionResult(result);
+                return result;
+            }
+            // Error during conversion or validating are not fatal, we just log the error and continue with the next rule
+            catch (error: any) {
+
+                console.error(`${rule.id} - error converting rule ${error.stack}`);
+                await this.ruleDao.markRuleAsNotConverted(rule, `${error}`);
+                if (!retry) {
+                    return null;
+                }
+            }
+        }
+        return null
+    }
+
+
 
     /**
      * Completes the body of a rule template implementation by replacing the placeholder "// AI_GENERATED" with the provided function body.

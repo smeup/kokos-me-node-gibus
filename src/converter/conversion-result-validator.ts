@@ -22,15 +22,22 @@ class SyntaxErrorValidator implements IConversionResultValidator {
         if (process.env.NODE_ENV === "test") {
             return;
         }
-        let tmpRulePath = path.resolve(process.cwd(), "src", "rules", `${result.ruleId}.ts`);
-        fs.writeFileSync(tmpRulePath, result.javaScript);
+        const rulePath = path.resolve(process.cwd(), "src", "rules", `${result.ruleId}.ts`);
+        fs.writeFileSync(rulePath, result.javaScript);
+        const currentTimeMillis = Date.now();
+        let tempRulePath = path.resolve(process.cwd(), "src", "rules", `${result.ruleId}.${currentTimeMillis}.ts`);
+        fs.writeFileSync(tempRulePath, result.javaScript);
         if (os.platform() === "win32") {
-            tmpRulePath = url.pathToFileURL(tmpRulePath).toString();
+            tempRulePath = url.pathToFileURL(rulePath).toString();
         }
         try {
-            await import(tmpRulePath);
+            await import(tempRulePath);
         } catch (error) {
             throw new Error(`${result.ruleId}: ${error}`);
+        } finally {
+            if (tempRulePath) {
+                fs.rmSync(tempRulePath, { force: true });
+            }
         }
     }
 }
