@@ -166,6 +166,23 @@ vars.setCF(0.25 * vars.get('§DUMMYN1'));
 vars.setCF(2 - vars.get('§NR_CHI_GAM'));
 vars.setCON_A(vars.getCOL());
 ###
+
+###
+Regola (COND, THEN §SI che sbaglia):
+"""
+#1
+COND:
+( §L_PORTANTE2 > #0 ) AND ( §FS_FAM2_WALL=§SI ) AND ( §FS_FAM2_165=§SI )
+
+THEN:
+SET *CF=#1
+"""
+Traduzione:
+//#1
+if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_FAM2_165') == vars.get('§SI'))) {
+    vars.setCF(1);
+}
+###
 `;
 
 const SYSTEM_MESSAGE = `
