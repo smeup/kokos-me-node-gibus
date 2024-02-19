@@ -51,7 +51,7 @@ class RuleDaoProduction implements IRuleDao {
         if (this.forceConversion) {
             this.exludeConverted = "1 = 1";
         } else {
-            this.exludeConverted = "STATUS <> 'P' and STATUS <> 'OK'";
+            this.exludeConverted = "STATUS is NULL or STATUS <> 'P'";
         }
         // this is a trick because to mock jest require "require"
         // but if I use this class not in test environment "require" does not work
