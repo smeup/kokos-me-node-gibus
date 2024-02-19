@@ -61,7 +61,8 @@ export const REG0004373: Rule = (iv) => {
     }
     
     //#4
-    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && ((vars.get('§FS_ACC_INI') == vars.get('§SI')) || (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') != vars.get('§SI')) && (vars.get('§FS_STA_ACC_ANT') != vars.get('§SI'))) {
+    //                 ( §FS_FAM2_165=§SI )           AND (( §FS_ACC_INI=§SI )                         OR                       ( §FS_ACC_FIN=§SI )) AND       ( §FS_FAM2_WALL<>§SI )  AND                  ( §FS_STA_ACC_ANT<>§SI )
+    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && ((vars.get('§FS_ACC_INI') == vars.get('§SI')) || (vars.get('§FS_ACC_FIN') == vars.get('§SI'))) && (vars.get('§FS_FAM2_WALL') != vars.get('§SI')) && (vars.get('§FS_STA_ACC_ANT') != vars.get('§SI'))) {
         vars.setCF(vars.get('§N_MODULI') + 1);
     }
     
