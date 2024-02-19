@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0009737"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§_AR\": \"AC0089\", \"§_CF\": \"AAJK6G\", \"§_CLI\": \"101694\", \"§_DEBUG\": \"\", \"§_LIN\": \"IT\", \"§_NAZ\": \"IT\", \"§_SU\": \"\", \"§_UT\": \"BENPAO\", \"§ALLEGATI\": \"\", \"§ALTE_AOP\":150.00000, \"§ALTE_INPUT\":150.00000, \"§ALTE_TC\":150.00000, \"§AOP_COL_STR\": \"0055\", \"§AOP_H\":138.40000, \"§AOP_MOD_TS\": \"TS0075\", \"§ATTACCO_QU\": \"QU03\", \"§CFG1\": \"AAJK6G\", \"§COD_MOD_TS\": \"TS0075\", \"§DUMMYA_XAC\": \"03.0055\", \"§DUMMYB2\": \"SI\", \"§DUMMYN1\":-1.00000, \"§FAM_ABB_COLORE\": \"05\", \"§FS_GUI_11\": \"SI\", \"§FS_GUI_11_13\": \"SI\", \"§FS_RIP_VETRATA\": \"\", \"§FS_11_QUJ\": \"SI\", \"§GSK\": \"9\", \"§GU_ZIP_FRESA\": \"186\", \"§L_GUIDA_FIX\":138.40000, \"§L_GUIDA_MOB\":138.30000, \"§L_MAX_MONOGIVA\": \"700\", \"§L_PORTA_ZIP\":138.00000, \"§LI_VERN_FS\": \"RAL\", \"§LIST_AR\": \"AC0089\", \"§LS_MAG_MAN\": \"143\", \"§LSD1\":0.00000, \"§LSD2\":138.40000, \"§LSK3\": \"**\", \"§MASTER_H\":138.40000, \"§NO\": \"NO\", \"§NR_MOL_GUI_ZIP\":16.00000, \"§NR_PORTA_ZIP\":2.00000, \"§OLOGRAMMA\": \"9\", \"§PD_ALLEGATI\": \"\", \"§SEI_IN_FONDO\": \"SI\", \"§SI\": \"SI\", \"§TI_MIS_GUI\": \"01\", \"§TXT_NOTA_STRU\": \"\", \"§VERN_DEF_PLASTI\": \"P055\", \"§VERN_GUIDE\": \"0055\", \"§VERN_PLAST\": \"P055\", \"§VERN_X_LTTAGLIO\": \"0055\", \"§VERN_1_COM\": \"0055\", \"§VERN_1_FS\": \"0055\", \"§VR_ABB\": \"01\", \"§VR_DEF_SLIT_CAR\": \"0055\", \"§VR_SLI_CAR\": \"0055\", \"§VZ_CVPLATE_SI\": \"SI\", \"§X_AR\": \"AC0089\", \"*CON-A\": \"\", \"*CON-B\":0.00000,  \"D§TIPD\":\"ART\", \"D§ASSI\":\"TC_GUARNI_CASSO\", \"D§USR1\":\"HI01\", \"D§COMP\":\"FT_GUA_T05\", \"D§USR2\":\"\", \"D§STAT\":\"10\", \"D§SQCI\":\"\", \"D§LTAD\":0, \"D§DINV\":0, \"D§DFNV\":0, \"D§CRSE\":\"GIBK\", \"D§COEF\":1.000000, \"D§PAS1\":\"REG0009737\", \"D§PAS2\":\"\", \"D§QTLO\":0.000, \"D§PERT\":0.000, \"D§QUA1\":0.000000, \"D§QUA2\":0.000000, \"D§QUA3\":0.000000, \"D§QUA4\":0.000000, \"D§QUA5\":0.000000, \"D§FLG1\":\"\", \"D§FLG2\":\"\", \"D§FLG3\":\"\", \"D§FLG4\":\"\", \"D§FLG5\":\"\", \"D§NOTA\":\"\", \"D§DISE\":\"\", \"D§DISP\":\"\", \"D§DTIN\":20190506, \"D§DTAG\":20240213, \"D§USAG\":\"SMFB\",\"XFVALI\":\"1\",\"XCONFI\":\"AAJK6G\"}}"
+    }
+}

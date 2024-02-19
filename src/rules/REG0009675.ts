@@ -28,12 +28,13 @@ export const REG0009675: Rule = (iv) => {
     // *SET *CF = [§DUMMYN1 / #100]
     // """
     // RESPONSE:
+    
     //#1
     vars.setCF(0);
     //#2
-    vars.setDUMMYN1((vars.get('§LARG') - 20).toFixed(2));
+    vars.setDUMMYN1(vars.get('§LARG') - 20.2);
     //#3
-    vars.setCF((vars.get('§DUMMYN1') / 100));
+    vars.setCF(vars.get('§DUMMYN1') / 100);
     // GENERATED
 
     return vars.output;

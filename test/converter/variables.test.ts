@@ -125,28 +125,28 @@ describe("Variables", () => {
   });
 
   it("should set the value of §DUMMYN1", () => {
-    variables.setDUMMYN1("DUMMYN1_VALUE");
-    expect(variables.get("§DUMMYN1")).toBe("DUMMYN1_VALUE");
+    variables.setDUMMYN1(1);
+    expect(variables.get("§DUMMYN1")).toBe(1);
   });
 
   it("should set the value of §DUMMYN2", () => {
-    variables.setDUMMYN2("DUMMYN2_VALUE");
-    expect(variables.get("§DUMMYN2")).toBe("DUMMYN2_VALUE");
+    variables.setDUMMYN2(2);
+    expect(variables.get("§DUMMYN2")).toBe(2);
   });
 
   it("should set the value of §DUMMYN3", () => {
-    variables.setDUMMYN3("DUMMYN3_VALUE");
-    expect(variables.get("§DUMMYN3")).toBe("DUMMYN3_VALUE");
+    variables.setDUMMYN3(3);
+    expect(variables.get("§DUMMYN3")).toBe(3);
   });
 
   it("should set the value of §DUMMYN4", () => {
-    variables.setDUMMYN4("DUMMYN4_VALUE");
-    expect(variables.get("§DUMMYN4")).toBe("DUMMYN4_VALUE");
+    variables.setDUMMYN4(4);
+    expect(variables.get("§DUMMYN4")).toBe(4);
   });
 
   it("should set the value of §DUMMYN5", () => {
-    variables.setDUMMYN5("DUMMYN5_VALUE");
-    expect(variables.get("§DUMMYN5")).toBe("DUMMYN5_VALUE");
+    variables.setDUMMYN5(5);
+    expect(variables.get("§DUMMYN5")).toBe(5);
   });
 
   it("should set the value of §DUMMYB1", () => {
@@ -245,9 +245,46 @@ describe("Get variables starts with *", () => {
     variables.setCON_A("1");
     expect(variables.get("*CON-A")).toBe("1");
   });
-  
+
   it("should retrieve the value of *CON-B", () => {
     variables.setCON_B(1);
     expect(variables.get("*CON-B")).toBe(1);
   });
+
+  it("Default value for §DUMMYA", () => {
+    expect(variables.get("§DUMMYA1")).toBe("");
+    expect(variables.get("§DUMMYA2")).toBe("");
+    expect(variables.get("§DUMMYA3")).toBe("");
+    expect(variables.get("§DUMMYA4")).toBe("");
+    expect(variables.get("§DUMMYA5")).toBe("");
+    expect(variables.get("§DUMMYA6")).toBe("");
+    expect(variables.get("§DUMMYA7")).toBe("");
+    expect(variables.get("§DUMMYA8")).toBe("");
+    expect(variables.get("§DUMMYA9")).toBe("");
+  });
+
+  it("Default value for §DUMMYB", () => {
+    expect(variables.get("§DUMMYB1")).toBe("");
+    expect(variables.get("§DUMMYB2")).toBe("");
+    expect(variables.get("§DUMMYB3")).toBe("");
+    expect(variables.get("§DUMMYB4")).toBe("");
+    expect(variables.get("§DUMMYB5")).toBe("");
+    expect(variables.get("§DUMMYB6")).toBe("");
+    expect(variables.get("§DUMMYB7")).toBe("");
+    expect(variables.get("§DUMMYB8")).toBe("");
+    expect(variables.get("§DUMMYB9")).toBe("");
+  });
+
+  it("Default value for §DUMMYN", () => {
+    expect(variables.get("§DUMMYN1")).toBe(0);
+    expect(variables.get("§DUMMYN2")).toBe(0);
+    expect(variables.get("§DUMMYN3")).toBe(0);
+    expect(variables.get("§DUMMYN4")).toBe(0);
+    expect(variables.get("§DUMMYN5")).toBe(0);
+    expect(variables.get("§DUMMYN6")).toBe(0);
+    expect(variables.get("§DUMMYN7")).toBe(0);
+    expect(variables.get("§DUMMYN8")).toBe(0);
+    expect(variables.get("§DUMMYN9")).toBe(0);
+  });
+
 });

@@ -1,4 +1,5 @@
 import { RuleVariableMap } from "../types/general.js";
+import { numeric_vars } from "./consts.js"
 
 const D_DISE_LEN = 9
 
@@ -19,6 +20,7 @@ const D_DISE_LEN = 9
  * Default behavior is the following:
  * - the variables starting with § are input variables
  * - the variables starting with * are output variables
+ * - dummy are exceptions because used to store temporary values and never written in the output object
  * Input variables are read only variables and can be accessed by the get(key: string) method.
  * Output variables are written by setNAME(value: any) methods and can be accessed by the getNAME() methods, all the getters have in common
  * this behavior: are searched in the output object, if not found are searched in the input object.
@@ -37,16 +39,17 @@ class Variables {
 
     /**
      * Retrieves the value of the variable with the specified name.
-     * If the variable name starts with "§DUMMYN" or "§DUMMYB" the value will be retrieved from the dummy object else from the input object.
-     * If the variable name starts with "*" the value will be retrieved from the getter method with the same name.
+     * If the variable name starts with "*" or "§DUMMY" the value will be retrieved from the getter method with the same name.
      * Else the value will be retrieved from the input object.
+     * When variable is not provided in the input object, it returns 0 for numeric variables and an empty string for the others.
+     * The definition for the numeric variables is provided in the consts.ts file.
      * @param key The name of the variable to retrieve.
      * @returns The value of the variable.
+     * @see numeric_vars
      */
     get(key: string): any {
-        if (key.startsWith("§DUMMYN") || key.startsWith("§DUMMYB") || key.startsWith("§DUMMYA")) {
-            return this.dummy[key];
-        } else if (key.startsWith("*")) {
+        // variables starting with * or §DUMMY are retrieved by getter methods
+        if (key.startsWith("*") || key.startsWith("§DUMMY")) {
             switch (key.slice(1)) {
                 case "CON-A": return this.getCON_A();
                 case "CON-B": return this.getCON_B();
@@ -54,7 +57,7 @@ class Variables {
             }
 
         } else {
-            return this.input[key];
+            return this.input[key] || (numeric_vars.includes(key) ? 0 : "");
         }
 
     }
@@ -119,84 +122,114 @@ class Variables {
         }
     }
 
-    getDUMMYA1(): any {
-        return this.dummy["§DUMMYA1"]
+    getDUMMYA1(): string {
+        return this.dummy["§DUMMYA1"] || this.input["§DUMMYA1"] || ""
     }
 
-    getDUMMYA2(): any {
-        return this.dummy["§DUMMYA2"]
+    getDUMMYA2(): string {
+        return this.dummy["§DUMMYA2"] || this.input["§DUMMYA2"] || ""
     }
 
-    getDUMMYA3(): any {
-        return this.dummy["§DUMMYA3"]
+    getDUMMYA3(): string {
+        return this.dummy["§DUMMYA3"] || this.input["§DUMMYA3"] || ""
     }
 
-    getDUMMYA4(): any {
-        return this.dummy["§DUMMYA4"]
+    getDUMMYA4(): string {
+        return this.dummy["§DUMMYA4"] || this.input["§DUMMYA4"] || ""
     }
 
-    getDUMMYA5(): any {
-        return this.dummy["§DUMMYA5"]
+    getDUMMYA5(): string {
+        return this.dummy["§DUMMYA5"] || this.input["§DUMMYA5"] || ""
+    }
+
+    getDUMMYA6(): string {
+        return this.dummy["§DUMMYA6"] || this.input["§DUMMYA6"] || ""
+    }
+
+    getDUMMYA7(): string {
+        return this.dummy["§DUMMYA7"] || this.input["§DUMMYA7"] || ""
+    }
+
+    getDUMMYA8(): string {
+        return this.dummy["§DUMMYA8"] || this.input["§DUMMYA8"] || ""
+    }
+
+    getDUMMYA9(): string {
+        return this.dummy["§DUMMYA9"] || this.input["§DUMMYA9"] || ""
+    }
+
+    getDUMMYN1(): number {
+        return this.dummy["§DUMMYN1"] || this.input["§DUMMYN1"] || 0
+    }
+
+    getDUMMYN2(): number {
+        return this.dummy["§DUMMYN2"] || this.input["§DUMMYN2"] || 0
+    }
+
+    getDUMMYN3(): number {
+        return this.dummy["§DUMMYN3"] || this.input["§DUMMYN3"] || 0
+    }
+
+    getDUMMYN4(): number {
+        return this.dummy["§DUMMYN4"] || this.input["§DUMMYN4"] || 0
+    }
+
+    getDUMMYN5(): number {
+        return this.dummy["§DUMMYN5"] || this.input["§DUMMYN5"] || 0
+    }
+
+    getDUMMYN6(): number {
+        return this.dummy["§DUMMYN6"] || this.input["§DUMMYN6"] || 0
+    }
+
+    getDUMMYN7(): number {
+        return this.dummy["§DUMMYN7"] || this.input["§DUMMYN7"] || 0
+    }
+
+    getDUMMYN8(): number {
+        return this.dummy["§DUMMYN8"] || this.input["§DUMMYN8"] || 0
+    }
+
+    getDUMMYN9(): number {
+        return this.dummy["§DUMMYN9"] || this.input["§DUMMYN9"] || 0
     }
 
 
-    getDUMMYN1(): any {
-        return this.dummy["§DUMMYN1"]
+    getDUMMYB1(): string {
+        return this.dummy["§DUMMYB1"] || this.input["§DUMMYB1"] || ""
     }
 
-    getDUMMYN2(): any {
-        return this.dummy["§DUMMYN2"]
+    getDUMMYB2(): string {
+        return this.dummy["§DUMMYB2"] || this.input["§DUMMYB2"] || ""
     }
 
-    getDUMMYN3(): any {
-        return this.dummy["§DUMMYN3"]
+    getDUMMYB3(): string {
+        return this.dummy["§DUMMYB3"] || this.input["§DUMMYB3"] || ""
     }
 
-    getDUMMYN4(): any {
-        return this.dummy["§DUMMYN4"]
+    getDUMMYB4(): string {
+        return this.dummy["§DUMMYB4"] || this.input["§DUMMYB4"] || ""
     }
 
-    getDUMMYN5(): any {
-        return this.dummy["§DUMMYN5"]
+    getDUMMYB5(): string {
+        return this.dummy["§DUMMYB5"] || this.input["§DUMMYB5"] || ""
     }
 
-    getDUMMYN6(): any {
-        return this.dummy["§DUMMYN6"]
+    getDUMMYB6(): string {
+        return this.dummy["§DUMMYB6"] || this.input["§DUMMYB6"] || ""
     }
 
-    getDUMMYN7(): any {
-        return this.dummy["§DUMMYN7"]
+    getDUMMYB7(): string {
+        return this.dummy["§DUMMYB7"] || this.input["§DUMMYB7"] || ""
     }
 
-    getDUMMYN8(): any {
-        return this.dummy["§DUMMYN8"]
+    getDUMMYB8(): string {
+        return this.dummy["§DUMMYB8"] || this.input["§DUMMYB8"] || ""
     }
 
-    getDummyN9(): any {
-        return this.dummy["§DUMMYN9"]
+    getDUMMYB9(): string {
+        return this.dummy["§DUMMYB9"] || this.input["§DUMMYB9"] || ""
     }
-
-
-    getDUMMYB1(): any {
-        return this.dummy["§DUMMYB1"]
-    }
-
-    getDUMMYB2(): any {
-        return this.dummy["§DUMMYB2"]
-    }
-
-    getDUMMYB3(): any {
-        return this.dummy["§DUMMYB3"]
-    }
-
-    getDUMMYB4(): any {
-        return this.dummy["§DUMMYB4"]
-    }
-
-    getDUMMYB5(): any {
-        return this.dummy["§DUMMYB5"]
-    }
-
 
     /**
      * Retrieves the value of the "XFVALI" output.
@@ -318,80 +351,96 @@ class Variables {
         this.output["*CON-B"] = con_b;
     }
 
-    setDUMMYA1(value: any) {
+    setDUMMYA1(value: string) {
         this.dummy["§DUMMYA1"] = value
     }
 
-    setDUMMYA2(value: any) {
+    setDUMMYA2(value: string) {
         this.dummy["§DUMMYA2"] = value
     }
 
-    setDUMMYA3(value: any) {
+    setDUMMYA3(value: string) {
         this.dummy["§DUMMYA3"] = value
     }
 
-    setDUMMYA4(value: any) {
+    setDUMMYA4(value: string) {
         this.dummy["§DUMMYA4"] = value
     }
 
-    setDUMMYA5(value: any) {
+    setDUMMYA5(value: string) {
         this.dummy["§DUMMYA5"] = value
     }
 
-    setDUMMYN1(value: any) {
+    setDUMMYN1(value: number) {
         this.dummy["§DUMMYN1"] = value
     }
 
-    setDUMMYN2(value: any) {
+    setDUMMYN2(value: number) {
         this.dummy["§DUMMYN2"] = value
     }
 
-    setDUMMYN3(value: any) {
+    setDUMMYN3(value: number) {
         this.dummy["§DUMMYN3"] = value
     }
 
-    setDUMMYN4(value: any) {
+    setDUMMYN4(value: number) {
         this.dummy["§DUMMYN4"] = value
     }
 
-    setDUMMYN5(value: any) {
+    setDUMMYN5(value: number) {
         this.dummy["§DUMMYN5"] = value
     }
 
-    setDUMMYN6(value: any) {
+    setDUMMYN6(value: number) {
         this.dummy["§DUMMYN6"] = value
     }
 
-    setDUMMYN7(value: any) {
+    setDUMMYN7(value: number) {
         this.dummy["§DUMMYN7"] = value
     }
 
-    setDUMMYN8(value: any) {
+    setDUMMYN8(value: number) {
         this.dummy["§DUMMYN8"] = value
     }
 
-    setDummyN9(value: any) {
+    setDummyN9(value: number) {
         this.dummy["§DUMMYN9"] = value
     }
 
-    setDUMMYB1(value: any) {
+    setDUMMYB1(value: string) {
         this.dummy["§DUMMYB1"] = value
     }
 
-    setDUMMYB2(value: any) {
+    setDUMMYB2(value: string) {
         this.dummy["§DUMMYB2"] = value
     }
 
-    setDUMMYB3(value: any) {
+    setDUMMYB3(value: string) {
         this.dummy["§DUMMYB3"] = value
     }
 
-    setDUMMYB4(value: any) {
+    setDUMMYB4(value: string) {
         this.dummy["§DUMMYB4"] = value
     }
 
-    setDUMMYB5(value: any) {
+    setDUMMYB5(value: string) {
         this.dummy["§DUMMYB5"] = value
+    }
+
+    setDUMMYB6(value: string) {
+        this.dummy["§DUMMYB6"] = value
+    }
+
+    setDUMMYB7(value: string) {
+        this.dummy["§DUMMYB7"] = value
+    }
+
+    setDUMMYB8(value: string) {
+        this.dummy["§DUMMYB8"] = value
+    }
+
+    setDUMMYB9(value: string) {
+        this.dummy["§DUMMYB9"] = value
     }
 
     /**
