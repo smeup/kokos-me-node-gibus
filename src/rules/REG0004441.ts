@@ -36,12 +36,14 @@ export const REG0004441: Rule = (iv) => {
     vars.setCF(0);
     
     //#2
-    if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI') && (vars.get('§FS_FAM2_165') == vars.get('§SI'))) {
+    //        ( §L_PORTANTE2 > #0 )    AND             ( §FS_FAM2_WALL=§SI )            AND ( §FS_FAM2_165=§SI )
+    if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_FAM2_165') == vars.get('§SI'))) {
         vars.setCF(1);
     }
     
     //#3
-    if ((vars.get('§L_PORTANTE3') > 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI') && (vars.get('§FS_FAM2_165') == vars.get('§SI'))) {
+    //           ( §L_PORTANTE3 > #0 ) AND                  ( §FS_FAM2_WALL=§SI )       AND               ( §FS_FAM2_165=§SI )
+    if ((vars.get('§L_PORTANTE3') > 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_FAM2_165') == vars.get('§SI'))) {
         vars.setCF(2);
     }
     // GENERATED
