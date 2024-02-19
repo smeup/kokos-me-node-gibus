@@ -51,27 +51,27 @@ export const REG0007087: Rule = (iv) => {
     vars.setCF(0);
     
     //#2
-    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI') && (vars.get('§FS_ACC_INI') == vars.get('§SI')) && (vars.get('§FS_STA_ACC_ANT') == vars.get('§SI'))) {
+    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_ACC_INI') == vars.get('§SI')) && (vars.get('§FS_STA_ACC_ANT') == vars.get('§SI'))) {
         vars.setCF(1);
     }
     
     //#3
-    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI') && (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_STA_ACC_ANT') == vars.get('§SI'))) {
+    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_STA_ACC_ANT') == vars.get('§SI'))) {
         vars.setCF(0);
     }
     
     //#4
-    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI') && (vars.get('§FS_ACC_CEN') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_DX') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_SX') == vars.get('§SI'))) {
+    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_ACC_CEN') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_DX') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_SX') == vars.get('§SI'))) {
         vars.setCF(1);
     }
     
     //#5
-    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI') && (vars.get('§FS_ACC_CEN') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_DX') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_SX') != vars.get('§SI'))) {
+    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_ACC_CEN') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_DX') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_SX') != vars.get('§SI'))) {
         vars.setCF(1);
     }
     
     //#6
-    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI') && (vars.get('§FS_ACC_CEN') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_DX') != vars.get('§SI'))) {
+    if ((vars.get('§FS_FAM2_165') == vars.get('§SI')) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_ACC_CEN') == vars.get('§SI')) && (vars.get('§FS_ACC_ANT_DX') != vars.get('§SI'))) {
         vars.setCF(0);
     }
     // GENERATED
