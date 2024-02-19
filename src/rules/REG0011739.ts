@@ -27,34 +27,13 @@ export const REG0011739: Rule = (iv) => {
     // *SET *CF = [ §N_MODULI - #1 ]
     // """
     // RESPONSE:
-    
-    Regola (THEN):
-    """
-    #1
-    THEN:
-    *SET *CF = 0
-    """
-    
     //#1
     vars.setCF(0);
-    
-    
-    
-    Regola (COND, THEN):
-    """
-    #2
-    COND:
-    §FS_FAM2_AVIA == vars.get('§SI')
-    
-    THEN:
-    vars.setCF(vars.get('§N_MODULI') - 1);
-    """
     
     //#2
     if (vars.get('§FS_FAM2_AVIA') == vars.get('§SI')) {
         vars.setCF(vars.get('§N_MODULI') - 1);
     }
-    
     // GENERATED
 
     return vars.output;
