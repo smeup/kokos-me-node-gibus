@@ -27,7 +27,7 @@ export const REG0007371: Rule = (iv) => {
     // """
     // RESPONSE:
     //#1
-    if ((vars.get('§FS_FAM2_100') == vars.get('§SI')) && ((vars.get('§SPOR') > 700) || (vars.get('§FS_GUI_MET') == vars.get('§SI'))) {
+    if ((vars.get('§FS_FAM2_100') == vars.get('§SI')) && ((vars.get('§SPOR') > 700) || (vars.get('§FS_GUI_MET') == vars.get('§SI')))) {
         vars.setCF(vars.get('§N_MODULI') + 1);
     } else {
         vars.setLG('');
