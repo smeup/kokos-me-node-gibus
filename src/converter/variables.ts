@@ -1,5 +1,5 @@
 import { RuleVariableMap } from "../types/general.js";
-import { numeric_vars } from "./consts.js"
+import { isNumericType } from "./utils.js"
 
 const D_DISE_LEN = 9
 
@@ -57,7 +57,7 @@ class Variables {
             }
 
         } else {
-            return this.input[key] || (numeric_vars.includes(key) ? 0 : "");
+            return this.input[key] || (isNumericType(key) ? 0 : "");
         }
 
     }
