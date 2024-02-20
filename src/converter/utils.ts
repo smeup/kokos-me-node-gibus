@@ -81,21 +81,34 @@ function isOpenAIKeySet(): boolean {
 /**
  * Load variables from a function payload.
  * @param funPayload The function payload.
+ * @param onlyVariablesSet This function is called with the variables that are set, it can be used to speed up the tests.
  * @returns The variables.
  */
-function loadVariables(funPayload: string): RuleVariableMap {
+function loadVariables(
+    funPayload: string,
+    onlyVariablesSet: (onlyVariablesSet: RuleVariableMap) => void = () => { })
+    : RuleVariableMap {
     if (funPayload === '') {
         return {};
     }
     const fun: Fun = JSON.parse(funPayload).fun;
+    let variables: RuleVariableMap = {};
     if (fun.INPUT && fun.INPUT !== '') {
         const jsonInput = JSON.parse(
             fun.INPUT ? fun.INPUT : ""
         ) as ExecuteRulePayload;
-        return jsonInput.variables ? jsonInput.variables : {}
-    } else {
-        return {};
+        variables = jsonInput.variables ? jsonInput.variables : {}
     }
+    const filteredVariables: RuleVariableMap = {};
+    Object.entries(variables).forEach(([key, value]) => {
+        if (value !== "" && value !== 0) {
+            filteredVariables[key] = value;
+        }
+    });
+    onlyVariablesSet(filteredVariables);
+    return variables;
 }
+
+
 
 export { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet, isOpenAIKeySet, loadVariables }
