@@ -133,7 +133,9 @@ export interface ITypeProvider {
     isNumericType(name: string): boolean;
 }
 
-export { Rule, ConversionResult, Condition }; export type DbAccessConfig = {
+export { Rule, ConversionResult, Condition };
+
+export type DbAccessConfig = {
     host: string;
     user: string;
     password: string;
