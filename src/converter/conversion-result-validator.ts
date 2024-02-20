@@ -27,16 +27,17 @@ class SyntaxErrorValidator implements IConversionResultValidator {
         const currentTimeMillis = Date.now();
         let tempRulePath = path.resolve(process.cwd(), "src", "rules", `${result.ruleId}.${currentTimeMillis}.ts`);
         fs.writeFileSync(tempRulePath, result.javaScript);
-        if (os.platform() === "win32") {
-            tempRulePath = url.pathToFileURL(rulePath).toString();
-        }
         try {
-            await import(tempRulePath);
+            if (os.platform() === "win32") {
+                await import(url.pathToFileURL(tempRulePath).toString());
+            } else {
+                await import(tempRulePath);
+            }
         } catch (error) {
             throw new Error(`${result.ruleId}: ${error}`);
         } finally {
             if (tempRulePath) {
-                fs.rmSync(tempRulePath, { force: true });
+                fs.rmSync(tempRulePath, { force: true }); // Delete the file using the file path
             }
         }
     }
