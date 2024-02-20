@@ -55,7 +55,7 @@ class RuleConverterApp {
      * @returns A promise that resolves to the conversion result or null if the conversion fails.
      */
     private async convertRule(rule: Rule): Promise<ConversionResult | null> {
-        const models = ["gpt-3.5-turbo", "gpt-4"];
+        const models = ["gpt-3.5-turbo", "gpt-3.5-turbo", "gpt-4"];
         let retry = false;
         for (const model of models) {
             try {
