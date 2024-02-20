@@ -1,4 +1,4 @@
-import { Condition, IRuleDao, Rule } from './types';
+import { Condition, IRuleDao, Rule } from './types.js';
 import * as path from 'path'
 import * as fs from 'fs'
 

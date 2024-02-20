@@ -1,12 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { RuleConverterAppExamples } from './app.examples';
-import { Rule, ExecuteRulePayload, RuleVariableMap } from '../types/general';
-import { getRule } from '../services/RULE';
+import { RuleConverterAppExamples } from './app.examples.js';
+import { Rule, ExecuteRulePayload, RuleVariableMap } from '../types/general.js';
+import { getRule } from '../services/RULE.js';
 import { Fun } from "@sme.up/kokos-sdk-node";
-import { DbAccessConfig, ITypeProvider } from './types';
-import { TypeProviderConst } from './type-provider.const';
-import * as consts from './consts';
+import { DbAccessConfig, ITypeProvider } from './types.js';
+import { TypeProviderConst } from './type-provider.const.js';
+import * as consts from './consts.js';
 
 let typeProvider: ITypeProvider | null = new TypeProviderConst();
 
