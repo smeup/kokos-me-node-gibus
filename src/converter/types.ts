@@ -59,7 +59,7 @@ export interface IRuleConverterService {
      * @param modelName - The model name to be used for the conversion.
      * @returns A promise that resolves to a ConversionResult.
      */
-    convertRule(rule: Rule, modelName:string): Promise<ConversionResult>;
+    convertRule(rule: Rule, modelName: string): Promise<ConversionResult>;
 }
 
 /**
@@ -119,4 +119,23 @@ export interface IConversionResultDao {
     saveConversionResult(conversionResult: ConversionResult): void;
 }
 
-export { Rule, ConversionResult, Condition };
+
+/**
+ * Represents a type provider.
+ */
+export interface ITypeProvider {
+
+    /**
+     * Checks if a given name is numeric.
+     * @param name - The variable name to be checked.
+     * @returns True if the name is numeric, false otherwise.
+     */
+    isNumericType(name: string): boolean;
+}
+
+export { Rule, ConversionResult, Condition }; export type DbAccessConfig = {
+    host: string;
+    user: string;
+    password: string;
+};
+
