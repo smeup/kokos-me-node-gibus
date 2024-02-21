@@ -318,7 +318,8 @@ class Variables {
      */
     setCF(cf: number) {
         this.cf = cf
-        this.output["D§COEF"] = cf * this.get("D§COEF");
+        let dcoefResult = cf * this.get("D§COEF");
+        this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
     }
 
     /**
