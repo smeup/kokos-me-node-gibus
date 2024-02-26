@@ -1,19 +1,18 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { SystemMessage, HumanMessage } from "langchain/schema";
-import { Condition, ConversionResult, IRuleConverterService, Rule } from "./types";
-import * as utils from "./utils";
-import { SYSTEM_MESSAGE } from "./prompts";
+import { Condition, ConversionResult, IRuleConverterService, Rule } from "./types.js";
+import { SYSTEM_MESSAGE } from "./prompts.js";
 
 class OpenAIRuleConverter implements IRuleConverterService {
-
+   
     constructor() {
     }
 
-    async convertRule(rule: Rule): Promise<ConversionResult> {
+    async convertRule(rule: Rule, modelName: string = "gpt-3.5-turbo"): Promise<ConversionResult> {
         const openai = new ChatOpenAI(
             {
                 openAIApiKey: process.env.OPENAI_API_KEY,
-                modelName: "gpt-3.5-turbo",
+                modelName: modelName,
                 temperature: 0
             }
         );

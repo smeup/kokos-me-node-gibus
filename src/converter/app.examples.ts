@@ -1,9 +1,9 @@
-import { RuleConverterApp } from "./app";
-import { ConversionResultDaoFileSystem } from "./convertion-result-dao.file";
-import { OpenAIRuleConverter } from "./rule-converter.openai";
-import { RuleDaoExamples } from "./rule-dao.examples";
-import { SyntaxErrorValidator } from "./conversion-result-validator";
-import { IConversionResultDao, IRuleConverterService, IRuleDao } from "./types";
+import { RuleConverterApp } from "./app.js";
+import { ConversionResultDaoFileSystem } from "./convertion-result-dao.file.js";
+import { OpenAIRuleConverter } from "./rule-converter.openai.js";
+import { RuleDaoExamples } from "./rule-dao.examples.js";
+import { SyntaxErrorValidator } from "./conversion-result-validator.js";
+import { IConversionResultDao, IRuleConverterService, IRuleDao } from "./types.js";
 import * as path from 'path';
 import * as fs from 'fs';
 

@@ -1,9 +1,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { RuleConverterAppExamples } from './app.examples';
-import { Rule, ExecuteRulePayload, RuleVariableMap } from '../types/general';
-import { getRule } from '../services/RULE';
+import { RuleConverterAppExamples } from './app.examples.js';
+import { Rule, ExecuteRulePayload, RuleVariableMap } from '../types/general.js';
+import { getRule } from '../services/RULE.js';
 import { Fun } from "@sme.up/kokos-sdk-node";
+import { DbAccessConfig, ITypeProvider } from './types.js';
+import { TypeProviderConst } from './type-provider.const.js';
+import * as consts from './consts.js';
+
+let typeProvider: ITypeProvider | null = new TypeProviderConst();
 
 /**
  * Removes unnecessary whitespace characters and js comments from a given code string.
@@ -79,23 +84,87 @@ function isOpenAIKeySet(): boolean {
 }
 
 /**
+ * Retrieves the database access configuration.
+ * The configuration is retrieved from the consts module.
+ * @see {@link consts}
+ * 
+ * @returns The database access configuration object or null if the configuration is not set.
+ */
+function getDbAccessConfig(): DbAccessConfig | null {
+    if (consts.host !== "setme"
+        && consts.user !== "setme" && consts.password !== "setme") {
+        return {
+            host: consts.host,
+            user: consts.user,
+            password: consts.password
+        };
+    } else {
+        return null;
+    }
+}
+
+/**
  * Load variables from a function payload.
  * @param funPayload The function payload.
+ * @param onlyVariablesSet This function is called with the variables that are set, it can be used to speed up the tests.
  * @returns The variables.
  */
-function loadVariables(funPayload: string): RuleVariableMap {
+function loadVariables(
+    funPayload: string,
+    onlyVariablesSet: (onlyVariablesSet: RuleVariableMap) => void = () => { })
+    : RuleVariableMap {
     if (funPayload === '') {
         return {};
     }
     const fun: Fun = JSON.parse(funPayload).fun;
+    let variables: RuleVariableMap = {};
     if (fun.INPUT && fun.INPUT !== '') {
         const jsonInput = JSON.parse(
             fun.INPUT ? fun.INPUT : ""
         ) as ExecuteRulePayload;
-        return jsonInput.variables ? jsonInput.variables : {}
-    } else {
-        return {};
+        variables = jsonInput.variables ? jsonInput.variables : {}
     }
+    const filteredVariables: RuleVariableMap = {};
+    Object.entries(variables).forEach(([key, value]) => {
+        if (value !== "" && value !== 0) {
+            filteredVariables[key] = value;
+        }
+    });
+    onlyVariablesSet(filteredVariables);
+    return variables;
 }
 
-export { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet, isOpenAIKeySet, loadVariables }
+/**
+ * Sets the type provider for the converter.
+ * Default is TypeProviderConst.
+ * 
+ * @param typeProvider - The type provider to be set.
+ * @see {@link TypeProviderConst}
+ */
+function setTypeProvider(newTypeProvider: ITypeProvider | null) {
+    typeProvider = newTypeProvider;
+}
+
+/***
+ * Check if a variable is a numeric type.
+ * @param name The name of the variable.
+ * @returns True if the variable is a numeric type, false otherwise.
+ */
+function isNumericType(name: string): boolean {
+    if (typeProvider === null) {
+        throw new Error("Type provider not set");
+    }
+    return typeProvider.isNumericType(name);
+}
+
+
+export {
+    removeUnnecessaryChars,
+    convertExampleRule,
+    runFunctionIfOpenAIKeySet,
+    isOpenAIKeySet,
+    loadVariables,
+    isNumericType,
+    setTypeProvider,
+    getDbAccessConfig
+}

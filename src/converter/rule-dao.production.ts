@@ -1,12 +1,7 @@
 import { Condition, IRuleDao } from './types';
+import { DbAccessConfig } from './types';
 import { Rule } from './types';
 import { Connection, pool } from 'node-jt400';
-
-type Config = {
-    host: string;
-    user: string;
-    password: string;
-};
 
 type Row = {
     COMP: string;
@@ -21,7 +16,7 @@ type Row = {
  */
 class RuleDaoProduction implements IRuleDao {
 
-    private readonly config: Config;
+    private readonly config: DbAccessConfig;
     private readonly exludeConverted: string;
     readonly pool: Connection;
     private readonly filter: string;
@@ -138,4 +133,4 @@ class RuleDaoProduction implements IRuleDao {
 
 }
 
-export { RuleDaoProduction, Config, Row };
+export { RuleDaoProduction, Row };
