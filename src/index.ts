@@ -11,6 +11,6 @@ if (dbAccessConfig) {
     await typeProvider.init();
     setTypeProvider(typeProvider);
 } else {
-    LOGGER.error(new Error("Database access configuration not set, cannot initialize type provider."));
+    LOGGER.info("Database access configuration not provided I am going to use default type provider");
 }
 startServer("me-node-gibus");
