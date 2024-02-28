@@ -542,7 +542,7 @@ class Variables {
         if (typeof s == "string") {
             return s
         } else {
-            return (s != 0) ? s*10 : s
+            return s*10
         }
         
 
