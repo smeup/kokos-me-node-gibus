@@ -255,7 +255,7 @@ class Variables {
      * @returns The value of the "XFVALI" output or input.
      */
     getLG(): any {
-        return this.output["XFVALI"] || this.input["XFVALI"] || "";
+        return this.getStringOrDefault("XFVALI")
     }
 
     /**
@@ -264,7 +264,7 @@ class Variables {
      * @returns The value of the "D§NOTA" output or input.
      */
     getNT(): any {
-        return this.output["D§NOTA"] || this.input["D§NOTA"] || ""
+        return this.getStringOrDefault("D§NOTA")
     }
 
     /**
@@ -274,35 +274,35 @@ class Variables {
      * @returns The value of the "D§QUA1" output or input.
      */
     getQ1(): number {
-        return this.output["D§QUA1"] || this.input["D§QUA1"] || 0;
+        return this.getNumberOrDefault("D§QUA1")
     }
 
     /**
      * Same behavior as getQ1
      */
     getQ2(): number {
-        return this.output["D§QUA2"] || this.input["D§QUA2"] || 0;
+        return this.getNumberOrDefault("D§QUA2")
     }
 
     /**
      * Same behavior as getQ1
      */
     getQ3(): number {
-        return this.output["D§QUA3"] || this.input["D§QUA3"] || 0;
+        return this.getNumberOrDefault("D§QUA3")
     }
 
     /**
      * Same behavior as getQ1
      */
     getQ4(): number {
-        return this.output["D§QUA4"] || this.input["D§QUA4"] || 0;
+        return this.getNumberOrDefault("D§QUA4")
     }
 
     /**
      * Same behavior as getQ1
      */
     getQ5(): number {
-        return this.output["D§QUA5"] || this.input["D§QUA5"] || 0;
+        return this.getNumberOrDefault("D§QUA5")
     }
 
     /**
@@ -311,15 +311,15 @@ class Variables {
      * 
      * @returns The value of the "D§USR1" output or input.
      */
-    getS1(): number {
-        return this.output["D§USR1"] || this.input["D§USR1"] || 0
+    getS1(): number|string {
+        return this.output["D§USR1"] || this.input["D§USR1"]
     }
 
     /**
      * Same behavior as getS1
      */
-    getS2(): number {
-        return this.output["D§USR2"] || this.input["D§USR2"] || 0
+    getS2(): number|string {
+        return this.output["D§USR2"] || this.input["D§USR2"]
     }
 
     /**
@@ -328,6 +328,24 @@ class Variables {
      */
     getLUNG(): any {
         return this.getCON_B();
+    }
+
+    private getStringOrDefault(varname: string): string {
+        const value = this.output[varname];
+        if (value !== undefined && value !== null) {
+            return value
+        } else {
+            return this.input[varname] || ""
+        }
+    }
+
+    private getNumberOrDefault(varname: string): number {
+        const value = this.output[varname];
+        if (value !== undefined && value !== null) {
+            return value
+        } else {
+            return this.input[varname] || 0
+        }
     }
 
     /**
