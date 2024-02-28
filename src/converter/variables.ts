@@ -509,7 +509,8 @@ class Variables {
      * @param usr The value that will be set
      */
     setS1(s: number) {
-        this.output["D§USR1"] = s
+        
+        this.output["D§USR1"] = this.calculateS(s)
     }
 
     /**
@@ -517,9 +518,13 @@ class Variables {
      * @param usr The value that will be set
      */
     setS2(s: number) {
-        this.output["D§USR2"] = s
+        this.output["D§USR2"] = this.calculateS(s)
     }
 
+    private calculateS(s: number): number {
+        return (s != 0) ? s*10 : s
+
+    }
 }
 
 export { Variables }
