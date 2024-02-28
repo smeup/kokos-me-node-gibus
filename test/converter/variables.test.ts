@@ -214,15 +214,37 @@ describe("Variables", () => {
     expect(variables.output["D§QUA5"]).toBe(500);
   });
 
-  it("should set the value of D§USR1", () => {
-    variables.setS1(1);
-    expect(variables.output["D§USR1"]).toBe(1);
+  it("test *S1='AAA'", () => {
+    variables.setS1('AAA');
+    expect(variables.output["D§USR1"]).toBe('AAA');
   });
 
-  it("should set the value of D§USR2", () => {
-    variables.setS2(2);
-    expect(variables.output["D§USR2"]).toBe(2);
+  it("test*S1=0", () => {
+    variables.setS1(0);
+    expect(variables.output["D§USR1"]).toBe(0);
   });
+
+  it("test *S1=1", () => {
+    variables.setS1(1);
+    expect(variables.output["D§USR1"]).toBe(10);
+  });
+
+  it("test *S2='AAA'", () => {
+    variables.setS2('AAA');
+    expect(variables.output["D§USR2"]).toBe('AAA');
+  });
+
+  it("test *S2=0", () => {
+    variables.setS2(0);
+    expect(variables.output["D§USR2"]).toBe(0);
+  });
+
+  it("test *S2=1", () => {
+    variables.setS2(1);
+    expect(variables.output["D§USR2"]).toBe(10);
+  });
+
+
 });
 
 describe("Get variables starts with *", () => {
