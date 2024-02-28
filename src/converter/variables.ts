@@ -233,7 +233,7 @@ class Variables {
 
     private getDUMMYString(varname: string): string {
         const value = this.dummy[varname];
-        if (value) {
+        if (value !== undefined && value !== null) {
             return value
         } else {
             return this.input[varname] || ""
