@@ -508,8 +508,7 @@ class Variables {
      * Set the value of "D§USR1"
      * @param usr The value that will be set
      */
-    setS1(s: number) {
-        
+    setS1(s: number|string) {
         this.output["D§USR1"] = this.calculateS(s)
     }
 
@@ -517,12 +516,17 @@ class Variables {
      * Set the value of "D§USR2"
      * @param usr The value that will be set
      */
-    setS2(s: number) {
+    setS2(s: number|string) {
         this.output["D§USR2"] = this.calculateS(s)
     }
 
-    private calculateS(s: number): number {
-        return (s != 0) ? s*10 : s
+    private calculateS(s: number|string): number|string {
+        if (typeof s == "string") {
+            return s
+        } else {
+            return (s != 0) ? s*10 : s
+        }
+        
 
     }
 }
