@@ -371,10 +371,9 @@ class Variables {
      * @param con_a The value that will be set, if undefined default is ""
      */
     setCON_A(con_a: string) {
-        con_a = con_a || "";
-        // D§DISE is a 9 chars len
-        this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] as string || "").substring(4)).padEnd(D_DISE_LEN, " ");
+        con_a = con_a || "    ";
         this.output["*CON-A"] = con_a;
+        this.setDise()
     }
 
     /**
@@ -383,9 +382,20 @@ class Variables {
      */
     setCON_B(con_b: number) {
         con_b = con_b || 0;
-        // D§DISE is a 9 chars len
-        this.output["D§DISE"] = (String(this.output["D§DISE"] || "").padEnd(4, " ") + con_b.toString()).padEnd(D_DISE_LEN, " ");
         this.output["*CON-B"] = con_b;
+        this.setDise()
+    }
+
+    private setDise() {
+        let conA = this.output["*CON-A"];
+        conA = (conA  === undefined || conA === null) ? "    " : conA;
+        let conB = this.output["*CON-B"];
+        conB = (conB  === undefined || conB === null) ? 0 : conB;    
+        this.output["D§DISE"] = conA;
+        conB = conB * 10;
+        conB = conB.toString();
+        conB= conB.padStart(5, '0');
+        this.output["D§DISE"] = this.output["D§DISE"].concat(conB);;
     }
 
     setDUMMYA1(value: string) {
