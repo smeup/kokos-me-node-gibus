@@ -123,112 +123,130 @@ class Variables {
     }
 
     getDUMMYA1(): string {
-        return this.dummy["§DUMMYA1"] || this.input["§DUMMYA1"] || ""
+        return this.getDUMMYString("§DUMMYA1")
     }
 
     getDUMMYA2(): string {
-        return this.dummy["§DUMMYA2"] || this.input["§DUMMYA2"] || ""
+        return this.getDUMMYString("§DUMMYA2")
     }
 
     getDUMMYA3(): string {
-        return this.dummy["§DUMMYA3"] || this.input["§DUMMYA3"] || ""
+        return this.getDUMMYString("§DUMMYA3")
     }
 
     getDUMMYA4(): string {
-        return this.dummy["§DUMMYA4"] || this.input["§DUMMYA4"] || ""
+        return this.getDUMMYString("§DUMMYA4")
     }
 
     getDUMMYA5(): string {
-        return this.dummy["§DUMMYA5"] || this.input["§DUMMYA5"] || ""
+        return this.getDUMMYString("§DUMMYA5")
     }
 
     getDUMMYA6(): string {
-        return this.dummy["§DUMMYA6"] || this.input["§DUMMYA6"] || ""
+        return this.getDUMMYString("§DUMMYA6")
     }
 
     getDUMMYA7(): string {
-        return this.dummy["§DUMMYA7"] || this.input["§DUMMYA7"] || ""
+        return this.getDUMMYString("§DUMMYA7")
     }
 
     getDUMMYA8(): string {
-        return this.dummy["§DUMMYA8"] || this.input["§DUMMYA8"] || ""
+        return this.getDUMMYString("§DUMMYA8")
     }
 
     getDUMMYA9(): string {
-        return this.dummy["§DUMMYA9"] || this.input["§DUMMYA9"] || ""
+        return this.getDUMMYString("§DUMMYA9")
     }
 
     getDUMMYN1(): number {
-        return this.dummy["§DUMMYN1"] || this.input["§DUMMYN1"] || 0
+        return this.getDUMMYNumber("§DUMMYN1")
     }
 
     getDUMMYN2(): number {
-        return this.dummy["§DUMMYN2"] || this.input["§DUMMYN2"] || 0
+        return this.getDUMMYNumber("§DUMMYN2")
     }
 
     getDUMMYN3(): number {
-        return this.dummy["§DUMMYN3"] || this.input["§DUMMYN3"] || 0
+        return this.getDUMMYNumber("§DUMMYN3")
     }
 
     getDUMMYN4(): number {
-        return this.dummy["§DUMMYN4"] || this.input["§DUMMYN4"] || 0
+        return this.getDUMMYNumber("§DUMMYN4")
     }
 
     getDUMMYN5(): number {
-        return this.dummy["§DUMMYN5"] || this.input["§DUMMYN5"] || 0
+        return this.getDUMMYNumber("§DUMMYN5")
     }
 
     getDUMMYN6(): number {
-        return this.dummy["§DUMMYN6"] || this.input["§DUMMYN6"] || 0
+        return this.getDUMMYNumber("§DUMMYN6")
     }
 
     getDUMMYN7(): number {
-        return this.dummy["§DUMMYN7"] || this.input["§DUMMYN7"] || 0
+        return this.getDUMMYNumber("§DUMMYN7")
     }
 
     getDUMMYN8(): number {
-        return this.dummy["§DUMMYN8"] || this.input["§DUMMYN8"] || 0
+        return this.getDUMMYNumber("§DUMMYN8")
     }
 
     getDUMMYN9(): number {
-        return this.dummy["§DUMMYN9"] || this.input["§DUMMYN9"] || 0
+        return this.getDUMMYNumber("§DUMMYN9")
     }
 
 
     getDUMMYB1(): string {
-        return this.dummy["§DUMMYB1"] || this.input["§DUMMYB1"] || ""
+        return this.getDUMMYString("§DUMMYB1")
     }
 
     getDUMMYB2(): string {
-        return this.dummy["§DUMMYB2"] || this.input["§DUMMYB2"] || ""
+        return this.getDUMMYString("§DUMMYB2")
     }
 
     getDUMMYB3(): string {
-        return this.dummy["§DUMMYB3"] || this.input["§DUMMYB3"] || ""
+        return this.getDUMMYString("§DUMMYB3")
     }
 
     getDUMMYB4(): string {
-        return this.dummy["§DUMMYB4"] || this.input["§DUMMYB4"] || ""
+        return this.getDUMMYString("§DUMMYB4")
     }
 
     getDUMMYB5(): string {
-        return this.dummy["§DUMMYB5"] || this.input["§DUMMYB5"] || ""
+        return this.getDUMMYString("§DUMMYB5")
     }
 
     getDUMMYB6(): string {
-        return this.dummy["§DUMMYB6"] || this.input["§DUMMYB6"] || ""
+        return this.getDUMMYString("§DUMMYB6")
     }
 
     getDUMMYB7(): string {
-        return this.dummy["§DUMMYB7"] || this.input["§DUMMYB7"] || ""
+        return this.getDUMMYString("§DUMMYB7")
     }
 
     getDUMMYB8(): string {
-        return this.dummy["§DUMMYB8"] || this.input["§DUMMYB8"] || ""
+        return this.getDUMMYString("§DUMMYB8")
     }
 
     getDUMMYB9(): string {
-        return this.dummy["§DUMMYB9"] || this.input["§DUMMYB9"] || ""
+        return this.getDUMMYString("§DUMMYB9")
+    }
+
+    private getDUMMYString(varname: string): string {
+        const value = this.dummy[varname];
+        if (value) {
+            return value
+        } else {
+            return this.input[varname] || ""
+        }
+    }
+
+    private getDUMMYNumber(varname: string): number {
+        const value = this.dummy[varname];
+        if (value !== undefined && value !== null) {
+            return value
+        } else {
+            return this.input[varname] || 0
+        }
     }
 
     /**
