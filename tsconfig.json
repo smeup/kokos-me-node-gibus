@@ -22,6 +22,7 @@
 		"lib",
 		"test/**/*.ts",
 		"src/converter/convert-production.ts",
-		"src/converter/rule-dao.production.ts"
+		"src/converter/rule-dao.production.ts",
+		"src/converter/type-provider.db.ts"
 	]
 }
