@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "TEMPLATE"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§L_PORTANTE2\": 1}}"
+    }
+}

@@ -101,26 +101,26 @@ describe("Variables", () => {
   });
 
   it("should set the value of D§DISE (first four chars)", () => {
-    variables.setCON_A("NEW_CON_A_VALUE");
-    expect(variables.output["D§DISE"]).toBe("NEW_     ");
-    expect(variables.output["*CON-A"]).toBe("NEW_CON_A_VALUE");
+    variables.setCON_A("AAAA");
+    expect(variables.output["D§DISE"]).toBe("AAAA00000");
+    expect(variables.output["*CON-A"]).toBe("AAAA");
   });
 
   it("setCON_A with undefined value", () => {
     variables.setCON_A(variables.output["UNDEFINED"]);
-    expect(variables.output["D§DISE"]).toBe("         ");
-    expect(variables.output["*CON-A"]).toBe("");
+    expect(variables.output["D§DISE"]).toBe("    00000");
+    expect(variables.output["*CON-A"]).toBe("    ");
   });
 
   it("should set the value of D§DISE (last five chars)", () => {
     variables.setCON_B(12);
-    expect(variables.output["D§DISE"]).toBe("    12   ");
+    expect(variables.output["D§DISE"]).toBe("    00120");
     expect(variables.output["*CON-B"]).toBe(12);
   });
 
   it("setCON_B with undefined value", () => {
     variables.setCON_B(variables.output["UNDEFINED"]);
-    expect(variables.output["D§DISE"]).toBe("    0    ");
+    expect(variables.output["D§DISE"]).toBe("    00000");
     expect(variables.output["*CON-B"]).toBe(0);
   });
 
@@ -214,15 +214,37 @@ describe("Variables", () => {
     expect(variables.output["D§QUA5"]).toBe(500);
   });
 
-  it("should set the value of D§USR1", () => {
-    variables.setS1(1);
-    expect(variables.output["D§USR1"]).toBe(1);
+  it("test *S1='AAA'", () => {
+    variables.setS1('AAA');
+    expect(variables.output["D§USR1"]).toBe('AAA');
   });
 
-  it("should set the value of D§USR2", () => {
-    variables.setS2(2);
-    expect(variables.output["D§USR2"]).toBe(2);
+  it("test*S1=0", () => {
+    variables.setS1(0);
+    expect(variables.output["D§USR1"]).toBe(0);
   });
+
+  it("test *S1=1", () => {
+    variables.setS1(1);
+    expect(variables.output["D§USR1"]).toBe(10);
+  });
+
+  it("test *S2='AAA'", () => {
+    variables.setS2('AAA');
+    expect(variables.output["D§USR2"]).toBe('AAA');
+  });
+
+  it("test *S2=0", () => {
+    variables.setS2(0);
+    expect(variables.output["D§USR2"]).toBe(0);
+  });
+
+  it("test *S2=1", () => {
+    variables.setS2(1);
+    expect(variables.output["D§USR2"]).toBe(10);
+  });
+
+
 });
 
 describe("Get variables starts with *", () => {

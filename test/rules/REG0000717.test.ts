@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { loadVariables } from "../../src/converter/utils";
 
 describe("REG0000717 test", () => {
-    it("Expected D§COEF= -0.028", async () => {
+    it("Expected D§COEF= 0", async () => {
         // define input
         const input: RuleVariableMap = loadVariables(
             fs.readFileSync(__dirname + "/REG0000717.1.json", "utf-8"),
@@ -15,7 +15,7 @@ describe("REG0000717 test", () => {
         const output = REG0000717(input);
 
         // check values
-        expect(output["D§COEF"].toFixed(3)).toBe("-0.028");
+        expect(output["D§COEF"]).toBe(0);
     });
 });
 

@@ -123,112 +123,130 @@ class Variables {
     }
 
     getDUMMYA1(): string {
-        return this.dummy["§DUMMYA1"] || this.input["§DUMMYA1"] || ""
+        return this.getDUMMYString("§DUMMYA1")
     }
 
     getDUMMYA2(): string {
-        return this.dummy["§DUMMYA2"] || this.input["§DUMMYA2"] || ""
+        return this.getDUMMYString("§DUMMYA2")
     }
 
     getDUMMYA3(): string {
-        return this.dummy["§DUMMYA3"] || this.input["§DUMMYA3"] || ""
+        return this.getDUMMYString("§DUMMYA3")
     }
 
     getDUMMYA4(): string {
-        return this.dummy["§DUMMYA4"] || this.input["§DUMMYA4"] || ""
+        return this.getDUMMYString("§DUMMYA4")
     }
 
     getDUMMYA5(): string {
-        return this.dummy["§DUMMYA5"] || this.input["§DUMMYA5"] || ""
+        return this.getDUMMYString("§DUMMYA5")
     }
 
     getDUMMYA6(): string {
-        return this.dummy["§DUMMYA6"] || this.input["§DUMMYA6"] || ""
+        return this.getDUMMYString("§DUMMYA6")
     }
 
     getDUMMYA7(): string {
-        return this.dummy["§DUMMYA7"] || this.input["§DUMMYA7"] || ""
+        return this.getDUMMYString("§DUMMYA7")
     }
 
     getDUMMYA8(): string {
-        return this.dummy["§DUMMYA8"] || this.input["§DUMMYA8"] || ""
+        return this.getDUMMYString("§DUMMYA8")
     }
 
     getDUMMYA9(): string {
-        return this.dummy["§DUMMYA9"] || this.input["§DUMMYA9"] || ""
+        return this.getDUMMYString("§DUMMYA9")
     }
 
     getDUMMYN1(): number {
-        return this.dummy["§DUMMYN1"] || this.input["§DUMMYN1"] || 0
+        return this.getDUMMYNumber("§DUMMYN1")
     }
 
     getDUMMYN2(): number {
-        return this.dummy["§DUMMYN2"] || this.input["§DUMMYN2"] || 0
+        return this.getDUMMYNumber("§DUMMYN2")
     }
 
     getDUMMYN3(): number {
-        return this.dummy["§DUMMYN3"] || this.input["§DUMMYN3"] || 0
+        return this.getDUMMYNumber("§DUMMYN3")
     }
 
     getDUMMYN4(): number {
-        return this.dummy["§DUMMYN4"] || this.input["§DUMMYN4"] || 0
+        return this.getDUMMYNumber("§DUMMYN4")
     }
 
     getDUMMYN5(): number {
-        return this.dummy["§DUMMYN5"] || this.input["§DUMMYN5"] || 0
+        return this.getDUMMYNumber("§DUMMYN5")
     }
 
     getDUMMYN6(): number {
-        return this.dummy["§DUMMYN6"] || this.input["§DUMMYN6"] || 0
+        return this.getDUMMYNumber("§DUMMYN6")
     }
 
     getDUMMYN7(): number {
-        return this.dummy["§DUMMYN7"] || this.input["§DUMMYN7"] || 0
+        return this.getDUMMYNumber("§DUMMYN7")
     }
 
     getDUMMYN8(): number {
-        return this.dummy["§DUMMYN8"] || this.input["§DUMMYN8"] || 0
+        return this.getDUMMYNumber("§DUMMYN8")
     }
 
     getDUMMYN9(): number {
-        return this.dummy["§DUMMYN9"] || this.input["§DUMMYN9"] || 0
+        return this.getDUMMYNumber("§DUMMYN9")
     }
 
 
     getDUMMYB1(): string {
-        return this.dummy["§DUMMYB1"] || this.input["§DUMMYB1"] || ""
+        return this.getDUMMYString("§DUMMYB1")
     }
 
     getDUMMYB2(): string {
-        return this.dummy["§DUMMYB2"] || this.input["§DUMMYB2"] || ""
+        return this.getDUMMYString("§DUMMYB2")
     }
 
     getDUMMYB3(): string {
-        return this.dummy["§DUMMYB3"] || this.input["§DUMMYB3"] || ""
+        return this.getDUMMYString("§DUMMYB3")
     }
 
     getDUMMYB4(): string {
-        return this.dummy["§DUMMYB4"] || this.input["§DUMMYB4"] || ""
+        return this.getDUMMYString("§DUMMYB4")
     }
 
     getDUMMYB5(): string {
-        return this.dummy["§DUMMYB5"] || this.input["§DUMMYB5"] || ""
+        return this.getDUMMYString("§DUMMYB5")
     }
 
     getDUMMYB6(): string {
-        return this.dummy["§DUMMYB6"] || this.input["§DUMMYB6"] || ""
+        return this.getDUMMYString("§DUMMYB6")
     }
 
     getDUMMYB7(): string {
-        return this.dummy["§DUMMYB7"] || this.input["§DUMMYB7"] || ""
+        return this.getDUMMYString("§DUMMYB7")
     }
 
     getDUMMYB8(): string {
-        return this.dummy["§DUMMYB8"] || this.input["§DUMMYB8"] || ""
+        return this.getDUMMYString("§DUMMYB8")
     }
 
     getDUMMYB9(): string {
-        return this.dummy["§DUMMYB9"] || this.input["§DUMMYB9"] || ""
+        return this.getDUMMYString("§DUMMYB9")
+    }
+
+    private getDUMMYString(varname: string): string {
+        const value = this.dummy[varname];
+        if (value !== undefined && value !== null) {
+            return value
+        } else {
+            return this.input[varname] || ""
+        }
+    }
+
+    private getDUMMYNumber(varname: string): number {
+        const value = this.dummy[varname];
+        if (value !== undefined && value !== null) {
+            return value
+        } else {
+            return this.input[varname] || 0
+        }
     }
 
     /**
@@ -237,7 +255,7 @@ class Variables {
      * @returns The value of the "XFVALI" output or input.
      */
     getLG(): any {
-        return this.output["XFVALI"] || this.input["XFVALI"] || "";
+        return this.getStringOrDefault("XFVALI")
     }
 
     /**
@@ -246,7 +264,7 @@ class Variables {
      * @returns The value of the "D§NOTA" output or input.
      */
     getNT(): any {
-        return this.output["D§NOTA"] || this.input["D§NOTA"] || ""
+        return this.getStringOrDefault("D§NOTA")
     }
 
     /**
@@ -256,35 +274,35 @@ class Variables {
      * @returns The value of the "D§QUA1" output or input.
      */
     getQ1(): number {
-        return this.output["D§QUA1"] || this.input["D§QUA1"] || 0;
+        return this.getNumberOrDefault("D§QUA1")
     }
 
     /**
      * Same behavior as getQ1
      */
     getQ2(): number {
-        return this.output["D§QUA2"] || this.input["D§QUA2"] || 0;
+        return this.getNumberOrDefault("D§QUA2")
     }
 
     /**
      * Same behavior as getQ1
      */
     getQ3(): number {
-        return this.output["D§QUA3"] || this.input["D§QUA3"] || 0;
+        return this.getNumberOrDefault("D§QUA3")
     }
 
     /**
      * Same behavior as getQ1
      */
     getQ4(): number {
-        return this.output["D§QUA4"] || this.input["D§QUA4"] || 0;
+        return this.getNumberOrDefault("D§QUA4")
     }
 
     /**
      * Same behavior as getQ1
      */
     getQ5(): number {
-        return this.output["D§QUA5"] || this.input["D§QUA5"] || 0;
+        return this.getNumberOrDefault("D§QUA5")
     }
 
     /**
@@ -293,15 +311,15 @@ class Variables {
      * 
      * @returns The value of the "D§USR1" output or input.
      */
-    getS1(): number {
-        return this.output["D§USR1"] || this.input["D§USR1"] || 0
+    getS1(): number|string {
+        return this.output["D§USR1"] || this.input["D§USR1"]
     }
 
     /**
      * Same behavior as getS1
      */
-    getS2(): number {
-        return this.output["D§USR2"] || this.input["D§USR2"] || 0
+    getS2(): number|string {
+        return this.output["D§USR2"] || this.input["D§USR2"]
     }
 
     /**
@@ -310,6 +328,24 @@ class Variables {
      */
     getLUNG(): any {
         return this.getCON_B();
+    }
+
+    private getStringOrDefault(varname: string): string {
+        const value = this.output[varname];
+        if (value !== undefined && value !== null) {
+            return value
+        } else {
+            return this.input[varname] || ""
+        }
+    }
+
+    private getNumberOrDefault(varname: string): number {
+        const value = this.output[varname];
+        if (value !== undefined && value !== null) {
+            return value
+        } else {
+            return this.input[varname] || 0
+        }
     }
 
     /**
@@ -335,10 +371,9 @@ class Variables {
      * @param con_a The value that will be set, if undefined default is ""
      */
     setCON_A(con_a: string) {
-        con_a = con_a || "";
-        // D§DISE is a 9 chars len
-        this.output["D§DISE"] = (con_a.trim().padEnd(4, " ").substring(0, 4) + (this.output["D§DISE"] as string || "").substring(4)).padEnd(D_DISE_LEN, " ");
+        con_a = con_a || "    ";
         this.output["*CON-A"] = con_a;
+        this.setDise()
     }
 
     /**
@@ -347,9 +382,20 @@ class Variables {
      */
     setCON_B(con_b: number) {
         con_b = con_b || 0;
-        // D§DISE is a 9 chars len
-        this.output["D§DISE"] = (String(this.output["D§DISE"] || "").padEnd(4, " ") + con_b.toString()).padEnd(D_DISE_LEN, " ");
         this.output["*CON-B"] = con_b;
+        this.setDise()
+    }
+
+    private setDise() {
+        let conA = this.output["*CON-A"];
+        conA = (conA  === undefined || conA === null) ? "    " : conA;
+        let conB = this.output["*CON-B"];
+        conB = (conB  === undefined || conB === null) ? 0 : conB;    
+        this.output["D§DISE"] = conA;
+        conB = conB * 10;
+        conB = conB.toString();
+        conB= conB.padStart(5, '0');
+        this.output["D§DISE"] = this.output["D§DISE"].concat(conB);;
     }
 
     setDUMMYA1(value: string) {
@@ -508,18 +554,27 @@ class Variables {
      * Set the value of "D§USR1"
      * @param usr The value that will be set
      */
-    setS1(s: number) {
-        this.output["D§USR1"] = s
+    setS1(s: number|string) {
+        this.output["D§USR1"] = this.calculateS(s)
     }
 
     /**
      * Set the value of "D§USR2"
      * @param usr The value that will be set
      */
-    setS2(s: number) {
-        this.output["D§USR2"] = s
+    setS2(s: number|string) {
+        this.output["D§USR2"] = this.calculateS(s)
     }
 
+    private calculateS(s: number|string): number|string {
+        if (typeof s == "string") {
+            return s
+        } else {
+            return s*10
+        }
+        
+
+    }
 }
 
 export { Variables }
