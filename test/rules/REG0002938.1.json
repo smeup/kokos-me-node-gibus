@@ -1,0 +1,22 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0002938"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§NR_H_GUARN_GUID\": 2, \"§VR_ABB\": \"01\", \"§ALTE_TC\" : 250, \"§TI_MIS_GUI\" : \"02\"}}"
+    },
+    "context": {
+        "user": {
+            "sessionId": "string",
+            "username": "string",
+            "environment": "string",
+            "device": "string"
+        }
+    }
+}
