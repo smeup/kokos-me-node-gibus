@@ -13,9 +13,12 @@ export const TEMPLATE: Rule = (iv) => {
 
     const vars = new Variables(iv);
 
-    // GENERATED
-    // AI_GENERATED
-    // GENERATED
-
+    if (vars.get("§L_PORTANTE2") === 1) {
+        vars.setCON_A("1632");
+        vars.setCON_B(1);
+    } else {
+        vars.setCON_A("1632");
+        vars.setCON_B(0);
+    }
     return vars.output;
 };
