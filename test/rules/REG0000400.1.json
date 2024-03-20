@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0000400"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§FS_ZEROGRADI\": \"SI\", \"§SI\": \"SI\"}}"
+    }
+}
