@@ -102,13 +102,13 @@ describe("Variables", () => {
 
   it("should set the value of D§DISE (first four chars)", () => {
     variables.setCON_A("AAAA");
-    expect(variables.output["D§DISE"]).toBe("AAAA00000");
+    expect(variables.output["D§DISE"]).toBe("AAAA");
     expect(variables.output["*CON-A"]).toBe("AAAA");
   });
 
   it("setCON_A with undefined value", () => {
     variables.setCON_A(variables.output["UNDEFINED"]);
-    expect(variables.output["D§DISE"]).toBe("    00000");
+    expect(variables.output["D§DISE"]).toBe("    ");
     expect(variables.output["*CON-A"]).toBe("    ");
   });
 
@@ -120,8 +120,7 @@ describe("Variables", () => {
 
   it("setCON_B with undefined value", () => {
     variables.setCON_B(variables.output["UNDEFINED"]);
-    expect(variables.output["D§DISE"]).toBe("    00000");
-    expect(variables.output["*CON-B"]).toBe(0);
+    expect(variables.output["D§DISE"]).toBe("    ");
   });
 
   it("should set the value of §DUMMYN1", () => {

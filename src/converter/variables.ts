@@ -389,13 +389,14 @@ class Variables {
     private setDise() {
         let conA = this.output["*CON-A"];
         conA = (conA  === undefined || conA === null) ? "    " : conA;
-        let conB = this.output["*CON-B"];
-        conB = (conB  === undefined || conB === null) ? 0 : conB;    
         this.output["D§DISE"] = conA;
-        conB = conB * 10;
-        conB = conB.toString();
-        conB= conB.padStart(5, '0');
-        this.output["D§DISE"] = this.output["D§DISE"].concat(conB);;
+        let conB = this.output["*CON-B"];
+        if (conB) {
+            conB = conB * 10;
+            conB = conB.toString();
+            conB = conB.padStart(5, '0');
+            this.output["D§DISE"] = this.output["D§DISE"].concat(conB);
+        }
     }
 
     setDUMMYA1(value: string) {
