@@ -24,11 +24,10 @@ export const REG0008677: Rule = (iv) => {
     // *SET *S2 = *LUNG
     // """
     // RESPONSE:
-    if (vars.get('*COL') != null) {
-        vars.setCON_A(vars.get('*COL'));
-        vars.setCON_B(vars.get('*LUNG'));
-        vars.setS2(vars.get('*LUNG'));
-    }
+    //#1
+    vars.setCON_A(vars.getCOL());
+    vars.setCON_B(vars.getLUNG());
+    vars.setS2(vars.getLUNG());
     // GENERATED
 
     return vars.output;
