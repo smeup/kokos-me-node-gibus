@@ -15,4 +15,14 @@ describe("REG0009203 test", () => {
         expect(output["D§USR2"]).toBe(0);
     });
 
+    it("Expected D§USR2: 50000", async () => {
+        // define input
+        const input: RuleVariableMap = loadVariables(fs.readFileSync(__dirname + "/REG0009203.2.json", "utf-8"));
+        // apply rule
+        const output = REG0009203(input);
+        console.log(output);
+        // check 
+        expect(output["D§USR2"]).toBe(5000);
+    });
+
 });
