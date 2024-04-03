@@ -5,14 +5,15 @@ import fs from 'fs';
 
 describe("REG0009521 test", () => {
 
-    it("Expected D§COEF: 1", async () => {
+    it("Expected D§COEF: 0", async () => {
         // define input
         const input: RuleVariableMap = loadVariables(fs.readFileSync(__dirname + "/REG0009521.1.json", "utf-8"));
         // apply rule
         const output = REG0009521(input);
-        // todo wait fiorenza evaluation 
-        // expect(output["D§COEF"]).toBe(1);
+        console.log(output);
+        // check
         expect(output["D§COEF"]).toBe(0);
+        
     });
 
 
