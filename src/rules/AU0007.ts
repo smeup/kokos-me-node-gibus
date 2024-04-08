@@ -9,12 +9,26 @@
 import { Rule } from "../types/general.js";
 import { Variables } from "../converter/variables.js";
 
-export const TEMPLATE: Rule = (iv) => {
+export const AU0007: Rule = (iv) => {
 
     const vars = new Variables(iv);
 
     // GENERATED
-    // AI_GENERATED
+    // RULE: AU0007
+    // REQUEST:
+    // """
+    // #1
+    // COND:
+    // TIPO_P_TELO1 = 'FALLS'
+    // ELSE:
+    // *SET *LG = '0'
+    // """
+    // RESPONSE:
+    //#1
+    if (vars.get('TIPO_P_TELO1') == 'FALLS') {
+    } else {
+        vars.setLG('0');
+    }
     // GENERATED
 
     return vars.output;

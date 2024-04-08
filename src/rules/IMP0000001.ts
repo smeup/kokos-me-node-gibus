@@ -9,25 +9,31 @@
 import { Rule } from "../types/general.js";
 import { Variables } from "../converter/variables.js";
 
-export const REG0008677: Rule = (iv) => {
+export const IMP0000001: Rule = (iv) => {
 
     const vars = new Variables(iv);
 
     // GENERATED
-    // RULE: REG0008677
+    // RULE: IMP0000001
     // REQUEST:
     // """
     // #1
+    // COND:
+    // (§FO_ATT_UNIVERS = §SI) AND (§FS_DIM_400 <> §SI)
     // THEN:
-    // *SET *CON-A = *COL
-    // *SET *CON-B = *LUNG
-    // *SET *S2 = *LUNG
+    // *SET *CON-A = §VERN_1_COM
+    // *SET *LG = ''
+    // ELSE:
+    // *SET *LG = ''
     // """
     // RESPONSE:
     //#1
-    vars.setCON_A(vars.getCOL());
-    vars.setCON_B(vars.getLUNG());
-    vars.setS2(vars.getLUNG());
+    if ((vars.get('§FO_ATT_UNIVERS') == vars.get('§SI')) && (vars.get('§FS_DIM_400') != vars.get('§SI'))) {
+        vars.setCON_A(vars.get('§VERN_1_COM'));
+        vars.setLG('');
+    } else {
+        vars.setLG('');
+    }
     // GENERATED
 
     return vars.output;

@@ -9,25 +9,39 @@
 import { Rule } from "../types/general.js";
 import { Variables } from "../converter/variables.js";
 
-export const REG0008677: Rule = (iv) => {
+export const IMP0000009: Rule = (iv) => {
 
     const vars = new Variables(iv);
 
     // GENERATED
-    // RULE: REG0008677
+    // RULE: IMP0000009
     // REQUEST:
     // """
     // #1
+    // COND:
+    // §FO_SUP_CO_AL_CI = §SI
     // THEN:
-    // *SET *CON-A = *COL
-    // *SET *CON-B = *LUNG
-    // *SET *S2 = *LUNG
+    // *SET *CON-A = §VERN_1_COM
+    // ELSE:
+    // *SET *LG = ''
+    // #2
+    // COND:
+    // §FO_SUP_CO_IN_CI = §SI
+    // THEN:
+    // *SET *CF = #0
     // """
     // RESPONSE:
     //#1
-    vars.setCON_A(vars.getCOL());
-    vars.setCON_B(vars.getLUNG());
-    vars.setS2(vars.getLUNG());
+    if (vars.get('§FO_SUP_CO_AL_CI') == vars.get('§SI')) {
+        vars.setCON_A(vars.get('§VERN_1_COM'));
+    } else {
+        vars.setLG('');
+    }
+    
+    //#2
+    if (vars.get('§FO_SUP_CO_IN_CI') == vars.get('§SI')) {
+        vars.setCF(0);
+    }
     // GENERATED
 
     return vars.output;

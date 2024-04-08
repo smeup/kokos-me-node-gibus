@@ -9,12 +9,23 @@
 import { Rule } from "../types/general.js";
 import { Variables } from "../converter/variables.js";
 
-export const TEMPLATE: Rule = (iv) => {
+export const REG0000005: Rule = (iv) => {
 
     const vars = new Variables(iv);
 
     // GENERATED
-    // AI_GENERATED
+    // RULE: REG0000005
+    // REQUEST:
+    // """
+    // #1
+    // THEN:
+    // *SET *CON-A = §VERN_1_COM
+    // *SET *CON-B = §LARG
+    // """
+    // RESPONSE:
+    //#1
+    vars.setCON_A(vars.get('§VERN_1_COM'));
+    vars.setCON_B(vars.get('§LARG'));
     // GENERATED
 
     return vars.output;

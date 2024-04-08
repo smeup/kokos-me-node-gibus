@@ -9,12 +9,29 @@
 import { Rule } from "../types/general.js";
 import { Variables } from "../converter/variables.js";
 
-export const TEMPLATE: Rule = (iv) => {
+export const IMP0000008: Rule = (iv) => {
 
     const vars = new Variables(iv);
 
     // GENERATED
-    // AI_GENERATED
+    // RULE: IMP0000008
+    // REQUEST:
+    // """
+    // #1
+    // COND:
+    // §FO_SUP_CO_SC = §SI
+    // THEN:
+    // *SET *CON-A = §VERN_1_COM
+    // ELSE:
+    // *SET *LG = ''
+    // """
+    // RESPONSE:
+    //#1
+    if (vars.get('§FO_SUP_CO_SC') == vars.get('§SI')) {
+        vars.setCON_A(vars.get('§VERN_1_COM'));
+    } else {
+        vars.setLG('');
+    }
     // GENERATED
 
     return vars.output;
