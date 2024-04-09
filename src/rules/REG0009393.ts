@@ -69,7 +69,6 @@ export const REG0009393: Rule = (iv) => {
     // *SET *CON-A='0069'
     // """
     // RESPONSE:
-    """
     //#1
     vars.setCF(0);
     vars.setDUMMYB1('');
@@ -86,17 +85,17 @@ export const REG0009393: Rule = (iv) => {
     }
     
     //#4
-    if ((vars.get('§DUMMYB1') == vars.get('§SI')) && (vars.get('§FIX_PAV') == 'SX')) {
+    if (vars.get('§DUMMYB1') == vars.get('§SI') && vars.get('§FIX_PAV') == 'SX') {
         vars.setCF(1);
     }
     
     //#5
-    if ((vars.get('§DUMMYB1') == vars.get('§SI')) && (vars.get('§FIX_PAV') == 'DX')) {
+    if (vars.get('§DUMMYB1') == vars.get('§SI') && vars.get('§FIX_PAV') == 'DX') {
         vars.setCF(1);
     }
     
     //#6
-    if ((vars.get('§DUMMYB1') == vars.get('§SI')) && (vars.get('§FIX_PAV') == 'DX+SX')) {
+    if (vars.get('§DUMMYB1') == vars.get('§SI') && vars.get('§FIX_PAV') == 'DX+SX') {
         vars.setCF(0);
     }
     
@@ -119,7 +118,6 @@ export const REG0009393: Rule = (iv) => {
     if (vars.get('§VERN_PLAST') == 'P069') {
         vars.setCON_A('0069');
     }
-    """
     // GENERATED
 
     return vars.output;
