@@ -38,7 +38,7 @@ export const REG0013271: Rule = (iv) => {
     vars.setCF(0);
     vars.setCON_A(vars.get('§VERN_PLAST'));
     //#2
-    if ((vars.get('§FS_SPA_75') == vars.get('§SI')) && (1 == 2)) {
+    if ((vars.get('§FS_SPA_75') == vars.get('§SI')) && (false)) {
         vars.setCF(1);
     }
     //#3

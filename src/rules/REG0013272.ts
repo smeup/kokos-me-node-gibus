@@ -40,7 +40,7 @@ export const REG0013272: Rule = (iv) => {
     vars.setCON_A(vars.getCOL());
     vars.setCON_B(vars.getLUNG());
     //#2
-    if ((vars.get('§FS_SPA_75') == vars.get('§SI')) && (1 == 2)) {
+    if ((vars.get('§FS_SPA_75') == vars.get('§SI')) && (false)) {
         vars.setCF(1);
     }
     //#3
