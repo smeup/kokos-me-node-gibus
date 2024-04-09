@@ -113,7 +113,7 @@ ELSE:
 """
 Traduzione:
 //#1
-if (getVAR() > 0) {
+if (vars.getVAR() > 0) {
 } else {
     vars.setLG("");
 }
