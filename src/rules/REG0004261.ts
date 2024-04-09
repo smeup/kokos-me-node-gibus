@@ -80,7 +80,7 @@ export const REG0004261: Rule = (iv) => {
     }
     //#6
     if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && ((vars.get('§N_GAM_ANT_N_ANG') > 0) || (vars.get('§N_GAM_POS_N_ANG') == 0)) && (vars.get('§NR_MON_ANG_MAN') == 0)) {
-        vars.setCF([]);
+        vars.setCF("");
     }
     //#7
     if (vars.get('§FS_FAM2_ZENIT') == vars.get('§SI')) {
