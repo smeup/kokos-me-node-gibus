@@ -34,12 +34,14 @@ export const REG0009780: Rule = (iv) => {
     // RESPONSE:
     //#1
     vars.setCON_A('P073');
+    
     //#2
-    if (getCOL() == '0055' || getCOL() == '0131' || getCOL() == '0323' || getCOL() == '0280') {
+    if (vars.getCOL() == '0055' || vars.getCOL() == '0131' || vars.getCOL() == '0323' || vars.getCOL() == '0280') {
         vars.setCON_A('P065');
     }
+    
     //#3
-    if (getCOL() == '0053' || getCOL() == '0069' || getCOL() == '0073' || getCOL() == '0065' || getCOL() == '0266' || getCOL() == '0258' || getCOL() == '0324') {
+    if (vars.getCOL() == '0053' || vars.getCOL() == '0069' || vars.getCOL() == '0073' || vars.getCOL() == '0065' || vars.getCOL() == '0266' || vars.getCOL() == '0258' || vars.getCOL() == '0324') {
         vars.setCON_A('P068');
     }
     // GENERATED
