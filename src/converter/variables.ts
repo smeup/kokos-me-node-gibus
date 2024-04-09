@@ -330,6 +330,22 @@ class Variables {
         return this.getCON_B();
     }
 
+    getLUN(): any {
+        return this.getLUNG();
+    }
+
+    setD_L(value: any) {
+        throw new Error("Method not implemented.");
+    }
+
+    setD_P(value: any) {
+        throw new Error("Method not implemented.");
+    }
+
+    setD_H(value: any) {
+        throw new Error("Method not implemented.");
+    }
+
     private getStringOrDefault(varname: string): string {
         const value = this.output[varname];
         if (value !== undefined && value !== null) {
@@ -352,9 +368,14 @@ class Variables {
      * Set the value of cf and the output["D§COEF"] property to the product of the current value of "D§COEF" and the new value of cf.
      * @param cf The value that will be set
      */
-    setCF(cf: number) {
-        this.cf = cf
-        let dcoefResult = cf * this.get("D§COEF");
+    setCF(cf: number|string) {
+        if (typeof cf === 'string') {
+            if (cf === "") cf = "";
+            this.cf = parseFloat(cf);
+        } else {
+            this.cf = cf;
+        }
+        let dcoefResult = this.cf * this.get("D§COEF");
         this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
     }
 
@@ -380,7 +401,11 @@ class Variables {
      * Set the last five chars of "D§DISE" and "CON-B"
      * @param con_b The value that will be set, if undefined default is 0
      */
-    setCON_B(con_b: number) {
+    setCON_B(con_b: number|string) {
+        if (typeof con_b == "string") {
+            if (con_b === "") con_b = "0";
+            con_b = parseFloat(con_b);
+        } 
         con_b = con_b || 0;
         this.output["*CON-B"] = con_b;
         this.setDise()
