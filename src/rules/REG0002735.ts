@@ -25,9 +25,10 @@ export const REG0002735: Rule = (iv) => {
     // """
     // RESPONSE:
     //#1
-    if (getCOL() == '0000') {
+    if (vars.getCOL() == '0000') {
         vars.setLG('');
-    }
+    } 
+    
     // GENERATED
 
     return vars.output;
