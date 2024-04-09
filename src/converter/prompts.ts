@@ -193,6 +193,21 @@ Traduzione:
 //#1
 // Empty rule
 ###
+
+###
+"""
+// #1
+// COND:
+// §FS_SPA_75 = §SI AND #1 = #2
+// THEN:
+// *SET *CF = #1
+"""
+Traduzione:
+//#1
+if ((vars.get('§FS_SPA_75') == vars.get('§SI')) && (false)) {
+    vars.setCF(1);
+}
+###
 `;
 
 const SYSTEM_MESSAGE = `

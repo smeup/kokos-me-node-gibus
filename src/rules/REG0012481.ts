@@ -25,7 +25,7 @@ export const REG0012481: Rule = (iv) => {
     // """
     // RESPONSE:
     //#1
-    if (getCOL() == '0325') {
+    if (vars.getCOL() === '0325') {
     } else {
         vars.setCF(0);
     }

@@ -41,7 +41,7 @@ export const REG0001903: Rule = (iv) => {
         vars.setCF(1);
     }
     //#3
-    if ((vars.get('§FS_SPA_75') == vars.get('§SI')) && (1 == 2)) {
+    if ((vars.get('§FS_SPA_75') == vars.get('§SI')) && (false)) {
         vars.setCF(1);
     }
     // GENERATED

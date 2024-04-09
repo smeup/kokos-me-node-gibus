@@ -50,7 +50,7 @@ export const REG0011752: Rule = (iv) => {
         vars.setCF(0);
     }
     //#4
-    if (vars.get('§FS_SPA_75') == vars.get('§SI') && 1 == 2) {
+    if (vars.get('§FS_SPA_75') == vars.get('§SI') && false) {
         vars.setCF(0);
     }
     // GENERATED
