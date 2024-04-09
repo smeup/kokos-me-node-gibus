@@ -1,5 +1,5 @@
 import { RuleVariableMap } from "../types/general.js";
-import { isNumericType } from "./utils.js"
+import { isNumericType } from "./utils.js";
 
 const D_DISE_LEN = 9
 
@@ -27,16 +27,33 @@ const D_DISE_LEN = 9
  * @see get(key: string)
  */
 class Variables {
-
-    input: RuleVariableMap;
+    config: Record<string, any> = {};
+    input: RuleVariableMap = {};
     output: RuleVariableMap = {};
     dummy: RuleVariableMap = {};
     cf: number = 1;
+    parObj: Record<string, any> = { elemNumber: 0, objArray: [] }; //objArray ha oggetti tipo {text : '0000', idx : 1}
+    CSVA: string = '';
+  
 
     constructor(input: RuleVariableMap) {
-        this.input = input
+        this.input = input;
+        this.config = require(__dirname + '/config.json');
+        if (this.config.defaultOutput) {
+            this.setDefault(this.config.defaultOutput);
+        }
+
+        if (input['*CSVA']) {
+            this.CSVA = input['*CSVA'];
+            if (!this.config['*CSVA'][this.CSVA]){
+                this.CSVA = '*';//la condizione per gli sconosciuti (configurazione commerciale)
+            }
+            this.parObj.elemNumber = this.config['*CSVA'][this.CSVA].length; //numero elementi che compongono D§DISE
+            this.setDefaultDise();
+        }
     }
 
+   
     /**
      * Retrieves the value of the variable with the specified name.
      * If the variable name starts with "*" or "§DUMMY" the value will be retrieved from the getter method with the same name.
@@ -311,14 +328,14 @@ class Variables {
      * 
      * @returns The value of the "D§USR1" output or input.
      */
-    getS1(): number|string {
+    getS1(): number | string {
         return this.output["D§USR1"] || this.input["D§USR1"]
     }
 
     /**
      * Same behavior as getS1
      */
-    getS2(): number|string {
+    getS2(): number | string {
         return this.output["D§USR2"] || this.input["D§USR2"]
     }
 
@@ -354,8 +371,21 @@ class Variables {
      */
     setCF(cf: number) {
         this.cf = cf
-        let dcoefResult = cf * this.get("D§COEF");
-        this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
+        if (this.config["D§COEF"] === "newValue") {
+            this.output["D§COEF"] = cf;
+        } else {
+            let dcoefResult = cf * this.get("D§COEF");
+            this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
+        }
+       this.chkXfVali();//faccio uno o una serie di controlli per capire se il legame è ancora valido
+    }
+
+    private chkXfVali(){//al momento controllo solo il coefficiente
+        if (this.output["D§COEF"] <= 0){
+            this.output["XFVALI"] = "";
+        }else{
+            this.output["XFVALI"] = "1";
+        }
     }
 
     /**
@@ -370,33 +400,125 @@ class Variables {
      * Set the first four chars of "D§DISE" and "CON-A"
      * @param con_a The value that will be set, if undefined default is ""
      */
-    setCON_A(con_a: string) {
-        con_a = con_a || "    ";
-        this.output["*CON-A"] = con_a;
-        this.setDise()
+
+    private formatNumber(theNumber: number, conCsva: any): Object {
+        let retString: string;
+        let tmpNumber = Math.round(theNumber * 10 * conCsva.dec);
+        retString = tmpNumber.toString();
+
+        let retObj = { result: 'NOK', text: '' };
+
+        if (retString.length > conCsva.length) {
+            retObj.result = 'NOK';
+        } else {
+            if (conCsva.format === 'zeroPadded') {
+                retString = retString.padStart(conCsva.length, '0');
+            }
+            retObj.result = 'OK';
+            retObj.text = retString;
+        }
+
+        return retObj;
     }
 
-    /**
-     * Set the last five chars of "D§DISE" and "CON-B"
-     * @param con_b The value that will be set, if undefined default is 0
-     */
-    setCON_B(con_b: number) {
-        con_b = con_b || 0;
-        this.output["*CON-B"] = con_b;
-        this.setDise()
+    private formatString(theString: string, conCsva: Object): Object {
+        let retObj = { result: 'NOK', text: '' };
+        retObj.result = 'OK'
+        retObj.text = theString;
+        return retObj;
+    }
+
+    private setCon(value: any, label: string, posIdx: number) {
+        let CSVA = this.CSVA;
+        let conCsvaPropList = this.config["*CSVA"][CSVA];
+        let conCsva = conCsvaPropList.find((elem: any) => elem.idx === posIdx);
+        let retObj: any;
+        let objArray = this.parObj.objArray;
+        if (conCsva) {
+            if (conCsva.dataType === 'string') {
+                retObj = this.formatString(value, conCsva)
+            } else {
+                retObj = this.formatNumber(value, conCsva)
+            }
+            if (retObj.result === 'OK') {
+                let idx = objArray.findIndex(
+                    (elem: any) => elem.idx === posIdx
+                );
+                let objToLoad = { idx: posIdx, text: retObj.text };
+                if (idx >= 0) {
+                    objArray[idx] = objToLoad;
+                } else {
+                    objArray.push(objToLoad);
+                }
+
+                this.setDise();
+                this.output[label] = value;
+            }
+
+        } else {//non è previsto
+
+        }
+    }
+
+    //c'è un sistema per mettere queste funzioni su un file esterno?
+    //sempre se ha senso parametrizzarle
+    setCON_A(value: any) {
+        this.setCon(value, '*CON-A', 1);
+    }
+
+    setCON_B(value: any) {
+        this.setCon(value, '*CON-B', 2);
+    }
+
+    setCON_C(value : any) {
+        this.setCon(value , '*CON-C', 3);
     }
 
     private setDise() {
-        let conA = this.output["*CON-A"];
-        conA = (conA  === undefined || conA === null) ? "    " : conA;
-        this.output["D§DISE"] = conA;
-        let conB = this.output["*CON-B"];
-        if (conB) {
-            conB = conB * 10;
-            conB = conB.toString();
-            conB = conB.padStart(5, '0');
-            this.output["D§DISE"] = this.output["D§DISE"].concat(conB);
+        let objArray = this.parObj.objArray;
+        if (this.parObj.elemNumber === objArray.length) {//ho tutti gli elementi in canna
+            let objArray = this.parObj.objArray;
+            this.output["D§DISE"] = '';
+            objArray.sort((a: any, b: any) => a.idx - b.idx);
+            objArray.forEach((obj: any) => { this.output["D§DISE"] += obj.text });
         }
+    }
+
+    private setDefault(defaultType: string) {
+        switch (defaultType) {
+            case 'input':
+                this.setCF(this.input["D§COEF"]);
+                this.setCM(this.input["D§COMP"]);
+                this.setNT(this.getNT());
+                this.setS1(this.getS1());
+                this.setS2(this.getS2());
+                break;
+        }
+    }
+
+    private setDefaultDise() {
+        let defaultArray = this.config['*CSVA'][this.CSVA].filter((elem: any) => elem.default);
+        let objArray = this.parObj.objArray;
+        defaultArray.forEach((defElem: any) => {
+            if (!objArray.find((elem: any) => defElem.idx === elem.idx)) {
+                let defaultVal;
+                if (defElem.default.type === 'input') {
+                    let theKey = defElem.default.key;
+                    defaultVal = this.input[theKey];
+                }
+                switch (defElem.idx) {
+                    case 1:
+                        this.setCON_A(defaultVal);
+                        break;
+                    case 2:
+                        this.setCON_B(defaultVal);
+                        break;
+                    case 3:
+                        this.setCON_C(defaultVal);
+                        break;
+                }
+            }
+        });
     }
 
     setDUMMYA1(value: string) {
@@ -555,7 +677,7 @@ class Variables {
      * Set the value of "D§USR1"
      * @param usr The value that will be set
      */
-    setS1(s: number|string) {
+    setS1(s: number | string) {
         this.output["D§USR1"] = this.calculateS(s)
     }
 
@@ -563,17 +685,17 @@ class Variables {
      * Set the value of "D§USR2"
      * @param usr The value that will be set
      */
-    setS2(s: number|string) {
+    setS2(s: number | string) {
         this.output["D§USR2"] = this.calculateS(s)
     }
 
-    private calculateS(s: number|string): number|string {
+    private calculateS(s: number | string): number | string {
         if (typeof s == "string") {
             return s
         } else {
-            return s*10
+            return s * 10
         }
-        
+
 
     }
 }

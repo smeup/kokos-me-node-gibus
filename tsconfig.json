@@ -5,6 +5,7 @@
 		"outDir": "./lib",
 		"baseUrl": "./src",
 		"rootDir": "./src",
+		"resolveJsonModule": true,
 		"moduleResolution": "node",
 		"alwaysStrict": true,
 		"strict": true,
@@ -16,7 +17,7 @@
 	},
 	"include": [
 		"src/**/*.ts"
-	],
+, "src/converter/customFunctions.js"	],
 	"exclude": [
 		"node_modules",
 		"lib",
