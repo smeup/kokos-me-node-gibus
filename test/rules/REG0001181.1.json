@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0001181"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§FS_MOT_SOMFY\": \"SI\", \"§FS_MOTORE_CSI\": \"SI\", \"§SI\": \"SI\"}}"
+    }
+}

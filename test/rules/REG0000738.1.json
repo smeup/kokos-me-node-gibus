@@ -1,0 +1,15 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0001181"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§FS_13_QU\": \"SI\", \"§VERN_PLAST\": \"P072\", \"§FS_NO_GUI\": \"NO\", \"*CSVA\": \"003\", \"§SI\": \"SI\"}}"
+    }
+}
+
