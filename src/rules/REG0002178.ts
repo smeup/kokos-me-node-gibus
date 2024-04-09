@@ -34,12 +34,14 @@ export const REG0002178: Rule = (iv) => {
     // RESPONSE:
     //#1
     vars.setCON_A('P073');
+    
     //#2
-    if (getCOL() == '0053' || getCOL() == '0069' || getCOL() == '0073') {
+    if (vars.getCOL() == '0053' || vars.getCOL() == '0069' || vars.getCOL() == '0073') {
         vars.setCON_A('P068');
     }
+    
     //#3
-    if (getCOL() == '0055') {
+    if (vars.getCOL() == '0055') {
         vars.setCON_A('P065');
     }
     // GENERATED

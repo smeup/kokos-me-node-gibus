@@ -27,11 +27,12 @@ export const REG0001959: Rule = (iv) => {
     // """
     // RESPONSE:
     //#1
-    if (getCOL() == '0055') {
+    if (vars.getCOL() === '0055') {
         vars.setCON_A('P055');
     } else {
         vars.setCON_A('P072');
     }
+    
     // GENERATED
 
     return vars.output;

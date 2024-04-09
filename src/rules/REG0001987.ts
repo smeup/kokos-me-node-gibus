@@ -25,9 +25,9 @@ export const REG0001987: Rule = (iv) => {
     // """
     // RESPONSE:
     //#1
-    if (getCOL() == '0055') {
+    if (vars.getCOL() === '0055') {
     } else {
-        vars.setLG("");
+        vars.setLG('');
     }
     // GENERATED
 

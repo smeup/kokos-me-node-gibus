@@ -29,8 +29,9 @@ export const REG0002163: Rule = (iv) => {
     // RESPONSE:
     //#1
     vars.setCON_A('P072');
+    
     //#2
-    if (getCOL() == '0055' || getCOL() == '0053' || getCOL() == '0065') {
+    if (vars.getCOL() == '0055' || vars.getCOL() == '0053' || vars.getCOL() == '0065') {
         vars.setCON_A('P055');
     }
     // GENERATED
