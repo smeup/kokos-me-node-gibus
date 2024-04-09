@@ -44,7 +44,6 @@ export const REG0006526: Rule = (iv) => {
     // *SET *CF = ''
     // """
     // RESPONSE:
-    """
     //#1
     vars.setCF(0);
     vars.setCON_A('0051');
@@ -66,7 +65,7 @@ export const REG0006526: Rule = (iv) => {
     } else {
         vars.setCF('');
     }
-    """
+
     // GENERATED
 
     return vars.output;
