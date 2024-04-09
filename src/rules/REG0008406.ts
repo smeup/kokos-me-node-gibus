@@ -20,7 +20,9 @@ export const REG0008406: Rule = (iv) => {
     // #1
     // """
     // RESPONSE:
-    Mi dispiace, ma non hai fornito una regola da tradurre. Per favore, fornisci una regola nel formato corretto.
+    //#1
+    // Empty rule
+    
     // GENERATED
 
     return vars.output;
