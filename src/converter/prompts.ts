@@ -183,6 +183,16 @@ if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§FS_FAM2_WALL') == vars.get('
     vars.setCF(1);
 }
 ###
+
+###
+Regola vuota:
+"""
+#1
+"""
+Traduzione:
+//#1
+// Empty rule
+###
 `;
 
 const SYSTEM_MESSAGE = `
