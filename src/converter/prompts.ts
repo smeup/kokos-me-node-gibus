@@ -113,7 +113,7 @@ ELSE:
 """
 Traduzione:
 //#1
-if (getVAR() > 0) {
+if (vars.getVAR() > 0) {
 } else {
     vars.setLG("");
 }
@@ -182,6 +182,16 @@ Traduzione:
 if ((vars.get('§L_PORTANTE2') > 0) && (vars.get('§FS_FAM2_WALL') == vars.get('§SI')) && (vars.get('§FS_FAM2_165') == vars.get('§SI'))) {
     vars.setCF(1);
 }
+###
+
+###
+Regola vuota:
+"""
+#1
+"""
+Traduzione:
+//#1
+// Empty rule
 ###
 `;
 

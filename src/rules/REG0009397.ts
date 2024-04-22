@@ -1,91 +1,44 @@
-import { Rule } from "../types/general";
+/**
+ * This rule represents a template implementation of a rule.
+ * It takes an input value and performs some operations on it using the Variables class.
+ * The result is returned as the output value.
+ * 
+ * @param iv The input value for the rule.
+ * @returns The output value after applying the rule.
+ */
+import { Rule } from "../types/general.js";
+import { Variables } from "../converter/variables.js";
 
-// I created this function because I don't know where it is located. "./utils/util.mjs" not exists
-function defZero(a: any): any {
-  return a;
-}
-
-// before
-//(function (params, context) {
-
-// after
 export const REG0009397: Rule = (iv) => {
-  //la require non funziona
-  //let defZero = require('./utils/util.mjs').defZero;
-  //console.log(params.get("variables").asString().getValue());
-  //var iv = JSON.parse(
-  //  params.get("variables").asString().getValue()
-  //);
 
-  let qty = 0;
-  let CON_A = "";
-  let CON_B = "";
-  let dise = "";
+    const vars = new Variables(iv);
 
-  let index = parseInt(iv["D§USR2"]);
+    // GENERATED
+    // RULE: REG0009397
+    // REQUEST:
+    // """
+    // #1
+    // THEN:
+    // *SET *CF = #0
+    // *SET *CON-A = §VERN_FRANGI
+    // #2
+    // COND:
+    // §FRANGITRATTA1 > #0
+    // THEN:
+    // *SET *CF = §NR_FRANGI
+    // *SET *CON-B = §FRANGITRATTA1
+    // """
+    // RESPONSE:
+    //#1
+    vars.setCF(0);
+    vars.setCON_A(vars.get('§VERN_FRANGI'));
+    
+    //#2
+    if (vars.get('§FRANGITRATTA1') > 0) {
+        vars.setCF(vars.get('§NR_FRANGI'));
+        vars.setCON_B(vars.get('§FRANGITRATTA1'));
+    }
+    // GENERATED
 
-  let largM1 = parseFloat(iv["§LARG_M1"]);
-  let largM2 = defZero(parseFloat(iv["§LARG_M2"]));
-  let largM3 = defZero(parseFloat(iv["§LARG_M3"]));
-  let sbalzoSx = defZero(parseFloat(iv["§SBALZO_SX"]));
-  let sbalzoDx = defZero(parseFloat(iv["§SBALZO_DX"]));
-  let famLuce = iv["§FS_FAM2_LUCE"] === "SI";
-  let pteLuce = iv["§FS_PTE_LUC"] === "SI";
-  let luce = famLuce || pteLuce;
-  let lMaxFrangi = 700;
-  let nModuli = parseInt(iv["§N_MODULI"]);
-  let nDivFra = 1;
-  //let frangiTotale = largM1 + largM2 + largM3 - 2 + sbalzoSx  + 3.2 ;
-
-  let frangiTotale =
-    largM1 + largM2 + largM3 - 2 + sbalzoSx - 3.2 + sbalzoDx - 3.2;
-
-  let frangiList = [0];
-  let tgGroLuc = 0;
-
-  if (luce) {
-    tgGroLuc = largM1 + largM2 + largM3 + 5.6 + sbalzoDx - 3.2 + sbalzoSx - 3.2;
-  }
-
-  let pteDiviso = iv["§FS_MED_DIV"] === "SI";
-  tgGroLuc > lMaxFrangi ? (pteDiviso = true) : null;
-  frangiTotale > lMaxFrangi ? (pteDiviso = true) : null;
-
-  if (pteDiviso) {
-    nDivFra = nModuli;
-  }
-
-  nDivFra === 1 ? frangiList.push(frangiTotale) : null;
-
-  // operator & is incorrect. It must be &&
-  //nDivFra > 1 & [2, 3].includes(nModuli) ? frangiList.push(largM1 - 2 + sbalzoSx - 3.2) : null;
-  nDivFra > 1 && [2, 3].includes(nModuli)
-    ? frangiList.push(largM1 - 2 + sbalzoSx - 3.2)
-    : null;
-
-  nDivFra >= 2 && nModuli === 2
-    ? frangiList.push(largM2 - 2 + sbalzoDx - 3.2)
-    : null;
-  nDivFra >= 2 && nModuli === 3 ? frangiList.push(largM2 - 2) : null;
-
-  nDivFra >= 2 && nModuli === 3
-    ? frangiList.push(largM3 - 2 + sbalzoDx - 3.2)
-    : null;
-
-  if (frangiList[index]) {
-    qty = 1;
-    CON_A = iv["§VERN_FRANGI"];
-    CON_B = "" + frangiList[index] * 10;
-    dise =
-      CON_A + CON_B.toString().replace(".", "").padStart(5, "0") + iv["§_CF"];
-  } else {
-    dise = "undefined";
-  }
-
-  // build result
-  return {
-    "D§COEF": "" + qty,
-    "D§DISE": dise,
-    "D§NOTA": "" + frangiTotale,
-  };
+    return vars.output;
 };
