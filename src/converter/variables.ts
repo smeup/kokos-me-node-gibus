@@ -457,10 +457,10 @@ class Variables {
                 }
 
             } else {//formattazione non prevista
+                throw new Error("Anomalia, formattazione D§DISE non prevista");
             }
         } else {
-            //questa è un'anomalia.... una condizione non prevista
-            // dall'articolo
+            throw new Error("Anomalia, condizione non prevista per questo articolo");
         }
     }
 
