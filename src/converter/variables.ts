@@ -34,7 +34,7 @@ class Variables {
     cf: number = 1;
     parObj: Record<string, any> = { elemNumber: 0, objArray: [] }; //objArray ha oggetti tipo {text : '0000', idx : 1}
     CSVA: string = '';
-  
+
 
     constructor(input: RuleVariableMap) {
         this.input = input;
@@ -45,7 +45,7 @@ class Variables {
 
         if (input['*CSVA']) {
             this.CSVA = input['*CSVA'];
-            if (!this.config['*CSVA'][this.CSVA]){
+            if (!this.config['*CSVA'][this.CSVA]) {
                 this.CSVA = '*';//la condizione per gli sconosciuti (configurazione commerciale)
             }
             this.parObj.elemNumber = this.config['*CSVA'][this.CSVA].length; //numero elementi che compongono D§DISE
@@ -53,7 +53,7 @@ class Variables {
         }
     }
 
-   
+
     /**
      * Retrieves the value of the variable with the specified name.
      * If the variable name starts with "*" or "§DUMMY" the value will be retrieved from the getter method with the same name.
@@ -377,13 +377,13 @@ class Variables {
             let dcoefResult = cf * this.get("D§COEF");
             this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
         }
-       this.chkXfVali();//faccio uno o una serie di controlli per capire se il legame è ancora valido
+        this.chkXfVali();//faccio uno o una serie di controlli per capire se il legame è ancora valido
     }
 
-    private chkXfVali(){//al momento controllo solo il coefficiente
-        if (this.output["D§COEF"] <= 0){
+    private chkXfVali() {//al momento controllo solo il coefficiente
+        if (this.output["D§COEF"] <= 0) {
             this.output["XFVALI"] = "";
-        }else{
+        } else {
             this.output["XFVALI"] = "1";
         }
     }
@@ -430,33 +430,37 @@ class Variables {
 
     private setCon(value: any, label: string, posIdx: number) {
         let CSVA = this.CSVA;
-        let conCsvaPropList = this.config["*CSVA"][CSVA];
-        let conCsva = conCsvaPropList.find((elem: any) => elem.idx === posIdx);
-        let retObj: any;
-        let objArray = this.parObj.objArray;
-        if (conCsva) {
-            if (conCsva.dataType === 'string') {
-                retObj = this.formatString(value, conCsva)
-            } else {
-                retObj = this.formatNumber(value, conCsva)
-            }
-            if (retObj.result === 'OK') {
-                let idx = objArray.findIndex(
-                    (elem: any) => elem.idx === posIdx
-                );
-                let objToLoad = { idx: posIdx, text: retObj.text };
-                if (idx >= 0) {
-                    objArray[idx] = objToLoad;
+        if (this.config["*CSVA"][CSVA]) {
+            let conCsvaPropList = this.config["*CSVA"][CSVA];
+            let conCsva = conCsvaPropList.find((elem: any) => elem.idx === posIdx);
+            let retObj: any;
+            let objArray = this.parObj.objArray;
+            if (conCsva) {
+                if (conCsva.dataType === 'string') {
+                    retObj = this.formatString(value, conCsva)
                 } else {
-                    objArray.push(objToLoad);
+                    retObj = this.formatNumber(value, conCsva)
+                }
+                if (retObj.result === 'OK') {
+                    let idx = objArray.findIndex(
+                        (elem: any) => elem.idx === posIdx
+                    );
+                    let objToLoad = { idx: posIdx, text: retObj.text };
+                    if (idx >= 0) {
+                        objArray[idx] = objToLoad;
+                    } else {
+                        objArray.push(objToLoad);
+                    }
+
+                    this.setDise();
+                    this.output[label] = value;
                 }
 
-                this.setDise();
-                this.output[label] = value;
+            } else {//formattazione non prevista
             }
-
-        } else {//non è previsto
-
+        } else {
+            //questa è un'anomalia.... una condizione non prevista
+            // dall'articolo
         }
     }
 
@@ -470,8 +474,8 @@ class Variables {
         this.setCon(value, '*CON-B', 2);
     }
 
-    setCON_C(value : any) {
-        this.setCon(value , '*CON-C', 3);
+    setCON_C(value: any) {
+        this.setCon(value, '*CON-C', 3);
     }
 
     private setDise() {
