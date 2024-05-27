@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0001181"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"*CSVA\": \"003\", \"D§COEF\": 1 , \"§VERN_1_COM\": \"0055\", \"§_CF\": \"AAABBB\", \"§SI\": \"SI\"}}"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0001181"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"*CSVA\": \"005\", \"§FS_FAM2_JOY\": \"SI\", \"§AUM_SPO_T01\": 15, \"§LARG\": 200,\"§FS_MOT_SOMFY\": \"SI\", \"§FS_MOTORE_CSI\": \"SI\", \"§VR_LAME\": \"0055\", \"§_CF\": \"AAABBB\", \"§SI\": \"SI\"}}"
+    }
+}
