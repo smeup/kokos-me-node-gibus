@@ -385,16 +385,26 @@ class Variables {
      * Set the value of cf and the output["D§COEF"] property to the product of the current value of "D§COEF" and the new value of cf.
      * @param cf The value that will be set
      */
-    setCF(cf: number|string) {
-        if (typeof cf === 'string') {
-            if (cf === "") cf = "";
-            this.cf = parseFloat(cf);
+    // setCF(cf: number|string) {
+    //     if (typeof cf === 'string') {
+    //         if (cf === "") cf = "";
+    //         this.cf = parseFloat(cf);
+    //     } else {
+    //         this.cf = cf;
+    //     }
+    //     let dcoefResult = this.cf * this.get("D§COEF");
+    //     this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
+    // }
+
+    setCF(cf: number) {
+        this.cf = cf
+        if (this.config["D§COEF"] === "newValue") {
+            this.output["D§COEF"] = cf;
         } else {
-            this.cf = cf;
+            let dcoefResult = cf * this.get("D§COEF");
+            this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
         }
-        let dcoefResult = this.cf * this.get("D§COEF");
-        this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
-        this.chkXfVali();
+        this.chkXfVali();//faccio uno o una serie di controlli per capire se il legame è ancora valido
     }
 
     private chkXfVali() {//al momento controllo solo il coefficiente
