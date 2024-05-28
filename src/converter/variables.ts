@@ -396,7 +396,10 @@ class Variables {
     //     this.output["D§COEF"] = (dcoefResult < 0) ? 0 : dcoefResult;
     // }
 
-    setCF(cf: number) {
+    setCF(cf: number | string) {
+        if (typeof cf === 'string') {
+            throw new Error("I don't know how to handle a string here.");
+        }
         this.cf = cf
         if (this.config["D§COEF"] === "newValue") {
             this.output["D§COEF"] = cf;
