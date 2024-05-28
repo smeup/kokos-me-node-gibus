@@ -4,19 +4,16 @@ import { loadVariables } from "../../src/converter/utils";
 
 describe("REG0001181 test", () => {
 
-    it("Expected D§COEF=1", async () => {
-        // TODO - Fix this test
-        console.warn("Test never worked");
-        
+    it("Expected D§COEF=1", async () => {        
 
-        // // define input
-        // const input: RuleVariableMap = loadVariables(JSON.stringify(require(__dirname + "/REG0001181.1.json")));
+        // define input
+        const input: RuleVariableMap = loadVariables(JSON.stringify(require(__dirname + "/REG0001181.1.json")));
 
-        // // call function
-        // const output = REG0001181(input);
+        // call function
+        const output = REG0001181(input);
 
-        // // check values
-        // expect(output["D§COEF"]).toBe(1);
+        // check values
+        expect(output["D§COEF"]).toBe(1);
     });
 });
 
