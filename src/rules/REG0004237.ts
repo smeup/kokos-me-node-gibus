@@ -250,6 +250,192 @@ export const REG0004237: Rule = (iv) => {
     // *SET *CF=#0
     // """
     // RESPONSE:
-    throw new Error("Rule not implemented");
+    
+    //#1
+    vars.setCF(0);
+    //#2
+    vars.setCF(0);
+    //#3
+    if ((vars.get('§FS_ACC_PRI') != vars.get('§SI')) && (vars.get('§FS_ACC_PRI_02') != vars.get('§SI')) && (vars.get('§FS_ACC_CEN') != vars.get('§SI')) && (vars.get('§FS_ACC_FIN') != vars.get('§SI')) && (vars.get('§FS_STA_MUR_ANT1') == vars.get('§SI')) && (vars.get('§FS_STA_MUR_POS1') == vars.get('§SI'))) {
+        vars.setCF(vars.get('§NR_MON_ANG_MAN'));
+    }
+    //#4
+    if ((vars.get('§FS_ACC_PRI') != vars.get('§SI')) && (vars.get('§FS_ACC_PRI_02') != vars.get('§SI')) && (vars.get('§FS_ACC_CEN') != vars.get('§SI')) && (vars.get('§FS_ACC_FIN') != vars.get('§SI'))) {
+        vars.setCF(vars.get('§NR_MON_ANG_MAN'));
+    }
+    //#5
+    if (vars.get('§FS_ACC_CEN') == vars.get('§SI')) {
+        vars.setCF(0);
+    }
+    //#6
+    if ((vars.get('§FS_ACC_PRI') == vars.get('§SI')) && (vars.get('§FS_ACC_DX_SX') == vars.get('§SI')) && (((vars.get('§L_SPO_MON_ANT2') == 0) && (vars.get('§L_SBA_ANT2') == 0) && (vars.get('§FS_MON_ANT2') == vars.get('§SI'))) || ((vars.get('§L_SPO_MON_POS2') == 0) && (vars.get('§L_SBA_POS2') == 0) && (vars.get('§FS_MON_POS_2') == vars.get('§SI'))))) {
+        vars.setCF(1);
+    }
+    //#7
+    if ((vars.get('§FS_ACC_PRI') == vars.get('§SI')) && (vars.get('§FS_ACC_DX_SX') == vars.get('§SI')) && (vars.get('§L_SPO_MON_ANT2') == 0) && (vars.get('§L_SBA_ANT2') == 0) && (vars.get('§L_SPO_MON_POS2') == 0) && (vars.get('§L_SBA_POS2') == 0) && (vars.get('§FS_MON_ANT2') == vars.get('§SI')) && (vars.get('§FS_MON_POS_2') == vars.get('§SI'))) {
+        vars.setCF(2);
+    }
+    //#8
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '02') && (vars.get('§N_GAM_ANT_N_ANG') == 0) && (vars.get('§N_GAM_POS_N_ANG') == 0) && (vars.get('§NR_MON_ANG_MAN') == 0)) {
+        vars.setCF(vars.get('§NR_GAM_NOR_ANT') + vars.get('§NR_GAM_NOR_POS'));
+    }
+    //#9
+    if ((vars.get('§FS_ACC_PRI') == vars.get('§SI')) && (vars.get('§FS_ACC_SX_DX') == vars.get('§SI')) && (((vars.get('§L_SPO_MON_ANT1') == 0) && (vars.get('§L_SBA_ANT1') == 0) && (vars.get('§FS_MON_ANT1') == vars.get('§SI'))) || ((vars.get('§L_SPO_MON_POS1') == 0) && (vars.get('§L_SBA_POS1') == 0) && (vars.get('§FS_MON_POS_1') == vars.get('§SI'))))) {
+        vars.setCF(1);
+    }
+    //#10
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '02') && ((vars.get('§N_GAM_ANT_N_ANG') > 0) || (vars.get('§NR_MON_ANG_MAN') > 0))) {
+        vars.setCF(vars.get('§NR_MON_ANG_MAN'));
+    }
+    //#11
+    if ((vars.get('§FS_ACC_PRI') == vars.get('§SI')) && (vars.get('§FS_ACC_SX_DX') == vars.get('§SI')) && (vars.get('§L_SPO_MON_ANT1') == 0) && (vars.get('§L_SBA_ANT1') == 0) && (vars.get('§FS_MON_ANT1') == vars.get('§SI')) && (vars.get('§L_SPO_MON_POS1') == 0) && (vars.get('§L_SBA_POS1') == 0) && (vars.get('§FS_MON_POS_1') == vars.get('§SI'))) {
+        vars.setCF(2);
+    }
+    //#12
+    if ((vars.get('§FS_ACC_PRI_02') == vars.get('§SI')) && (vars.get('§N_GAM_POS_N_ANG') > 0)) {
+        vars.setCF(vars.get('§NR_GAM_NOR_POS') - vars.get('§N_GAM_POS_N_ANG'));
+    }
+    //#13
+    if (vars.get('§FS_ACC_CEN') == vars.get('§SI')) {
+        vars.setCF(0);
+    }
+    //#14
+    if ((vars.get('§FS_ACC_PRI_02') == vars.get('§SI')) && (vars.get('§N_GAM_POS_N_ANG') == 0)) {
+        vars.setCF(vars.get('§NR_GAM_NOR_POS'));
+    }
+    //#15
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_DX_SX') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && (((vars.get('§L_SPO_MON_ANT1') == 0) && (vars.get('§L_SBA_ANT1') == 0) && (vars.get('§FS_MON_ANT1') == vars.get('§SI'))) || ((vars.get('§L_SPO_MON_POS1') == 0) && (vars.get('§L_SBA_POS1') == 0) && (vars.get('§FS_MON_POS_1') == vars.get('§SI'))))) {
+        vars.setCF(1);
+    }
+    //#16
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_DX_SX') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && (((vars.get('§L_SPO_MON_ANT1') == 0) && (vars.get('§L_SBA_ANT1') == 0) && (vars.get('§FS_MON_ANT1') == vars.get('§SI'))) && ((vars.get('§L_SPO_MON_POS1') == 0) && (vars.get('§L_SBA_POS1') == 0) && (vars.get('§FS_MON_POS_1') == vars.get('§SI'))))) {
+        vars.setCF(2);
+    }
+    //#17
+    if ((vars.get('§TI_ACC_TWI') == '02') && (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§LA_ADD_LAT') == 'SX') && ((vars.get('§L_SBA_POS2') > 0) || (vars.get('§L_SPO_MON_POS2') > 0) || (vars.get('§FS_MON_POS_2') != vars.get('§SI'))) && (vars.get('§FS_STA_MUR_ANT1') == vars.get('§SI'))) {
+        vars.setCF(0);
+    }
+    //#18
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_SX_DX') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && (((vars.get('§L_SPO_MON_ANT2') == 0) && (vars.get('§L_SBA_ANT2') == 0) && (vars.get('§FS_MON_ANT2') == vars.get('§SI'))) || ((vars.get('§L_SPO_MON_POS2') == 0) && (vars.get('§L_SBA_POS2') == 0) && (vars.get('§FS_MON_POS_2') == vars.get('§SI'))))) {
+        vars.setCF(1);
+    }
+    //#19
+    if ((vars.get('§TI_ACC_TWI') == '02') && (vars.get('§LA_ADD_LAT') == 'DX') && ((vars.get('§L_SBA_POS1') > 0) || (vars.get('§L_SPO_MON_POS1') > 0) || (vars.get('§FS_MON_POS_1') != vars.get('§SI')))) {
+        vars.setCF(0);
+    }
+    //#20
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_SX_DX') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && (vars.get('§L_SPO_MON_ANT2') == 0) && (vars.get('§L_SBA_ANT2') == 0) && (vars.get('§FS_MON_ANT2') == vars.get('§SI')) && (vars.get('§L_SPO_MON_POS2') == 0) && (vars.get('§L_SBA_POS2') == 0) && (vars.get('§FS_MON_POS_2') == vars.get('§SI'))) {
+        vars.setCF(2);
+    }
+    //#21
+    if ((vars.get('§FS_ACC_PRI_02') == vars.get('§SI')) && (vars.get('§LA_ADD_LAT') == 'SX') && (vars.get('§FS_MON_ANT2') != vars.get('§SI'))) {
+        vars.setCF(0);
+    }
+    //#22
+    if ((vars.get('§FS_ACC_PRI_02') == vars.get('§SI')) && (vars.get('§FS_ACC_POS_ANT') == vars.get('§SI')) && (((vars.get('§L_SPO_MON_POS2') == 0) && (vars.get('§L_SBA_POS2') == 0) && (vars.get('§FS_MON_POS_2') == vars.get('§SI'))) || ((vars.get('§L_SPO_MON_POS1') == 0) && (vars.get('§L_SBA_POS1') == 0) && (vars.get('§FS_MON_POS_1') == vars.get('§SI'))))) {
+        vars.setCF(1);
+    }
+    //#23
+    if ((vars.get('§FS_ACC_PRI_02') == vars.get('§SI')) && (vars.get('§LA_ADD_LAT') == 'DX') && (vars.get('§FS_MON_ANT1') != vars.get('§SI'))) {
+        vars.setCF(0);
+    }
+    //#24
+    if ((vars.get('§FS_ACC_PRI_02') == vars.get('§SI')) && (vars.get('§FS_ACC_POS_ANT') == vars.get('§SI')) && (vars.get('§L_SPO_MON_POS2') == 0) && (vars.get('§L_SBA_POS2') == 0) && (vars.get('§FS_MON_POS_2') == vars.get('§SI')) && (vars.get('§L_SPO_MON_POS1') == 0) && (vars.get('§L_SBA_POS1') == 0) && (vars.get('§FS_MON_POS_1') == vars.get('§SI'))) {
+        vars.setCF(2);
+    }
+    //#25
+    if ((vars.get('§FS_ACC_PRI') != vars.get('§SI')) && (vars.get('§FS_ACC_PRI_02') != vars.get('§SI')) && ((vars.get('§N_GAM_ANT_N_ANG') > 0) || (vars.get('§N_GAM_POS_N_ANG') > 0)) && (vars.get('§NR_MON_ANG_MAN') == 0)) {
+        vars.setCF(vars.get('§NR_MON_ANG_MAN') - vars.get('§N_GAM_ANT_N_ANG') - vars.get('§N_GAM_POS_N_ANG'));
+    }
+    //#26
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_POS_ANT') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '02') && (((vars.get('§L_SPO_MON_ANT2') == 0) && (vars.get('§L_SBA_ANT2') == 0) && (vars.get('§FS_MON_ANT2') == vars.get('§SI'))) || ((vars.get('§L_SPO_MON_ANT1') == 0) && (vars.get('§L_SBA_ANT1') == 0) && (vars.get('§FS_MON_ANT1') == vars.get('§SI'))))) {
+        vars.setCF(1);
+    }
+    //#27
+    if ((vars.get('§TI_ACC_TWI') == '02') && (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§N_GAM_ANT_N_ANG') > 0)) {
+        vars.setCF(0);
+    }
+    //#28
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_POS_ANT') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '02') && (((vars.get('§L_SPO_MON_ANT2') == 0) && (vars.get('§L_SBA_ANT2') == 0) && (vars.get('§FS_MON_ANT2') == vars.get('§SI'))) && ((vars.get('§L_SPO_MON_ANT1') == 0) && (vars.get('§L_SBA_ANT1') == 0) && (vars.get('§FS_MON_ANT1') == vars.get('§SI'))))) {
+        vars.setCF(2);
+    }
+    //#29
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '02') && ((vars.get('§NR_MON_ANG_MAN') > 0) || (vars.get('§N_GAM_POS_N_ANG') > 0))) {
+        vars.setCF(0);
+    }
+    //#30
+    if ((vars.get('§FS_ACC_PRI') == vars.get('§SI')) && (vars.get('§FS_ACC_DX_SX') == vars.get('§SI')) && (((vars.get('§FS_MON_POS_2') != vars.get('§SI')) || (vars.get('§L_SBA_POS2') > 0) || (vars.get('§L_SPO_MON_POS2') > 0)) || ((vars.get('§FS_MON_ANT2') != vars.get('§SI')) || (vars.get('§L_SBA_ANT2') > 0) || (vars.get('§L_SPO_MON_ANT2') > 0)))) {
+        vars.setCF(1);
+    }
+    //#31
+    if ((vars.get('§FS_ACC_PRI') == vars.get('§SI')) && (vars.get('§FS_ACC_DX_SX') == vars.get('§SI')) && (((vars.get('§FS_MON_POS_2') != vars.get('§SI')) || (vars.get('§L_SBA_POS2') > 0) || (vars.get('§L_SPO_MON_POS2') > 0)) && ((vars.get('§FS_MON_ANT2') != vars.get('§SI')) || (vars.get('§L_SBA_ANT2') > 0) || (vars.get('§L_SPO_MON_ANT2') > 0)))) {
+        vars.setCF(0);
+    }
+    //#32
+    if ((vars.get('§TI_ACC_TWI') == '02') && (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_MON_ANT2') == vars.get('§SI')) && (vars.get('§L_SPO_MON_ANT2') == 0) && (vars.get('§L_SBA_ANT2') == 0) && (vars.get('§LA_ADD_LAT') == 'SX')) {
+        vars.setCF(1);
+    }
+    //#33
+    if ((vars.get('§FS_ACC_PRI') == vars.get('§SI')) && (vars.get('§FS_ACC_SX_DX') == vars.get('§SI')) && (((vars.get('§FS_MON_POS_1') != vars.get('§SI')) || (vars.get('§L_SPO_MON_POS1') > 0) || (vars.get('§L_SBA_POS1') > 0)) || ((vars.get('§FS_MON_ANT1') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT1') > 0) || (vars.get('§L_SBA_ANT1') > 0)))) {
+        vars.setCF(1);
+    }
+    //#34
+    if ((vars.get('§TI_ACC_TWI') == '02') && (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_MON_ANT1') == vars.get('§SI')) && (vars.get('§L_SPO_MON_ANT1') == 0) && (vars.get('§L_SBA_ANT1') == 0) && (vars.get('§LA_ADD_LAT') == 'DX')) {
+        vars.setCF(1);
+    }
+    //#35
+    if ((vars.get('§FS_ACC_PRI') == vars.get('§SI')) && (vars.get('§FS_ACC_SX_DX') == vars.get('§SI')) && (((vars.get('§FS_MON_POS_1') != vars.get('§SI')) || (vars.get('§L_SPO_MON_POS1') > 0) || (vars.get('§L_SBA_POS1') > 0)) && ((vars.get('§FS_MON_ANT1') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT1') > 0) || (vars.get('§L_SBA_ANT1') > 0)))) {
+        vars.setCF(0);
+    }
+    //#36
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01')) {
+        vars.setCF(vars.get('§NR_MON_ANG_MAN'));
+    }
+    //#37
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_DX_SX') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && (((vars.get('§FS_MON_ANT1') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT1') > 0) || (vars.get('§L_SBA_ANT1') > 0)) || ((vars.get('§L_SPO_MON_POS1') > 0) || (vars.get('§L_SBA_POS1') > 0) || (vars.get('§FS_MON_POS_1') != vars.get('§SI'))))) {
+        vars.setCF(1);
+    }
+    //#38
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_DX_SX') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && (((vars.get('§FS_MON_ANT1') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT1') > 0) || (vars.get('§L_SBA_ANT1') > 0)) && ((vars.get('§L_SPO_MON_POS1') > 0) || (vars.get('§L_SBA_POS1') > 0) || (vars.get('§FS_MON_POS_1') != vars.get('§SI'))))) {
+        vars.setCF(0);
+    }
+    //#39
+    if ((vars.get('§FS_ACC_PRI') != vars.get('§SI')) && (vars.get('§FS_ACC_PRI_02') != vars.get('§SI')) && (vars.get('§FS_ACC_CEN') != vars.get('§SI')) && (vars.get('§FS_ACC_FIN') != vars.get('§SI')) && (vars.get('§FS_STA_MUR_ANT1') != vars.get('§SI')) && (vars.get('§FS_STA_MUR_POS1') != vars.get('§SI'))) {
+        vars.setCF(vars.get('§NR_MON_MAN') - vars.get('§NR_MON_ANG_MAN'));
+    }
+    //#40
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_SX_DX') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && (((vars.get('§FS_MON_ANT2') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT2') > 0) || (vars.get('§L_SBA_ANT2') > 0)) || ((vars.get('§FS_MON_ANT2') != vars.get('§SI')) || (vars.get('§L_SPO_MON_POS2') > 0) || (vars.get('§L_SBA_POS2') > 0)))) {
+        vars.setCF(1);
+    }
+    //#41
+    if ((vars.get('§TI_ACC_TWI') == '02') && (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_STA_MUR_ANT1') != vars.get('§SI'))) {
+        vars.setCF(vars.get('§NR_MON_ANG_MAN'));
+    }
+    //#42
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_SX_DX') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '01') && (((vars.get('§FS_MON_ANT2') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT2') > 0) || (vars.get('§L_SBA_ANT2') > 0)) && ((vars.get('§FS_MON_ANT2') != vars.get('§SI')) || (vars.get('§L_SPO_MON_POS2') > 0) || (vars.get('§L_SBA_POS2') > 0)))) {
+        vars.setCF(0);
+    }
+    //#43
+    if ((vars.get('§TI_ACC_TWI') == '02') && (vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_STA_MUR_ANT1') == vars.get('§SI'))) {
+        vars.setCF(vars.get('§NR_MON_ANG_MAN') - vars.get('§NR_MON_ANG_MAN'));
+    }
+    //#44
+    if ((vars.get('§FS_ACC_PRI_02') == vars.get('§SI')) && (vars.get('§FS_ACC_POS_ANT') == vars.get('§SI')) && (((vars.get('§FS_MON_POS_2') != vars.get('§SI')) || (vars.get('§L_SPO_MON_POS2') > 0) || (vars.get('§L_SBA_POS2') > 0)) || ((vars.get('§L_SPO_MON_POS1') > 0) || (vars.get('§L_SBA_POS1') > 0) || (vars.get('§FS_MON_POS_1') != vars.get('§SI'))))) {
+        vars.setCF(1);
+    }
+    //#45
+    if ((vars.get('§FS_ACC_PRI_02') == vars.get('§SI')) && (vars.get('§FS_ACC_POS_ANT') == vars.get('§SI')) && (((vars.get('§FS_MON_POS_2') != vars.get('§SI')) || (vars.get('§L_SPO_MON_POS2') > 0) || (vars.get('§L_SBA_POS2') > 0)) && ((vars.get('§L_SPO_MON_POS1') > 0) || (vars.get('§L_SBA_POS1') > 0) || (vars.get('§FS_MON_POS_1') != vars.get('§SI'))))) {
+        vars.setCF(0);
+    }
+    //#46
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_POS_ANT') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '02') && (((vars.get('§FS_MON_ANT2') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT2') > 0) || (vars.get('§L_SBA_ANT2') > 0)) || ((vars.get('§FS_MON_ANT1') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT1') > 0) || (vars.get('§L_SBA_ANT1') > 0)))) {
+        vars.setCF(1);
+    }
+    //#47
+    if ((vars.get('§FS_ACC_FIN') == vars.get('§SI')) && (vars.get('§FS_ACC_POS_ANT') == vars.get('§SI')) && (vars.get('§TI_ACC_TWI') == '02') && (((vars.get('§FS_MON_ANT2') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT2') > 0) || (vars.get('§L_SBA_ANT2') > 0)) && ((vars.get('§FS_MON_ANT1') != vars.get('§SI')) || (vars.get('§L_SPO_MON_ANT1') > 0) || (vars.get('§L_SBA_ANT1') > 0)))) {
+        vars.setCF(0);
+    }
+    // GENERATED
+
     return vars.output;
 };
