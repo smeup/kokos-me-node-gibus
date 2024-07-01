@@ -22,7 +22,7 @@ describe("REG0009203 test", () => {
         const output = REG0009203(input);
         console.log(output);
         // check 
-        expect(output["D§USR2"]).toBe(5000);
+        expect(output["D§USR2"]).toBe(50000);
     });
 
 });

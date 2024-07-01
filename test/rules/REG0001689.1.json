@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0001181"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§FS_CLI_ZIP_TWI\": \"SI\", \"§FS_NO_GUI\": \"SI\", \"§NR_MOL_GUI_ZIP\": 12 , \"§SI\": \"SI\"}}"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0002812"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§FS_LT60\": \"NO\", \"§D§COMP\": \"666666\", \"§FS_FAM2_TOLO\": \"SI\", \"§SI\": \"SI\"}}"
+    }
+}
