@@ -1,4 +1,4 @@
-{
+const CONFIG: Record<string, any> = {
     "D§COEF": "newValue",
     "defaultOutput": "input",
     "*CSVA": {
@@ -83,3 +83,5 @@
         ]
     }
 }
+
+export { CONFIG };

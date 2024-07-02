@@ -1,22 +1,8 @@
 import { RuleVariableMap } from "../types/general.js";
 import { isNumericType } from "./utils.js";
-import * as fs from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { CONFIG } from "./config.js";
 
 const D_DISE_LEN = 9
-
-// I need to make CONFIG singleton because require is not suppoerted in ES6 modules
-// and I need to load the config file only once
-const CONFIG: Record<string, any> = loadConfig()
-
-function loadConfig(): Record<string, any> {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-    const configPath = '/config.json';
-    const configData = fs.readFileSync(__dirname + configPath, 'utf-8');
-    return JSON.parse(configData);
-}
 
 
 /***
@@ -43,7 +29,7 @@ function loadConfig(): Record<string, any> {
  * @see get(key: string)
  */
 class Variables {
-    config: Record<string, any> = {};
+    config: Record<string, any> = CONFIG;
     input: RuleVariableMap = {};
     output: RuleVariableMap = {};
     dummy: RuleVariableMap = {};
