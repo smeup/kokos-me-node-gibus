@@ -2,6 +2,8 @@ import {
   ExecutionContext,
   Fun,
   KokosService,
+  SmeupDataColumn,
+  SmeupDataRow,
   SmeupDataStructureWriter,
 } from "@sme.up/kokos-sdk-node";
 import { ExecuteRulePayload, Rule } from "../types/general.js";
@@ -36,32 +38,29 @@ async function executeRule(
       const outputVariables = rule(
         jsonInput.variables ? jsonInput.variables : {}
       );
-      // return smeup table
-      writer.writeColumn({
-        code: "NAME",
-        text: "Variable Name",
+      const columscolumns: SmeupDataColumn[] = [];
+      columscolumns.push({
+        name: "NAME",
+        title: "Variable Name",
+        visible: true,
       });
-      writer.writeColumn({
-        code: "VALUE",
-        text: "Variable Value",
+      columscolumns.push({
+        name: "VALUE",
+        title: "Variable Value",
+        visible: true,
       });
       for (let variableName in outputVariables) {
-        writer.writeRow({
-          fields: {
-            NAME: {
-              name: "NAME",
-              smeupObject: {
-                codice: variableName,
-              },
+        const row: SmeupDataRow = {
+          cells: {
+            "NAME": {
+              value: variableName,
             },
-            VALUE: {
-              name: "VALUE",
-              smeupObject: {
-                codice: `${outputVariables[variableName]}`
-              },
+            "VALUE": {
+              value: `${outputVariables[variableName]}`,
             },
           },
-        });
+        };
+        writer.writeDataRow(row);
       }
     } else {
       throw new Error("Non-existent or unregistered rule");

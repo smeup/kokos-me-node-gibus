@@ -1,7 +1,9 @@
 import { RuleVariableMap } from "../types/general.js";
 import { isNumericType } from "./utils.js";
+import { CONFIG } from "./config.js";
 
 const D_DISE_LEN = 9
+
 
 /***
  * Lamberto Grassi documentation
@@ -27,7 +29,7 @@ const D_DISE_LEN = 9
  * @see get(key: string)
  */
 class Variables {
-    config: Record<string, any> = {};
+    config: Record<string, any> = CONFIG;
     input: RuleVariableMap = {};
     output: RuleVariableMap = {};
     dummy: RuleVariableMap = {};
@@ -38,11 +40,10 @@ class Variables {
 
     constructor(input: RuleVariableMap) {
         this.input = input;
-        this.config = require(__dirname + '/config.json');
+        this.config = CONFIG;
         if (this.config.defaultOutput) {
             this.setDefault(this.config.defaultOutput);
         }
-
         if (input['*CSVA']) {
             this.CSVA = input['*CSVA'];
             if (!this.config['*CSVA'][this.CSVA]) {
