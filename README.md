@@ -65,7 +65,7 @@ npm run dev:win
 ```
 - Set a breakpoint
 ![Breakpoint](./docs/readme-myrule-bpnt.png)
-- Click on [http://localhost:8011/swagger/#/execution/ExecuteFun](http://localhost:8011/swagger/#/execution/ExecuteFun)
+- Click on [http://localhost:8011/swagger/#/execution/ExecuteFunV2](http://localhost:8011/swagger/#/execution/ExecuteFunV2)
 - Click on **Try it out**
 - And past in the **Request body** this payload (where the property `k` of `obj1` contains your rule id: `MYRULE`)
 ```json
