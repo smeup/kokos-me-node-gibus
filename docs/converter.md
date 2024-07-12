@@ -1,0 +1,93 @@
+# Converter
+
+## Rule conversion
+
+### Test rule conversion
+
+Before to convert the rules in production, it is possible to convert some example rules.  
+
+Currently these rules are stored in [rules.tsv](../assets/test/rules.tsv) file.  
+This file has been created by serializing the rules stored in `GIBUS_RULES` logical view placed in `srvlab01.smeup.com` schema `W_SMMB` retrieved with the following query:
+
+```sql
+select trim(COMP) AS COMP, PRGR, trim(REGO) as REGO, trim(IF_TRUE) as IF_TRUE, trim(IF_FALSE) as IF_FALSE 
+from W_SMMB.GIBUS_RULES where ASSI in ('ACCESSORI' , 'FT_GRO_INF_T01')
+order by COMP, PRGR;
+```
+
+Further information about the pipeline can be found at [RuleConverterExampleApp](../src/converter/app.examples.ts) 
+
+For a complete list of all examples converte rules see [Example converted rules](../assets/test/readme.md)
+
+```sh
+# linux osx
+OPENAI_API_KEY=your_api_key
+npm run convert-examples -- --rulesFileName rules.tsv
+
+# win
+$env:OPENAI_API_KEY="your_api_key"
+npm run convert-examples:win -- --rulesFileName rules.tsv
+```
+
+
+### Convert rule in production
+
+```sh
+# linux osx
+OPENAI_API_KEY=your_api_key
+ME_GIBUS_HOST=your_host
+ME_GIBUS_USER=your_user
+ME_GIBUS_PASSWORD=your_password
+npm run convert-production -- <options>
+
+# win
+$env:OPENAI_API_KEY="your_api_key"
+$env:ME_GIBUS_HOST="your_host"
+$env:ME_GIBUS_USER="your_user"
+$env:ME_GIBUS_PASSWORD="your_password"
+npm run convert-production:win -- <options>
+```
+
+***Options***
+--all: convert all the unconverted rules
+--rules RULE1, RULE2, RULEn: convert only the rules specified in the list
+--assiemi ASSI1, ASSI2, ASSIn: convert only the rules relarted the assiemi specified in the list
+*NB The options are mutually exclusive and none rule already converted will be converted again.*
+
+Example:
+```sh
+# Convert all unconverted rules
+npm run convert-production[:win] -- --all
+
+# Convert only the rules related assiemi: ACCESSORI and FT_GRO_INF_T01
+npm run convert-production[:win] -- --assiemi ACCESSORI,FT_GRO_INF_T01
+
+# convert only the rules RULE1 and RULE2
+npm run convert-production[:win] -- --rules RULE1,RULE2
+```
+
+**NB npm run convert-production:win**
+In windows when you run: `npm run convert-production:win` if you have this error: 
+```
+The specified module could not be found.
+    \\?\<path_to_kokos_me_node_gibus>\node_modules\java\build\Release\nodejavabridge_bindings.node
+```
+try to add to PATH the `JAVA_HOME\jre\bin\server` directory and re-run the command. 
+
+
+## Development
+
+### Modules
+- [types](../src/converter/types.ts) - Contains all definitions
+- [variables](../src/converter/variables.ts) - RuleVariableMap helper used to simplify the LLM prompt definition
+- [prompts](../src/converter/prompts.ts) - Instruction used for the dsl to javascript conversion
+- [app](../src/converter/app.ts) - The definition of RuleConverterApp that implements all steps needed for the conversion pipeline
+- [rule-dao.examples](../src/converter/rule-dao.examples.ts) - The IRuleDao implementation that retrieves the rules from [rules.tsv](../assets/test/rules.tsv)
+- [rule-dao.production](../src/converter/rule-dao.production.ts) - The IRuleDao implementation that retrieves the rules from `GIBUS_RULES` table
+- [rule-converter.openai](../src/converter/rule-converter.openai.ts) - The IRuleConverterService that use OpenAI to convert the rules
+- [conversion-result-validator](../src/converter/conversion-result-validator.ts) - The IConversionResultValidator implementation, that validates the syntax of the converted rules
+- [conversion-result-dao.file](../src/converter/convertion-result-dao.file.ts) - The IConversionResultDao that save the rule converted in a file
+
+
+![Image](converter_diagram.png)
+

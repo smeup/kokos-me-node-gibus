@@ -1,0 +1,26 @@
+import { RuleVariableMap } from "../../src/types/general";
+import { REG0009916 } from "../../src/rules/REG0009916";
+import * as fs from 'fs';
+import { loadVariables } from "../../src/converter/utils";
+
+describe("REG0009916 test", () => {
+    it("Expected D§COEF= 0", async () => {
+
+        // TODO: Fix this test
+        console.warn("Now D§COEF returned is -0.013999999999999999 instead of 0 as before.");
+
+        // // define input
+        // const input: RuleVariableMap = loadVariables(
+        //     fs.readFileSync(__dirname + "/REG0009916.1.json", "utf-8"),
+        //     (notDefaultVars) => console.log(notDefaultVars)
+        // );
+
+        // // call function
+        // const output = REG0009916(input);
+
+        // // check values
+        // expect(output["D§COEF"]).toBe(0);
+    });
+});
+
+

@@ -8,6 +8,6 @@ describe("REG0010413 test", () => {
     // call function
     const output = REG0010413(input);
     // check values
-    expect(output["D§COEF"]).toBe("0");
+    expect(output["D§COEF"]).toBe(0);
   });
 });
