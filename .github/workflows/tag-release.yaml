@@ -10,7 +10,10 @@ env:
   ECR_REPOSITORY: kokos-node-gibus
 
 jobs:
-  steps:
+  develop-release:
+    runs-on: ubuntu-latest
+    
+    steps:
       - uses: actions/checkout@v3
 
       - name: Configure AWS credentials
