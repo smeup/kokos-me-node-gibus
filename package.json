@@ -21,7 +21,7 @@
   "author": "Sme.UP",
   "license": "ISC",
   "dependencies": {
-    "@sme.up/kokos-sdk-node": "^0.3.0-SNAPSHOT",
+    "@sme.up/kokos-sdk-node": "^1.0.0",
     "langchain": "0.0.203",
     "node-jt400": "^4.5.0"
   },
