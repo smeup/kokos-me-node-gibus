@@ -10,7 +10,7 @@ env:
   ECR_REPOSITORY: kokos-node-gibus
 
 jobs:
-  develop-release:
+  tag-release:
     runs-on: ubuntu-latest
     
     steps:
