@@ -1,5 +1,5 @@
 import { RuleVariableMap } from "../../src/types/general";
-import { REG0009364 } from "../../src/rules/REG0009364_gibus";
+import { REG0009364 } from "../../src/rules/REG0009364_gib";
 import * as fs from 'fs';
 import { loadVariables } from "../../src/converter/utils";
 
