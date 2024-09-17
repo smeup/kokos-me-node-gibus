@@ -9,7 +9,7 @@
 import { Rule } from "../types/general.js";
 import { Variables } from "../converter/variables.js";
 
-export const REG0009424: Rule = (iv) => {
+export const REG0009424_GIB: Rule = (iv) => {
 
     const vars = new Variables(iv);
 

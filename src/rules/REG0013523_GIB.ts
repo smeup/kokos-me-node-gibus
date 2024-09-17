@@ -9,26 +9,23 @@
 import { Rule } from "../types/general.js";
 import { Variables } from "../converter/variables.js";
 
-export const REG0009364: Rule = (iv) => {
+export const REG0013523_GIB: Rule = (iv) => {
 
     const vars = new Variables(iv);
 
-    // GENERATED
-    // RULE: REG0009364
-    // REQUEST:
-    // """
-    // #1
-    // THEN:
-    // *SET *CON-A = *COL
-    // *SET *CON-B = *LUNG
-    // *SET *S2 = *LUNG
-    // """
-    // RESPONSE:
-    //#1
-    vars.setCON_A(vars.getCOL());
-    vars.setCON_B(vars.getLUNG());
-    vars.setS2(vars.getLUNG());
-    // GENERATED
+let config = '';
+if(vars.get('§VERN_1_COM')){
+    config = vars.get('§VERN_1_COM');
+} 
+
+if(vars.get('§VR_PROF_TET')){
+    config = vars.get('§VR_PROF_TET');
+} 
+
+if(vars.get('§VR_TRA_TET')){
+    config = vars.get('§VR_TRA_TET');
+} 
+vars.setCON_A(config);
 
     return vars.output;
 };
