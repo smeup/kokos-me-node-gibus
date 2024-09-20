@@ -1,33 +1,34 @@
-module.exports = { initInputVal, setOutputVal };
+import {config} from './config';
 
-function initInputVal(data) {
+export const functions = { initInputVal, setOutputVal };
 
-    let config = require('./config.json');
 
-    let initValLogic = config.initValLogic;
+function initInputVal(data: any) {
 
-    initValLogic.forEach(elem => {
+    let initValLogic : any = config.initValLogic;
+
+    initValLogic.forEach((elem : any)  => {
         let schemaKey = elem.schemaKey;
-        let schema = config[schemaKey]
+        let schema : any = config[schemaKey]
         let csvCodeKey = elem.csvCodeKey;
         let csvCode = data[csvCodeKey];
 
-        let csvObj = schema.find((elem) => elem.code === csvCode);
+        let csvObj : Record<string, object> = schema.find((elem : any) => elem.code === csvCode);
         if (!csvObj) {
-            csvObj = schema.find((elem) => elem.code === '*');
+            csvObj = schema.find((elem: any) => elem.code === '*');
         }
-        let partList = csvObj.partList;
-        partList.sort((a, b) => { a.idx - b.idx });
+        let partList : any = csvObj.partList;
+        partList.sort((a : any, b : any) => { a.idx - b.idx });
         setIntVal(data, partList);
     });
 
 
 }
 
-function setIntVal(data, partList) {
-    let extObj = {};
+function setIntVal(data : any, partList : any) {
+    let extObj :Record<string, string> = {};
 
-    partList.forEach(elem => {
+    partList.forEach((elem : any) => {
         let extElem = elem.extElem;
         if (extElem) {
             let extKey = extElem.key;
@@ -38,7 +39,7 @@ function setIntVal(data, partList) {
 
     });
 
-    partList.forEach(elem => {
+    partList.forEach((elem : any)=> {
         let extElem = elem.extElem;
         let intElem = elem.intElem;
 
@@ -48,7 +49,7 @@ function setIntVal(data, partList) {
 
             if (extElem.type === 'string') {
                 let theLength = extElem.length;
-                let theVal = extObj[extKey].substring(0, theLength);
+                let theVal : any = extObj[extKey].substring(0, theLength);
                 if (extElem.format === 'zeroPadded') {
                     theVal = parseFloat(theVal);
                     theVal = theVal / (10 * extElem.dec);
@@ -68,20 +69,19 @@ function setIntVal(data, partList) {
 
 }
 
-function setOutputVal(data) {
-    let config = require('./config.json');
+function setOutputVal(data : any) {
 
     let outputLogic = config.outputLogic;
 
-    outputLogic.forEach(elem => {
+    outputLogic.forEach((elem : any) => {
         let schemaKey = elem.schemaKey;
         let schema = config[schemaKey]
         let csvCodeKey = elem.csvCodeKey;
         let csvCode = data[csvCodeKey];
 
-        let csvObj = schema.find((elem) => elem.code === csvCode);
+        let csvObj = schema.find((elem : any) => elem.code === csvCode);
         if (!csvObj) {
-            csvObj = schema.find((elem) => elem.code === '*');
+            csvObj = schema.find((elem : any) => elem.code === '*');
         }
         let partList = csvObj.partList;
         setExtVal(data, partList)
@@ -96,7 +96,7 @@ function setOutputVal(data) {
     return data;
 }
 
-function calcComponente(data, config) {
+function calcComponente(data : any , config : any) {
     let componente = config.componente;
     let intCm = componente.intElem
     let extCm = componente.extElem
@@ -107,7 +107,7 @@ function calcComponente(data, config) {
     }
 }
 
-function calcCoefficiente(data, config) {
+function calcCoefficiente(data : any, config : any) {
     let coefficiente = config.coefficiente;
     let intCf = coefficiente.intElem
     let extCf = coefficiente.extElem
@@ -129,7 +129,7 @@ function calcCoefficiente(data, config) {
     }
 }
 
-function calcFinalExport(data,config){
+function calcFinalExport(data : any,config : any){
     let filterArray = config.exportKeyList;
     if (filterArray) {
         for (let key in data) {
@@ -140,9 +140,9 @@ function calcFinalExport(data,config){
     }
 }
 
-function setExtVal(data, partList) {
+function setExtVal(data : any, partList : any) {
 
-    partList.forEach(elem => {
+    partList.forEach((elem : any) => {
         let extElem = elem.extElem;
         let intElem = elem.intElem;
 
@@ -156,7 +156,7 @@ function setExtVal(data, partList) {
 
     });
 
-    partList.forEach(elem => {
+    partList.forEach((elem : any) => {
         let extElem = elem.extElem;
         let intElem = elem.intElem;
         if ((extElem) && (intElem)) {

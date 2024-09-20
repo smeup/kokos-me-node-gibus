@@ -1,4 +1,4 @@
-{
+export const config : any = {
     "coefficiente": {
         "newValue": "true",
         "intElem": {

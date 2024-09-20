@@ -7,10 +7,10 @@
  * @returns The output value after applying the rule.
  */
 import { Rule } from "../types/general.js";
+import  {functions} from "./libGibus/functions.js";
 
 export const REG0013551_NEW: Rule = (data) => {
-    let functions = require(__dirname + "/lib/functions.cjs");
-
+   
     functions.initInputVal(data);
 
     let coef = 0;
