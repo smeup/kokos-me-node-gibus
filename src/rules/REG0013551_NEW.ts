@@ -7,20 +7,20 @@
  * @returns The output value after applying the rule.
  */
 import { Rule } from "../types/general.js";
-import { Variables } from "../converter/variables.js";
 
-export const REG0013551_GIB: Rule = (iv) => {
+export const REG0013551_NEW: Rule = (data) => {
+    let functions = require(__dirname + "/lib/functions.cjs");
 
-    const vars = new Variables(iv);
+    functions.initInputVal(data);
 
     let coef = 0;
-    let tiTra =  vars.get("§TI_TRA_ANT_T01");
-    if(tiTra == '60X100'){
-        let nModuli = vars.get("§N_MODULI");
+    let tiTra = data["§TI_TRA_ANT_T01"];
+    if (tiTra == '60X100') {
+        let nModuli = data["§N_MODULI"];
         coef = 0 + +nModuli; //nModuli è stringa
     }
 
-    vars.setCF(coef);
-    
-    return vars.output;
+    data["*CF"] = coef;
+
+    return functions.setOutputVal(data);
 };

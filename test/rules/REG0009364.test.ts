@@ -13,7 +13,7 @@ describe("REG0009364 test", () => {
         const output = REG0009364_GIB(input);
 
         // // check values
-        console.log('non funziona va corretto il payload e i metodi');
+        console.warn('non funziona va corretto il payload e i metodi');
   //      expect(output["D§DISE"]).toBe('012104918AAKA44');
     });
 });
