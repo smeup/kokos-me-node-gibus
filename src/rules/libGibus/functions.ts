@@ -1,13 +1,15 @@
 import {config} from './config';
 
-export const functions = { initInputVal, setOutputVal };
+export const functions = { setInternalVal, setExternalVal };
 
+function setInternalVal(data: any) {
 
-function initInputVal(data: any) {
+    let coefLogic = config.coefficiente;
+    data[coefLogic.intKey] = data[coefLogic.extKey]
 
-    let initValLogic : any = config.initValLogic;
+    let initConfigValLogic : any = config.extToIntConfigLogic;
 
-    initValLogic.forEach((elem : any)  => {
+    initConfigValLogic.forEach((elem : any)  => {
         let schemaKey = elem.schemaKey;
         let schema : any = config[schemaKey]
         let csvCodeKey = elem.csvCodeKey;
@@ -19,13 +21,13 @@ function initInputVal(data: any) {
         }
         let partList : any = csvObj.partList;
         partList.sort((a : any, b : any) => { a.idx - b.idx });
-        setIntVal(data, partList);
+        setInternalConfigVal(data, partList);
     });
 
 
 }
 
-function setIntVal(data : any, partList : any) {
+function setInternalConfigVal(data : any, partList : any) {
     let extObj :Record<string, string> = {};
 
     partList.forEach((elem : any) => {
@@ -69,22 +71,31 @@ function setIntVal(data : any, partList : any) {
 
 }
 
-function setOutputVal(data : any) {
+function setExternalVal(data : any) {
 
-    let outputLogic = config.outputLogic;
+    let intToExtConfigLogic = config.intToExtConfigLogic;
 
-    outputLogic.forEach((elem : any) => {
-        let schemaKey = elem.schemaKey;
+    intToExtConfigLogic.forEach((elem : any) => {
+        let schemaKey = elem.schemaKey; //al momento solo distCfg, non prevedo più distinte di ritorno
         let schema = config[schemaKey]
         let csvCodeKey = elem.csvCodeKey;
         let csvCode = data[csvCodeKey];
-
-        let csvObj = schema.find((elem : any) => elem.code === csvCode);
-        if (!csvObj) {
-            csvObj = schema.find((elem : any) => elem.code === '*');
+        if (csvCode){
+            if(csvCode == ""){
+                let extKey = intToExtConfigLogic.defaultExtConfigKey;
+                data[extKey] = "";
+            }else{ //c'è un codice configurazione non vuoto
+                let csvObj = schema.find((elem : any) => elem.code === csvCode);
+                if (!csvObj) {
+                    csvObj = schema.find((elem : any) => elem.code === '*');
+                }
+                let partList = csvObj.partList;
+                setExtConfigVal(data, partList)
+            }
+        }else{
+            let extKey = elem.defaultExtConfigKey;
+            data[extKey] = "";
         }
-        let partList = csvObj.partList;
-        setExtVal(data, partList)
     });
 
     calcCoefficiente(data, config);
@@ -115,7 +126,6 @@ function calcCoefficiente(data : any, config : any) {
     let extCfKey = extCf.key;
     let newValue = coefficiente.newValue;
 
-    if (data[intCfKey]) {
         if (data[intCfKey] > 0) {
             if (newValue) {
                 data[extCfKey] = data[intCfKey];
@@ -126,7 +136,6 @@ function calcCoefficiente(data : any, config : any) {
             data['D§COEF'] = 0;
             data['XFVALI'] = '';
         }
-    }
 }
 
 function calcFinalExport(data : any,config : any){
@@ -140,7 +149,7 @@ function calcFinalExport(data : any,config : any){
     }
 }
 
-function setExtVal(data : any, partList : any) {
+function setExtConfigVal(data : any, partList : any) {
 
     partList.forEach((elem : any) => {
         let extElem = elem.extElem;

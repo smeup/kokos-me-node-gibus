@@ -11,7 +11,7 @@ import  {functions} from "./libGibus/functions.js";
 
 export const REG0013551_NEW: Rule = (data) => {
    
-    functions.initInputVal(data);
+    functions.setInternalVal(data);
 
     let coef = 0;
     let tiTra = data["§TI_TRA_ANT_T01"];
@@ -22,5 +22,5 @@ export const REG0013551_NEW: Rule = (data) => {
 
     data["*CF"] = coef;
 
-    return functions.setOutputVal(data);
+    return functions.setExternalVal(data);
 };

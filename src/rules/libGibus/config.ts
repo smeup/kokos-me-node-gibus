@@ -24,7 +24,7 @@ export const config : any = {
         "D§NOTA",
         "D§DISE"
     ],
-    "initValLogic": [
+    "extToIntConfigLogic": [
         {
             "schemaKey": "distCfg",
             "csvCodeKey": "*CSVA"
@@ -34,10 +34,11 @@ export const config : any = {
             "csvCodeKey": "*CSVP"
         }
     ],
-    "outputLogic": [
+    "intToExtConfigLogic": [
         {
             "schemaKey": "distCfg",
-            "csvCodeKey": "*CSVA"
+            "csvCodeKey": "*CSVA",
+            "defaultExtConfigKey" : "D§DISE"
         }
     ],
     "distCfg": [
