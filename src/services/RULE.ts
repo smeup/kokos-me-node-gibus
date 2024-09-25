@@ -119,7 +119,7 @@ function processRule(ruleName: string, rule: Rule, input: RuleVariableMap): Rule
   beforeRuleApplied(ruleName, input);
   const output = rule(input);
   afterRuleApplied(ruleName, getVars());
-  return output;
+  return getVars().output;
 }
 
 
