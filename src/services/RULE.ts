@@ -59,7 +59,7 @@ async function executeRule(
   writer: SmeupDataStructureWriter
 ) {
   const store = new Map<string, any>();
-  asyncLocalStorage.run(store, async () => {
+  await asyncLocalStorage.run(store, async () => {
     // get rule name
     const ruleName = fun.obj1?.k;
     if (ruleName && ruleName != "") {
@@ -117,7 +117,7 @@ async function executeRule(
  */
 function processRule(ruleName: string, rule: Rule, input: RuleVariableMap): RuleVariableMap {
   beforeRuleApplied(ruleName, input);
-  const output = rule(input);
+  rule(input);
   afterRuleApplied(ruleName, getVars());
   return getVars().output;
 }
