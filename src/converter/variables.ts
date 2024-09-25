@@ -1,6 +1,7 @@
 import { RuleVariableMap } from "../types/general.js";
 import { isNumericType } from "./utils.js";
 import { CONFIG } from "./config.js";
+import { setVars } from "../services/RULE.js";
 
 const D_DISE_LEN = 9
 
@@ -52,6 +53,7 @@ class Variables {
             this.parObj.elemNumber = this.config['*CSVA'][this.CSVA].length; //numero elementi che compongono D§DISE
             this.setDefaultDise();
         }
+        setVars(this);
     }
 
 
