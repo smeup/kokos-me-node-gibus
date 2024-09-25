@@ -2,7 +2,6 @@ import {
   ExecutionContext,
   Fun,
   KokosService,
-  LOGGER,
   SmeupDataColumn,
   SmeupDataRow,
   SmeupDataStructureWriter,
@@ -92,7 +91,7 @@ async function getRule(name: string): Promise<Rule> {
       }
     }
   } catch (error) {
-    LOGGER.info(`Rule ${name} not found: ${error}, return empty rule implementation`);
+    console.info(`Rule ${name} not found: ${error}, return empty rule implementation`);
     return (variables) => {
       return  variables;
     };
