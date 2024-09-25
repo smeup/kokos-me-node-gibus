@@ -91,7 +91,7 @@ async function getRule(name: string): Promise<Rule> {
       }
     }
   } catch (error) {
-    console.info(`Rule ${name} not found: ${error}, return empty rule implementation`);
+    console.info(`Rule ${name} not found, return empty rule implementation`);
     return (variables) => {
       return  variables;
     };
