@@ -1,5 +1,5 @@
 import { RuleVariableMap } from "../../src/types/general";
-import { REG0010566_GIB } from "../../src/rules/REG0010566_GIB";
+import { REG0010566_NEW } from "../../src/rules/REG0010566_NEW";
 import * as fs from 'fs';
 import { loadVariables } from "../../src/converter/utils";
 
@@ -10,7 +10,7 @@ describe("REG0013551 test", () => {
         const input: RuleVariableMap = loadVariables(fs.readFileSync(__dirname + "/REG0010566.1.json", "utf-8"));
 
         // // call function
-        const output = REG0010566_GIB(input);
+        const output = REG0010566_NEW(input);
         // // check values
 
         expect(output["D§DISE"]).toBe("0051");

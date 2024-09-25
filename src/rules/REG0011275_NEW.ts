@@ -1,7 +1,7 @@
 import { Rule } from "../types/general.js";
 import { functions } from "./libGibus/functions.js";
 
-export const REG0011275_GIB: Rule = (data) => {
+export const REG0011275_NEW: Rule = (data) => {
 
     functions.setInternalVal(data);
 
