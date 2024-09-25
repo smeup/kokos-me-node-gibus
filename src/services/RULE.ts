@@ -2,6 +2,7 @@ import {
   ExecutionContext,
   Fun,
   KokosService,
+  LOGGER,
   SmeupDataColumn,
   SmeupDataRow,
   SmeupDataStructureWriter,
@@ -66,7 +67,7 @@ async function executeRule(
       throw new Error("Non-existent or unregistered rule");
     }
   } else {
-    throw new Error("Rule not defined");
+    throw new Error("Empty ruleName is not allowed");
   }
 }
 
@@ -78,16 +79,23 @@ async function executeRule(
  * @returns The rule.
  */
 async function getRule(name: string): Promise<Rule> {
-  if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-    const module = await import(`../rules/${name}.ts`);
-    return module[name] as Rule;
-  } else {
-    if (RULE_MAPPING[name]) {
-      return RULE_MAPPING[name];
-    } else {
-      const module = await import(`../rules/${name}.js`);
+  try {
+    if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
+      const module = await import(`../rules/${name}.ts`);
       return module[name] as Rule;
+    } else {
+      if (RULE_MAPPING[name]) {
+        return RULE_MAPPING[name];
+      } else {
+        const module = await import(`../rules/${name}.js`);
+        return module[name] as Rule;
+      }
     }
+  } catch (error) {
+    LOGGER.info(`Rule ${name} not found: ${error}, return empty rule implementation`);
+    return (variables) => {
+      return  variables;
+    };
   }
 }
 
