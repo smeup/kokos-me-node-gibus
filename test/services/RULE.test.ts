@@ -14,5 +14,11 @@ describe("getRule", () => {
         const rule = await getRule("REG0012742");
         expect(rule).toBe(REG0012742)
     });
+
+    it(`Non-existent rule should return an empty rule implementation`, async () => {
+        process.env.NODE_ENV = "production";
+        const rule = await getRule("NON_EXISTENT_RULE");
+        expect(rule).toBeDefined();
+    });
 });
 
