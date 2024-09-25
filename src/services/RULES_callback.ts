@@ -20,7 +20,7 @@ function beforeRuleApplied(ruleName: string, input: RuleVariableMap) {
  */
 function defaultRuleImplementation(ruleName: string, vars: Variables) {
     const cfValue = vars.get("§_CF");
-    if (cfValue !== undefined) {
+    if (cfValue !== '') {
         const cfNumber = Number(cfValue);
         if (!isNaN(cfNumber)) {
             vars.setCF(cfNumber);
