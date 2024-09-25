@@ -34,7 +34,9 @@ function defaultRuleImplementation(ruleName: string, vars: Variables) {
  * @param vars The variables object
  */
 function afterRuleApplied(ruleName: string, vars: Variables) {
-    console.log(`afterRuleApplied - ruleName ${ruleName}`);
+    if (ruleName == "TEST_CALLBACK") {
+        vars.output["TEST_CALLBACK"] = "HELLO WORLD";
+    }
 }
 
 export { afterRuleApplied, defaultRuleImplementation, beforeRuleApplied };
