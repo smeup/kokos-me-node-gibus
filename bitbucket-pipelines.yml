@@ -1,5 +1,26 @@
-name: develop-release
+#image: node:18
+#pipelines:
+#  default:
+#    - parallel:
+#fallisce miseramente come nella installazione windows locale
+#        - step:
+#            name: Build and Test
+#            caches:
+#              - node
+#            script:
+#              - npm install
+#              - npm test
+#        - step:
+#            name: Code linting
+#            script:
+#              - npm install eslint
+#              - npx eslint .
+#            caches:
+#              - node
 
+
+#name: develop-release
+pipelines
 on:
   push:
     branches:
