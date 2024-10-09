@@ -14,8 +14,8 @@ pipelines:
             - IMAGE_TAG="latest"
             - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
             - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
-            - login_ecr=$(eval $(aws ecr get-login --no-include-email --region eu-south-1 | sed 's;https://;;g'))
-            - echo "$login_ecr"
-            - ECR_REGISTRY=${{ login-ecr.outputs.registry }}
+            - $(eval $(aws ecr get-login --no-include-email --region eu-south-1 | sed 's;https://;;g'))
+            - ECR_REGISTRY=$(eval $(aws ecr get-registry))
+            - echo "$ECR_REGISTRY"
             - docker build -t  $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
             - docker push  $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
