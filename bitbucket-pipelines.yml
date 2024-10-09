@@ -1,59 +1,20 @@
-#image: node:18
-#pipelines:
-#  default:
-#    - parallel:
-#fallisce miseramente come nella installazione windows locale
-#        - step:
-#            name: Build and Test
-#            caches:
-#              - node
-#            script:
-#              - npm install
-#              - npm test
-#        - step:
-#            name: Code linting
-#            script:
-#              - npm install eslint
-#              - npx eslint .
-#            caches:
-#              - node
+image: python:3.7.4-alpine3.10
 
-
-#name: develop-release
-pipelines
-on:
-  push:
-    branches:
-      - develop
-
-env:
-  AWS_REGION: eu-south-1
-  ECR_REPOSITORY: kokos-node-gibus
-
-jobs:
-  develop-release:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
-        with:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: latest
-        run: |
-          echo "building image $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+pipelines:
+  tags:
+    ecr-release-*:
+      - step:
+          services:
+            - docker
+          caches:
+            - pip
+          script:
+            - pip3 install awscli
+            - ECR_REPOSITORY="kokos-node-gibus"
+            - IMAGE_TAG="latest"
+            - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+            - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+            - login_ecr = eval $(aws ecr get-login --no-include-email --region eu-south-1 | sed 's;https://;;g')
+            - ECR_REGISTRY = ${{ login-ecr.outputs.registry }}
+            - docker build -t  $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+            - docker push  $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
