@@ -1,22 +1,20 @@
-#  Template NodeJS build
-#  This template allows you to validate your NodeJS code.
-#  The workflow allows running tests and code linting on the default branch.
-image: node:18
+image: python:3.7.4-alpine3.10
+
 pipelines:
-  default:
-    - parallel:
-#fallisce miseramente come nella installazione windows locale
-#        - step:
-#            name: Build and Test
-#            caches:
-#              - node
-#            script:
-#              - npm install
-#              - npm test
-        - step:
-            name: Code linting
-            script:
-              - npm install eslint
-              - npx eslint .
-            caches:
-              - node
+  tags:
+    ecr-release-*:
+      - step:
+          services:
+            - docker
+          caches:
+            - pip
+          script:
+            - pip3 install awscli
+            - ECR_REPOSITORY="kokos-node-gibus"
+            - IMAGE_TAG="latest"
+            - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+            - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+            - eval $(aws ecr get-login --no-include-email --region eu-south-1 | sed 's;https://;;g')
+            - ECR_REGISTRY=$(eval $(aws ecr get-registry))
+            - docker build -t  $ECR_REPOSITORY:$IMAGE_TAG .
+            - docker push $ECR_REPOSITORY:$IMAGE_TAG
