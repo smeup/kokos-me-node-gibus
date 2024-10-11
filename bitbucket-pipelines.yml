@@ -1,6 +1,29 @@
 image: python:3.7.4-alpine3.10
 
+definitions:
+  services:
+   docker:
+    memory: 2048
+
 pipelines:
+  tags:
+    ecr-release-*:
+      - step:
+          services:
+            - docker
+          caches:
+            - pip
+          script:
+            - pip3 install awscli
+            - ECR_REPOSITORY="kokos-node-gibus"
+            - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+            - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+            - ECR_LOGIN=$(aws ecr get-login --no-include-email --region eu-south-1 | sed 's;https://;;g') 
+            - ECR_URI=$(echo "$ECR_LOGIN" | awk '{print $7}' )
+            - eval $ECR_LOGIN
+            - IMAGE_TAG="latest"
+            - docker build -t  $ECR_URI/$ECR_REPOSITORY:$IMAGE_TAG .
+            - docker push $ECR_URI/$ECR_REPOSITORY:$IMAGE_TAG
   tags:
     ecr-release-*:
       - step:
