@@ -16,7 +16,7 @@
 	},
 	"include": [
 		"src/**/*.ts"
-	],
+, "src/rules/lib/test.js"	],
 	"exclude": [
 		"node_modules",
 		"lib",

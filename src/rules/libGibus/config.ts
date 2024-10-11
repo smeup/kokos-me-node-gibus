@@ -1,0 +1,271 @@
+export const config : any = {
+    "coefficiente": {
+        "newValue": "true",
+        "intElem": {
+            "key": "*CF"
+        },
+        "extElem": {
+            "key": "D§COEF"
+        }
+    },
+    "componente": {
+        "intElem": {
+            "key": "*CM"
+        },
+        "extElem": {
+            "key": "D§COMP"
+        }
+    },
+    "exportKeyList": [
+        "D§USR1",
+        "D§COMP",
+        "D§USR2",
+        "D§COEF",
+        "D§NOTA",
+        "D§DISE"
+    ],
+    "extToIntConfigLogic": [
+        {
+            "schemaKey": "distCfg",
+            "csvCodeKey": "*CSVA"
+        },
+        {
+            "schemaKey": "parentCfg",
+            "csvCodeKey": "*CSVP"
+        }
+    ],
+    "intToExtConfigLogic": [
+        {
+            "schemaKey": "distCfg",
+            "csvCodeKey": "*CSVA",
+            "defaultExtConfigKey" : "D§DISE"
+        }
+    ],
+    "distCfg": [
+        {
+            "code": "*",
+            "partList": [
+                {
+                    "idx": 1,
+                    "extElem": {
+                        "key": "D§DISE",
+                        "type": "string",
+                        "length": 6
+                    },
+                    "intElem": {
+                        "key": "§_CF",
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        {
+            "code": "003",
+            "partList": [
+                {
+                    "idx": 1,
+                    "extElem": {
+                        "key": "D§DISE",
+                        "type": "string",
+                        "length": 4
+                    },
+                    "intElem": {
+                        "key": "*CON-A",
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        {
+            "code": "004",
+            "partList": [
+                {
+                    "idx": 1,
+                    "extElem": {
+                        "key": "D§DISE",
+                        "type": "string",
+                        "length": 4
+                    },
+                    "intElem": {
+                        "key": "*CON-A",
+                        "type": "string"
+                    }
+                },
+                {
+                    "idx": 2,
+                    "format": "zeroPadded",
+                    "extElem": {
+                        "key": "D§DISE",
+                        "type": "string",
+                        "format": "zeroPadded",
+                        "length": 5,
+                        "dec": 1
+                    },
+                    "intElem": {
+                        "key": "*CON-B",
+                        "type": "number"
+                    }
+                }
+            ]
+        },
+        {
+            "code": "005",
+            "initValList": [
+                "distCfg",
+                "parentCfg"
+            ],
+            "partList": [
+                {
+                    "idx": 1,
+                    "extElem": {
+                        "key": "D§DISE",
+                        "type": "string",
+                        "length": 4
+                    },
+                    "intElem": {
+                        "key": "*CON-A",
+                        "type": "string"
+                    }
+                },
+                {
+                    "idx": 2,
+                    "format": "zeroPadded",
+                    "extElem": {
+                        "key": "D§DISE",
+                        "type": "string",
+                        "format": "zeroPadded",
+                        "length": 5,
+                        "dec": 1
+                    },
+                    "intElem": {
+                        "key": "*CON-B",
+                        "type": "number"
+                    }
+                },
+                {
+                    "idx": 3,
+                    "extElem": {
+                        "key": "D§DISE",
+                        "type": "string",
+                        "length": 6
+                    },
+                    "intElem": {
+                        "key": "§_CF",
+                        "type": "string"
+                    }
+                }
+            ]
+        }
+    ],
+    "parentCfg": [
+        {
+            "code": "*",
+            "partList": [
+                {
+                    "idx": 1,
+                    "extElem": {
+                        "key": "XCONFI",
+                        "type": "string",
+                        "length": 6
+                    },
+                    "intElem": {
+                        "key": "§_CF",
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        {
+            "code": "003",
+            "partList": [
+                {
+                    "idx": 1,
+                    "extElem": {
+                        "key": "XCONFI",
+                        "type": "string",
+                        "length": 4
+                    },
+                    "intElem": {
+                        "key": "*COL",
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        {
+            "code": "004",
+            "partList": [
+                {
+                    "idx": 1,
+                    "extElem": {
+                        "key": "XCONFI",
+                        "type": "string",
+                        "length": 4
+                    },
+                    "intElem": {
+                        "key": "*COL",
+                        "type": "string"
+                    }
+                },
+                {
+                    "idx": 2,
+                    "extElem": {
+                        "key": "XCONFI",
+                        "type": "string",
+                        "format": "zeroPadded",
+                        "length": 5,
+                        "dec": 1
+                    },
+                    "intElem": {
+                        "key": "*LUNG",
+                        "type": "number"
+                    }
+                }
+            ]
+        },
+        {
+            "code": "005",
+            "partList": [
+                {
+                    "idx": 1,
+                    "extElem": {
+                        "key": "XCONFI",
+                        "type": "string",
+                        "length": 4
+                    },
+                    "intElem": {
+                        "key": "*COL",
+                        "type": "string"
+                    }
+                },
+                {
+                    "idx": 2,
+                    "format": "zeroPadded",
+                    "extElem": {
+                        "key": "XCONFI",
+                        "type": "string",
+                        "format": "zeroPadded",
+                        "length": 5,
+                        "dec": 1
+                    },
+                    "intElem": {
+                        "key": "*LUNG",
+                        "type": "number"
+                    }
+                },
+                {
+                    "idx": 3,
+                    "extElem": {
+                        "key": "XCONFI",
+                        "type": "string",
+                        "length": 6
+                    },
+                    "intElem": {
+                        "key": "§_CF",
+                        "type": "string"
+                    }
+                }
+            ]
+        }
+    ]
+}

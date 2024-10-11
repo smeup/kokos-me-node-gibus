@@ -1,5 +1,5 @@
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { SystemMessage, HumanMessage } from "langchain/schema";
+import { ChatOpenAI } from "@langchain/openai";
+import { SystemMessage, HumanMessage } from "@langchain/core/messages";
 import { Condition, ConversionResult, IRuleConverterService, Rule } from "./types.js";
 import { SYSTEM_MESSAGE } from "./prompts.js";
 
