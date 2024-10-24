@@ -22,7 +22,8 @@ export const config : any = {
         "D§USR2",
         "D§COEF",
         "D§NOTA",
-        "D§DISE"
+        "D§DISE",
+        "XFVALI"
     ],
     "extToIntConfigLogic": [
         {

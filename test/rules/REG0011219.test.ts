@@ -14,6 +14,8 @@ describe("REG0013551 test", () => {
         // // check values
 
         expect(output["D§DISE"]).toBe("AAFME9");
+        expect(output["D§COEF"]).toBe(1);
+        expect(output["XFVALI"]).toBe("1");
     });
 });
 

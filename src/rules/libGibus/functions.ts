@@ -126,6 +126,7 @@ function calcCoefficiente(data : any, config : any) {
     let extCfKey = extCf.key;
     let newValue = coefficiente.newValue;
 
+    if(data[intCfKey]){//modifico i dati esterni solo se c'è stato almeno un set sui valori
         if (data[intCfKey] > 0) {
             if (newValue) {
                 data[extCfKey] = data[intCfKey];
@@ -136,6 +137,7 @@ function calcCoefficiente(data : any, config : any) {
             data['D§COEF'] = 0;
             data['XFVALI'] = '';
         }
+    }
 }
 
 function calcFinalExport(data : any,config : any){
