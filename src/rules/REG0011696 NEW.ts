@@ -6,7 +6,7 @@ export const REG0011696_NEW: Rule = (data) => {
     functions.setInternalVal(data);
 
     data['*CF'] = 0;
-    data['*CON_A'] = 'P072';
+    data['*CON-A'] = 'P072';
 
     if (data['§N_VIE'] == 2) {
         data['*CF'] = 1;

@@ -18,7 +18,7 @@ export const REG0010586_NEW: Rule = (data) => {
     }
 
     data['*CF'] = 0;
-    data['CON-A'] = '0000';
+    data['*CON-A'] = '0000';
 
     if (data['§FS_VET_SCORR'] == 'SI') {
         data['*CF'] = data['§DUMMYN1'] + data['§DUMMYN2'];
