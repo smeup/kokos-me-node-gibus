@@ -9,8 +9,8 @@ export const REG0010483_NEW: Rule = (data) => {
     
     if(data['§VE_GUIINF_2VIE'] > 0){
         if(data['§FS_VET_SCORR'] == 'SI'){
-            data['*CON_A'] = '0051';
-            data['*CON_B'] = data['§VE_GUIINF_2VIE'];
+            data['*CON-A'] = '0051';
+            data['*CON-B'] = data['§VE_GUIINF_2VIE'];
             data['*CF'] = data['§VE_QGUIINF_2VIE'];
         }
     }
