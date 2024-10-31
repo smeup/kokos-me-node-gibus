@@ -1,4 +1,4 @@
-import {config} from './config.js';
+import { config } from './config.js';
 
 export const functions = { setInternalVal, setExternalVal };
 
@@ -7,30 +7,30 @@ function setInternalVal(data: any) {
     let coefLogic = config.coefficiente;
     data[coefLogic.intKey] = data[coefLogic.extKey]
 
-    let initConfigValLogic : any = config.extToIntConfigLogic;
+    let initConfigValLogic: any = config.extToIntConfigLogic;
 
-    initConfigValLogic.forEach((elem : any)  => {
+    initConfigValLogic.forEach((elem: any) => {
         let schemaKey = elem.schemaKey;
-        let schema : any = config[schemaKey]
+        let schema: any = config[schemaKey]
         let csvCodeKey = elem.csvCodeKey;
         let csvCode = data[csvCodeKey];
 
-        let csvObj : Record<string, object> = schema.find((elem : any) => elem.code === csvCode);
+        let csvObj: Record<string, object> = schema.find((elem: any) => elem.code === csvCode);
         if (!csvObj) {
             csvObj = schema.find((elem: any) => elem.code === '*');
         }
-        let partList : any = csvObj.partList;
-        partList.sort((a : any, b : any) => { a.idx - b.idx });
+        let partList: any = csvObj.partList;
+        partList.sort((a: any, b: any) => { a.idx - b.idx });
         setInternalConfigVal(data, partList);
     });
 
 
 }
 
-function setInternalConfigVal(data : any, partList : any) {
-    let extObj :Record<string, string> = {};
+function setInternalConfigVal(data: any, partList: any) {
+    let extObj: Record<string, string> = {};
 
-    partList.forEach((elem : any) => {
+    partList.forEach((elem: any) => {
         let extElem = elem.extElem;
         if (extElem) {
             let extKey = extElem.key;
@@ -41,7 +41,7 @@ function setInternalConfigVal(data : any, partList : any) {
 
     });
 
-    partList.forEach((elem : any)=> {
+    partList.forEach((elem: any) => {
         let extElem = elem.extElem;
         let intElem = elem.intElem;
 
@@ -51,48 +51,47 @@ function setInternalConfigVal(data : any, partList : any) {
 
             if (extElem.type === 'string') {
                 let theLength = extElem.length;
-                let theVal : any = extObj[extKey].substring(0, theLength);
-                if (extElem.format === 'zeroPadded') {
-                    theVal = parseFloat(theVal);
-                    theVal = theVal / (10 * extElem.dec);
-                    theVal = theVal.toString();
+                let theVal: any = extObj[extKey].substring(0, theLength);
+                if (theVal) {
+                    if (extElem.format === 'zeroPadded') {
+                        theVal = parseFloat(theVal);
+                        theVal = theVal / (10 * extElem.dec);
+                        theVal = theVal.toString();
+                    }
+                    if (intElem.type === 'number') {
+                        theVal = parseFloat(theVal);
+                    }
+                    data[intKey] = theVal;
+                    extObj[extKey] = extObj[extKey].substring(theLength);
                 }
-                if (intElem.type === 'number') {
-                    theVal = parseFloat(theVal);
-                }
-                data[intKey] = theVal;
-                extObj[extKey] = extObj[extKey].substring(theLength);
             }
-
-
         }
-
     });
 
 }
 
-function setExternalVal(data : any) {
+function setExternalVal(data: any) {
 
     let intToExtConfigLogic = config.intToExtConfigLogic;
 
-    intToExtConfigLogic.forEach((elem : any) => {
+    intToExtConfigLogic.forEach((elem: any) => {
         let schemaKey = elem.schemaKey; //al momento solo distCfg, non prevedo più distinte di ritorno
         let schema = config[schemaKey]
         let csvCodeKey = elem.csvCodeKey;
         let csvCode = data[csvCodeKey];
-        if (csvCode){
-            if(csvCode == ""){
+        if (csvCode) {
+            if (csvCode == "") {
                 let extKey = intToExtConfigLogic.defaultExtConfigKey;
                 data[extKey] = "";
-            }else{ //c'è un codice configurazione non vuoto
-                let csvObj = schema.find((elem : any) => elem.code === csvCode);
+            } else { //c'è un codice configurazione non vuoto
+                let csvObj = schema.find((elem: any) => elem.code === csvCode);
                 if (!csvObj) {
-                    csvObj = schema.find((elem : any) => elem.code === '*');
+                    csvObj = schema.find((elem: any) => elem.code === '*');
                 }
                 let partList = csvObj.partList;
                 setExtConfigVal(data, partList)
             }
-        }else{
+        } else {
             let extKey = elem.defaultExtConfigKey;
             data[extKey] = "";
         }
@@ -107,7 +106,7 @@ function setExternalVal(data : any) {
     return data;
 }
 
-function calcComponente(data : any , config : any) {
+function calcComponente(data: any, config: any) {
     let componente = config.componente;
     let intCm = componente.intElem
     let extCm = componente.extElem
@@ -118,7 +117,7 @@ function calcComponente(data : any , config : any) {
     }
 }
 
-function calcCoefficiente(data : any, config : any) {
+function calcCoefficiente(data: any, config: any) {
     let coefficiente = config.coefficiente;
     let intCf = coefficiente.intElem
     let extCf = coefficiente.extElem
@@ -126,7 +125,7 @@ function calcCoefficiente(data : any, config : any) {
     let extCfKey = extCf.key;
     let newValue = coefficiente.newValue;
 
-    if(data[intCfKey]){//modifico i dati esterni solo se c'è stato almeno un set sui valori
+    if (data[intCfKey]) {//modifico i dati esterni solo se c'è stato almeno un set sui valori
         if (data[intCfKey] > 0) {
             if (newValue) {
                 data[extCfKey] = data[intCfKey];
@@ -140,7 +139,7 @@ function calcCoefficiente(data : any, config : any) {
     }
 }
 
-function calcFinalExport(data : any,config : any){
+function calcFinalExport(data: any, config: any) {
     let filterArray = config.exportKeyList;
     if (filterArray) {
         for (let key in data) {
@@ -151,9 +150,9 @@ function calcFinalExport(data : any,config : any){
     }
 }
 
-function setExtConfigVal(data : any, partList : any) {
+function setExtConfigVal(data: any, partList: any) {
 
-    partList.forEach((elem : any) => {
+    partList.forEach((elem: any) => {
         let extElem = elem.extElem;
         let intElem = elem.intElem;
 
@@ -167,7 +166,7 @@ function setExtConfigVal(data : any, partList : any) {
 
     });
 
-    partList.forEach((elem : any) => {
+    partList.forEach((elem: any) => {
         let extElem = elem.extElem;
         let intElem = elem.intElem;
         if ((extElem) && (intElem)) {
