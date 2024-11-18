@@ -8,9 +8,8 @@ describe("REG0010483 test", () => {
 
         // define input
         const input: RuleVariableMap = loadVariables(JSON.stringify(require(__dirname + "/REG0010483.1.json")));
-
         // call function
-        const output = REG0010483_NEW(input);
+        const output = await REG0010483_NEW(input);
 
         // check values
         expect(output["D§DISE"]).toBe('005102498AAFME9');

@@ -6,7 +6,8 @@ export const config : any = {
         },
         "extElem": {
             "key": "D§COEF"
-        }
+        },
+        "validKey" : "XFVALI"
     },
     "componente": {
         "intElem": {

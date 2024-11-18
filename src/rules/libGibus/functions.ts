@@ -1,8 +1,42 @@
 import { config } from './config.js';
+import { systemVariables } from './systemVariables.js';
 
-export const functions = { setInternalVal, setExternalVal };
+export const functions = { initDataObj, finalDataObj };
 
-function setInternalVal(data: any) {
+function initDataObj(data: any, filterVariables: any, functionName : string) {
+    let filteringVariables : any = [];
+
+    //vado a passare direttamente un array monolivello
+    //filterVariables.forEach((elemList : any) => filteringVariables = [...filteringVariables, ...elemList]);
+    filteringVariables = filterVariables;
+    filteringVariables = [...filteringVariables, ...systemVariables];
+
+
+    const filtered = Object.keys(data)
+        .filter(key => filteringVariables.includes(key))
+        .reduce((obj, key) => {
+            return {
+                ...obj,
+                [key]: data[key]
+            };
+        }, {});
+
+    data = filtered;
+
+    const dataObj = {
+        ...data,
+        get: function (variable: any) {
+            //controllo se il nome della variabile sta nelle filter variables
+            if (!filteringVariables.includes(variable)) {
+                //come segnalo l'anomalia?
+                console.log({unknownVariable: variable , in : functionName});
+            }
+            return this[variable];
+        }
+
+    };
+
+    data = dataObj;
 
     let coefLogic = config.coefficiente;
     data[coefLogic.intKey] = data[coefLogic.extKey]
@@ -24,7 +58,7 @@ function setInternalVal(data: any) {
         setInternalConfigVal(data, partList);
     });
 
-
+    return data;
 }
 
 function setInternalConfigVal(data: any, partList: any) {
@@ -70,35 +104,48 @@ function setInternalConfigVal(data: any, partList: any) {
 
 }
 
-function setExternalVal(data: any) {
+function finalDataObj(data: any) {
 
     let intToExtConfigLogic = config.intToExtConfigLogic;
 
-    intToExtConfigLogic.forEach((elem: any) => {
-        let schemaKey = elem.schemaKey; //al momento solo distCfg, non prevedo più distinte di ritorno
-        let schema = config[schemaKey]
-        let csvCodeKey = elem.csvCodeKey;
-        let csvCode = data[csvCodeKey];
-        if (csvCode) {
-            if (csvCode == "") {
-                let extKey = intToExtConfigLogic.defaultExtConfigKey;
-                data[extKey] = "";
-            } else { //c'è un codice configurazione non vuoto
-                let csvObj = schema.find((elem: any) => elem.code === csvCode);
-                if (!csvObj) {
-                    csvObj = schema.find((elem: any) => elem.code === '*');
-                }
-                let partList = csvObj.partList;
-                setExtConfigVal(data, partList)
-            }
-        } else {
-            let extKey = elem.defaultExtConfigKey;
-            data[extKey] = "";
-        }
-    });
 
     calcCoefficiente(data, config);
 
+    let validElem = true
+
+    if (config.coefficiente) {
+        if (config.coefficiente.validKey) {
+            if (!data[config.coefficiente.validKey]) {
+                validElem = false;
+            }
+        }
+    }
+
+    if (validElem) {
+        intToExtConfigLogic.forEach((elem: any) => {
+            let schemaKey = elem.schemaKey; //al momento solo distCfg, non prevedo più distinte di ritorno
+            let schema = config[schemaKey]
+            let csvCodeKey = elem.csvCodeKey;
+            let csvCode = data[csvCodeKey];
+            if (csvCode) {
+                if (csvCode == "") {
+                    let extKey = intToExtConfigLogic.defaultExtConfigKey;
+                    data[extKey] = "";
+                } else { //c'è un codice configurazione non vuoto
+                    let csvObj = schema.find((elem: any) => elem.code === csvCode);
+                    if (!csvObj) {
+                        csvObj = schema.find((elem: any) => elem.code === '*');
+                    }
+                    let partList = csvObj.partList;
+                    setExtConfigVal(data, partList)
+                }
+            } else {
+                let extKey = elem.defaultExtConfigKey;
+                data[extKey] = "";
+            }
+        });
+    }
+    
     calcComponente(data, config);
 
     calcFinalExport(data, config);
@@ -124,6 +171,7 @@ function calcCoefficiente(data: any, config: any) {
     let intCfKey = intCf.key;
     let extCfKey = extCf.key;
     let newValue = coefficiente.newValue;
+    let validKey = coefficiente.validKey;
 
     if (data[intCfKey]) {//modifico i dati esterni solo se c'è stato almeno un set sui valori
         if (data[intCfKey] > 0) {
@@ -133,8 +181,8 @@ function calcCoefficiente(data: any, config: any) {
                 data[extCfKey] *= data[intCfKey];
             }
         } else {
-            data['D§COEF'] = 0;
-            data['XFVALI'] = '';
+            data[extCfKey] = 0;
+            data[validKey] = '';
         }
     }
 }
@@ -176,6 +224,10 @@ function setExtConfigVal(data: any, partList: any) {
                 let theVal = data[intKey];
                 if (extElem.type === 'number') {
                     theVal = parseFloat(theVal);
+                    if (!theVal) {
+                        //todo questo è chiaramente un errore
+                        //le formule non hanno popolato il valore
+                    }
                 }
                 if (extElem.type === 'string') {
                     if (extElem.format === 'zeroPadded') {
