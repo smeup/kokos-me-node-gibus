@@ -3,8 +3,8 @@ import { systemVariables } from './systemVariables.js';
 
 export const functions = { initDataObj, finalDataObj };
 
-function initDataObj(data: any, filterVariables: any, functionName : string) {
-    let filteringVariables : any = [];
+function initDataObj(data: any, filterVariables: any, functionName: string) {
+    let filteringVariables: any = [];
 
     //vado a passare direttamente un array monolivello
     //filterVariables.forEach((elemList : any) => filteringVariables = [...filteringVariables, ...elemList]);
@@ -29,7 +29,7 @@ function initDataObj(data: any, filterVariables: any, functionName : string) {
             //controllo se il nome della variabile sta nelle filter variables
             if (!filteringVariables.includes(variable)) {
                 //come segnalo l'anomalia?
-                console.log({unknownVariable: variable , in : functionName});
+                console.log({ unknownVariable: variable, in: functionName });
             }
             return this[variable];
         }
@@ -106,6 +106,22 @@ function setInternalConfigVal(data: any, partList: any) {
 
 function finalDataObj(data: any) {
 
+    //in questo punto innesterei il filtro per i ricambi
+    //in data proveniente dal payload metterei il tag dei ricambi
+    //nella formula metterei la lista dei tag che lasciano attiva la formula
+    if (data.tag) {
+        let ok = false;
+        if (data.tagList) {
+            if (data.tagList.includes(data.tag)) {
+                ok = true;
+            }
+        }
+        if (!ok) {
+            data.xfvali = '';
+            return data;
+        }
+    }
+
     let intToExtConfigLogic = config.intToExtConfigLogic;
 
 
@@ -145,7 +161,7 @@ function finalDataObj(data: any) {
             }
         });
     }
-    
+
     calcComponente(data, config);
 
     calcFinalExport(data, config);
