@@ -1,9 +1,11 @@
 import { Rule } from "../types/general.js";
 import { functions } from "./libGibus/functions.js";
+import {VE as filterVariables} from "./libGibus/functionVariables.js";
+
 
 export const REG0010586_NEW: Rule = (data) => {
 
-    functions.setInternalVal(data);
+        functions.initDataObj(data, filterVariables, '' );
 
     data['§DUMMYN1'] = 0;
 
@@ -24,5 +26,5 @@ export const REG0010586_NEW: Rule = (data) => {
         data['*CF'] = data['§DUMMYN1'] + data['§DUMMYN2'];
     }
 
-    return functions.setExternalVal(data);
+    return functions.finalDataObj(data);
 };

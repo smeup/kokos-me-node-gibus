@@ -1,9 +1,11 @@
 import { Rule } from "../types/general.js";
 import { functions } from "./libGibus/functions.js";
+import {VE as filterVariables} from "./libGibus/functionVariables.js";
+
 
 export const REG0010598_NEW: Rule = (data) => {
 
-    functions.setInternalVal(data);
+        functions.initDataObj(data, filterVariables, '' );
 
     data['*CF'] = 0;
     data['*CON-A'] = '';
@@ -30,6 +32,6 @@ export const REG0010598_NEW: Rule = (data) => {
         data['*CF'] = data['§Q_PANN_LAT'];
     }
 
-    return functions.setExternalVal(data);
+    return functions.finalDataObj(data);
 };
 

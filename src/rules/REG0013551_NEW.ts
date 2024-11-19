@@ -8,10 +8,11 @@
  */
 import { Rule } from "../types/general.js";
 import  {functions} from "./libGibus/functions.js";
+import {VE as filterVariables} from "./libGibus/functionVariables.js";
 
 export const REG0013551_NEW: Rule = (data) => {
    
-    functions.setInternalVal(data);
+        functions.initDataObj(data, filterVariables, '' );
 
     let coef = 0;
     let tiTra = data["§TI_TRA_ANT_T01"];
@@ -22,5 +23,5 @@ export const REG0013551_NEW: Rule = (data) => {
 
     data["*CF"] = coef;
 
-    return functions.setExternalVal(data);
+    return functions.finalDataObj(data);
 };
