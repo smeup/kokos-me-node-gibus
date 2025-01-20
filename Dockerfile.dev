@@ -1,0 +1,20 @@
+# Build step
+FROM node:18-slim AS builder
+
+WORKDIR /app
+
+# Install dependencies of ibm_db
+RUN apt update && apt install -y make gcc g++ libssl-dev libbz2-dev python3
+
+# Install dependencies of node_jt400
+RUN apt-get update && \
+    apt-get install -y default-jdk && \
+    apt-get clean;
+
+# run container as user node
+USER node
+
+EXPOSE 8011
+
+# wait forever
+CMD ["tail", "-f", "/dev/null"]
