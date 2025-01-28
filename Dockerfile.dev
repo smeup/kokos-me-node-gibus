@@ -16,5 +16,6 @@ USER node
 
 EXPOSE 8011
 
-# wait forever
-CMD ["tail", "-f", "/dev/null"]
+# run application in dev mode
+# retry every 30s since repository might not yet be cloned
+CMD ["/bin/sh", "-c", "while true; do npm run dev || true; echo 'Retrying in 30 seconds...'; sleep 30; done"]
