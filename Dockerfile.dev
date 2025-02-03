@@ -1,0 +1,21 @@
+# Build step
+FROM node:18-slim AS builder
+
+WORKDIR /app
+
+# Install dependencies of ibm_db
+RUN apt update && apt install -y make gcc g++ libssl-dev libbz2-dev python3
+
+# Install dependencies of node_jt400
+RUN apt-get update && \
+    apt-get install -y default-jdk && \
+    apt-get clean;
+
+# run container as user node
+USER node
+
+EXPOSE 8011
+
+# run application in dev mode
+# retry every 30s since repository might not yet be cloned
+CMD ["/bin/sh", "-c", "while true; do npm run dev || true; echo 'Retrying in 30 seconds...'; sleep 30; done"]
