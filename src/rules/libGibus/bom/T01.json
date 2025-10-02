@@ -1,0 +1,89 @@
+{
+    "comment": "primo file",
+    "defProps": {
+        "cod" : "",
+        "transCod" : "",
+        "forceSumQty" : false
+        , "blackListed" : false
+    },
+    "codList": [
+        {
+            "cod": "020182"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "272386"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "272387"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "272388"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "272389"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "146137"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "111480"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "111487"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "111485"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "111483"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "272390"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "272391"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "010625"
+            , "transCod" : "TG_PR0070"
+            , "forceSumQty" : true
+        },
+        {
+            "cod": "010599"
+            , "transCod" : "TG_PR0073"
+        },
+        {
+            "cod": "030218"
+            , "transCod" : "TG_PR0074"
+        }
+        ,
+        {
+            "cod": "010601"
+            , "transCod" : "TG_PR0075"
+        },
+        {
+            "cod": "010600"
+            , "transCod" : "TG_PR0076"
+        },
+        {
+            "cod": "010383"
+            , "transCod" : "TG_PR0077"
+        },
+        {
+            "cod": "010602"
+            , "transCod" : "TG_PR0078"
+        }
+    ]
+}

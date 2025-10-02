@@ -1,5 +1,4 @@
-# Build step
-FROM node:18-slim AS builder
+FROM node:18-slim
 
 WORKDIR /app
 
@@ -11,11 +10,13 @@ RUN apt-get update && \
     apt-get install -y default-jdk && \
     apt-get clean;
 
-# run container as user node
+# Set JAVA_HOME and LD_LIBRARY_PATH for JVM
+ENV JAVA_HOME=/usr/lib/jvm/default-java
+ENV LD_LIBRARY_PATH=$JAVA_HOME/lib/server
+
 USER node
 
 EXPOSE 8011
-
 # run application in dev mode
 # retry every 30s since repository might not yet be cloned
-CMD ["/bin/sh", "-c", "npm ci && npm run dev"]
+CMD ["/bin/sh", "-c", "while true; do npm install && npm run dev || true; echo 'Retrying in 30 seconds...'; sleep 30; done"]

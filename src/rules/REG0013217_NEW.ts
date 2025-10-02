@@ -1,18 +1,19 @@
 import { Rule } from "../types/general.js";
-import  {functions} from "./libGibus/functions.js";
+import { functions } from "./libGibus/functions.js";
 
-export const REG0013217_NEW: Rule = (data) => {
+export const REG0013217_NEW: Rule = async (data) => {
 
-    functions.setInternalVal(data);
+    let filterVariables = (await import("./libGibus/functionVariables.js")).VE;
+
+    await functions.asyncInitDataObj(data, filterVariables, '');
 
     data['*CF'] = 0;
-
 
     if (data['§FS_VET_SCORR'] == 'SI' && data['§FS_PR_CH_SPAZI'] == 'SI' && data['§QPR_CH_SPAZI'] > 0) {
         data['*CON-A'] = data['§VERN_1_COM'];
         data['*CON-B'] = 600;
         data['*CF'] = data['§QPR_CH_SPAZI'];
-    } 
+    }
 
-    return functions.setExternalVal(data);
+    return await functions.asyncFinalDataObj(data);
 };

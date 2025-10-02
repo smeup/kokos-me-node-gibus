@@ -7,11 +7,13 @@
  * @returns The output value after applying the rule.
  */
 import { Rule } from "../types/general.js";
-import  {functions} from "./libGibus/functions.js";
+import { functions } from "./libGibus/functions.js";
 
-export const REG0013551_NEW: Rule = (data) => {
-   
-    functions.setInternalVal(data);
+export const REG0013551_NEW: Rule = async (data) => {
+
+    let filterVariables = (await import("./libGibus/functionVariables.js")).VE;
+
+    await functions.asyncInitDataObj(data, filterVariables, '');
 
     let coef = 0;
     let tiTra = data["§TI_TRA_ANT_T01"];
@@ -22,5 +24,5 @@ export const REG0013551_NEW: Rule = (data) => {
 
     data["*CF"] = coef;
 
-    return functions.setExternalVal(data);
+    return await functions.asyncFinalDataObj(data);
 };

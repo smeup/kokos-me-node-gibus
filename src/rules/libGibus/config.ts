@@ -1,4 +1,72 @@
-export const config : any = {
+import { parentCfg } from "./bom/parentCfg";
+import { distCfg } from "./bom/distCfg";
+
+const vari = {
+    vari: [
+        {
+            "intElem": {
+                "key": "*CDL"
+            },
+            "extElem": {
+                "key": "R§RISO"
+            }
+        }
+        , {
+            "intElem": {
+                "key": "*NTC"
+            },
+            "extElem": {
+                "key": "R§NOTA"
+            }
+        }
+        , {
+            "intElem": {
+                "key": "*NTD"
+            },
+            "extElem": {
+                "key": "D§NOTA"
+            }
+        }
+    ]
+}
+
+const tempiCiclo = {
+    "tempiCiclo": [{
+        "intElem": {
+            "key": "*CDL"
+        },
+        "extElem": {
+            "key": "R§RISO"
+        }
+    }
+        , {
+        "intElem": {
+            "key": "*TELA"
+        },
+        "extElem": {
+            "key": "R§TE01"
+        }
+    }
+        , {
+        "intElem": {
+            "key": "*TEMA"
+        },
+        "extElem": {
+            "key": "R§TE02"
+        }
+    }
+        , {
+        "intElem": {
+            "key": "*TEAT"
+        },
+        "extElem": {
+            "key": "R§TE03"
+        }
+    }
+    ]
+}
+
+const resto = {
     "coefficiente": {
         "newValue": "true",
         "intElem": {
@@ -6,7 +74,8 @@ export const config : any = {
         },
         "extElem": {
             "key": "D§COEF"
-        }
+        },
+        "validKey": "XFVALI"
     },
     "componente": {
         "intElem": {
@@ -15,14 +84,32 @@ export const config : any = {
         "extElem": {
             "key": "D§COMP"
         }
-    },
-    "exportKeyList": [
+    }, "exportKeyList": [
         "D§USR1",
         "D§COMP",
         "D§USR2",
         "D§COEF",
         "D§NOTA",
-        "D§DISE"
+        "D§DISE",
+        "XFVALI"
+        , "*TCL"
+        , "*TCN"
+        , "*DES"
+        , "CMM"
+        , "*TCL"
+        , "*D_L"
+        , "*D_P"
+        , "*D_H"
+        , "*D_L5"
+        , "*D_P5"
+        , "*D_H5"
+        , "*P_N"
+        , "*P_L"
+        , "R§RISO"
+        , "R§NOTA"
+        , "R§TE01"
+        , "R§TE02"
+        , "R§TE03"
     ],
     "extToIntConfigLogic": [
         {
@@ -38,234 +125,11 @@ export const config : any = {
         {
             "schemaKey": "distCfg",
             "csvCodeKey": "*CSVA",
-            "defaultExtConfigKey" : "D§DISE"
-        }
-    ],
-    "distCfg": [
-        {
-            "code": "*",
-            "partList": [
-                {
-                    "idx": 1,
-                    "extElem": {
-                        "key": "D§DISE",
-                        "type": "string",
-                        "length": 6
-                    },
-                    "intElem": {
-                        "key": "§_CF",
-                        "type": "string"
-                    }
-                }
-            ]
-        },
-        {
-            "code": "003",
-            "partList": [
-                {
-                    "idx": 1,
-                    "extElem": {
-                        "key": "D§DISE",
-                        "type": "string",
-                        "length": 4
-                    },
-                    "intElem": {
-                        "key": "*CON-A",
-                        "type": "string"
-                    }
-                }
-            ]
-        },
-        {
-            "code": "004",
-            "partList": [
-                {
-                    "idx": 1,
-                    "extElem": {
-                        "key": "D§DISE",
-                        "type": "string",
-                        "length": 4
-                    },
-                    "intElem": {
-                        "key": "*CON-A",
-                        "type": "string"
-                    }
-                },
-                {
-                    "idx": 2,
-                    "format": "zeroPadded",
-                    "extElem": {
-                        "key": "D§DISE",
-                        "type": "string",
-                        "format": "zeroPadded",
-                        "length": 5,
-                        "dec": 1
-                    },
-                    "intElem": {
-                        "key": "*CON-B",
-                        "type": "number"
-                    }
-                }
-            ]
-        },
-        {
-            "code": "005",
-            "initValList": [
-                "distCfg",
-                "parentCfg"
-            ],
-            "partList": [
-                {
-                    "idx": 1,
-                    "extElem": {
-                        "key": "D§DISE",
-                        "type": "string",
-                        "length": 4
-                    },
-                    "intElem": {
-                        "key": "*CON-A",
-                        "type": "string"
-                    }
-                },
-                {
-                    "idx": 2,
-                    "format": "zeroPadded",
-                    "extElem": {
-                        "key": "D§DISE",
-                        "type": "string",
-                        "format": "zeroPadded",
-                        "length": 5,
-                        "dec": 1
-                    },
-                    "intElem": {
-                        "key": "*CON-B",
-                        "type": "number"
-                    }
-                },
-                {
-                    "idx": 3,
-                    "extElem": {
-                        "key": "D§DISE",
-                        "type": "string",
-                        "length": 6
-                    },
-                    "intElem": {
-                        "key": "§_CF",
-                        "type": "string"
-                    }
-                }
-            ]
-        }
-    ],
-    "parentCfg": [
-        {
-            "code": "*",
-            "partList": [
-                {
-                    "idx": 1,
-                    "extElem": {
-                        "key": "XCONFI",
-                        "type": "string",
-                        "length": 6
-                    },
-                    "intElem": {
-                        "key": "§_CF",
-                        "type": "string"
-                    }
-                }
-            ]
-        },
-        {
-            "code": "003",
-            "partList": [
-                {
-                    "idx": 1,
-                    "extElem": {
-                        "key": "XCONFI",
-                        "type": "string",
-                        "length": 4
-                    },
-                    "intElem": {
-                        "key": "*COL",
-                        "type": "string"
-                    }
-                }
-            ]
-        },
-        {
-            "code": "004",
-            "partList": [
-                {
-                    "idx": 1,
-                    "extElem": {
-                        "key": "XCONFI",
-                        "type": "string",
-                        "length": 4
-                    },
-                    "intElem": {
-                        "key": "*COL",
-                        "type": "string"
-                    }
-                },
-                {
-                    "idx": 2,
-                    "extElem": {
-                        "key": "XCONFI",
-                        "type": "string",
-                        "format": "zeroPadded",
-                        "length": 5,
-                        "dec": 1
-                    },
-                    "intElem": {
-                        "key": "*LUNG",
-                        "type": "number"
-                    }
-                }
-            ]
-        },
-        {
-            "code": "005",
-            "partList": [
-                {
-                    "idx": 1,
-                    "extElem": {
-                        "key": "XCONFI",
-                        "type": "string",
-                        "length": 4
-                    },
-                    "intElem": {
-                        "key": "*COL",
-                        "type": "string"
-                    }
-                },
-                {
-                    "idx": 2,
-                    "format": "zeroPadded",
-                    "extElem": {
-                        "key": "XCONFI",
-                        "type": "string",
-                        "format": "zeroPadded",
-                        "length": 5,
-                        "dec": 1
-                    },
-                    "intElem": {
-                        "key": "*LUNG",
-                        "type": "number"
-                    }
-                },
-                {
-                    "idx": 3,
-                    "extElem": {
-                        "key": "XCONFI",
-                        "type": "string",
-                        "length": 6
-                    },
-                    "intElem": {
-                        "key": "§_CF",
-                        "type": "string"
-                    }
-                }
-            ]
+            "defaultExtConfigKey": "D§DISE"
         }
     ]
+}
+
+export const config: any = {
+    ...vari, ...distCfg, ...parentCfg, ...tempiCiclo, ...resto
 }

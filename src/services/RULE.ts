@@ -1,6 +1,7 @@
 import {
   ExecutionContext,
   Fun,
+  funToString,
   KokosService,
   SmeupDataColumn,
   SmeupDataRow,
@@ -35,8 +36,8 @@ async function executeRule(
         fun.INPUT ? fun.INPUT : ""
       ) as ExecuteRulePayload;
       // call rule
-      const outputVariables = rule(
-        jsonInput.variables ? jsonInput.variables : {}
+      const outputVariables = await rule(
+        jsonInput.variables ? jsonInput.variables : {}, true//le regole che arrivano da smeup sono sempre finalizzate...
       );
       const columscolumns: SmeupDataColumn[] = [];
       columscolumns.push({
@@ -79,16 +80,38 @@ async function executeRule(
  */
 async function getRule(name: string): Promise<Rule> {
   if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-    const module = await import(`../rules/${name}.ts`);
+
+    var module: any = '';
+    let fileName: string;
+
+    fileName = `../rules/${name}.ts`;
+
+    try {
+      module = await import(fileName);
+    } catch (error) {
+      console.dir('unable to load: ' + fileName);
+      console.dir(error);
+    }
+    
+     
+
+    //module = await import(fileName);
+
+
     return module[name] as Rule;
+
   } else {
+
     if (RULE_MAPPING[name]) {
+
       return RULE_MAPPING[name];
     } else {
       const module = await import(`../rules/${name}.js`);
+
       return module[name] as Rule;
     }
   }
+
 }
 
 

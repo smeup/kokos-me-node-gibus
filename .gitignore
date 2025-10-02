@@ -1,6 +1,2 @@
-node_modules
 lib
-.work
-src/rules/*.tmp.ts
-.DS_Store
-package-lock.json
+node_modules

@@ -2,9 +2,12 @@
 import { Rule } from "../types/general.js";
 import  {functions} from "./libGibus/functions.js";
 
-export const REG0010478_NEW: Rule = (data) => {
+export const REG0010478_NEW: Rule = async (data) => {
 
-    functions.setInternalVal(data);
+    let filterVariables = (await import("./libGibus/functionVariables.js")).VE;
+
+
+    await functions.asyncInitDataObj(data, filterVariables, '10478' );
 
     data['*CF'] = 0;
 
@@ -12,5 +15,5 @@ export const REG0010478_NEW: Rule = (data) => {
         data['*CF'] = 1;
     }
 
-    return functions.setExternalVal(data);
+    return await functions.asyncFinalDataObj(data);
 };

@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0013660"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"§_AR\": \"GS0118\", \"§_CF\": \"AAKMXT\", \"§_LIN\": \"IT\", \"§ALLEGATI\": \"\", \"§ALTE_TESS\":120.00000, \"§ATTACCO\": \"\", \"§CARTER_PROTEZ\": \"\", \"§DIM1_PROD\":0.00000, \"§DIM2_PROD\":0.00000, \"§DUMMYA1\": \"\", \"§DUMMYB1\": \"SI\", \"§DUMMYB2\": \"\", \"§DUMMYN1\":4.00000, \"§DUMMYN2\":274.00000, \"§FS_COM_DX\": \"\", \"§FS_COM_SX\": \"\", \"§FS_CUSC_INOX\": \"SI\", \"§FS_FAM2_ADDF\": \"\", \"§FS_FAM2_ISOLA\": \"SI\", \"§FS_FAM2_LANI\": \"SI\", \"§FS_FER_AST_PAR\": \"\", \"§FS_MOT_CLI\": \"\", \"§FS_NO_COM\": \"\", \"§FS_PRE_T01\": \"\", \"§FS_SALVAGOCCIA\": \"SI\", \"§FS_SCA_LAT_T01\": \"SI\", \"§FS_SEN_WIN_T01\": \"\", \"§H_GAMBA\":240.00000, \"§KIT_DOM\": \"\", \"§KIT_DOM2\": \"\", \"§LARG\":300.00000, \"§LARG_INPUT\":300.00000, \"§LARG_TELO\":298.00000, \"§LATO_LED\": \"DX\", \"§LED_1\":1.00000, \"§MANUALE_CE\": \"\", \"§NO\": \"NO\", \"§NR_FRANGI\":4.00000, \"§NR_SPO_T01\": \"4\", \"§NULL\": \"\", \"§OPT_GAM_A1\": \"1\", \"§OPT_GAM_A2\": \"1\", \"§OPT_GAM_P1\": \"1\", \"§OPT_GAM_P2\": \"1\", \"§POS_COMANDO\": \"01\", \"§SI\": \"SI\", \"§SPOR\":300.00000, \"§TECNOL_MOTORE\": \"SOMFY_IO\", \"§TESS\": \"ACRILICO\", \"§TESS_HID\": \"190391\", \"§TI_FRO_T01\": \"01\", \"§TI_LED_T01\": \"02\", \"§TI_PTEL_T01\": \"02\", \"§TI_SCA_LAT_T01\": \"01\", \"§TI_SENS_TEMP\": \"\", \"§TI_TEL_T02\": \"\", \"§TIPO_ACCESSORIO\": \"\", \"§TIPO_CORNICE\": \"\", \"§TIPO_KIT_CFG\": \"\", \"§TIPO_RICEVITORE\": \"\", \"§TIPO_SEN_SO_VEN\": \"\", \"§TIPO_SENS_LUCE\": \"\", \"§TIPO_SENS_PIOGG\": \"\", \"§TIPO_SENS_VENTO\": \"\", \"§TIPO_TELECOM\": \"\", \"§TIPO_TRA_C_CORN\": \"\", \"§TIPO_TRA_S_CORN\": \"\", \"§TOP_A1\": \"\", \"§TOP_A2\": \"\", \"§TOP_P1\": \"\", \"§TOP_P2\": \"\", \"§TYP_A1\": \"1\", \"§TYP_A2\": \"1\", \"§TYP_P1\": \"1\", \"§TYP_P2\": \"1\", \"§VERN_FRANGI\": \"\", \"§VERN_1_COM\": \"0076\", \"§VR_ABB\": \"09\", \"*CON-A\": \"\", \"*CON-B\":0.00000, \"*CSVP\": \"FL\", \"*CSVA\": \"003\",  \"D§TIPD\":\"ART\", \"D§ASSI\":\"FT_STR_T06\", \"D§USR1\":\"MG01\", \"D§COMP\":\"272337\", \"D§USR2\":\"\", \"D§STAT\":\"10\", \"D§SQCI\":\"\", \"D§LTAD\":0, \"D§DINV\":0, \"D§DFNV\":0, \"D§CRSE\":\"GIBK\", \"D§COEF\":1.000000, \"D§PAS1\":\"REG0013718\", \"D§PAS2\":\"\", \"D§QTLO\":0.000, \"D§PERT\":0.000, \"D§QUA1\":0.000000, \"D§QUA2\":0.000000, \"D§QUA3\":0.000000, \"D§QUA4\":0.000000, \"D§QUA5\":0.000000, \"D§FLG1\":\"\", \"D§FLG2\":\"\", \"D§FLG3\":\"\", \"D§FLG4\":\"\", \"D§FLG5\":\"\", \"D§NOTA\":\"\", \"D§DISE\":\"0000\", \"D§DISP\":\"\", \"D§DTIN\":20241213, \"D§DTAG\":20241213, \"D§USAG\":\"DANALE\",\"XFVALI\":\"1\",\"XCONFI\":\"AAKMXT\"}}"
+    }
+}

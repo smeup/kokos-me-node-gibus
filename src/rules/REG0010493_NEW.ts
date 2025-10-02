@@ -1,9 +1,12 @@
 import { Rule } from "../types/general.js";
 import  {functions} from "./libGibus/functions.js";
 
-export const REG0010493_NEW: Rule = (data) => {
+export const REG0010493_NEW: Rule = async (data) => {
 
-	functions.setInternalVal(data);
+    let filterVariables = (await import("./libGibus/functionVariables.js")).VE;
+
+
+	    await functions.asyncInitDataObj(data, filterVariables, '' );
 
     data['*CF'] = 0;
     if (data['§VE_RISC_LATERAL'] > 0 && data['§FS_VET_SCORR'] === 'SI') {
@@ -12,5 +15,5 @@ export const REG0010493_NEW: Rule = (data) => {
         data['*CF'] = 2;
     } 
 
-    return functions.setExternalVal(data);
+    return await functions.asyncFinalDataObj(data);
 };

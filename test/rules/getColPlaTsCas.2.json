@@ -1,0 +1,14 @@
+{
+    "fun": {
+        "component": "EXB",
+        "service": "RULE",
+        "function": "EXE.RUL",
+        "obj1": {
+            "t": "",
+            "p": "",
+            "k": "REG0000400"
+        },
+        "P": "",
+        "INPUT": "{\"variables\": {\"*CON-A\": \"\", \"*CON-B\":0.00000, \"*CSVP\": \"003\", \"*CSVA\": \"003\",  \"D§TIPD\":\"ART\", \"D§ASSI\":\"271583\", \"D§USR1\":\"BA\", \"D§COMP\":\"110118\", \"D§USR2\":\"\", \"D§STAT\":\"10\", \"D§SQCI\":\"\", \"D§LTAD\":0, \"D§DINV\":0, \"D§DFNV\":0, \"D§CRSE\":\"GIBK\", \"D§COEF\":1.000000, \"D§PAS1\":\"REG0000332\", \"D§PAS2\":\"\", \"D§QTLO\":0.000, \"D§PERT\":0.000, \"D§QUA1\":0.000000, \"D§QUA2\":0.000000, \"D§QUA3\":0.000000, \"D§QUA4\":0.000000, \"D§QUA5\":0.000000, \"D§FLG1\":\"\", \"D§FLG2\":\"\", \"D§FLG3\":\"\", \"D§FLG4\":\"\", \"D§FLG5\":\"\", \"D§NOTA\":\"\", \"D§DISE\":\"\", \"D§DISP\":\"\", \"D§DTIN\":20160208, \"D§DTAG\":20250117, \"D§USAG\":\"DANALE\",\"XFVALI\":\"1\",\"XCONFI\":\"0520\"}}"
+    }
+}
