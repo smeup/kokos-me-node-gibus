@@ -1,8 +1,8 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
-import { getColStr } from "./getColStr.js";
-import { getColPlaStr } from "./getColPlaStr.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
+import { getColStr } from "./getColStr";
+import { getColPlaStr } from "./getColPlaStr";
 
 
 
@@ -10,7 +10,7 @@ import { getColPlaStr } from "./getColPlaStr.js";
 //dato che l'ambiente di produzione avrà la sua numerazione
 export const REG0013691_P1: Rule = async (data) => {
 
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
 
     data = await functions.asyncInitDataObj(data, filterVariables, '');
 

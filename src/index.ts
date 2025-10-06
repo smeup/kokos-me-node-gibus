@@ -1,6 +1,6 @@
 import { startServer, LOGGER } from "@sme.up/kokos-sdk-node";
-import { setTypeProvider, getDbAccessConfig } from "./converter/utils.js";
-import { TypeProviderDb } from "./converter/type-provider.db.js";
+import { setTypeProvider, getDbAccessConfig } from "./converter/utils";
+import { TypeProviderDb } from "./converter/type-provider.db";
 
 
 LOGGER.info("Creating type provider...");

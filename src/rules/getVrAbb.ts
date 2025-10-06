@@ -1,5 +1,5 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { getInfoCol } from "./getInfoCol.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { getInfoCol } from "./getInfoCol";
 
 
 export const getVrAbb = async (codCol : any) => {

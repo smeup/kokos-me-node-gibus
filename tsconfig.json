@@ -1,26 +1,8 @@
 {
-	"compilerOptions": {
-		"module": "ESNext",
-		"target": "ESNext",
-		"outDir": "./lib",
-		"baseUrl": "./src",
-		"rootDir": "./src",
-		"moduleResolution": "node",
-		"alwaysStrict": true,
-		"strict": true,
-		"noImplicitAny": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"esModuleInterop": true,
-		"declaration": true,
-		"allowJs": true,
-	},
-	"include": [
-		"src/**/*.ts"
-, "src/rules/lib/test.js"	],
-	"exclude": [
-		"node_modules",
-		"lib",
-		"test/**/*.ts"
-	]
+  "extends": "./node_modules/@sme.up/kokos-sdk-node/tsconfig.json",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib"
+  }
 }

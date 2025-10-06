@@ -1,7 +1,7 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
-import { getCategTess4CicliFasi } from "./getCategTess4CicliFasi.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
+import { getCategTess4CicliFasi } from "./getCategTess4CicliFasi";
 
 //questa regola riguarda il telo da fare a Saccolongo relativo a un pacco telo da fare a veggiano
 //fase 47 MACCHINA 1 TESTA SACCOLONGO sempre attiva tranne nei casi seguenti (per i quali va spenta):
@@ -11,7 +11,7 @@ import { getCategTess4CicliFasi } from "./getCategTess4CicliFasi.js";
 
 export const REC0000392: Rule = async (data) => {
 
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
 
     data = await functions.asyncInitDataObj(data, filterVariables, '');
     

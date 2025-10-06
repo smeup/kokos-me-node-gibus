@@ -1,5 +1,5 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { getVrAbb } from "./getVrAbb.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { getVrAbb } from "./getVrAbb";
 
 
 export const getColPlaFrangi = async (vrFrangi : any, data : any) => {

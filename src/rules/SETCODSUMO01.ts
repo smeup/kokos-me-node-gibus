@@ -1,12 +1,12 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
-import { getInfoMot } from "./getInfoMot.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
+import { getInfoMot } from "./getInfoMot";
 
 
 export const SETCODSUMO01: Rule = async (data, finalize = true) => {
 
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
 
     if (finalize) data = await functions.asyncInitDataObj(data, filterVariables, '');
 

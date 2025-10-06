@@ -1,10 +1,10 @@
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
-import { dimP90 } from "./libGibus/dimP90.js";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
+import { dimP90 } from "./libGibus/dimP90";
 
 export const REG0013635: Rule = async (data) => {
 
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
 
     data = await functions.asyncInitDataObj(data, filterVariables, '');
 

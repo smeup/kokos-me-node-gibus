@@ -1,6 +1,6 @@
-import { RuleVariableMap } from "../types/general.js";
-import { isNumericType } from "./utils.js";
-import { CONFIG } from "./config.js";
+import { RuleVariableMap } from "../types/general";
+import { isNumericType } from "./utils";
+import { CONFIG } from "./config";
 
 const D_DISE_LEN = 9
 

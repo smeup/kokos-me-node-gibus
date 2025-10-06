@@ -1,13 +1,13 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
 
-import { readFaseAttivaCFbyConf } from "./readFaseAttivaCFbyConf.js";
+import { readFaseAttivaCFbyConf } from "./readFaseAttivaCFbyConf";
 
 
 export const REC0000398: Rule = async (data) => {
 
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
 
     data = await functions.asyncInitDataObj(data, filterVariables, '');
 

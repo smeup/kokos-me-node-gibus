@@ -1,12 +1,12 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
-import { getColPlaStr } from "./getColPlaStr.js";
-import { getColStr } from "./getColStr.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
+import { getColPlaStr } from "./getColPlaStr";
+import { getColStr } from "./getColStr";
 
 
 export const SETCOLPLASTR: Rule = async (data, finalize = true) => {
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
 
     if (finalize) data = await functions.asyncInitDataObj(data, filterVariables, '');
     

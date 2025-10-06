@@ -7,8 +7,8 @@ import {
   SmeupDataRow,
   SmeupDataStructureWriter,
 } from "@sme.up/kokos-sdk-node";
-import { ExecuteRulePayload, Rule } from "../types/general.js";
-import { RULE_MAPPING } from "../types/rule.js";
+import { ExecuteRulePayload, Rule } from "../types/general";
+import { RULE_MAPPING } from "../types/rule";
 
 const RULE: KokosService = {
   methods: {
@@ -87,31 +87,22 @@ async function getRule(name: string): Promise<Rule> {
     fileName = `../rules/${name}.ts`;
 
     try {
-      module = await import(fileName);
+      module = require(fileName);
     } catch (error) {
       console.dir('unable to load: ' + fileName);
       console.dir(error);
     }
-    
-     
-
-    //module = await import(fileName);
-
 
     return module[name] as Rule;
-
   } else {
-
     if (RULE_MAPPING[name]) {
-
       return RULE_MAPPING[name];
     } else {
-      const module = await import(`../rules/${name}.js`);
+      const module = require(`../rules/${name}.js`);
 
       return module[name] as Rule;
     }
   }
-
 }
 
 

@@ -1,14 +1,14 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
-import { getVrAbb } from "./getVrAbb.js";
-import { getColStr } from "./getColStr.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
+import { getVrAbb } from "./getVrAbb";
+import { getColStr } from "./getColStr";
 
 
 
 export const REG0013978: Rule = async (data) => {
 
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
 
     data = await functions.asyncInitDataObj(data, filterVariables, '');
     var pezzi;

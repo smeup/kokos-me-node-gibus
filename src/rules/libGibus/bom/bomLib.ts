@@ -1,6 +1,6 @@
 export { manageGtechBom };
 import { connection01 } from "../connections";
-import { RuleVariableMap } from "types/general";
+import { RuleVariableMap } from "../../../types/general";
 import { cleanData } from "../functions/forSmeup";
 import { Connection } from "node-jt400";
 
