@@ -1,5 +1,5 @@
-import { config } from './config.js';
-import { systemVariables } from './systemVariables.js';
+import { config } from './config';
+import { systemVariables } from './systemVariables';
 import { connection01 } from "../libGibus/connections";
 
 export const functions = { asyncInitDataObj, asyncFinalDataObj, getOriginalVal };

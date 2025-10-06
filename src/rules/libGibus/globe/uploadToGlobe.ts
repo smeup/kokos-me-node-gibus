@@ -1,20 +1,19 @@
 import { readCfgData, getDocData } from "../smeup/query";
 import { calcSvgList as calcSvgListDeck } from "../allegati/deckLib";
+import { GenericObject } from "../../../types/general";
 
 export const upAllDeck = async (data: any) => {
+  //in linea di massima basta il codice articolo e il codice configurazione
+  //data.codCfg
+  //data.codArt
+  let reqParams = JSON.parse(data.INPUT);
 
-    //in linea di massima basta il codice articolo e il codice configurazione
-    //data.codCfg
-    //data.codArt
-    let reqParams = JSON.parse(data.INPUT);
+  //questa qua è da fare
+  let cfgData = await readCfgData(reqParams.codCfg);
 
-    
-    //questa qua è da fare
-    let cfgData = await readCfgData(reqParams.codCfg);
+  //let calcSvgList : any = 'pippo';
 
-    //let calcSvgList : any = 'pippo';
-
-   /*  console.log(cfgData);
+  /*  console.log(cfgData);
     try {
        calcSvgList = (await import("../allegati/deckLib")).calcSvgList;
 
@@ -24,42 +23,41 @@ export const upAllDeck = async (data: any) => {
     }
     */
 
-    //await perchè dentro viene letto dal db il numero documento commerciale
-    let docData = await getDocData(cfgData['_CF']);
+  //await perchè dentro viene letto dal db il numero documento commerciale
+  let docData = await getDocData(cfgData["_CF"]);
 
-    let svgList = await calcSvgListDeck(cfgData, docData);
-    
-    let reportServer = process.env.reportServer;
-    
-    //override per andare in effettivo
-    reportServer = "http://gtech02.gibus.it:3030";
+  let svgList = await calcSvgListDeck(cfgData, docData);
 
-    let theUrl = `${reportServer}/mkPdfT008`;
+  let reportServer = process.env.reportServer;
 
-    let theJsonData : any = {};
-    theJsonData.codCfg = reqParams.codCfg;
-    theJsonData.hn = docData.nDoc;
-    theJsonData.rn = docData.nRig;
-    theJsonData.templateId = 'ALGPRO';
-    theJsonData.svgList = svgList;
-    theJsonData.repName = 'pedana';
-  
-    
-    let uploadResult;
-    uploadResult = await fetch(theUrl, {
-        headers: {
-            "Content-Type": "application/json",
-          },
-        method: 'POST',
-        body: JSON.stringify({jsonData : theJsonData})
-    });
-console.dir({uploadResultBody : uploadResult.body});
+  //override per andare in effettivo
+  reportServer = "http://gtech02.gibus.it:3030";
 
-    //TODO caricare gli allegati su globe usando Gtech02
+  let theUrl = `${reportServer}/mkPdfT008`;
 
-    //jsonData viene preso da qua
-    //this.reqParams.jsonData = JSON.parse(req.body.jsonData);
-   /*  if (this.reqParams.jsonData.cfg) {
+  let theJsonData: any = {};
+  theJsonData.codCfg = reqParams.codCfg;
+  theJsonData.hn = docData.nDoc;
+  theJsonData.rn = docData.nRig;
+  theJsonData.templateId = "ALGPRO";
+  theJsonData.svgList = svgList;
+  theJsonData.repName = "pedana";
+
+  let uploadResult;
+  uploadResult = await fetch(theUrl, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({ jsonData: theJsonData }),
+  });
+  console.dir({ uploadResultBody: uploadResult.body });
+
+  //TODO caricare gli allegati su globe usando Gtech02
+
+  //jsonData viene preso da qua
+  //this.reqParams.jsonData = JSON.parse(req.body.jsonData);
+  /*  if (this.reqParams.jsonData.cfg) {
         this.cfg = this.reqParams.jsonData.cfg;
     }
     if (this.reqParams.jsonData.hn) {
@@ -112,6 +110,4 @@ console.dir({uploadResultBody : uploadResult.body});
     if (this.reqParams.jsonData.tagList) {
         this.tagList = this.reqParams.jsonData.tagList;
     } */
-
 };
-
