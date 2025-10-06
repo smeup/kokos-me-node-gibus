@@ -1,6 +1,6 @@
 //ricalcoliamo l'impegno alternativo per le barre
-import { config } from "./config.js";
-import { connection01 } from "./connections.js";
+import { config } from "./config";
+import { connection01 } from "./connections";
 
 export const altImpT01 = async (data: any) => {
   //funzione ultraspecifica che altera *CON-B e *CF che è delicato... in quanto un 

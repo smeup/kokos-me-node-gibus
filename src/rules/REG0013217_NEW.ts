@@ -1,9 +1,9 @@
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
 
 export const REG0013217_NEW: Rule = async (data) => {
 
-    let filterVariables = (await import("./libGibus/functionVariables.js")).VE;
+    let filterVariables = (await import("./libGibus/functionVariables")).VE;
 
     await functions.asyncInitDataObj(data, filterVariables, '');
 

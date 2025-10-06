@@ -17,8 +17,8 @@ describe("SyntaxErrorValidator", () => {
         const result: ConversionResult = {
             ruleId: "TESTOK",
             javaScript: `
-            import { Rule } from "../types/general.js";
-            import { Variables } from "../converter/variables.js";
+            import { Rule } from "../types/general";
+            import { Variables } from "../converter/variables";
 
             export const TESTOK: Rule = (iv) => {
 
@@ -44,8 +44,8 @@ describe("SyntaxErrorValidator", () => {
         const result: ConversionResult = {
             ruleId: "TESTKO",
             javaScript: `
-            import { Rule } from "../types/general.js";
-            import { Variables } from "../converter/variables.js";
+            import { Rule } from "../types/general";
+            import { Variables } from "../converter/variables";
 
             export const TESTKO: Rule = (iv) => {
 

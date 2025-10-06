@@ -7,8 +7,8 @@ import {
   SmeupDataRow,
   SmeupDataStructureWriter,
 } from "@sme.up/kokos-sdk-node";
-import { ExecuteRulePayload, Rule } from "../types/general.js";
-import { RULE_MAPPING } from "../types/rule.js";
+import { ExecuteRulePayload, Rule } from "../types/general";
+import { RULE_MAPPING } from "../types/rule";
 
 const RULE: KokosService = {
   methods: {
@@ -37,7 +37,8 @@ async function executeRule(
       ) as ExecuteRulePayload;
       // call rule
       const outputVariables = await rule(
-        jsonInput.variables ? jsonInput.variables : {}, true//le regole che arrivano da smeup sono sempre finalizzate...
+        jsonInput.variables ? jsonInput.variables : {},
+        true //le regole che arrivano da smeup sono sempre finalizzate...
       );
       const columscolumns: SmeupDataColumn[] = [];
       columscolumns.push({
@@ -53,10 +54,10 @@ async function executeRule(
       for (let variableName in outputVariables) {
         const row: SmeupDataRow = {
           cells: {
-            "NAME": {
+            NAME: {
               value: variableName,
             },
-            "VALUE": {
+            VALUE: {
               value: `${outputVariables[variableName]}`,
             },
           },
@@ -79,42 +80,26 @@ async function executeRule(
  * @returns The rule.
  */
 async function getRule(name: string): Promise<Rule> {
-  if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-
-    var module: any = '';
-    let fileName: string;
-
-    fileName = `../rules/${name}.ts`;
-
-    try {
-      module = await import(fileName);
-    } catch (error) {
-      console.dir('unable to load: ' + fileName);
-      console.dir(error);
-    }
-    
-     
-
-    //module = await import(fileName);
-
-
-    return module[name] as Rule;
-
-  } else {
-
+  if (process.env.NODE_ENV === "PRODUCTION") {
     if (RULE_MAPPING[name]) {
-
       return RULE_MAPPING[name];
     } else {
-      const module = await import(`../rules/${name}.js`);
-
+      const module = require(`../rules/${name}.js`);
       return module[name] as Rule;
     }
+  } else {
+    var module: any = "";
+    let fileName: string;
+    fileName = `../rules/${name}.ts`;
+    try {
+      module = require(fileName);
+    } catch (error) {
+      console.dir("unable to load: " + fileName);
+      console.dir(error);
+    }
+    return module[name] as Rule;
   }
-
 }
-
-
 
 export default RULE;
 export { getRule, executeRule };

@@ -1,14 +1,14 @@
 
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
 
 
-import { altImpT01 } from "./libGibus/altImp.js";
+import { altImpT01 } from "./libGibus/altImp";
 
 
 export const SETSL01: Rule = async (data) => {
 
-    let filterVariables = (await import("./libGibus/functionVariables.js")).SETSL;
+    let filterVariables = (await import("./libGibus/functionVariables")).SETSL;
 
     data = await functions.asyncInitDataObj(data, filterVariables, 'SETSL01');
 

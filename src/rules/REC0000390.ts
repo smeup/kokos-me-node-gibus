@@ -1,7 +1,7 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
-//import { getCategTess4CicliFasi } from "./getCategTess4CicliFasi.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
+//import { getCategTess4CicliFasi } from "./getCategTess4CicliFasi";
 
 //questa regola riguarda il telo da fare a Saccolongo relativo a un pacco telo da fare a veggiano
 //fase 10 TAGLIO TELO sempre attiva in questo caso
@@ -9,7 +9,7 @@ import { functions } from "./libGibus/functions.js";
 
 export const REC0000390: Rule = async (data) => {
 
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
 
     data = await functions.asyncInitDataObj(data, filterVariables, '');
 

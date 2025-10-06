@@ -1,10 +1,10 @@
 export { calcModelloTenda, calcGlassType, calcParObjPedana }
 
-import { calcPedanaInput } from "./class4DECK.js"
+import { calcPedanaInput } from "./class4DECK"
 
-import { calcGtechLang } from "../functions/forGtech.js";
+import { calcGtechLang } from "../functions/forGtech";
 
-import { getDocData } from "../smeup/query.js";
+import { getDocData } from "../smeup/query";
 
 
 function calcModelloTenda(data: any) {

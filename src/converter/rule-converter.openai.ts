@@ -1,7 +1,7 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { SystemMessage, HumanMessage } from "@langchain/core/messages";
-import { Condition, ConversionResult, IRuleConverterService, Rule } from "./types.js";
-import { SYSTEM_MESSAGE } from "./prompts.js";
+import { Condition, ConversionResult, IRuleConverterService, Rule } from "./types";
+import { SYSTEM_MESSAGE } from "./prompts";
 
 class OpenAIRuleConverter implements IRuleConverterService {
    

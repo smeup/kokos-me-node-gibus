@@ -1,12 +1,12 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { RuleConverterAppExamples } from './app.examples.js';
-import { Rule, ExecuteRulePayload, RuleVariableMap } from '../types/general.js';
-import { getRule } from '../services/RULE.js';
+import * as fs from "fs";
+import * as path from "path";
+import { RuleConverterAppExamples } from "./app.examples";
+import { Rule, ExecuteRulePayload, RuleVariableMap } from "../types/general";
+import { getRule } from "../services/RULE";
 import { Fun } from "@sme.up/kokos-sdk-node";
-import { DbAccessConfig, ITypeProvider } from './types.js';
-import { TypeProviderConst } from './type-provider.const.js';
-import * as consts from './consts.js';
+import { DbAccessConfig, ITypeProvider } from "./types";
+import { TypeProviderConst } from "./type-provider.const";
+import * as consts from "./consts";
 
 let typeProvider: ITypeProvider | null = new TypeProviderConst();
 
@@ -16,33 +16,32 @@ let typeProvider: ITypeProvider | null = new TypeProviderConst();
  * @returns The code string with whitespace characters replaced by a single space.
  */
 function removeUnnecessaryChars(code: string) {
-    code = removeJavascriptLineComment(code);
-    return code.replace(/\s+/g, ' ').trim();
+  code = removeJavascriptLineComment(code);
+  return code.replace(/\s+/g, " ").trim();
 }
 
 function removeJavascriptLineComment(jsCode: string) {
-    return jsCode.replace(/\s*\/\/.*/g, '');
+  return jsCode.replace(/\s*\/\/.*/g, "");
 }
 
 function printTargetVariable() {
-    const filePath = path.resolve('assets', 'test', 'rules.tsv');
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const lines = fileContent.split('\n');
+  const filePath = path.resolve("assets", "test", "rules.tsv");
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const lines = fileContent.split("\n");
 
-    let vars: string[] = [];
-    for (const line of lines) {
-        if (line.includes('*SET')) {
-            const targetMatch = line.match(/.+\*SET\s+(.+)=.+/);
-            if (targetMatch) {
-                const target = targetMatch[1].trim();
-                if (!vars.includes(target)) {
-                    vars.push(target);
-                }
-            }
+  let vars: string[] = [];
+  for (const line of lines) {
+    if (line.includes("*SET")) {
+      const targetMatch = line.match(/.+\*SET\s+(.+)=.+/);
+      if (targetMatch) {
+        const target = targetMatch[1].trim();
+        if (!vars.includes(target)) {
+          vars.push(target);
         }
+      }
     }
-    console.log(vars);
-
+  }
+  console.log(vars);
 }
 
 /**
@@ -50,11 +49,11 @@ function printTargetVariable() {
  * @param ruleId The ID of the rule to convert.
  */
 async function convertExampleRule(ruleId: string): Promise<Rule> {
-    const allow = (myRuleId: string) => myRuleId === ruleId;
-    const app = new RuleConverterAppExamples({ allow: allow });
-    await app.convertRules();
-    const rule = getRule(ruleId);
-    return rule;
+  const allow = (myRuleId: string) => myRuleId === ruleId;
+  const app = new RuleConverterAppExamples({ allow: allow });
+  await app.convertRules();
+  const rule = getRule(ruleId);
+  return rule;
 }
 
 /**
@@ -64,15 +63,17 @@ async function convertExampleRule(ruleId: string): Promise<Rule> {
  * @returns The result of the function else nothing.
  */
 async function runFunctionIfOpenAIKeySet(
-    func: () => any,
-    onOpenAIKeyNotSet: () => void = () => { console.warn("OPENAI_API_KEY environment variable is not set.") }
+  func: () => any,
+  onOpenAIKeyNotSet: () => void = () => {
+    console.warn("OPENAI_API_KEY environment variable is not set.");
+  }
 ): Promise<any> {
-    const openAIKey = process.env.OPENAI_API_KEY;
-    if (!openAIKey) {
-        onOpenAIKeyNotSet();
-    } else {
-        return func();
-    }
+  const openAIKey = process.env.OPENAI_API_KEY;
+  if (!openAIKey) {
+    onOpenAIKeyNotSet();
+  } else {
+    return func();
+  }
 }
 
 /**
@@ -80,27 +81,30 @@ async function runFunctionIfOpenAIKeySet(
  * @returns {boolean} True if the OPENAI_API_KEY is set, false otherwise.
  */
 function isOpenAIKeySet(): boolean {
-    return process.env.OPENAI_API_KEY !== undefined;
+  return process.env.OPENAI_API_KEY !== undefined;
 }
 
 /**
  * Retrieves the database access configuration.
  * The configuration is retrieved from the consts module.
  * @see {@link consts}
- * 
+ *
  * @returns The database access configuration object or null if the configuration is not set.
  */
 function getDbAccessConfig(): DbAccessConfig | null {
-    if (consts.host !== "setme"
-        && consts.user !== "setme" && consts.password !== "setme") {
-        return {
-            host: consts.host,
-            user: consts.user,
-            password: consts.password
-        };
-    } else {
-        return null;
-    }
+  if (
+    consts.host !== "setme" &&
+    consts.user !== "setme" &&
+    consts.password !== "setme"
+  ) {
+    return {
+      host: consts.host,
+      user: consts.user,
+      password: consts.password,
+    };
+  } else {
+    return null;
+  }
 }
 
 /**
@@ -110,39 +114,39 @@ function getDbAccessConfig(): DbAccessConfig | null {
  * @returns The variables.
  */
 function loadVariables(
-    funPayload: string,
-    onlyVariablesSet: (onlyVariablesSet: RuleVariableMap) => void = () => { })
-    : RuleVariableMap {
-    if (funPayload === '') {
-        return {};
+  funPayload: string,
+  onlyVariablesSet: (onlyVariablesSet: RuleVariableMap) => void = () => {}
+): RuleVariableMap {
+  if (funPayload === "") {
+    return {};
+  }
+  const fun: Fun = JSON.parse(funPayload).fun;
+  let variables: RuleVariableMap = {};
+  if (fun.INPUT && fun.INPUT !== "") {
+    const jsonInput = JSON.parse(
+      fun.INPUT ? fun.INPUT : ""
+    ) as ExecuteRulePayload;
+    variables = jsonInput.variables ? jsonInput.variables : {};
+  }
+  const filteredVariables: RuleVariableMap = {};
+  Object.entries(variables).forEach(([key, value]) => {
+    if (value !== "" && value !== 0) {
+      filteredVariables[key] = value;
     }
-    const fun: Fun = JSON.parse(funPayload).fun;
-    let variables: RuleVariableMap = {};
-    if (fun.INPUT && fun.INPUT !== '') {
-        const jsonInput = JSON.parse(
-            fun.INPUT ? fun.INPUT : ""
-        ) as ExecuteRulePayload;
-        variables = jsonInput.variables ? jsonInput.variables : {}
-    }
-    const filteredVariables: RuleVariableMap = {};
-    Object.entries(variables).forEach(([key, value]) => {
-        if (value !== "" && value !== 0) {
-            filteredVariables[key] = value;
-        }
-    });
-    onlyVariablesSet(filteredVariables);
-    return variables;
+  });
+  onlyVariablesSet(filteredVariables);
+  return variables;
 }
 
 /**
  * Sets the type provider for the converter.
  * Default is TypeProviderConst.
- * 
+ *
  * @param typeProvider - The type provider to be set.
  * @see {@link TypeProviderConst}
  */
 function setTypeProvider(newTypeProvider: ITypeProvider | null) {
-    typeProvider = newTypeProvider;
+  typeProvider = newTypeProvider;
 }
 
 /***
@@ -151,20 +155,19 @@ function setTypeProvider(newTypeProvider: ITypeProvider | null) {
  * @returns True if the variable is a numeric type, false otherwise.
  */
 function isNumericType(name: string): boolean {
-    if (typeProvider === null) {
-        throw new Error("Type provider not set");
-    }
-    return typeProvider.isNumericType(name);
+  if (typeProvider === null) {
+    throw new Error("Type provider not set");
+  }
+  return typeProvider.isNumericType(name);
 }
-
 
 export {
-    removeUnnecessaryChars,
-    convertExampleRule,
-    runFunctionIfOpenAIKeySet,
-    isOpenAIKeySet,
-    loadVariables,
-    isNumericType,
-    setTypeProvider,
-    getDbAccessConfig
-}
+  removeUnnecessaryChars,
+  convertExampleRule,
+  runFunctionIfOpenAIKeySet,
+  isOpenAIKeySet,
+  loadVariables,
+  isNumericType,
+  setTypeProvider,
+  getDbAccessConfig,
+};

@@ -1,14 +1,14 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { Rule } from "../types/general.js";
-import { functions } from "./libGibus/functions.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { Rule } from "../types/general";
+import { functions } from "./libGibus/functions";
 import { calcParObjTense } from "./libGibus/products/tenseLib";
 import { tenseClass } from "./libGibus/products/class4tense";
-//import { rawBomToBom, validateLink } from "./libGibus/bom/bomLib.js";
-import { cleanData } from "./libGibus/functions/forSmeup.js";
+//import { rawBomToBom, validateLink } from "./libGibus/bom/bomLib";
+import { cleanData } from "./libGibus/functions/forSmeup";
 
 export const TENSE: Rule = async (linkData) => {
 
-    let filterVariables: any = (await import("./libGibus/functionVariables.js")).niente;
+    let filterVariables: any = (await import("./libGibus/functionVariables")).niente;
     cleanData(linkData);
 
     let parObj = await calcParObjTense(linkData);

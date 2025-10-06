@@ -1,4 +1,4 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
 
 export const getColStr = async (data : any) => {
 

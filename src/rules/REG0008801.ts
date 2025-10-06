@@ -6,8 +6,8 @@
  * @param iv The input value for the rule.
  * @returns The output value after applying the rule.
  */
-import { Rule } from "../types/general.js";
-import { Variables } from "../converter/variables.js";
+import { Rule } from "../types/general";
+import { Variables } from "../converter/variables";
 
 export const REG0008801: Rule = (iv) => {
 

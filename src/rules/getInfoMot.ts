@@ -1,5 +1,5 @@
-import { _isMessageFieldWithRole } from "@langchain/core/messages.js";
-import { connection01 } from "./libGibus/connections.js";
+import { _isMessageFieldWithRole } from "@langchain/core/messages";
+import { connection01 } from "./libGibus/connections";
 
 
 export const getInfoMot = async (data: any) => {

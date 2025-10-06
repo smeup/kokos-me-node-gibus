@@ -12,7 +12,10 @@ export interface RuleVariableMap {
 /**
  * Rule is a function
  */
-export type Rule = (variables: RuleVariableMap, finalize: boolean) => RuleVariableMap;
+export type Rule = (
+  variables: RuleVariableMap,
+  finalize: boolean
+) => RuleVariableMap;
 
 /**
  * The registry of the rules.
@@ -22,3 +25,7 @@ export type Rule = (variables: RuleVariableMap, finalize: boolean) => RuleVariab
 export interface RuleRegistry {
   [key: string]: Rule;
 }
+
+export type GenericObject = {
+  [key: string]: any;
+};

@@ -1,4 +1,4 @@
-import { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet, loadVariables } from "../../src/converter/utils.js";
+import { removeUnnecessaryChars, convertExampleRule, runFunctionIfOpenAIKeySet, loadVariables } from "../../src/converter/utils";
 import * as fs from 'fs';
 import * as path from 'path';
 jest.setTimeout(20000);
